@@ -1,17 +1,33 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableHighlight} from 'react-native';
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux' 
+import { ActionCreators } from '../actions'
 
 
 class AppContainer extends React.Component{
+
+    addProject(){
+        this.props.addProject();
+    }
+
 render(){
     return(
         <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>ChanZa you make wdsadidsdll  reload.</Text>
-        <Text>Shake your phone to open the devesddfsloper menu.</Text>
+        <Text>I am AppContainer! Project Count: {this.props.projectCount} </Text>
+        <TouchableHighlight onPress = {() => {this.addProject()}}>
+
+        <Text> Add Project </Text>
+
+        </TouchableHighlight>
       </View>
     );
 }
+}
+
+function mapDispatchToProps(dispatch) {
+    // Gathering every action and dispatching to the entire app
+    return bindActionCreators(ActionCreators, dispatch);
 }
 
 const styles = StyleSheet.create({
@@ -23,4 +39,7 @@ const styles = StyleSheet.create({
     },
   });
 
-  export default AppContainer
+  export default connect((state) => { 
+      return {
+          projectCount: state.projectCount
+      } }, mapDispatchToProps)(AppContainer)
