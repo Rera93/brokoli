@@ -5,7 +5,7 @@
 */
 
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import { Provider } from 'react-redux';
 import {createStore, applyMiddleware, combineReducers, compose} from 'redux'
 import thunkMiddleware from 'redux-thunk'
@@ -37,7 +37,14 @@ const store = configureStore({});
 
 // TODO: pass an initial state to store
 
-
+/*
+ * Displays the icon for the tab w/ color dependent upon selection
+*/
+const TabIcon = ({ selected, source }) => {
+  return (
+    <Image style={[styles.icon, {tintColor: selected ? '#5d95c4' :'#dad9de'}]} source={source}/>
+  );
+}
 
 export default class App extends React.Component {
   render() {
@@ -46,7 +53,7 @@ export default class App extends React.Component {
       <Provider store={store}>
 
       <Router>
-        <Stack key="root">
+        <Scene key="root">
         <Scene key="footerTab"
                tabs={true}
                hideNavBar
@@ -54,28 +61,43 @@ export default class App extends React.Component {
 
                <Scene key="projectTab" 
                       title="Project" 
-                      component={ProjectScreen}/>
+                      component={ProjectScreen}
+                      source={require('./img/icons/project.png')}
+                      icon={TabIcon}
+                      hideNavBar/>
                 
                <Scene key="bookmarkTab" 
-                      title="Bookmark" 
-                      component={BookmarkScreen}/>
+                      title="Bookmarks" 
+                      component={BookmarkScreen}
+                      source={require('./img/icons/bookmark.png')}
+                      icon={TabIcon}
+                      hideNavBar/>
 
                <Scene key="brokoliTab" 
                       title="Brokoli"
-                      component={BrokoliScreen}/>
+                      component={BrokoliScreen}
+                      source={require('./img/icons/broccoli.png')}
+                      icon={TabIcon}
+                      hideNavBar/>
 
                <Scene key="profileTab" 
                       title="Profile" 
-                      component={ProfileScreen}/>
+                      component={ProfileScreen}
+                      source={require('./img/icons/profile.png')}
+                      icon={TabIcon}
+                      hideNavBar/>
 
                <Scene key="notificationTab" 
                       title="Notification"
-                      component={NotificationScreen}/>
+                      component={NotificationScreen}
+                      source={require('./img/icons/mail.png')}
+                      icon={TabIcon}
+                      hideNavBar/>
 
 
         </Scene>
 
-        </Stack>
+        </Scene>
 
       </Router>
 
@@ -88,11 +110,16 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
 customizeFooter: {
   flexDirection: 'row',
-  justifyContent: 'center',
+  justifyContent: 'flex-end',
   alignItems: 'center',
   backgroundColor: 'white',
   borderTopWidth: 0.7,
   borderColor: '#5d95c4',
+},
+icon:{
+  height: 22.5,
+  width: 22.5,
+  resizeMode: 'contain'
 }
 });
 
