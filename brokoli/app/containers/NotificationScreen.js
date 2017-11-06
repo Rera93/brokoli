@@ -23,4 +23,4 @@ class NotificationScreen extends React.Component {
     }
 }
 
-module.exports = NotificationScreen
+export default NotificationScreen

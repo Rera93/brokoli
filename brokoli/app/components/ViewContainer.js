@@ -3,9 +3,8 @@
 
   ViewContainer is root of every screen
 */
-'use strict'
-import React, { Component } from 'react';
-import {AppRegistry,StyleSheet,Text,View,TouchableHighlight} from 'react-native';
+import React, {Component} from 'react';
+import {StyleSheet, View} from 'react-native';
 
 class ViewContainer extends Component {
   render(){
@@ -26,4 +25,4 @@ const styles = StyleSheet.create({
   }
 });
 
-module.exports = ViewContainer
+export default ViewContainer

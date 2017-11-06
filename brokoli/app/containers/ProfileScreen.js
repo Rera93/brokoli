@@ -22,4 +22,4 @@ class ProfileScreen extends React.Component {
     }
 }
 
-module.exports = ProfileScreen
+export default ProfileScreen

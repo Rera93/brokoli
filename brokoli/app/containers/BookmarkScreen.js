@@ -22,4 +22,4 @@ class BookmarkScreen extends React.Component {
     }
 }
 
-module.exports = BookmarkScreen
+export default BookmarkScreen

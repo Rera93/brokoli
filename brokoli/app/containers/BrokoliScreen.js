@@ -23,4 +23,4 @@ class BrokoliScreen extends React.Component {
     }
 }
 
-module.exports = BrokoliScreen
+export default BrokoliScreen

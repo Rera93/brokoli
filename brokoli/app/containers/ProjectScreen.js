@@ -9,7 +9,7 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 
-import ViewContainer from '../components/ViewContainer'
+import ViewContainer from '../components/ViewContainer';
 
 class ProjectScreen extends React.Component {
 
@@ -23,4 +23,4 @@ class ProjectScreen extends React.Component {
     }
 }
 
-module.exports = ProjectScreen
+export default ProjectScreen
