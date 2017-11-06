@@ -7,7 +7,7 @@
 
 'use strict'
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 
 import ViewContainer from '../components/ViewContainer';
 
@@ -16,7 +16,7 @@ class ProjectScreen extends React.Component {
     render(){
         return(
             <ViewContainer>
-                
+                <Text> Hello Project Screen </Text>
                 </ViewContainer>
 
         )

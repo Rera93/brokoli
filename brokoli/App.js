@@ -42,57 +42,73 @@ const store = configureStore({});
 */
 const TabIcon = ({ selected, source }) => {
   return (
-    <Image style={[styles.icon, {tintColor: selected ? '#5d95c4' :'#dad9de'}]} source={source}/>
+    <Image style={[styles.icon, {tintColor: selected ? '#228B22' :'#dad9de'}]} source={source}/>
   );
 }
-
+// This will modify the margin for the TabBar
+const getSceneStyle = (props, computedProps) => {
+  const style = {
+    flex: 1,
+  };
+  if (computedProps.isActive) {
+    style.marginBottom = computedProps.hideTabBar ? 0 : 50;
+  }
+  return style;
+};
 export default class App extends React.Component {
   render() {
     return (
 
       <Provider store={store}>
-
       <Router>
         <Scene key="root">
-        <Scene key="footerTab"
+        <Scene key="tabbar"
                tabs={true}
                hideNavBar
                tabBarStyle={styles.customizeFooter}>
 
                <Scene key="projectTab" 
                       title="Project" 
-                      component={ProjectScreen}
                       source={require('./img/icons/project.png')}
                       icon={TabIcon}
-                      hideNavBar/>
+                      onPress={()=> {Actions.project({type: ActionConst.REFRESH})}}>
+
+                      <Scene key='project' component={ProjectScreen} hideNavBar />
+
+              </Scene>
                 
                <Scene key="bookmarkTab" 
                       title="Bookmarks" 
-                      component={BookmarkScreen}
                       source={require('./img/icons/bookmark.png')}
-                      icon={TabIcon}
-                      hideNavBar/>
+                      icon={TabIcon}>
+                      <Scene key='project' component={BookmarkScreen} hideNavBar />
+
+              </Scene>
 
                <Scene key="brokoliTab" 
                       title="Brokoli"
-                      component={BrokoliScreen}
                       source={require('./img/icons/broccoli.png')}
-                      icon={TabIcon}
-                      hideNavBar/>
+                      icon={TabIcon}>
+                      <Scene key='project' component={BrokoliScreen} hideNavBar />
+
+                      </Scene>
 
                <Scene key="profileTab" 
                       title="Profile" 
-                      component={ProfileScreen}
                       source={require('./img/icons/profile.png')}
-                      icon={TabIcon}
-                      hideNavBar/>
+                      icon={TabIcon}>
+                      <Scene key='project' component={ProfileScreen} hideNavBar />
+
+              </Scene>
 
                <Scene key="notificationTab" 
                       title="Notification"
-                      component={NotificationScreen}
                       source={require('./img/icons/mail.png')}
                       icon={TabIcon}
-                      hideNavBar/>
+                      >
+                      <Scene key='project' component={NotificationScreen} hideNavBar />
+
+              </Scene>
 
 
         </Scene>
@@ -101,8 +117,6 @@ export default class App extends React.Component {
 
       </Router>
 
-     {/* <AppContainer /> */}
-
       </Provider>
     );
   }
@@ -110,11 +124,11 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
 customizeFooter: {
   flexDirection: 'row',
-  justifyContent: 'flex-end',
-  alignItems: 'center',
+  justifyContent: 'center',
+  alignItems: 'flex-end',
   backgroundColor: 'white',
   borderTopWidth: 0.7,
-  borderColor: '#5d95c4',
+  borderColor: '#228B22',
 },
 icon:{
   height: 22.5,

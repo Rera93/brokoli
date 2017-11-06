@@ -6,7 +6,7 @@
 
 'use strict'
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 
 import ViewContainer from '../components/ViewContainer'
 
@@ -15,7 +15,7 @@ class BookmarkScreen extends React.Component {
     render(){
         return(
             <ViewContainer>
-                
+                <Text> Hello Bookmark Screen </Text>
                 </ViewContainer>
 
         )
