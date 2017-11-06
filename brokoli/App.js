@@ -1,3 +1,9 @@
+/*
+  Created by Brigel Pineti
+
+  Redux and React Navigation
+*/
+
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Provider } from 'react-redux';
@@ -6,6 +12,12 @@ import thunkMiddleware from 'redux-thunk'
 import {createLogger} from 'redux-logger'
 import reducer from './app/reducers'
 import AppContainer from './app/containers/AppContainer'
+
+import ProjectScreen from './app/containers/ProjectScreen'
+import BookmarkScreen from './app/containers/BookmarkScreen'
+import BrokoliScreen from './app/containers/BrokoliScreen'
+import ProfileScreen from './app/containers/ProfileScreen'
+import NotificationScreen from './app/containers/NotificationScreen'
 
 //middleware that logs actions
 const loggerMiddleware = createLogger({ predicate : (getState, action) => __DEV__});
