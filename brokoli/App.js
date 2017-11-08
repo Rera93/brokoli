@@ -65,7 +65,8 @@ export default class App extends React.Component {
         <Scene key="tabbar"
                tabs={true}
                hideNavBar
-               tabBarStyle={styles.customizeFooter}>
+               tabBarStyle={styles.customizeFooter}
+               tabBarPosition="bottom">
 
                <Scene key="projectTab" 
                       title="Project" 
