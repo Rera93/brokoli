@@ -72,44 +72,41 @@ export default class App extends React.Component {
                       title="Project" 
                       source={require('./img/icons/project.png')}
                       icon={TabIcon}
-                      onPress={()=> {Actions.project({type: ActionConst.REFRESH})}}>
-
-                      <Scene key='project' component={ProjectScreen} hideNavBar />
-
-              </Scene>
+                      component={ProjectScreen}
+                      hideNavBar />
                 
                <Scene key="bookmarkTab" 
                       title="Bookmarks" 
                       source={require('./img/icons/bookmark.png')}
-                      icon={TabIcon}>
-                      <Scene key='project' component={BookmarkScreen} hideNavBar />
+                      icon={TabIcon}
+                      component={BookmarkScreen} 
+                      hideNavBar />
 
-              </Scene>
 
                <Scene key="brokoliTab" 
                       title="Brokoli"
                       source={require('./img/icons/broccoli.png')}
-                      icon={TabIcon}>
-                      <Scene key='project' component={BrokoliScreen} hideNavBar />
+                      icon={TabIcon}
+                      component={BrokoliScreen}
+                      hideNavBar />
 
-                      </Scene>
+                      
 
                <Scene key="profileTab" 
                       title="Profile" 
                       source={require('./img/icons/profile.png')}
-                      icon={TabIcon}>
-                      <Scene key='project' component={ProfileScreen} hideNavBar />
+                      icon={TabIcon}
+                      component={ProfileScreen} 
+                      hideNavBar />
 
-              </Scene>
+             
 
                <Scene key="notificationTab" 
                       title="Notification"
                       source={require('./img/icons/mail.png')}
                       icon={TabIcon}
-                      >
-                      <Scene key='project' component={NotificationScreen} hideNavBar />
-
-              </Scene>
+                      component={NotificationScreen} 
+                      hideNavBar />
 
 
         </Scene>
@@ -126,14 +123,14 @@ const styles = StyleSheet.create({
 customizeFooter: {
   flexDirection: 'row',
   justifyContent: 'center',
-  alignItems: 'flex-end',
+  alignItems: 'center',
   backgroundColor: 'white',
   borderTopWidth: 0.7,
   borderColor: '#228B22',
 },
 icon:{
-  height: 22.5,
-  width: 22.5,
+  height: 30,
+  width: 30,
   resizeMode: 'contain'
 }
 });
