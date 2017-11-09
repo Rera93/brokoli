@@ -7,7 +7,7 @@
 
 'use strict'
 import React from 'react';
-import { StyleSheet, Text, TextInput, Button, Alert } from 'react-native';
+import { StyleSheet, Text, TextInput, Button, Alert, ScrollView} from 'react-native';
 
 import ViewContainer from '../components/ViewContainer';
 
@@ -32,44 +32,50 @@ export default class ProjectScreen extends React.Component {
 
     render(){
         return(
-            <ViewContainer style={styles.ViewContainer}>
               
-                <Text style={styles.topComponent}>
+           <ScrollView>
+            
+              
+                <Text style={styles.textComponent}>
                   Project Name
                 </Text>
                 <TextInput
+                  underlineColorAndroid='transparent'
                   style={styles.textInput}
                   onChangeText={(projectNameText) => this.setState({projectNameText})}
                   value={this.state.projectNameText}
                 />
 
-                <Text>
+                <Text style={styles.textComponent}>
                   Abstract
                 </Text>
                 <TextInput
+                  underlineColorAndroid='transparent'
                   multiline ={true}
                   style={styles.largeForm}
                   onChangeText={(abstractText) => this.setState({abstractText})}
                   value={this.state.abstractText}
                 />
 
-                <Text>
+                <Text style={styles.textComponent}>
                   Position(s) available
                 </Text>
                 <TextInput
+                  underlineColorAndroid='transparent'
                   multiline ={true}
                   style={styles.textInput}
                   onChangeText={(positionText) => this.setState({positionText})}
                   value={this.state.positionText}
                 />
-               <Button
+               <Button style={styles.textComponent}
                   onPress={() => this._createOnpress(this.state.projectNameText, this.state.abstractText, this.state.positionText) }
                   title="Create Project"
                   color="#841584"
                   accessibilityLabel="create project button"
                 />
-
-            </ViewContainer>
+            
+            
+            </ScrollView>
 
         )
     }
@@ -82,16 +88,19 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "stretch"
   },
-  topComponent:{
-    marginTop:30,
+  textComponent:{
+    fontSize: 20,
+    marginTop:20,
   },
   largeForm: {
+    borderWidth:1,
     justifyContent: 'flex-start',
     height:80,
     alignItems: 'flex-start',
     backgroundColor: '#F5FCFF',
   },
   textInput: {
+    borderWidth:1,
     justifyContent: 'center',
     height:40,
     alignItems: 'center',
@@ -103,11 +112,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
+  
   instructions: {
     textAlign: 'center',
     color: '#333333',
