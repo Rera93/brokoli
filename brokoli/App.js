@@ -45,16 +45,7 @@ const TabIcon = ({ selected, source }) => {
     <Image style={[styles.icon, {tintColor: selected ? '#228B22' :'#dad9de'}]} source={source}/>
   );
 }
-// This will modify the margin for the TabBar
-const getSceneStyle = (props, computedProps) => {
-  const style = {
-    flex: 1,
-  };
-  if (computedProps.isActive) {
-    style.marginBottom = computedProps.hideTabBar ? 0 : 50;
-  }
-  return style;
-};
+
 export default class App extends React.Component {
   render() {
     return (
