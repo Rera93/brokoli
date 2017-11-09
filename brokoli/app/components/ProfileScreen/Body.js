@@ -20,7 +20,7 @@ export default class Body extends React.Component {
 }
 const styles = StyleSheet.create({
     body:{
-        flex: 1,
+        flex: 3,
         flexDirection: 'row',
         borderWidth: 1
     }

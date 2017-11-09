@@ -9,6 +9,9 @@ import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 
 const profileIcon = require("../../../img/icons/profile_pic.png")
+const locationIcon = require("../../../img/icons/location.png")
+const occupationIcon = require("../../../img/icons/briefcase.png")
+const userNameIcon = require("../../../img/icons/user_name.png")
 
 import ViewContainer from '../ViewContainer'
 
@@ -18,17 +21,33 @@ export default class Header extends React.Component {
         return(
             <ViewContainer style={styles.header}>
 
-            <View>
-            <Image source={profileIcon} style={styles.profileIcon}/> 
+                <View style={styles.profilePicCont}>
+                    <Image source={profileIcon} style={styles.profileIcon}/> 
+                </View>
 
-            </View>
+                <View style={styles.basicInfoParent}>
 
-         
-            <View style={styles.basicInfo}>
-            <Text> Achraf Bekkali </Text>
-            <Text> Information Science Master at Radboud University </Text>
+                    <View style={styles.basicInfoChild}>
+                        <Image source={userNameIcon} style={styles.icon}/>
+                        <Text style={styles.basicInfoText}>Achraf Bekkali</Text>
+                    </View>
 
-            </View>
+                    <View style={styles.basicInfoChild}>
+                        <Image source={occupationIcon} style={styles.icon}/>
+                        <Text style={styles.basicInfoText}>MSc in Information Science</Text>
+                    </View>
+
+                    <View style={styles.basicInfoChild}>
+                        <Image source={locationIcon} style={styles.icon}/>
+                        <Text style={styles.basicInfoText}>Radboud University</Text>
+                    </View>
+
+                    <View style={styles.basicInfoChild}>
+                        <Image source={locationIcon} style={styles.icon}/>
+                        <Text style={styles.basicInfoText}>Nijmegen, Netherlands</Text>
+                    </View>
+
+                </View>
             </ViewContainer>
            
 
@@ -38,24 +57,36 @@ export default class Header extends React.Component {
 const styles = StyleSheet.create({
     header:{
         flex: 1,
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     profilePicCont: {
-        borderWidth: 1,
-        borderColor: 'red',
+        alignItems: 'center',
+        justifyContent:'center',
         flex: 1,
     },
     profileIcon: {
-        resizeMode: 'contain',
+        resizeMode: 'center',
+        marginTop: 5,
         width: 100,
         height: 100
     },
-    basicInfo:{
-        flex: 1,
+    basicInfoParent:{
+        flex: 2,
         alignItems: 'flex-start',
-        justifyContent: 'flex-start',
-        borderWidth: 1,
-        borderColor: 'green'
+        justifyContent: 'center',
+    },
+    icon:{
+        resizeMode: 'center',
+        width: 20,
+        height: 20,
+        tintColor: 'green'
+    },
+    basicInfoChild:{
+        flexDirection: 'row',
+        marginTop: 5,
+    },
+    basicInfoText:{
+        marginLeft: 10,
     }
   });
 
