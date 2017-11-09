@@ -11,6 +11,7 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 const profileIcon = require("../../../img/icons/profile_pic.png")
 const locationIcon = require("../../../img/icons/location.png")
 const occupationIcon = require("../../../img/icons/briefcase.png")
+const pinIcon = require("../../../img/icons/pin.png")
 const userNameIcon = require("../../../img/icons/user_name.png")
 
 import ViewContainer from '../ViewContainer'
@@ -38,7 +39,7 @@ export default class Header extends React.Component {
                     </View>
 
                     <View style={styles.basicInfoChild}>
-                        <Image source={locationIcon} style={styles.icon}/>
+                        <Image source={pinIcon} style={styles.icon}/>
                         <Text style={styles.basicInfoText}>Radboud University</Text>
                     </View>
 
