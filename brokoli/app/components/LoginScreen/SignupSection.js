@@ -6,7 +6,7 @@ import {
 	Text,
 } from 'react-native';
 
-export default class MoreOptions extends Component {
+export default class SignupSection extends Component {
 	render() {
 		return (
 			<View style={styles.container}>

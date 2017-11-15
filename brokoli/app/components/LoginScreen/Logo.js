@@ -9,7 +9,7 @@ import {
 	Image,
 } from 'react-native';
 
-import logoImg from '../../../img/icons/brokoli';
+import logoImg from '../../../img/icons/brokoli.png';
 
 export default class Logo extends Component {
 	render() {

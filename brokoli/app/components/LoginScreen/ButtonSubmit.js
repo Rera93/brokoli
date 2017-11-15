@@ -16,7 +16,7 @@ import {
 } from 'react-native';
 import { Actions, ActionConst } from 'react-native-router-flux';
 
-import spinner from '../images/loading.gif';
+import spinner from '../../../img/icons/loading.gif';
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
 const DEVICE_HEIGHT = Dimensions.get('window').height;
