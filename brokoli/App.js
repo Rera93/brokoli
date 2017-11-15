@@ -18,7 +18,7 @@ import ProjectScreen from './app/containers/ProjectScreen'
 import BookmarkScreen from './app/containers/BookmarkScreen'
 import BrokoliScreen from './app/containers/BrokoliScreen'
 import ProfileScreen from './app/containers/ProfileScreen'
-import NotificationScreen from './app/containers/NotificationScreen'
+import NotificationScreen from './app/containers/LoginScreen'
 
 //middleware that logs actions
 const loggerMiddleware = createLogger({ predicate : (getState, action) => __DEV__});
@@ -76,7 +76,7 @@ export default class App extends React.Component {
 
                <Scene key="brokoliTab" 
                       title="Brokoli"
-                      source={require('./img/icons/broccoli.png')}
+                      source={require('./img/icons/brokoli.png')}
                       icon={TabIcon}
                       component={BrokoliScreen}
                       hideNavBar />
