@@ -68,12 +68,12 @@ const styles = StyleSheet.create({
 	},
 	btnEye: {
     position: 'absolute',
-    top: 55,
+    top: 60,
     right: 28,
   },
   iconEye: {
     width: 25,
     height: 25,
-    tintColor: 'rgba(0,0,0,0.2)',
+    tintColor: '#14FDD2',
   },
 });

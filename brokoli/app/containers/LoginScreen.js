@@ -15,7 +15,7 @@ export default class LoginScreen extends React.Component {
 
         return(
 
-            <ViewContainer>
+            <ViewContainer style={{backgroundColor: 'white'}}>
 
                 <Logo />
 				<Form />
@@ -27,3 +27,6 @@ export default class LoginScreen extends React.Component {
         )
     }
 }
+const styles = StyleSheet.create({
+	
+});
