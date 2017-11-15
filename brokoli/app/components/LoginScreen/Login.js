@@ -68,3 +68,47 @@ export default class Login extends React.Component {
         );
     }
 }
+const styles = StyleSheet.create({
+    textInfo:{
+      height: 80,
+    },
+    logoImg: {
+          alignItems: 'center',
+          justifyContent:'center',
+          flex: 1,
+    },
+    ViewContainer:{
+      justifyContent: "flex-start",
+      alignItems: "stretch"
+    },
+    textComponent:{
+      fontSize: 20,
+      marginTop:20,
+    },
+    largeForm: {
+      borderWidth:1,
+      justifyContent: 'flex-start',
+      height:80,
+      alignItems: 'flex-start',
+      backgroundColor: '#F5FCFF',
+    },
+    textInput: {
+      borderWidth:1,
+      justifyContent: 'center',
+      height:40,
+      alignItems: 'center',
+      backgroundColor: '#F5FCFF',
+    },
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#F5FCFF',
+    },
+  
+    instructions: {
+      textAlign: 'center',
+      color: '#333333',
+      marginBottom: 5,
+    },
+  });
