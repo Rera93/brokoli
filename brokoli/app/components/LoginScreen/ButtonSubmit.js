@@ -1,3 +1,7 @@
+/*
+    Created by Brigel Pineti.
+*/
+
 import React, { Component, PropTypes } from 'react';
 import Dimensions from 'Dimensions';
 import {
