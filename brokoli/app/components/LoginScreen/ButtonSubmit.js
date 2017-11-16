@@ -120,15 +120,16 @@ const styles = StyleSheet.create({
 		width: MARGIN,
 		marginTop: -MARGIN,
 		borderWidth: 1,
-		borderColor: '#F035E0',
+		borderColor: '#14FDD2',
 		borderRadius: 100,
 		alignSelf: 'center',
 		zIndex: 99,
-		backgroundColor: '#F035E0',
+		backgroundColor: '#14FDD2',
 	},
 	text: {
 		color: 'white',
 		backgroundColor: 'transparent',
+		fontWeight: 'bold'
 	},
 	image: {
 		width: 24,
