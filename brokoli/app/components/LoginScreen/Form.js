@@ -46,13 +46,6 @@ export default class Form extends Component {
 					returnKeyType={'done'}
 					autoCapitalize={'none'}
 					autoCorrect={false} />
-					<TouchableOpacity
-						activeOpacity={0.7}
-						style={styles.btnEye}
-						onPress={this.showPass}
-					>
-						<Image source={eyeImg} style={styles.iconEye} />
-					</TouchableOpacity>
 			</KeyboardAvoidingView>
 		);
 	}
@@ -63,12 +56,14 @@ const DEVICE_HEIGHT = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
+		flex: 2,
 		alignItems: 'center',
+		marginTop: 100,
+		marginBottom: 35
 	},
 	btnEye: {
     position: 'absolute',
-    top: 60,
+    top: 65,
     right: 28,
   },
   iconEye: {

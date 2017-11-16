@@ -17,6 +17,7 @@ export default class Logo extends Component {
 			<View style={styles.container}>
 				<Image source={logoImg} style={styles.image} />
 				<Text style={styles.text}>BROKOLI</Text>
+				
 			</View>
 		);
 	}
@@ -27,15 +28,21 @@ const styles = StyleSheet.create({
 		flex: 3,
 		alignItems: 'center',
 		justifyContent: 'center',
+		paddingTop: 100,
+
 	},
 	image: {
-		width: 100,
-		height: 100,
+		width: 250,
+		height: 250,
+	},
+	imagebelow: {
+		width: 400,
+		height: 80
 	},
 	text: {
-		color: 'white',
-		fontWeight: 'bold',
+		color: '#494947',
+		fontSize: 40,
 		backgroundColor: 'transparent',
-		marginTop: 20,
+		fontFamily: 'sans-serif-light'
 	}
 });

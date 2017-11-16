@@ -23,13 +23,14 @@ const DEVICE_HEIGHT = Dimensions.get('window').height;
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		top: 65,
+		top: 30,
 		width: DEVICE_WIDTH,
 		flexDirection: 'row',
 		justifyContent: 'space-around',
 	},
 	text: {
-		color: 'white',
+		color: '#14FDD2',
 		backgroundColor: 'transparent',
+		fontWeight: 'bold'
 	},
 });
