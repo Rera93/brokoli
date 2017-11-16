@@ -11,13 +11,15 @@ export default class FullName extends React.Component {
     };
     
     render(){
+
         const { navigate } = this.props.navigation;
+
         return(
 
             <ViewContainer>
 
               <Text> Hello, full name. </Text>
-              <TouchableOpacity onPress={()=> navigate('Email')}>
+              <TouchableOpacity onPress={()=> navigate('BirthDate')}>
 
                 <Text> NEXT </Text>
 

@@ -4,20 +4,22 @@ import { StackNavigator } from 'react-navigation';
 
 import ViewContainer from '../ViewContainer'
 
-export default class Email extends React.Component {
+export default class JobExp extends React.Component {
 
     static navigationOptions = {
-        title: 'Email Address'
+        title: 'Job Experience'
     };
     
     render(){
+        
         const { navigate } = this.props.navigation;
+
         return(
 
             <ViewContainer>
 
-              <Text> Hello, email. </Text>
-              <TouchableOpacity onPress={()=> navigate('Username')}>
+              <Text> Hello, jobExp. </Text>
+              <TouchableOpacity onPress={()=> navigate('Email')}>
 
                 <Text> NEXT </Text>
 

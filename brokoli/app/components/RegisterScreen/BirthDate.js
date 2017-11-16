@@ -4,20 +4,22 @@ import { StackNavigator } from 'react-navigation';
 
 import ViewContainer from '../ViewContainer'
 
-export default class Email extends React.Component {
+export default class BirthDate extends React.Component {
 
     static navigationOptions = {
-        title: 'Email Address'
+        title: 'Date of Birth'
     };
     
     render(){
+        
         const { navigate } = this.props.navigation;
+
         return(
 
             <ViewContainer>
 
-              <Text> Hello, email. </Text>
-              <TouchableOpacity onPress={()=> navigate('Username')}>
+              <Text> Hello, birth date. </Text>
+              <TouchableOpacity onPress={()=> navigate('Gender')}>
 
                 <Text> NEXT </Text>
 

@@ -10,14 +10,17 @@ import {
 } from 'react-native';
 
 import logoImg from '../../../img/icons/brokoli.png';
+import titleImg from '../../../img/icons/title.png';
+import sloganImg from '../../../img/icons/slogan.png';
 
 export default class Logo extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
 				<Image source={logoImg} style={styles.image} />
-				<Text style={styles.text}>BROKOLI</Text>
-				
+				{/*<Text style={styles.text}>BROKOLI</Text>*/}
+				<Image source={titleImg}/>
+				<Image source={sloganImg}/>
 			</View>
 		);
 	}

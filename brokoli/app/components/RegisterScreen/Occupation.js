@@ -4,10 +4,10 @@ import { StackNavigator } from 'react-navigation';
 
 import ViewContainer from '../ViewContainer'
 
-export default class Email extends React.Component {
+export default class Occupation extends React.Component {
 
     static navigationOptions = {
-        title: 'Email Address'
+        title: 'Occupation'
     };
     
     render(){
@@ -16,8 +16,8 @@ export default class Email extends React.Component {
 
             <ViewContainer>
 
-              <Text> Hello, email. </Text>
-              <TouchableOpacity onPress={()=> navigate('Username')}>
+              <Text> Hello, occupation. </Text>
+              <TouchableOpacity onPress={()=> navigate('Location')}>
 
                 <Text> NEXT </Text>
 
