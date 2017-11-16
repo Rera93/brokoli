@@ -10,14 +10,15 @@ import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 
 import ViewContainer from '../components/ViewContainer'
+import Body from '../components/BrokoliScreen/Body'
 
 class BrokoliScreen extends React.Component {
 
     render(){
         return(
             <ViewContainer>
-                <Text> Hello Brokoli Screen </Text>
-                </ViewContainer>
+            <Body/>
+              </ViewContainer>
 
         )
     }
