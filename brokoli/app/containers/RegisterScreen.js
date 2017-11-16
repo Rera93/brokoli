@@ -4,30 +4,22 @@ import { StackNavigator } from 'react-navigation';
 
 
 import ViewContainer from '../components/ViewContainer'
-import FullName from '../components/RegisterScreen/FullName'
-import BirthDate from '../components/RegisterScreen/BirthDate'
-import Gender from '../components/RegisterScreen/Gender'
-import Occupation from '../components/RegisterScreen/Occupation'
-import Location from '../components/RegisterScreen/Location'
-import Education from '../components/RegisterScreen/Education'
-import JobExp from '../components/RegisterScreen/JobExp'
-import ProjectExp from '../components/RegisterScreen/ProjectExp'
-import Email from '../components/RegisterScreen/Email'
-import Username from '../components/RegisterScreen/Username'
-import Password from '../components/RegisterScreen/Password'
+
+import Personal from '../components/RegisterScreen/Personal/Personal'
+import Account from '../components/RegisterScreen/Account/Account'
+import Professional from '../components/RegisterScreen/Professional/Professional'
+import Career from '../components/RegisterScreen/Career/Career'
+import Additional from '../components/RegisterScreen/Additional/Additional'
+
+
 
 const StackNav = StackNavigator({
-    FullName: {screen: FullName},
-    BirthDate: {screen: BirthDate},
-    Gender: {screen: Gender},
-    Occupation: {screen:Occupation},
-    Location: {screen:Location},
-    Education: {screen: Education},
-    ProjectExp: {screen: ProjectExp},
-    JobExp: {screen: JobExp},
-    Email: {screen: Email},
-    Username: {screen: Username},
-    Password: {screen: Password}
+
+    Personal: {screen: Personal},
+    Account: {screen: Account},
+    Professional: {screen: Professional},
+    Career: {screen: Career},
+    Additional: {screen: Additional}
 });
 
 export default class RegisterScreen extends React.Component {

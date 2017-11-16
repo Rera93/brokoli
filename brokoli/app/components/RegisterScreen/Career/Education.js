@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
-import ViewContainer from '../ViewContainer'
+import ViewContainer from '../../ViewContainer'
 
 export default class Education extends React.Component {
 
