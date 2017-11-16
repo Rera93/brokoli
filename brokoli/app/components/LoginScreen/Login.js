@@ -4,13 +4,14 @@ import {
   Text,
   View,
   TextInput,
-  ScrollView,
-  Button,
   Alert,
-  Image
+  Image,
+  TouchableHighlight
 } from 'react-native';
 
-const brokoliIcon = require("../../../img/icons/broccoli.png")
+import ViewContainer from '../ViewContainer';
+
+const brokoliIcon = require("../../../img/icons/brokoli.png")
 
 export default class Login extends React.Component {
 
@@ -27,88 +28,81 @@ export default class Login extends React.Component {
       }
         render() {
           return (
-            <ScrollView>
+            <ViewContainer style={{backgroundColor: 'white'}}>
       
-            <Text style={styles.textInfo}>
-            </Text>
-      
-                  <View style={styles.logoImg}>
-                      <Image source={brokoliIcon} style={styles.logoImg}/>
-                  </View>
-      
-            <Text style={styles.textComponent}>
-              Username
-            </Text>
-            <TextInput
-              underlineColorAndroid='transparent'
-              style={styles.textInput}
-              onChangeText={(username) => this.setState({username})}
-              />
-              <Text style={styles.textComponent}>
-                Password
-              </Text>
-              <TextInput
+            <View style={styles.logoCont}>
+                <Image source={brokoliIcon} style={styles.logoImg}/>
+            </View>
+
+            <View style={styles.bottomLogoCont}>
+                
+                <TextInput
                 underlineColorAndroid='transparent'
                 style={styles.textInput}
-                onChangeText={(password) => this.setState({password})}
+                placeholder='username'
+                placeholderTextColor='#222222'
+                onChangeText={(username) => this.setState({username})}
                 />
-      
-              <Button style={styles.textComponent}
-              onPress={() => this._createOnpress(this.state.username, this.state.password) }
-              title="Login"
-              color="#841584"
-              accessibilityLabel="create project button"
-              />
-      
-              <Text style={styles.textComponent}>
-                  Register
-              </Text>
-      
-            </ScrollView>
+
+                <TextInput
+                    underlineColorAndroid='transparent'
+                    style={styles.textInput}
+                    placeholder='password'
+                    placeholderTextColor='#222222'
+                    onChangeText={(password) => this.setState({password})}
+                    />
+        
+                <TouchableHighlight
+                    onPress={() => this._createOnpress(this.state.username, this.state.password) }
+                    color="#14FDD2"
+                    style={styles.button}>
+                    <Text style={styles.buttonTitle}>Login</Text>
+                </TouchableHighlight>
+        
+                <Text style={styles.registerLink}>
+                    I don't have a Brokoli account
+                </Text>
+            </View>
+            </ViewContainer>
         );
     }
 }
 const styles = StyleSheet.create({
-    textInfo:{
-      height: 80,
-    },
-    logoImg: {
+    logoCont: {
           alignItems: 'center',
           justifyContent:'center',
           flex: 1,
     },
-    ViewContainer:{
-      justifyContent: "flex-start",
-      alignItems: "stretch"
+    logoImg: {
+        resizeMode: 'center'
     },
-    textComponent:{
-      fontSize: 20,
-      marginTop:20,
+    button:{
+      marginBottom:20,
+      borderRadius: 10
     },
-    largeForm: {
-      borderWidth:1,
-      justifyContent: 'flex-start',
-      height:80,
-      alignItems: 'flex-start',
-      backgroundColor: '#F5FCFF',
+    buttonTitle: {
+        paddingTop:10,
+        paddingBottom:10,
+        color:'#fff',
+        fontSize: 14,
+        textAlign:'center',
+        backgroundColor:'#14FDD2',
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: '#fff'
     },
     textInput: {
-      borderWidth:1,
+      borderWidth: 1,
+      borderColor: '#14FDD2',
       justifyContent: 'center',
-      height:40,
       alignItems: 'center',
-      backgroundColor: '#F5FCFF',
+      height: 40,
+      marginBottom: 20
     },
     container: {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
       backgroundColor: '#F5FCFF',
-    },
-  
-    instructions: {
-      textAlign: 'center',
-      color: '#333333',
-      marginBottom: 5,
     },
   });

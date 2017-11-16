@@ -76,7 +76,7 @@ export default class App extends React.Component {
 
                <Scene key="brokoliTab" 
                       title="Brokoli"
-                      source={require('./img/icons/broccoli.png')}
+                      source={require('./img/icons/brokoli.png')}
                       icon={TabIcon}
                       component={BrokoliScreen}
                       hideNavBar />
