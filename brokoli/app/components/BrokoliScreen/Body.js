@@ -45,13 +45,41 @@ class Body extends React.Component {
     //    <Text>{text}</Text>
     // }
 
+   //  renderProjects() {
+   //   var contents = this.state.data.map(function (item) {
+   //      return (
+   //        <View key={item.id}>
+   //          <Text>{item.doc.name}</Text>
+   //          <Text>{item.doc.description}</Text>
+   //          <Text>{item.doc.positions}</Text>
+   //        </View>
+   //      );
+   //   });
+   // }
+
+   // for(var i = 0; i < this.state.data.length;i++){
+   //      Alert.alert('name[0]:'+ this.state.data[i].doc.name);
+   //    }
+
       render(){
 
-        var projects =[];
         
-      for(var i = 0; i < this.state.data.length;i++){
-        Alert.alert('name[0]:'+ this.state.data[i].doc.name);
-      }
+        
+      
+
+      var contents = this.state.data.map(function (item) {
+        return (
+          <View key={item.id}>
+            <Text>{item.doc.name}</Text>
+            <Text>{item.doc.description}</Text>
+            <Text>{item.doc.positions}</Text>
+            <Text>==============</Text>
+          </View>
+        );
+     });
+
+      
+
       // var arrayLength = this.state.data.length;
       // if(var>0)
       //   Alert.alert(arrayLength);
@@ -68,7 +96,7 @@ class Body extends React.Component {
             <ScrollView>
                 <View>
                 <Text>oi</Text>
-                
+                {contents}
                 </View>
 
           </ScrollView>
