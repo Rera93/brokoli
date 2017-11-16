@@ -19,7 +19,7 @@ export default class Gender extends React.Component {
             <ViewContainer>
 
               <Text> Hello, gender. </Text>
-              <TouchableOpacity onPress={()=> navigate('Occupation')}>
+              <TouchableOpacity onPress={()=> navigate('Location')}>
 
                 <Text> NEXT </Text>
 

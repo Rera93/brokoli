@@ -18,7 +18,6 @@ export default class Logo extends Component {
 		return (
 			<View style={styles.container}>
 				<Image source={logoImg} style={styles.image} />
-				{/*<Text style={styles.text}>BROKOLI</Text>*/}
 				<Image source={titleImg}/>
 				<Image source={sloganImg}/>
 			</View>
@@ -41,11 +40,5 @@ const styles = StyleSheet.create({
 	imagebelow: {
 		width: 400,
 		height: 80
-	},
-	text: {
-		color: '#494947',
-		fontSize: 40,
-		backgroundColor: 'transparent',
-		fontFamily: 'sans-serif-light'
 	}
 });
