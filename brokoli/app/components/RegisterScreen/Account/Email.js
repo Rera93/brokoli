@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, TextInput } from 'react-native';
 
 import ViewContainer from '../../ViewContainer'
+import UserInput from '../UserInput';
 
 export default class Email extends React.Component {
 
@@ -9,11 +10,10 @@ export default class Email extends React.Component {
     render(){
         return(
 
-            <ViewContainer>
-
-              <Text> Hello, email. </Text>
-
-                </ViewContainer>
+            <UserInput placeholder='email'
+                       autoCapitalize={'none'}
+                       returnKeyType={'done'}
+                       autoCorrect={false} />
 
         )
     }

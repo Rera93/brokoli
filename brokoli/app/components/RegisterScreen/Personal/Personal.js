@@ -28,7 +28,7 @@ export default class Personal extends React.Component {
                 <Gender />
                 <Location />
 
-                <TouchableOpacity onPress={()=> navigate('Professional')}>
+                <TouchableOpacity onPress={()=> navigate('Account')}>
 
                 <Text> NEXT </Text>
 
