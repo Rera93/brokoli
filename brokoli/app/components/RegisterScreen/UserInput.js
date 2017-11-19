@@ -51,6 +51,5 @@ const styles = StyleSheet.create({
 	},
 	inputWrapper: {
 		flex: 1,
-		marginBottom: 40
 	},
 });

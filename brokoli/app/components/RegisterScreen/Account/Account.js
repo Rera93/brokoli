@@ -38,11 +38,9 @@ export default class Account extends React.Component {
       keyboardDidShow = (event) => {
         Animated.parallel([
           Animated.timing(this.keyboardHeight, {
-            duration: event.duration,
             toValue: event.endCoordinates.height,
           }),
           Animated.timing(this.imageHeight, {
-            duration: event.duration,
             toValue: window.width / 7,
           }),
         ]).start();
@@ -51,11 +49,9 @@ export default class Account extends React.Component {
       keyboardDidHide = (event) => {
         Animated.parallel([
           Animated.timing(this.keyboardHeight, {
-            duration: event.duration,
             toValue: 0,
           }),
           Animated.timing(this.imageHeight, {
-            duration: event.duration,
             toValue: window.width / 2,
           }),
         ]).start();
