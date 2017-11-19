@@ -16,6 +16,9 @@ export default class UserInput extends Component {
 		return (
 			<View style={styles.inputWrapper}>
 
+                <Image source={this.props.source}
+					style={styles.inlineImg} />
+
 				<TextInput style={styles.input}
 					placeholder={this.props.placeholder}
 					secureTextEntry={this.props.secureTextEntry}
@@ -51,5 +54,15 @@ const styles = StyleSheet.create({
 	},
 	inputWrapper: {
 		flex: 1,
+    },
+    
+    inlineImg: {
+		position: 'absolute',
+		zIndex: 99,
+		width: 22,
+		height: 22,
+		left: 35,
+        top: 9,
+        tintColor: '#59cd32'
 	},
 });

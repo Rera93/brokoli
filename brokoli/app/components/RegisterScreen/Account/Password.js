@@ -3,6 +3,7 @@ import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 import ViewContainer from '../../ViewContainer'
 import UserInput from '../UserInput';
+import keyImg from '../../../../img/icons/key.png'
 
 export default class Password extends React.Component {
 
@@ -10,7 +11,8 @@ export default class Password extends React.Component {
     render(){
         return(
 
-            <UserInput placeholder='password'
+            <UserInput source={keyImg}
+                       placeholder='password'
                        autoCapitalize={'none'}
                        returnKeyType={'done'}
                        autoCorrect={false} />
