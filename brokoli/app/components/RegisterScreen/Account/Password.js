@@ -12,7 +12,7 @@ export default class Password extends React.Component {
         return(
 
             <UserInput source={keyImg}
-                       placeholder='password'
+                       placeholder='Password'
                        autoCapitalize={'none'}
                        returnKeyType={'done'}
                        autoCorrect={false} />
