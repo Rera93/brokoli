@@ -77,7 +77,7 @@ export default class Account extends React.Component {
                     <Password />
                     <PassConfirm />
 
-                    <TouchableOpacity onPress={()=> navigate('Personal')}>
+                    <TouchableOpacity onPress={()=> navigate('Professional')}>
 
                     <Text> NEXT </Text>
 
