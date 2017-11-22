@@ -124,7 +124,7 @@ export default class SwipeCards extends Component {
     handleMaybe: (card) => null,
     handleNope: (card) => null,
     nopeText: "Discard",
-    maybeText: "Maybe!",
+    maybeText: "Brokoli",
     yupText: "Discard!",
     onClickHandler: () => { alert('tap') },
     onDragStart: () => {},
