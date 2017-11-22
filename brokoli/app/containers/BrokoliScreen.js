@@ -10,7 +10,7 @@ import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 
 import ViewContainer from '../components/ViewContainer'
-import Body from '../components/BrokoliScreen/Body'
+import Body from '../components/BrokoliScreen/Swipe'
 
 class BrokoliScreen extends React.Component {
 
