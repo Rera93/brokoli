@@ -10,7 +10,7 @@ import {
   Animated,
   PanResponder,
   Dimensions,
-  Image
+  Image,
 } from 'react-native';
 
 import clamp from 'clamp';
@@ -19,6 +19,9 @@ import Defaults from './Defaults.js';
 
 const viewport = Dimensions.get('window')
 const SWIPE_THRESHOLD = 120;
+
+const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
   container: {
@@ -34,7 +37,7 @@ const styles = StyleSheet.create({
     padding: 20,
     bottom: 20,
     borderRadius: 5,
-    right: 0,
+    alignItems: 'center'
   },
   yupText: {
     fontSize: 16,
@@ -47,7 +50,7 @@ const styles = StyleSheet.create({
     padding: 20,
     bottom: 20,
     borderRadius: 5,
-    right: 20,
+    alignItems: 'center',
   },
   maybeText: {
     fontSize: 16,
@@ -60,7 +63,7 @@ const styles = StyleSheet.create({
     bottom: 20,
     padding: 20,
     borderRadius: 5,
-    left: 0,
+    alignItems: 'center'
   },
   nopeText: {
     fontSize: 16,
@@ -118,14 +121,14 @@ export default class SwipeCards extends Component {
     stackOffsetX: 25,
     stackOffsetY: 0,
     showYup: true,
-    showMaybe: true,
+    showMaybe: false,
     showNope: true,
     handleYup: (card) => null,
     handleMaybe: (card) => null,
     handleNope: (card) => null,
     nopeText: "Discard",
     maybeText: "Brokoli",
-    yupText: "Discard!",
+    yupText: "Discard",
     onClickHandler: () => { alert('tap') },
     onDragStart: () => {},
     onDragRelease: () => {},
