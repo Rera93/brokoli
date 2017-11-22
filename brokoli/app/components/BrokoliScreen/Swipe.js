@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, View, Image, Dimensions} from 'react-native';
 
-import SwipeCards from 'react-native-swipe-cards';
+import SwipeCards from '../../lib/SwipeCards'
+
+const window = Dimensions.get('window');
+const width = window.width
 
 class Project extends React.Component {
     constructor(props) {
@@ -121,13 +124,13 @@ class Project extends React.Component {
       flex: 1,
       alignItems: 'center',
       borderRadius: 5,
-      overflow: 'hidden',
       borderColor: 'grey',
       backgroundColor: 'white',
       borderWidth: 1,
       elevation: 1,
-      marginTop :30,
       marginBottom: 10,
+      marginTop: 30,
+      width: width - 20,
     },
     thumbnail: {
       width: 300,
