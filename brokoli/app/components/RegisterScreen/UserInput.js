@@ -25,7 +25,7 @@ export default class UserInput extends Component {
 					autoCorrect={this.props.autoCorrect}
 					autoCapitalize={this.props.autoCapitalize}
 					returnKeyType={this.props.returnKeyType}
-					placeholderTextColor='#59cd32' />
+					placeholderTextColor='grey' />
 
 			</View>
 		);
@@ -49,10 +49,7 @@ const styles = StyleSheet.create({
 		height: 40,
 		marginHorizontal: 20,
 		paddingLeft: 45,
-        color: '#59cd32',
-        borderBottomWidth: 1,
-        borderColor: '#59cd32'
-        
+        color: 'grey',
 	},
 	inputWrapper: {
 		flex: 1,
@@ -65,6 +62,6 @@ const styles = StyleSheet.create({
 		height: 22,
 		left: 35,
         top: 9,
-        tintColor: '#59cd32'
+        tintColor: 'grey'
 	},
 });
