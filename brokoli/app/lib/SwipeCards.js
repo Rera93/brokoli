@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   yup: {
-    borderColor: 'green',
+    borderColor: '#FF00FF',
     borderWidth: 2,
     position: 'absolute',
     padding: 20,
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   },
   yupText: {
     fontSize: 16,
-    color: 'green',
+    color: '#FF00FF',
   },
   maybe: {
     borderColor: 'blue',
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     color: 'blue',
   },
   nope: {
-    borderColor: 'red',
+    borderColor: '#FF00FF',
     borderWidth: 2,
     position: 'absolute',
     bottom: 20,
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
   },
   nopeText: {
     fontSize: 16,
-    color: 'red',
+    color: '#FF00FF',
   }
 });
 
@@ -123,9 +123,9 @@ export default class SwipeCards extends Component {
     handleYup: (card) => null,
     handleMaybe: (card) => null,
     handleNope: (card) => null,
-    nopeText: "Nope!",
+    nopeText: "Discard",
     maybeText: "Maybe!",
-    yupText: "Yup!",
+    yupText: "Discard!",
     onClickHandler: () => { alert('tap') },
     onDragStart: () => {},
     onDragRelease: () => {},
