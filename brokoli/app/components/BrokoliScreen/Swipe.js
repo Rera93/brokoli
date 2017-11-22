@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
 
-import SwipeCards from 'react-native-swipe-cards';
+import SwipeCards from '../../lib/SwipeCards'
 
 class Card extends React.Component {
     constructor(props) {
