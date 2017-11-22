@@ -28,9 +28,10 @@ export default class Personal extends React.Component {
                 <Gender />
                 <Location />
 
-                <TouchableOpacity onPress={()=> navigate('Account')}>
+                <TouchableOpacity onPress={()=> navigate('Account')}
+                                  style={styles.button}>
 
-                <Text> NEXT </Text>
+                <Text style={styles.btnText}> NEXT </Text>
 
                 </TouchableOpacity>
 
@@ -40,3 +41,14 @@ export default class Personal extends React.Component {
     }
 }
 
+const styles = StyleSheet.create({
+button: {
+    backgroundColor: '#0FFDD8',
+    marginBottom: 20,
+    borderRadius: 10,
+},
+btnText: {
+color : 'white',
+padding: 10
+}
+})

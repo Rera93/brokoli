@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, StyleSheet, Text, TouchableOpacity, View, KeyboardAvoidingView, Animated, Keyboard } from 'react-native';
+import { Dimensions, StyleSheet, Text, TouchableHighlight, View, KeyboardAvoidingView, Animated, Keyboard } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
@@ -77,11 +77,13 @@ export default class Account extends React.Component {
                     <Password />
                     <PassConfirm />
 
-                    <TouchableOpacity onPress={()=> navigate('Professional')}>
+                    <TouchableHighlight 
+                                onPress={()=> navigate('Professional')}
+                                style={styles.button}>
 
-                    <Text> NEXT </Text>
+                    <Text style={styles.btnText}> NEXT </Text>
 
-                    </TouchableOpacity>
+                    </TouchableHighlight>
 
                 </KeyboardAwareScrollView>
 
@@ -105,4 +107,13 @@ const styles = StyleSheet.create({
             padding:10,
             marginTop:20
           },
+    button: {
+            backgroundColor: '#0FFDD8',
+            marginBottom: 20,
+            borderRadius: 10,
+    },
+    btnText: {
+      color : 'white',
+      padding: 10
+    }
 });

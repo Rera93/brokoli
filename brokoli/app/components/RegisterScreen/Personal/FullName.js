@@ -2,6 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 import ViewContainer from '../../ViewContainer'
+import UserInput from '../UserInput'
+
 
 export default class FullName extends React.Component {
 
@@ -13,7 +15,11 @@ export default class FullName extends React.Component {
 
             <ViewContainer>
 
-              <Text> Hello, full name. </Text>
+                    <UserInput
+                       placeholder='first and last name'
+                       autoCapitalize={'none'}
+                       returnKeyType={'done'}
+                       autoCorrect={false} />
     
 
                 </ViewContainer>
