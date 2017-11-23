@@ -18,20 +18,33 @@ class Project extends React.Component {
       return (
         <View style={[styles.card]}>
           <View style = {styles.header} />
+
           <View style = {styles.tieCont}>
-          <Image source = {tie} style={styles.tie} /> 
+            <Image source = {tie} style={styles.tie} /> 
           </View>
+
           <View style = {styles.nameCont}>
-          <Text style={styles.name}> firstName lastName </Text>
+            <Text style={styles.name}> firstName lastName </Text>
           </View>
+
           <View style = {styles.infoCont}>
-          <Text style={styles.info}> Master student at Radboud University Nijmegen </Text>
+            <Text style={styles.info}> Master student at Radboud University Nijmegen </Text>
           </View>
+
           <View style={styles.projectCont}>
-          <Text style={styles.projectTitle}>{this.props.doc.name}</Text>
-          <Text style={styles.text}>{this.props.doc.description}</Text>
-          <Text style={styles.text}>Position(s) available in this project: {"\n"}
-                    {this.props.doc.positions}</Text>
+
+            <View style={styles.titleCont}>
+              <Text style={styles.projectTitle}>{this.props.doc.name}</Text>
+            </View>
+
+            <View style={styles.abstractCont}>
+              <Text style={styles.abstract}>{this.props.doc.description}</Text>
+            </View>
+
+            <View style={styles.posiCont}>
+              <Text style={styles.positions}>Position(s) available in this project: {"\n"}
+                   {this.props.doc.positions}</Text>
+            </View>
           </View>
         </View>
       )
@@ -147,10 +160,6 @@ class Project extends React.Component {
       marginTop: 30,
       width: width - 20,
     },
-    thumbnail: {
-      width: 300,
-      height: 300,
-    },
     text: {
       fontSize: 20,
       paddingTop: 10,
@@ -158,7 +167,6 @@ class Project extends React.Component {
     },
     projectTitle: {
       fontSize: 40,
-      paddingTop: 20,
       paddingBottom: 10,
       borderColor: 'grey'
     },
@@ -215,7 +223,29 @@ class Project extends React.Component {
       color: 'grey',
     },
     projectCont: {
-      flex: 9,
-      alignItems: 'center'
+      flex: 10,
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
+    titleCont:{
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
+    abstractCont: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
+    abstract:{
+
+    },
+    posiCont: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
+    position:{
+      
     }
   })
