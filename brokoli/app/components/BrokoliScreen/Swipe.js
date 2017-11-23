@@ -6,6 +6,8 @@ import SwipeCards from '../../lib/SwipeCards'
 const window = Dimensions.get('window');
 const width = window.width
 
+import tie from '../../../img/icons/tie.png'
+
 class Project extends React.Component {
     constructor(props) {
       super(props);
@@ -15,6 +17,7 @@ class Project extends React.Component {
      render() {
       return (
         <View style={[styles.card]}>
+          <Image source = {tie} style={styles.tie} /> 
           <Text style={styles.projectTitle}>{this.props.doc.name}</Text>
           <Text style={styles.text}>{this.props.doc.description}</Text>
           <Text style={styles.text}>Position(s) available in this project: {"\n"}
@@ -150,5 +153,11 @@ class Project extends React.Component {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
+    },
+    tie:{
+      marginTop: 10,
+      width: 80,
+      height: 80,
+      resizeMode: 'center',
     }
   })
