@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, Image, Dimensions} from 'react-native';
+import {ScrollView,StyleSheet, Text, View, Image, Dimensions} from 'react-native';
 
 import SwipeCards from '../../lib/SwipeCards'
 
@@ -27,10 +27,12 @@ class Project extends React.Component {
           <View style = {styles.infoCont}>
           <Text style={styles.info}> Master student at Radboud University Nijmegen </Text>
           </View>
+          <View style={styles.projectCont}>
           <Text style={styles.projectTitle}>{this.props.doc.name}</Text>
           <Text style={styles.text}>{this.props.doc.description}</Text>
           <Text style={styles.text}>Position(s) available in this project: {"\n"}
                     {this.props.doc.positions}</Text>
+          </View>
         </View>
       )
     }
@@ -197,8 +199,7 @@ class Project extends React.Component {
     },
     infoCont: {
         flex: 1,
-        paddingBottom: 40,
-        marginTop: 40,
+        paddingBottom: 10,
         borderBottomWidth: 0.7,
         borderColor: 'grey',
         width: width,
@@ -212,6 +213,9 @@ class Project extends React.Component {
     info:{
       fontSize: 16,
       color: 'grey',
-      
+    },
+    projectCont: {
+      flex: 9,
+      alignItems: 'center'
     }
   })
