@@ -15,7 +15,7 @@ import { Router, Scene, Actions, ActionConst, Stack } from 'react-native-router-
 
 import AppContainer from './app/containers/AppContainer'
 import ProjectScreen from './app/containers/ProjectScreen'
-import BookmarkScreen from './app/containers/BookmarkScreen'
+import BookmarkScreen from './app/containers/LoginScreen'
 import BrokoliScreen from './app/containers/BrokoliScreen'
 import ProfileScreen from './app/containers/ProfileScreen'
 import NotificationScreen from './app/containers/RegisterScreen'
@@ -78,6 +78,7 @@ export default class App extends React.Component {
                       title="Brokoli"
                       source={require('./img/icons/brokoli.png')}
                       icon={TabIcon}
+                      initial
                       component={BrokoliScreen}
                       hideNavBar />
 

@@ -17,7 +17,16 @@ class Project extends React.Component {
      render() {
       return (
         <View style={[styles.card]}>
+          <View style = {styles.header} />
+          <View style = {styles.tieCont}>
           <Image source = {tie} style={styles.tie} /> 
+          </View>
+          <View style = {styles.nameCont}>
+          <Text style={styles.name}> firstName lastName </Text>
+          </View>
+          <View style = {styles.infoCont}>
+          <Text style={styles.info}> Master student at Radboud University Nijmegen </Text>
+          </View>
           <Text style={styles.projectTitle}>{this.props.doc.name}</Text>
           <Text style={styles.text}>{this.props.doc.description}</Text>
           <Text style={styles.text}>Position(s) available in this project: {"\n"}
@@ -126,10 +135,11 @@ class Project extends React.Component {
     card: {
       flex: 1,
       alignItems: 'center',
-      borderRadius: 5,
+      borderRadius: 15,
       borderColor: 'grey',
       backgroundColor: 'white',
-      borderWidth: 1,
+      borderWidth: 0.7,
+      borderColor: '#50C878',
       elevation: 1,
       marginBottom: 10,
       marginTop: 30,
@@ -146,18 +156,62 @@ class Project extends React.Component {
     },
     projectTitle: {
       fontSize: 40,
-      paddingTop: 10,
-      paddingBottom: 10
+      paddingTop: 20,
+      paddingBottom: 10,
+      borderColor: 'grey'
     },
     noMoreProjects: {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
     },
-    tie:{
+    tieCont:{
       marginTop: 10,
       width: 80,
       height: 80,
-      resizeMode: 'center',
+      position: 'absolute',
+      justifyContent: 'center',
+      backgroundColor: 'white',
+      marginTop: 25,
+      borderRadius: width / 2,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderWidth: 1,
+      borderColor: '#50C878'
+    },
+    header: {
+      borderTopLeftRadius: 25,
+      borderTopRightRadius: 25,
+      width: width, 
+      height: 60,
+      backgroundColor: '#50C878',
+    },
+    tie: {
+      width: 70,
+      height: 70,
+      resizeMode: 'cover'
+    },
+    nameCont: {
+        flex: 1,
+        marginTop: 60,
+    },
+    infoCont: {
+        flex: 1,
+        paddingBottom: 40,
+        marginTop: 40,
+        borderBottomWidth: 0.7,
+        borderColor: 'grey',
+        width: width,
+        alignItems: 'center'
+        
+    },
+    name:{
+      fontSize: 20,
+      color: 'grey'
+    },
+    info:{
+      fontSize: 16,
+      color: 'grey',
+      
     }
   })
