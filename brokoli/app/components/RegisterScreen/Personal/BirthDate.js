@@ -17,10 +17,6 @@ export default class BirthDate extends React.Component {
 
     }
 
-    
-
-   
-
     _showDatePicker = () => this.setState({isDateTimePickerVisible: true});
 
     _hideDatePicker = () => this.setState({isDateTimePickerVisible: false});
