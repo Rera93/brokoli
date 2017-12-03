@@ -42,11 +42,16 @@ const store = configureStore({});
 */
 const TabIcon = ({ selected, source }) => {
   return (
-    <Image style={[styles.icon, {tintColor: selected ? '#228B22' :'#dad9de'}]} source={source}/>
+    <Image style={[styles.icon, {tintColor: selected ? 'yellow' :'#228B22'}]} source={source}/>
   );
 }
 
 export default class App extends React.Component {
+
+  constructor(props){
+    super(props)
+  }
+
   render() {
     return (
 
@@ -63,8 +68,13 @@ export default class App extends React.Component {
                       title="Project" 
                       source={require('./img/icons/project.png')}
                       icon={TabIcon}
-                      component={ProjectScreen}
-                      hideNavBar />
+                      onPress={()=> {Actions.project({type: ActionConst.REFRESH})}}>
+                
+                <Scene key='project' component={ProjectScreen} hideNavBar/>
+
+                </Scene>
+
+              
                 
                <Scene key="bookmarkTab" 
                       title="Bookmarks" 
