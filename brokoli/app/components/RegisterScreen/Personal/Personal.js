@@ -21,7 +21,7 @@ export default class Personal extends React.Component {
         
         return(
 
-            <ViewContainer>
+            <ViewContainer style={styles.personal}>
                 <FullName />
                 <ProfilePic />
                 <BirthDate />
@@ -42,13 +42,17 @@ export default class Personal extends React.Component {
 }
 
 const styles = StyleSheet.create({
-button: {
+    personal: {
+        backgroundColor: 'white'
+
+    },
+    button: {
     backgroundColor: '#0FFDD8',
     marginBottom: 20,
     borderRadius: 10,
-},
-btnText: {
-color : 'white',
-padding: 10
+    },
+    btnText: {
+    color : 'white',
+    padding: 10
 }
 })

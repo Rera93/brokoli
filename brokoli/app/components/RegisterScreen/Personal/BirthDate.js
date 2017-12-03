@@ -1,8 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, TextInput } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, TextInput, Dimensions } from 'react-native';
 import DatePicker from 'react-native-modal-datetime-picker'
 
 import ViewContainer from '../../ViewContainer'
+
+const width = Dimensions.get("window").width
 
 export default class BirthDate extends React.Component {
 
@@ -10,7 +12,7 @@ export default class BirthDate extends React.Component {
         super(props);
         this.state = {
                         isDateTimePickerVisible: false,
-                        text: 'mm-dd-yyyy',
+                        text: 'date of birth',
                      };
 
     }
@@ -37,8 +39,8 @@ export default class BirthDate extends React.Component {
 
             <ViewContainer>
                 
-              <TouchableOpacity onPress={this._showDatePicker}>
-              <Text> {this.state.text} </Text>
+              <TouchableOpacity style={styles.dateBirthCont} onPress={this._showDatePicker}>
+              <Text style={styles.dateBirth}> {this.state.text} </Text>
               </TouchableOpacity> 
 
               <DatePicker 
@@ -52,4 +54,19 @@ export default class BirthDate extends React.Component {
         )
     }
 }
+
+const styles = StyleSheet.create({
+    dateBirthCont: {
+        alignItems: 'center',
+        borderWidth: 1,
+        padding: 10,
+        width: width - 80,
+        borderRadius: 5,
+        borderColor: '#1ED760'
+    },
+    dateBirth:{
+        color: 'grey'
+    }
+    });
+    
 
