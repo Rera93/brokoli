@@ -1,15 +1,19 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, Dimensions } from 'react-native';
 
 import Education from './Education'
 import JobExp from './JobExp'
 import ProjectExp from './ProjectExp'
 import ViewContainer from '../../ViewContainer'
 
+const width = Dimensions.get('window').width
+
 export default class Career extends React.Component {
 
     static navigationOptions = {
-        title: 'Career'
+        title: 'Career',
+        headerStyle: { backgroundColor: '#42D260', marginTop: 24 },
+        headerTitleStyle: { color: 'white' },
       };
     
     
@@ -19,15 +23,15 @@ export default class Career extends React.Component {
         
         return(
 
-            <ViewContainer>
+            <ViewContainer style={styles.career}>
 
                 <Education />
                 <JobExp />
                 <ProjectExp />
 
-                <TouchableOpacity onPress={()=> navigate('Additional')}>
+                <TouchableOpacity style={styles.button} onPress={()=> navigate('Additional')}>
 
-                <Text> NEXT </Text>
+                <Text style={styles.btnText}> NEXT </Text>
 
                 </TouchableOpacity>
 
@@ -36,4 +40,20 @@ export default class Career extends React.Component {
         )
     }
 }
-
+const styles = StyleSheet.create({
+    career: {
+        backgroundColor: 'white'
+    },
+    button: {
+    backgroundColor: '#42D260',
+    marginBottom: 20,
+    borderRadius: 10,
+    width: width - 100,
+    alignItems: 'center'
+    },
+    btnText: {
+    color : 'white',
+    padding: 10,
+    fontWeight: 'bold'
+}
+})

@@ -11,11 +11,14 @@ import ViewContainer from '../../ViewContainer'
 import logo from '../../../../img/icons/brokoli.png'
 
 const window = Dimensions.get('window');
+const width = window.width
 
 
 export default class Account extends React.Component {
     static navigationOptions = {
-        title: 'Account'
+        title: 'Account',
+        headerStyle: { backgroundColor: '#42D260', marginTop: 24 },
+        headerTitleStyle: { color: 'white' },
       };
 
       constructor(props) {
@@ -98,7 +101,7 @@ const styles = StyleSheet.create({
             flex: 1,
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: 'white'
+            backgroundColor: 'white',
     },
     logo: {
             height: window.width / 2,
@@ -108,12 +111,16 @@ const styles = StyleSheet.create({
             marginTop:20
           },
     button: {
-            backgroundColor: '#0FFDD8',
+            backgroundColor: '#42D260',
+            width: width - 100,
             marginBottom: 20,
             borderRadius: 10,
+            alignItems: 'center'
     },
     btnText: {
       color : 'white',
-      padding: 10
+      padding: 10,
+      fontWeight: 'bold'
+
     }
 });
