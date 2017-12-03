@@ -22,7 +22,7 @@ export default class BirthDate extends React.Component {
 
     _handleDatePicked = (date) => {
         console.log('Picked date: ', date);
-        this.setState({text: date})
+        this.setState({text: String(date)})
         this._hideDatePicker();
     };
     
