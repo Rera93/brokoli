@@ -10,7 +10,7 @@ export default class BirthDate extends React.Component {
         super(props);
         this.state = {
                         isDateTimePickerVisible: false,
-                        text: 'yyyy-mm-dd',
+                        text: 'mm-dd-yyyy',
                      };
 
     }
@@ -22,7 +22,7 @@ export default class BirthDate extends React.Component {
 
     _handleDatePicked = (date) => {
         console.log('Picked date: ', date);
-        this.setState({text: String(date)})
+        this.setState({text: String(date).substr(4, 12)})
         this._hideDatePicker();
     };
     
