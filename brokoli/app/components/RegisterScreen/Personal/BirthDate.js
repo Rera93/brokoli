@@ -14,6 +14,9 @@ export default class BirthDate extends React.Component {
                      };
 
     }
+
+    
+
    
 
     _showDatePicker = () => this.setState({isDateTimePickerVisible: true});
@@ -27,7 +30,8 @@ export default class BirthDate extends React.Component {
     };
     
     render(){
-        
+
+        let today = new Date();
 
         return(
 
@@ -40,7 +44,8 @@ export default class BirthDate extends React.Component {
               <DatePicker 
                 isVisible = {this.state.isDateTimePickerVisible}
                 onConfirm = {this._handleDatePicked}
-                onCancel = {this._hideDatePicker} />
+                onCancel = {this._hideDatePicker}
+                maximumDate = {today}/>
         
                 </ViewContainer>
 
