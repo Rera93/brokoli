@@ -42,7 +42,7 @@ const store = configureStore({});
 */
 const TabIcon = ({ selected, source }) => {
   return (
-    <Image style={[styles.icon, {tintColor: selected ? 'yellow' :'#228B22'}]} source={source}/>
+    <Image style={[styles.icon, {tintColor: selected ? 'yellow' :'#42D260'}]} source={source}/>
   );
 }
 
