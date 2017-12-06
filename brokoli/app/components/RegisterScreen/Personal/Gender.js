@@ -15,7 +15,7 @@ export default class Gender extends React.Component {
         radio_props : [
             {label: 'Male', value: 0 },
             {label: 'Female', value: 1 },
-            {label: 'Other', value: 3 }
+            {label: 'Other', value: 2 }
           ],
         selectedValue : 0,
         selectedValueIndex: 0
