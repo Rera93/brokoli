@@ -39,8 +39,7 @@ export default class Interests extends React.Component {
             rows.push(
                 <TouchableOpacity key = {i} 
                                   onPress={this._onToggleCategory.bind(this,i)} 
-                                  style={[styles.category, 
-                                        {backgroundColor: this.state.isSelected[i] ? '#42D260' : 'white'}]}>
+                                  style={[styles.category, {backgroundColor: this.state.isSelected[i] ? '#42D260' : 'white'}]}>
                   <Text style={{color: this.state.isSelected[i] ? 'white' : 'grey' }}> {categories[i].name} </Text>
                 </TouchableOpacity>
             )
@@ -54,10 +53,9 @@ export default class Interests extends React.Component {
     } 
     _onToggleCategory = (id) => {
         //Toggle property: when clicked from false => true && true => false
-        this.state.isSelected[id]= !this.state.isSelected[id]
-
-         //When clicked the id of the category icon is passed as a prop to the HomeScreen through Actions.refresh.
-         Actions.refresh()
+        this.state.isSelected[id] = !this.state.isSelected[id]
+        this.setState({isSelected: this.state.isSelected})
+        console.log('Array',this.state.isSelected)
     } 
 }
 
