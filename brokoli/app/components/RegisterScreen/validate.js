@@ -1,3 +1,5 @@
+import validation from './constrains'
+
 export default function validate(fieldName, value) {
     // Validate.js validates your values as an object
     // e.g. var form = {email: 'email@example.com'}

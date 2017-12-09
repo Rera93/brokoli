@@ -14,64 +14,12 @@ export default class Interests extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            dataArray: []
+          
         }
     }
 
-    componentDidMount() {
-        this.loadData();
-    }
-
-    loadData() {
-        this.setState({
-            dataArray: interests
-        })
-    }
-
-    onClick(data) {
-        data.checked = !data.checked;
-        let msg=data.checked? 'you checked ':'you unchecked '
-        this.toast.show(msg+data.name);
-    }
-
-    renderView() {
-        if (!this.state.dataArray || this.state.dataArray.length === 0) return;
-        var len = this.state.dataArray.length;
-        var views = [];
-        for (var i = 0, l = len - 2; i < l; i += 2) {
-            views.push(
-                <View key={i}>
-                    <View style={styles.item}>
-                        {this.renderCheckBox(this.state.dataArray[i])}
-                        {this.renderCheckBox(this.state.dataArray[i + 1])}
-                    </View>
-                    <View style={styles.line}/>
-                </View>
-            )
-        }
-        views.push(
-            <View key={len - 1}>
-                <View style={styles.item}>
-                    {len % 2 === 0 ? this.renderCheckBox(this.state.dataArray[len - 2]) : null}
-                    {this.renderCheckBox(this.state.dataArray[len - 1])}
-                </View>
-            </View>
-        )
-        return views;
-
-    }
-
-    renderCheckBox(data) {
-        var leftText = data.name;
-        return (
-            <CheckBox
-                style={{flex: 1, padding: 10}}
-                onClick={()=>this.onClick(data)}
-                isChecked={data.checked}
-                leftText={leftText}
-                checkBoxColor={'#42D260'}
-            />);
-    }
+    
+    
 
     
     render(){
@@ -79,10 +27,26 @@ export default class Interests extends React.Component {
 
             <View style={styles.container}>
 
-                <ScrollView>
-                    {this.renderView()}
-                </ScrollView>
-                <Toast ref={e=>{this.toast=e}}/>
+                <Text> Pick at least 2 categories </Text>
+
+                <View style={styles.categories}>
+
+                <TouchableOpacity style={styles.category}>
+
+                    <Text style={styles.title}> Business </Text> 
+
+
+                </TouchableOpacity>
+
+                    
+                <TouchableOpacity style={styles.category}>
+
+                    <Text style={styles.title}> Programming </Text> 
+                    
+
+                    </TouchableOpacity>
+
+                    </View>
 
                 </View>
 
@@ -95,15 +59,22 @@ const styles = StyleSheet.create({
         flex: 1,
         width: width - 60,
         marginTop: 15,
+        marginBottom: 15,
+        alignItems: 'center'
+    },
+    categories: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    category: {
+        borderWidth: 1,
+        padding: 10,
+        borderRadius: 5,
+        borderColor: '#42D260',
         marginBottom: 15
     },
-    item: {
-        flexDirection: 'row',
-        flex: 1,
-    },
-    line: {
-        flex: 1,
-        height: 0.3,
-        backgroundColor: '#42D260',
-    },
+    title: {
+        color: 'grey'
+    }
 })
