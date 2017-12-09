@@ -37,6 +37,11 @@ const categories = [
         name: "Manufacturing & Engineering",
         checked: false,
     },
+    { id: 7,
+        name: "Charity & Social Work",
+        checked: false,
+    },
+
     
 
 

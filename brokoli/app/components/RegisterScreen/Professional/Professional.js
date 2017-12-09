@@ -12,7 +12,7 @@ export default class Professional extends React.Component {
 
 
     static navigationOptions = {
-        title: 'Professional',
+        title: 'Categories',
         headerStyle: { backgroundColor: '#42D260', marginTop: 24 },
         headerTitleStyle: { color: 'white' },
       };
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#42D260',
     marginBottom: 20,
     borderRadius: 10,
-    width: width - 100,
+    width: width -300,
     alignItems: 'center'
     },
     btnText: {
