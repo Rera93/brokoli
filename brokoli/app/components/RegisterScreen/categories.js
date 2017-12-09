@@ -19,7 +19,7 @@ const categories = [
     },
     {
       id: 3,
-      name: "Banking",
+      name: "Accountancy, Banking & Finance",
       checked: false,
     },
     { id: 4,
@@ -30,6 +30,21 @@ const categories = [
       name: "Transport & Logistics",
       checked: false,
     },
+    { id: 6,
+        name: "Creative Arts & Design",
+        checked: false,
+    },
+    { id: 6,
+        name: "Manufacturing & Engineering",
+        checked: false,
+    },
+    { id: 7,
+        name: "Charity & Social Work",
+        checked: false,
+    },
+    
+
+
 ]
 
 module.exports = categories
