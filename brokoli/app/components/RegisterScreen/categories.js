@@ -2,7 +2,6 @@
   Created by Brigel Pineti
   All of these data shall be change with API
 */
-'use strict'
 const categories = [
     { id: 0,
       name: "Business, Consulting & Management",

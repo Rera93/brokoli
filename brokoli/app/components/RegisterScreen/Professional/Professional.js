@@ -25,7 +25,7 @@ export default class Professional extends React.Component {
 
             <ViewContainer style={styles.professional}>
 
-             <Skills />
+            {/* <Skills />*/}
              <Interests />
 
              <TouchableOpacity style={styles.button} onPress={()=> navigate('Career')}>

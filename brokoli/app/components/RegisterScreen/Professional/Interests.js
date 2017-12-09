@@ -1,12 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, ScrollView, View, Dimensions } from 'react-native';
-import CheckBox from 'react-native-check-box'
-import interests from './interests.json'
-import Toast from 'react-native-easy-toast'
+import { StyleSheet, Text, TouchableOpacity, View, Dimensions } from 'react-native';
+import {Actions} from 'react-native-router-flux';
 
 const width = Dimensions.get("window"). width
 
-import categories from '../categories'
+import categories from '../categories.js'
 import ViewContainer from '../../ViewContainer'
 
 export default class Interests extends React.Component {
@@ -14,20 +12,11 @@ export default class Interests extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-
-            isSelected: Array(categories.lenght).fill(false)
+            //Initialy, isSelected contains an array of false values.
+            isSelected: Array(categories.length).fill(false)
           
         }
-    }
-
-    _onCheck() {
-        this.setState
-    }
-
-    
-    
-
-    
+    }  
     render(){
         return(
 
@@ -35,29 +24,41 @@ export default class Interests extends React.Component {
 
                 <Text> Pick at least 2 categories </Text>
 
-                <View style={styles.categories}>
-
-                <TouchableOpacity style={styles.category} onPress={this._onCheck}>
-
-                    <Text style={styles.title}> Business </Text> 
-
-
-                </TouchableOpacity>
-
-                    
-                <TouchableOpacity style={styles.category}>
-
-                    <Text style={styles.title}> Programming </Text> 
-                    
-
-                    </TouchableOpacity>
-
-                    </View>
+                {this._renderCategories()}
 
                 </View>
 
         )
     }
+    _renderCategories(){
+
+        var isSelected = []
+        var rows = []
+        for(let i=0; i < categories.length; i++)
+        {
+            rows.push(
+                <TouchableOpacity key = {i} 
+                                  onPress={this._onToggleCategory.bind(this,i)} 
+                                  style={[styles.category, 
+                                        {backgroundColor: this.state.isSelected[i] ? '#42D260' : 'white'}]}>
+                  <Text style={{color: this.state.isSelected[i] ? 'white' : 'grey' }}> {categories[i].name} </Text>
+                </TouchableOpacity>
+            )
+        }
+        return(
+            <View> 
+                {rows}
+
+                </View>
+        )
+    } 
+    _onToggleCategory = (id) => {
+        //Toggle property: when clicked from false => true && true => false
+        this.state.isSelected[id]= !this.state.isSelected[id]
+
+         //When clicked the id of the category icon is passed as a prop to the HomeScreen through Actions.refresh.
+         Actions.refresh()
+    } 
 }
 
 const styles = StyleSheet.create({
@@ -80,7 +81,4 @@ const styles = StyleSheet.create({
         borderColor: '#42D260',
         marginBottom: 15
     },
-    title: {
-        color: 'grey'
-    }
 })
