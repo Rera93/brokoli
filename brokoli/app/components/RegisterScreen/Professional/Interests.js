@@ -6,7 +6,7 @@ import Toast from 'react-native-easy-toast'
 
 const width = Dimensions.get("window"). width
 
-
+import categories from '../categories'
 import ViewContainer from '../../ViewContainer'
 
 export default class Interests extends React.Component {
@@ -14,8 +14,14 @@ export default class Interests extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+
+            isSelected: Array(categories.lenght).fill(false)
           
         }
+    }
+
+    _onCheck() {
+        this.setState
     }
 
     
@@ -31,7 +37,7 @@ export default class Interests extends React.Component {
 
                 <View style={styles.categories}>
 
-                <TouchableOpacity style={styles.category}>
+                <TouchableOpacity style={styles.category} onPress={this._onCheck}>
 
                     <Text style={styles.title}> Business </Text> 
 
