@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, Dimensions } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, Dimensions, ScrollView } from 'react-native';
 
 import Education from './Education'
 import JobExp from './JobExp'
@@ -23,7 +23,8 @@ export default class Career extends React.Component {
         
         return(
 
-            <ViewContainer style={styles.career}>
+            <ScrollView contentContainerStyle={styles.career}
+                        showsVerticalScrollIndicator={false}>
 
                 <Education />
                 <JobExp />
@@ -35,14 +36,14 @@ export default class Career extends React.Component {
 
                 </TouchableOpacity>
 
-                </ViewContainer>
+                </ScrollView>
 
         )
     }
 }
 const styles = StyleSheet.create({
     career: {
-        backgroundColor: 'white'
+        alignItems: 'center'
     },
     button: {
     backgroundColor: '#42D260',
