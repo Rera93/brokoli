@@ -57,7 +57,8 @@ export default class Interests extends React.Component {
         //Toggle property: when clicked from false => true && true => false
         this.state.isSelected[id] = !this.state.isSelected[id]
         this.setState({isSelected: this.state.isSelected})
-        console.log('Array',this.state.isSelected)
+        console.log('Child',this.state.isSelected)
+        this.props.callbackFromParent(this.state.isSelected);
     } 
 }
 

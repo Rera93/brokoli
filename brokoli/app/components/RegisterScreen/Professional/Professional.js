@@ -5,10 +5,24 @@ import { StackNavigator } from 'react-navigation';
 import Interests from './Interests'
 import Skills from './Skills'
 import ViewContainer from '../../ViewContainer'
+import categories from '../categories.js'
 
 const width = Dimensions.get('window').width
 
 export default class Professional extends React.Component {
+
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            isSelectedFromCategories : Array(categories.length).fill(false)
+        }
+    }
+
+    myCallback = (dataFromChild) => {
+        this.setState({ isSelectedFromCategories: dataFromChild });
+        console.log("Parent", this.state.isSelectedFromCategories)
+    }
 
 
     static navigationOptions = {
@@ -26,7 +40,7 @@ export default class Professional extends React.Component {
             <ViewContainer style={styles.professional}>
 
             {/* <Skills />*/}
-             <Interests />
+             <Interests callbackFromParent = {this.myCallback} />
 
              <TouchableOpacity style={styles.button} onPress={()=> navigate('Career')}>
 
