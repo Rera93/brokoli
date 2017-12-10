@@ -54,6 +54,7 @@ export default class Professional extends React.Component {
             if(this.state.isSelectedFromCategories[i] == true)
             {
                 this.setState({passToDb: this.state.passToDb.push(categories[i].name)})
+                //TODO: Fix bug when user goes back to category screen. 
             }
          }
          console.log("passToBd: ", this.state.passToDb) 
