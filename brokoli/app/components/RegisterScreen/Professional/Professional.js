@@ -17,7 +17,8 @@ export default class Professional extends React.Component {
 
         this.state = {
             isSelectedFromCategories : Array(categories.length).fill(false),
-            flip : false
+            flip : false,
+            passToDb : []
         }
     }
 
@@ -46,6 +47,20 @@ export default class Professional extends React.Component {
         }
     }
 
+    _onSubmit(){
+        this.setState({passToDb : []})
+         for(let i = 0; i < categories.length; i++)
+         {
+            if(this.state.isSelectedFromCategories[i] == true)
+            {
+                this.setState({passToDb: this.state.passToDb.push(categories[i].name)})
+            }
+         }
+         console.log("passToBd: ", this.state.passToDb) 
+         this.props.navigation.navigate('Career')
+
+    }
+
 
     static navigationOptions = {
         title: 'Categories',
@@ -55,16 +70,16 @@ export default class Professional extends React.Component {
     
     render(){
 
-        const {navigate}= this.props.navigation
-
+      
         return(
 
             <ViewContainer style={styles.professional}>
 
-            {/* <Skills />*/}
              <Interests callbackFromParent = {this.myCallback} />
 
-             <TouchableOpacity disabled={this.state.flip ? false : true} style={[styles.button, {backgroundColor: this.state.flip ? '#42D260' : 'white'}]} onPress={()=> navigate('Career')}>
+             <TouchableOpacity disabled={this.state.flip ? false : true} 
+                               style={[styles.button, {backgroundColor: this.state.flip ? '#42D260' : 'white'}]} 
+                               onPress={this._onSubmit.bind(this)}>
 
                 <Text style={[styles.btnText, {color: this.state.flip ? 'white' : '#42D260'}]}> NEXT </Text>
 

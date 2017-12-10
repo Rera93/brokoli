@@ -65,10 +65,12 @@ export default class Interests extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        width: width - 60,
+        width: width,
         marginTop: 15,
         marginBottom: 15,
-        alignItems: 'center'
+        alignItems: 'center',
+        borderBottomWidth: 0.7,
+        borderColor: 'grey'
     },
     headerCont: {
         borderBottomWidth: 0.7,
