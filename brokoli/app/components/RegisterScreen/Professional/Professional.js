@@ -2,8 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, Dimensions } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
-import Interests from './Interests'
-import Skills from './Skills'
+import Categories from './Categories'
 import ViewContainer from '../../ViewContainer'
 import categories from '../categories.js'
 
@@ -75,7 +74,7 @@ export default class Professional extends React.Component {
 
             <ViewContainer style={styles.professional}>
 
-             <Interests callbackFromParent = {this.myCallback} />
+             <Categories callbackFromParent = {this.myCallback} />
 
              <TouchableOpacity disabled={this.state.flip ? false : true} 
                                style={[styles.button, {backgroundColor: this.state.flip ? '#42D260' : 'white'}]} 

@@ -7,7 +7,7 @@ const width = Dimensions.get("window"). width
 import categories from '../categories.js'
 import ViewContainer from '../../ViewContainer'
 
-export default class Interests extends React.Component {
+export default class Categories extends React.Component {
 
     constructor(props) {
         super(props);
