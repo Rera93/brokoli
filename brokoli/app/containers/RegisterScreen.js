@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Image } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import getSlideFromRightTransition from 'react-navigation-slide-from-right-transition';
 
@@ -9,6 +9,7 @@ import Account from '../components/RegisterScreen/Account/Account'
 import Professional from '../components/RegisterScreen/Professional/Professional'
 import Career from '../components/RegisterScreen/Career/Career'
 import Additional from '../components/RegisterScreen/Additional/Additional'
+
 
 const StackNav = StackNavigator({
 
@@ -21,7 +22,20 @@ const StackNav = StackNavigator({
     transitionConfig: getSlideFromRightTransition
 });
 
+
+
 export default class RegisterScreen extends React.Component {
+
+    static navigationOptions = {
+        tabBarLabel: 'Mail',
+        tabBarIcon: ({ tintColor }) => (
+          <Image
+            source={require('../../img/icons/mail.png')}
+            style={[styles.icon, {tintColor: tintColor}]}
+          />
+        ),
+      };
+
 
     static navOptions = {
         title: 'Sign Up'
@@ -40,3 +54,9 @@ export default class RegisterScreen extends React.Component {
         )
     }
 }
+const styles = StyleSheet.create({
+    icon: {
+      width: 24,
+      height: 24,
+    },
+  });

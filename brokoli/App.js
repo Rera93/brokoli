@@ -12,6 +12,7 @@ import thunkMiddleware from 'redux-thunk'
 import {createLogger} from 'redux-logger'
 import reducer from './app/reducers'
 import { Router, Scene, Actions, ActionConst, Stack } from 'react-native-router-flux'
+import { TabNavigator } from 'react-navigation';
 
 import AppContainer from './app/containers/AppContainer'
 import ProjectScreen from './app/containers/ProjectScreen'
@@ -39,13 +40,53 @@ const store = configureStore({});
 
 /*
  * Displays the icon for the tab w/ color dependent upon selection
-*/
+
 const TabIcon = ({ selected, source }) => {
   return (
     <Image style={[styles.icon, {tintColor: selected ? 'yellow' :'#42D260'}]} source={source}/>
   );
-}
+}*/
 
+const TabNav =  TabNavigator({
+  Project: {
+    screen: ProjectScreen,
+  },
+  Bookmark: {
+    screen: BookmarkScreen,
+  },
+  Brokoli: {
+    screen: BrokoliScreen,
+  },
+  Profile: {
+    screen: ProfileScreen,
+  },
+  Mail: {
+    screen: NotificationScreen,
+  },
+}, {
+  initialRouteName: 'Brokoli',
+  tabBarPosition: 'bottom',
+  animationEnabled: true,
+  swipeEnabled: false,
+  tabBarOptions: {
+    activeTintColor: '#42D260',
+    showIcon: true,
+    labelStyle: {
+      fontSize: 9,
+      fontWeight: 'bold'
+    },
+    style: {
+      borderTopWidth: 1,
+      borderColor: '#42D260',
+      backgroundColor: 'white',
+    },
+    inactiveTintColor: 'grey',
+    indicatorStyle: {
+      backgroundColor: '#42D260',
+    }
+  
+  },
+});
 export default class App extends React.Component {
 
   constructor(props){
@@ -55,69 +96,7 @@ export default class App extends React.Component {
   render() {
     return (
 
-      <Provider store={store}>
-      <Router>
-        <Scene key="root">
-        <Scene key="tabbar"
-               tabs={true}
-               hideNavBar
-               tabBarStyle={styles.customizeFooter}
-               tabBarPosition="bottom">
-
-               <Scene key="projectTab" 
-                      title="Project" 
-                      source={require('./img/icons/project.png')}
-                      icon={TabIcon}
-                      onPress={()=> {Actions.project({type: ActionConst.REFRESH})}}>
-                
-                <Scene key='project' component={ProjectScreen} hideNavBar/>
-
-                </Scene>
-
-              
-                
-               <Scene key="bookmarkTab" 
-                      title="Bookmarks" 
-                      source={require('./img/icons/bookmark.png')}
-                      icon={TabIcon}
-                      component={BookmarkScreen} 
-                      hideNavBar />
-
-
-               <Scene key="brokoliTab" 
-                      title="Brokoli"
-                      source={require('./img/icons/brokoli.png')}
-                      icon={TabIcon}
-                      initial
-                      component={BrokoliScreen}
-                      hideNavBar />
-
-                      
-
-               <Scene key="profileTab" 
-                      title="Profile" 
-                      source={require('./img/icons/profile.png')}
-                      icon={TabIcon}
-                      component={ProfileScreen} 
-                      hideNavBar />
-
-             
-
-               <Scene key="notificationTab" 
-                      title="Notification"
-                      source={require('./img/icons/mail.png')}
-                      icon={TabIcon}
-                      component={NotificationScreen} 
-                      hideNavBar />
-
-
-        </Scene>
-
-        </Scene>
-
-      </Router>
-
-      </Provider>
+          <TabNav />
     );
   }
 }

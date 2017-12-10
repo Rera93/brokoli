@@ -7,7 +7,7 @@
 
 'use strict'
 import React from 'react';
-import { StyleSheet, Text, TextInput, Button, Alert, ScrollView} from 'react-native';
+import { StyleSheet, Text, TextInput, Button, Alert, ScrollView, Image} from 'react-native';
 
 
 
@@ -17,6 +17,17 @@ import Header from '../components/ProjectScreen/Header';
 
 
 class ProjectScreen extends React.Component {
+
+    static navigationOptions = {
+        tabBarLabel: 'Project',
+        tabBarIcon: ({ tintColor }) => (
+          <Image
+            source={require('../../img/icons/project.png')}
+            style={[styles.icon, {tintColor: tintColor}]}
+          />
+        ),
+      };
+
      
 
 
@@ -34,6 +45,13 @@ class ProjectScreen extends React.Component {
         )
     }
 }
+
+const styles = StyleSheet.create({
+    icon: {
+      width: 24,
+      height: 24,
+    },
+  });
 
 export default ProjectScreen
 

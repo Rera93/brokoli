@@ -6,11 +6,22 @@
 
 'use strict'
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, Image } from 'react-native';
 
 import ViewContainer from '../components/ViewContainer'
 
 class BookmarkScreen extends React.Component {
+
+    static navigationOptions = {
+        tabBarLabel: 'Bookmark',
+        tabBarIcon: ({ tintColor }) => (
+          <Image
+            source={require('../../img/icons/bookmark.png')}
+            style={[styles.icon, {tintColor: tintColor}]}
+          />
+        ),
+      };
+
 
     render(){
         return(
@@ -21,5 +32,12 @@ class BookmarkScreen extends React.Component {
         )
     }
 }
+
+const styles = StyleSheet.create({
+    icon: {
+      width: 26,
+      height: 26,
+    },
+  });
 
 export default BookmarkScreen

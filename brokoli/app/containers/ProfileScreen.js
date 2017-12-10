@@ -6,13 +6,24 @@
 
 'use strict'
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, Image } from 'react-native';
 
 import ViewContainer from '../components/ViewContainer';
 import Header from '../components/ProfileScreen/Header';
 import Body from '../components/ProfileScreen/Body';
 
 class ProfileScreen extends React.Component {
+
+    static navigationOptions = {
+        tabBarLabel: 'Profile',
+        tabBarIcon: ({ tintColor }) => (
+          <Image
+            source={require('../../img/icons/profile.png')}
+            style={[styles.icon, {tintColor: tintColor}]}
+          />
+        ),
+      };
+
 
     render(){
         return(
@@ -28,7 +39,11 @@ class ProfileScreen extends React.Component {
 const styles = StyleSheet.create({
     profile: {
         flex: 1
-    }
+    },
+    icon: {
+        width: 24,
+        height: 24,
+      },
   });
 
 export default ProfileScreen
