@@ -8,7 +8,6 @@ import ViewContainer from '../../ViewContainer'
 import categories from '../categories.js'
 
 const width = Dimensions.get('window').width
-var countCat = 0
 
 export default class Professional extends React.Component {
 
@@ -36,9 +35,9 @@ export default class Professional extends React.Component {
             if(this.state.isSelectedFromCategories[i] == true)
             { 
                   countCat++ 
-                  console.log('count', countCat)
             }
         }
+        console.log('count', countCat)
         if(countCat >= 2)
         {
              this.setState({flip : true})
@@ -48,12 +47,12 @@ export default class Professional extends React.Component {
     }
 
     _onSubmit(){
-        this.setState({passToDb : []})
+
          for(let i = 0; i < categories.length; i++)
          {
             if(this.state.isSelectedFromCategories[i] == true)
             {
-                this.setState({passToDb: this.state.passToDb.push(categories[i].name)})
+                this.setState({passToDb: this.state.passToDb.push(categories[i].name)})   
                 //TODO: Fix bug when user goes back to category screen. 
             }
          }
