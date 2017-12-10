@@ -28,19 +28,21 @@ export default class Professional extends React.Component {
     }
 
     _onFlip(){
+        let countCat = 0
         for(let i=0; i < categories.length; i++)
         {
         
             if(this.state.isSelectedFromCategories[i] == true)
             { 
                   countCat++ 
+                  console.log('count', countCat)
             }
-            if(countCat >= 2)
-            {
-                 this.setState({flip : true})
-            } else {
-                this.setState({flip : false})
-            }
+        }
+        if(countCat >= 2)
+        {
+             this.setState({flip : true})
+        } else {
+            this.setState({flip : false})
         }
     }
 
