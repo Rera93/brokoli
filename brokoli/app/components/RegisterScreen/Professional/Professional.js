@@ -64,7 +64,7 @@ export default class Professional extends React.Component {
             {/* <Skills />*/}
              <Interests callbackFromParent = {this.myCallback} />
 
-             <TouchableOpacity style={[styles.button, {backgroundColor: this.state.flip ? '#42D260' : 'white'}]} onPress={()=> navigate('Career')}>
+             <TouchableOpacity disabled={this.state.flip ? false : true} style={[styles.button, {backgroundColor: this.state.flip ? '#42D260' : 'white'}]} onPress={()=> navigate('Career')}>
 
                 <Text style={[styles.btnText, {color: this.state.flip ? 'white' : '#42D260'}]}> NEXT </Text>
 
