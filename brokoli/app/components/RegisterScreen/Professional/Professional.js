@@ -8,6 +8,7 @@ import ViewContainer from '../../ViewContainer'
 import categories from '../categories.js'
 
 const width = Dimensions.get('window').width
+var countCat = 0
 
 export default class Professional extends React.Component {
 
@@ -15,13 +16,32 @@ export default class Professional extends React.Component {
         super(props)
 
         this.state = {
-            isSelectedFromCategories : Array(categories.length).fill(false)
+            isSelectedFromCategories : Array(categories.length).fill(false),
+            flip : false
         }
     }
 
     myCallback = (dataFromChild) => {
         this.setState({ isSelectedFromCategories: dataFromChild });
         console.log("Parent", this.state.isSelectedFromCategories)
+        this._onFlip()
+    }
+
+    _onFlip(){
+        for(let i=0; i < categories.length; i++)
+        {
+        
+            if(this.state.isSelectedFromCategories[i] == true)
+            { 
+                  countCat++ 
+            }
+            if(countCat >= 2)
+            {
+                 this.setState({flip : true})
+            } else {
+                this.setState({flip : false})
+            }
+        }
     }
 
 
@@ -42,9 +62,9 @@ export default class Professional extends React.Component {
             {/* <Skills />*/}
              <Interests callbackFromParent = {this.myCallback} />
 
-             <TouchableOpacity style={styles.button} onPress={()=> navigate('Career')}>
+             <TouchableOpacity style={[styles.button, {backgroundColor: this.state.flip ? '#42D260' : 'white'}]} onPress={()=> navigate('Career')}>
 
-                <Text style={styles.btnText}> NEXT </Text>
+                <Text style={[styles.btnText, {color: this.state.flip ? 'white' : '#42D260'}]}> NEXT </Text>
 
                 </TouchableOpacity>
 
@@ -59,14 +79,14 @@ const styles = StyleSheet.create({
         backgroundColor: 'white'
     },
     button: {
-    backgroundColor: '#42D260',
     marginBottom: 20,
     borderRadius: 10,
     width: width -300,
-    alignItems: 'center'
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#42D260'
     },
     btnText: {
-    color : 'white',
     padding: 10,
     fontWeight: 'bold'
 }
