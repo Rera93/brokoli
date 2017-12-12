@@ -25,7 +25,7 @@ export default class Career extends React.Component {
 
             <ScrollView contentContainerStyle={styles.career}
                         showsVerticalScrollIndicator={false}>
-
+                {/* Create collapsable */}
                 <Education />
                 <JobExp />
                 <ProjectExp />

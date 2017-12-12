@@ -17,6 +17,12 @@ export default class Education extends React.Component {
           }, {
             value: 'Bachelor',
           }];
+
+        let specializationData = [{
+            value: 'Computer Science',
+          }, {
+            value: 'Information Science',
+        }];
     
         return(
 
@@ -26,11 +32,23 @@ export default class Education extends React.Component {
               <Text style={styles.eduTitle}> Most recent education </Text>
               </View>
 
+              
+
               <View style={styles.topEdu}>
 
-              <View style={{flex: 1}}>
-
                 <TextInput style={styles.name} placeholder='name of school' /> 
+
+                </View>
+
+                <View style={styles.middleEdu}>
+
+                <View style={styles.yearCont}>
+
+                <TextInput style={styles.year} placeholder="yyyy" />
+
+                <Text> until </Text>
+
+                <TextInput style={styles.year} placeholder="yyyy" />
 
                 </View>
 
@@ -40,7 +58,7 @@ export default class Education extends React.Component {
 
                 </View>
 
-                </View>
+                </View> 
 
                 <View style={styles.bottomEdu}>
 
@@ -54,7 +72,9 @@ export default class Education extends React.Component {
 
                 <View style={{flex: 1}}>
 
-                <TextInput style={styles.location} placeholder="location" />
+                <Dropdown
+                    label='choose a specialization'
+                    data={specializationData}/>   
 
                 </View>
 
@@ -87,6 +107,9 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
+        width: width - 20,
+        marginBottom: 10,
+
     },
     name: {
         borderWidth: 1,
@@ -94,7 +117,18 @@ const styles = StyleSheet.create({
         marginRight: 10,
         padding: 5,
         borderRadius: 5,
-        alignItems: 'center'    
+        alignItems: 'center',
+        width: width - 40  
+    },
+    middleEdu: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    yearCont: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center'
     },
     location: {
         borderWidth: 1,
