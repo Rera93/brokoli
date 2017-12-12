@@ -3,6 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, Dimensions, View, TextInput } from 
 
 import ViewContainer from '../../ViewContainer'
 import { Dropdown } from 'react-native-material-dropdown';
+import { TextField } from 'react-native-material-textfield';
 
 const width = Dimensions.get('window').width
 
@@ -11,30 +12,54 @@ export default class Education extends React.Component {
     constructor(props){
         super(props)
 
+        this.onFocus = this.onFocus.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
         this.onChangeText = this.onChangeText.bind(this);
-
+        this.onSubmitSchoolName = this.onSubmitSchoolName.bind(this);
+        this.onSubmitLocation = this.onSubmitLocation.bind(this);
+        
+        this.schoolNameRef = this.updateRef.bind(this, 'schoolName');
+        this.locationRef = this.updateRef.bind(this, 'location');
         this.startYearRef = this.updateRef.bind(this, 'startYear');
         this.endYearRef = this.updateRef.bind(this, 'endYear');
         this.degreeRef = this.updateRef.bind(this, 'degree');
         this.specializationRef = this.updateRef.bind(this, 'specialization');
 
         this.state = {
-           // schoolName: '',
-           // location: '',
+            schoolName: '',
+            location: '',
             startYear: '',
             endYear: '',
             degree: '',
-            specialization: ''
+            specialization: '',
         }
     }
 
+    onFocus() {
+        let {errors = {}} = this.state
+  
+        for (let name in errors) {
+          let ref = this[name];
+  
+          if (ref && ref.isFocused()) {
+            delete errors[name];
+          }
+        }
+  
+        this.setState({ errors });
+     }
+
     onChangeText(text) {
-        ['startYear', 'endYear', 'degree', 'specialization']
+        ['schoolName', 'location', 'startYear', 'endYear', 'degree', 'specialization']
           .map((name) => ({ name, ref: this[name] }))
           .filter(({ ref }) => ref && ref.isFocused())
           .forEach(({ name, ref }) => {
             this.setState({ [name]: text });
           });
+
+          // Updated states 
+          console.log("schoolName: ", this.state.schoolName)
+          console.log("location: ", this.state.location)
           console.log("startYear: ", this.state.startYear)
           console.log("endYear: ", this.state.endYear)
           console.log("degree: ", this.state.degree)
@@ -43,14 +68,37 @@ export default class Education extends React.Component {
          }
          
   
-      updateRef(name, ref) {
+        updateRef(name, ref) {
         this[name] = ref;
         }
+
+        onSubmitSchoolName(){
+            this.schoolName.focus();
+        }
+
+        onSubmitLocation(){
+            this.location.focus();
+        }
+
+        onSubmit() {
+            let errors = {};
+      
+            ['schoolName', 'location']
+              .forEach((name) => {
+                let value = this[name].value();
+      
+                if (!value) {
+                  errors[name] = 'Should not be empty';
+                } 
+              });
+      
+            this.setState({ errors });
+      }
 
     
     render(){
 
-
+        let { errors = {} } = this.state
 
         let degreeData = [{
             value: 'Phd',
@@ -136,16 +184,36 @@ export default class Education extends React.Component {
 
                 <View style={styles.topEdu}>
 
-                    <TextInput style={styles.name} placeholder='name of school' /> 
+                <View>
+
+                    <TextField
+                            ref={this.schoolNameRef}
+                            onFocus={this.onFocus}
+                            onChangeText={this.onChangeText}
+                            onSubmitEditing={this.onSubmitSchoolName}
+                            returnKeyType='next'
+                            blurOnSubmit={true}
+                            label='Name'/>
+
+                </View>
 
                 </View>
 
                 <View style={styles.middleEdu}>
 
 
-                    <View style={{flex: 1}}>
+                    <View style={{flex: 1, marginLeft: 10, marginRight: 10}}>
 
-                        <TextInput style={styles.location} placeholder="location" />
+                       {/*<TextInput style={styles.location} placeholder="location" />*/}
+
+                       <TextField
+                            ref={this.locationRef}
+                            onFocus={this.onFocus}
+                            onChangeText={this.onChangeText}
+                            onSubmitEditing={this.onSubmitLocation}
+                            returnKeyType='next'
+                            blurOnSubmit={true}
+                            label='Location'/>
 
                     </View>
 
@@ -155,7 +223,7 @@ export default class Education extends React.Component {
 
                             <Dropdown
                                 ref={this.startYearRef}
-                                label='start'
+                                label='Start'
                                 onChangeText={this.onChangeText}
                                 data={yyData}/> 
 
@@ -171,7 +239,7 @@ export default class Education extends React.Component {
 
                             <Dropdown
                                 ref={this.endYearRef}
-                                label='end'
+                                label='End'
                                 onChangeText={this.onChangeText}
                                 data={yyData}/> 
 
@@ -187,7 +255,7 @@ export default class Education extends React.Component {
 
                 <Dropdown
                     ref={this.degreeRef}
-                    label='degree'
+                    label='Degree'
                     onChangeText={this.onChangeText}
                     data={degreeData}/>    
 
@@ -197,7 +265,7 @@ export default class Education extends React.Component {
 
                 <Dropdown
                     ref={this.specializationRef}
-                    label='specialization'
+                    label='Specialization'
                     onChangeText={this.onChangeText}
                     data={specializationData}/>   
 
@@ -229,11 +297,6 @@ const styles = StyleSheet.create({
         color: 'grey'
     },
     topEdu: {
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'center',
-        width: width - 20,
-        marginBottom: 10,
 
     },
     name: {
