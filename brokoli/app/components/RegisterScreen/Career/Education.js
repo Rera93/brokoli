@@ -8,8 +8,50 @@ const width = Dimensions.get('window').width
 
 export default class Education extends React.Component {
 
+    constructor(props){
+        super(props)
+
+        this.onChangeText = this.onChangeText.bind(this);
+
+        this.startYearRef = this.updateRef.bind(this, 'startYear');
+        this.endYearRef = this.updateRef.bind(this, 'endYear');
+        this.degreeRef = this.updateRef.bind(this, 'degree');
+        this.specializationRef = this.updateRef.bind(this, 'specialization');
+
+        this.state = {
+           // schoolName: '',
+           // location: '',
+            startYear: '',
+            endYear: '',
+            degree: '',
+            specialization: ''
+        }
+    }
+
+    onChangeText(text) {
+        ['startYear', 'endYear', 'degree', 'specialization']
+          .map((name) => ({ name, ref: this[name] }))
+          .filter(({ ref }) => ref && ref.isFocused())
+          .forEach(({ name, ref }) => {
+            this.setState({ [name]: text });
+          });
+          console.log("startYear: ", this.state.startYear)
+          console.log("endYear: ", this.state.endYear)
+          console.log("degree: ", this.state.degree)
+          console.log("specialization: ", this.state.specialization)
+
+         }
+         
+  
+      updateRef(name, ref) {
+        this[name] = ref;
+        }
+
     
     render(){
+
+
+
         let degreeData = [{
             value: 'Phd',
           }, {
@@ -112,12 +154,14 @@ export default class Education extends React.Component {
                         <View style={{flex: 1, justifyContent: 'center'}}> 
 
                             <Dropdown
-                                label='yy'
+                                ref={this.startYearRef}
+                                label='start'
+                                onChangeText={this.onChangeText}
                                 data={yyData}/> 
 
                         </View>
 
-                        <View style={{flex: 1}}>
+                        <View style={{flex: 1, marginTop: 30, alignItems: 'center'}}>
 
                             <Text> until </Text>
 
@@ -126,7 +170,9 @@ export default class Education extends React.Component {
                         <View style={{flex: 1}}>
 
                             <Dropdown
-                                label='yy'
+                                ref={this.endYearRef}
+                                label='end'
+                                onChangeText={this.onChangeText}
                                 data={yyData}/> 
 
                         </View>
@@ -140,7 +186,9 @@ export default class Education extends React.Component {
                 <View style={{flex: 2, marginLeft: 10}}>
 
                 <Dropdown
-                    label='choose a degree'
+                    ref={this.degreeRef}
+                    label='degree'
+                    onChangeText={this.onChangeText}
                     data={degreeData}/>    
 
                 </View>
@@ -148,7 +196,9 @@ export default class Education extends React.Component {
                 <View style={{flex: 3, marginLeft: 10, marginRight: 10}}>
 
                 <Dropdown
-                    label='choose a specialization'
+                    ref={this.specializationRef}
+                    label='specialization'
+                    onChangeText={this.onChangeText}
                     data={specializationData}/>   
 
                 </View>
@@ -207,7 +257,9 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center', 
-        justifyContent: 'center' 
+        justifyContent: 'center',
+        marginLeft: 10,
+        marginRight: 10
     },
     location: {
         borderWidth: 1,
