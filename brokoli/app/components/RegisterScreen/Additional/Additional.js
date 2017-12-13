@@ -23,6 +23,8 @@ export default class Additional extends React.Component {
 
         this.state={
             addNew: false,
+            totalNrSkills: nrOfRequiredSkills,
+            skills: Array(nrOfRequiredSkills).fill(''),
         }
     }
 
@@ -35,18 +37,32 @@ export default class Additional extends React.Component {
                 <View key = {i}
                       style={styles.skillCont}>
 
-                    <TextInput style={styles.skill} placeholder='skill'/>
+                    <TextInput style={styles.skill} 
+                               placeholder={'skill ' + (i+1)}
+                               onChangeText={(text) => this._grabSkill(text, i)}/>
 
                 </View>
             )
         }
+        console.log(this.state.skills)
         return(
             <View style={styles.reqSkills}>
                 {rows}
-
                 </View>
         )
     }
+
+    _grabSkill = (text, i) => {
+
+        this.state.skills[i] = text
+
+        this.setState({skills: this.state.skills})
+
+        console.log(this.state.skills)
+
+    }
+
+
 
     
     _flip(){
@@ -146,6 +162,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginTop: 5,
         marginBottom: 5,
+        borderColor: 'grey'
 
     },
     reqSkills: {
