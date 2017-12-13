@@ -28,6 +28,7 @@ export default class Categories extends React.Component {
 
                 </View>
                 {this._renderCategories()}
+                
 
                 </View>
 

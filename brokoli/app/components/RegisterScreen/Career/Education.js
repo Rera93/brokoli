@@ -184,18 +184,13 @@ export default class Education extends React.Component {
 
                 <View style={styles.topEdu}>
 
-                <View>
-
                     <TextField
                             ref={this.schoolNameRef}
                             onFocus={this.onFocus}
                             onChangeText={this.onChangeText}
                             onSubmitEditing={this.onSubmitSchoolName}
-                            returnKeyType='next'
                             blurOnSubmit={true}
                             label='Name'/>
-
-                </View>
 
                 </View>
 
@@ -207,13 +202,12 @@ export default class Education extends React.Component {
                        {/*<TextInput style={styles.location} placeholder="location" />*/}
 
                        <TextField
-                            ref={this.locationRef}
-                            onFocus={this.onFocus}
-                            onChangeText={this.onChangeText}
-                            onSubmitEditing={this.onSubmitLocation}
-                            returnKeyType='next'
-                            blurOnSubmit={true}
-                            label='Location'/>
+                       ref={this.schoolNameRef}
+                       onFocus={this.onFocus}
+                       onChangeText={this.onChangeText}
+                       onSubmitEditing={this.onSubmitSchoolName}
+                       blurOnSubmit={true}
+                       label='Name'/>
 
                     </View>
 
@@ -229,7 +223,7 @@ export default class Education extends React.Component {
 
                         </View>
 
-                        <View style={{flex: 1, marginTop: 30, alignItems: 'center'}}>
+                        <View style={{flex: 1, marginTop: 20, alignItems: 'center'}}>
 
                             <Text> until </Text>
 

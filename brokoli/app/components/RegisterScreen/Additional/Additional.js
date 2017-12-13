@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, Dimensions } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, Dimensions, TextInput, View, ScrollView } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 import Header from './Header'
@@ -16,13 +16,64 @@ export default class Additional extends React.Component {
         headerTitleStyle: { color: 'white' },
       };
 
+
+    constructor(props){
+        super(props)
+
+        this.state={
+            addNew: false
+        }
+    }
+
+    
+    _flip(){
+
+        this.setState({addNew: !this.state.addNew});
+        console.log("addNew: ", this.state.addNew)
+
+        {this._addNew}      
+    }
+
+    _addNew(){
+
+        if(this.state.addNew == true){
+            return(
+                <View style={styles.skill}>
+                
+                    <TextInput placeholder='skill'/>
+                
+                </View> )
+                //console.log("addNew: ", this.state.addNew)
+                this.setState({addNew: !this.state.addNew})
+                //console.log("addNew: ", this.state.addNew)
+                
+        }
+    }
+
     
     render(){
         return(
 
-            <ViewContainer style={styles.additional}>
+            <ScrollView contentContainerStyle={styles.additional}
+                        showsVerticalScrollIndicator={false}>
 
                 <Header />
+
+                <View style={styles.skill}>
+
+                <TextInput placeholder='skill'/>
+
+                </View>
+
+
+                <TouchableOpacity style={styles.add} onPress={this._flip.bind(this)}>
+
+                 <Text style={styles.plus}> + </Text>
+
+                </TouchableOpacity> 
+
+                {this._addNew()}
+
                 <Summary />
 
                 <TouchableOpacity style={styles.button}>
@@ -31,7 +82,7 @@ export default class Additional extends React.Component {
 
                 </TouchableOpacity>
 
-                </ViewContainer>
+                </ScrollView>
 
         )
     }
@@ -39,7 +90,9 @@ export default class Additional extends React.Component {
 
 const styles = StyleSheet.create({
     additional: {
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     button: {
     backgroundColor: '#42D260',
@@ -52,6 +105,22 @@ const styles = StyleSheet.create({
     color : 'white',
     padding: 10,
     fontWeight: 'bold'
-}
+}, 
+    add: {
+        backgroundColor: 'white', 
+    },
+    plus: {
+        color: '#42D260',
+        padding: 10,
+        fontSize: 55
+    },
+    skill: {
+        flex: 1,
+        borderWidth: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: width - 60
+    }
+
 })
 
