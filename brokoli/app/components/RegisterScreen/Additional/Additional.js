@@ -3,7 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, Dimensions, TextInput, View, Scroll
 import { StackNavigator } from 'react-navigation';
 
 import Header from './Header'
-import Summary from './Summary'
+import Skills from './Skills'
 import ViewContainer from '../../ViewContainer'
 
 const width = Dimensions.get('window').width
@@ -109,7 +109,7 @@ export default class Additional extends React.Component {
 
                 {this._addNew()}
 
-                <Summary />
+                <Skills />
 
                 <TouchableOpacity style={styles.button}>
 
@@ -153,6 +153,7 @@ const styles = StyleSheet.create({
         flex: 1,
         width: width - 60,
         padding: 10,
+        color: '#42D260'
     },
     skillCont: {
         flex: 1,

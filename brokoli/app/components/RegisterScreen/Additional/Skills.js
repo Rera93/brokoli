@@ -4,7 +4,7 @@ import { StackNavigator } from 'react-navigation';
 
 import ViewContainer from '../../ViewContainer'
 
-export default class Summary extends React.Component {
+export default class Skills extends React.Component {
 
     
     render(){
