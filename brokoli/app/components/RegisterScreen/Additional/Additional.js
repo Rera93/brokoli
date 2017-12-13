@@ -7,6 +7,7 @@ import Summary from './Summary'
 import ViewContainer from '../../ViewContainer'
 
 const width = Dimensions.get('window').width
+const nrOfRequiredSkills = 5;
 
 export default class Additional extends React.Component {
 
@@ -21,15 +22,38 @@ export default class Additional extends React.Component {
         super(props)
 
         this.state={
-            addNew: false
+            addNew: false,
         }
+    }
+
+    _renderSkills(){
+        var rows = []
+        for(let i=0; i < nrOfRequiredSkills; i++)
+        {
+            rows.push(
+
+                <View key = {i}
+                      style={styles.skillCont}>
+
+                    <TextInput style={styles.skill} placeholder='skill'/>
+
+                </View>
+            )
+        }
+        return(
+            <View style={styles.reqSkills}>
+                {rows}
+
+                </View>
+        )
     }
 
     
     _flip(){
-
-        this.setState({addNew: !this.state.addNew});
         console.log("addNew: ", this.state.addNew)
+        this.setState({addNew: !this.state.addNew})
+        console.log("addNew: ", this.state.addNew)
+        
 
         {this._addNew}      
     }
@@ -38,14 +62,12 @@ export default class Additional extends React.Component {
 
         if(this.state.addNew == true){
             return(
-                <View style={styles.skill}>
+                <View style={styles.skillCont}>
                 
-                    <TextInput placeholder='skill'/>
+                    <TextInput style={styles.skill} placeholder='skill'/>
                 
                 </View> )
-                //console.log("addNew: ", this.state.addNew)
-                this.setState({addNew: !this.state.addNew})
-                //console.log("addNew: ", this.state.addNew)
+             //   this.setState({addNew: !this.state.addNew})
                 
         }
     }
@@ -59,11 +81,8 @@ export default class Additional extends React.Component {
 
                 <Header />
 
-                <View style={styles.skill}>
 
-                <TextInput placeholder='skill'/>
-
-                </View>
+                 {this._renderSkills()}
 
 
                 <TouchableOpacity style={styles.add} onPress={this._flip.bind(this)}>
@@ -116,10 +135,23 @@ const styles = StyleSheet.create({
     },
     skill: {
         flex: 1,
+        width: width - 60,
+        padding: 10,
+    },
+    skillCont: {
+        flex: 1,
         borderWidth: 1,
+        borderRadius: 5,
         alignItems: 'center',
         justifyContent: 'center',
-        width: width - 60
+        marginTop: 5,
+        marginBottom: 5,
+
+    },
+    reqSkills: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 
 })
