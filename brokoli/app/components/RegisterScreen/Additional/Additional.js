@@ -97,6 +97,12 @@ export default class Additional extends React.Component {
 
                 <Header />
 
+                <View style={styles.titleCont}>
+
+                    <Text style={styles.title}> What do you know? List at least five skills </Text>
+
+                </View>
+
 
                  {this._renderSkills()}
 
@@ -128,6 +134,20 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    titleCont: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 10,
+        marginBottom: 10
+    },
+    title: {
+        fontSize: 16,
+        color: 'grey',
+        textAlign: 'left',
+        fontWeight: '600'
+        
     },
     button: {
     backgroundColor: '#42D260',
@@ -169,7 +189,8 @@ const styles = StyleSheet.create({
     reqSkills: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginTop: 10,
     }
 
 })

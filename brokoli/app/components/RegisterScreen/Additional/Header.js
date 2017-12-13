@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
         color: 'grey',
         fontSize: 16,
         fontWeight: '600',
+        textAlign: 'left'
 
     },
     inputCont:{
@@ -67,7 +68,8 @@ const styles = StyleSheet.create({
     input:{
         padding: 10,
         width: width - 60,
-        color: '#42D260'
+        color: '#42D260',
+        
     }
 
 
