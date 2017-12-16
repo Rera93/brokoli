@@ -20,7 +20,46 @@ export default class Account extends React.Component {
 
       constructor(props) {
         super(props);
+        
+        this.state = {
+
+          username: '',
+          email: '',
+          password: '',
+          passwordConf: '',
+
+        }
     
+      }
+
+      _grabUsername = (text) => {
+
+        this.state.username = text
+        this.setState({username: this.state.username})
+        console.log('Username: ', this.state.username)
+      }
+
+      _grabEmail = (text) => {
+
+        this.state.email = text
+        this.setState({email: this.state.email})
+        console.log('Email: ', this.state.email)
+        
+      }
+
+      _grabPassword = (text) => {
+
+        this.state.password = text
+        this.setState({password: this.state.password})
+        console.log('Password: ', this.state.password)
+        
+      }
+
+      _grabPasswordConf = (text) => {
+
+        this.state.passwordConf = text
+        this.setState({passwordConf: this.state.passwordConf}) 
+        console.log('ConfPassword: ', this.state.passwordConf)
       }
 
     
@@ -46,25 +85,29 @@ export default class Account extends React.Component {
                         <View style={styles.inputContainer}> 
                           <Text style={[styles.cond, {color: '#EEAD0E'}]}> O </Text>
                           <TextInput style={styles.input} 
-                                     placeholder='username' />
+                                     placeholder='username'
+                                     onChangeText={(text) => this._grabUsername(text)}/>
                         </View>
 
                         <View style={styles.inputContainer}> 
                           <Text style={[styles.cond, {color: '#BE2625'}]}> R </Text>
                           <TextInput style={styles.input} 
-                                     placeholder='email' />
+                                     placeholder='email'
+                                     onChangeText={(text) => this._grabEmail(text)} />
                         </View>
 
                         <View style={styles.inputContainer}> 
                           <Text style={[styles.cond, {color: '#BE2625'}]}> R </Text>
                           <TextInput style={styles.input} 
-                                     placeholder='password' />
+                                     placeholder='password'
+                                     onChangeText={(text) => this._grabPassword(text)} />
                         </View>
 
                         <View style={styles.inputContainer}>
                           <Text style={[styles.cond, {color: '#BE2625'}]}> R </Text> 
                           <TextInput style={styles.input} 
-                                     placeholder='confirm password' />
+                                     placeholder='confirm password'
+                                     onChangeText={(text) => this._grabPasswordConf(text)} />
                         </View>
 
                     <TouchableHighlight 
