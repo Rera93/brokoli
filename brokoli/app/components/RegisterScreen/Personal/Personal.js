@@ -5,7 +5,8 @@ import { StyleSheet,
          Dimensions, 
          KeyboardAvoidingView, 
          View,
-        ScrollView } from 'react-native';
+         ScrollView,
+         TextInput } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 import FullName from './FullName'
@@ -41,7 +42,13 @@ export default class Personal extends React.Component {
                 <ProfilePic />
                 <BirthDate />
                 <Gender />
-                <Location />
+
+                <View style={styles.whereabouts}> 
+                    <Text style={[styles.cond, {color: '#EEAD0E'}]}> O </Text>
+                    <TextInput style={styles.locInput} placeholder='city' />
+                    <Text style={[styles.cond, {color: '#EEAD0E'}]}> O </Text>
+                    <TextInput style={styles.locInput} placeholder='country'/>  
+                </View>
 
                 <TouchableOpacity onPress={()=> navigate('Account')}
                                   style={styles.button}>
@@ -66,13 +73,36 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center',
+        paddingVertical: 40,
 
     },
+    whereabouts: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: width,
+        flexDirection: 'row'
+    },
+    locInput: {
+        color: '#42D260',
+        padding: 10,
+        width: width / 2 - 50,
+        borderRadius: 5,
+        marginTop: 15,
+        marginBottom: 15,
+        marginRight: 20,
+        borderWidth: 1,
+        borderColor: 'grey'
+    },
+    cond: {
+        fontSize: 17,
+        fontWeight: '600',
+    }, 
     button: {
     backgroundColor: '#42D260',
     marginBottom: 20,
     borderRadius: 10,
-    width: width - 100,
+    width: width - 300,
     alignItems: 'center'
     },
     btnText: {
