@@ -49,7 +49,9 @@ export default class Skills extends React.Component {
 
         this.setState({skills: this.state.skills})
 
-        console.log(this.state.skills)
+        //console.log('Child Skills Arr: ',this.state.skills)
+
+        this.props.callbackFromParent(this.state.skills);
 
     }
 

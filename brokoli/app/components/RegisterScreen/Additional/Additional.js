@@ -22,28 +22,22 @@ export default class Additional extends React.Component {
         super(props)
 
         this.state={
+            passSkillsToDb : [],
+        //    passHeadertoDb : [],
+        //    passScreenToDb : passHeadertoDb.concat(passSkillsToDb)
         }
     }
 
+   /* callbackHeader = (dataFromChild) => {
+        this.setState({ passHeadertoDb: dataFromChild });
+        console.log("Parent Header Arr: ", this.state.passHeadertoDb)
+        this._onFlip()
+    }*/
 
-
-    
-    
-
-    _addNew(){
-
-        if(this.state.addNew == true){
-            return(
-                <View style={styles.skillCont}>
-                
-                    <TextInput style={styles.skill} placeholder='skill'/>
-                
-                </View> )
-             //   this.setState({addNew: !this.state.addNew})
-                
-        }
+    callbackSkills = (dataFromChild) => {
+        this.setState({ passSkillsToDb: dataFromChild });
+        console.log("Parent Skills Arr: ", this.state.passSkillsToDb)
     }
-
     
     render(){
         return(
@@ -55,7 +49,7 @@ export default class Additional extends React.Component {
 
                 <Header />
 
-                <Skills />
+                <Skills callbackFromParent = {this.callbackSkills} />
 
                 <TouchableOpacity style={styles.button}>
 

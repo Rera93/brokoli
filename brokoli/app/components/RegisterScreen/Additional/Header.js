@@ -8,6 +8,22 @@ const width = Dimensions.get("window").width
 
 export default class Header extends React.Component {
 
+    constructor(props){
+        super(props)
+
+        this.state = {
+            header : ' '
+        }
+    }
+    _grapHeader = (text) => {
+
+        this.state.header = text
+
+        this.setState({header: this.state.header})
+
+        console.log('Child Header: ', this.state.header)
+    }
+
     render(){
         return(
 
@@ -26,7 +42,8 @@ export default class Header extends React.Component {
                          placeholder='header'
                          multiline = {true}
                          numberOfLines = {3} 
-                         maxLength={120}/>
+                         maxLength={120}
+                         onChangeText={(text) => this._grapHeader(text)}/>
 
               </View>
 
