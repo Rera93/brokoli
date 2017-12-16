@@ -33,11 +33,17 @@ export default class Personal extends React.Component {
             
             <KeyboardAvoidingView behavior="padding">
             
-                        <ScrollView contentContainerStyle={styles.personal}
+             <ScrollView contentContainerStyle={styles.personal}
                                     showsVerticalScrollIndicator={false}>
 
+               <View style={styles.titleContainer}> 
+
+                  <Text style={styles.title}>Please enter your personal information in order to construct your profile </Text>
+
+                </View>
+
                 
-            <View style={styles.inputCont}> 
+                <View style={styles.inputCont}> 
                     <Text style={[styles.cond, {color: '#BE2625'}]}> R </Text>
                     <TextInput style={styles.locInput} placeholder='first name' />
                     <Text style={[styles.cond, {color: '#BE2625'}]}> R </Text>
@@ -77,8 +83,23 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingVertical: 40,
+        paddingVertical: 30,
 
+    },
+    titleContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: 15,
+        marginTop: 15,
+        width: width,
+    },
+    title: {
+      color: 'grey',
+      fontWeight: '900',
+      padding: 10,
+      width: width - 60,
+      fontSize: 17,
     },
     inputCont: {
         flex: 1,

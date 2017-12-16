@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
             alignItems: 'center',
             justifyContent: 'center',
             backgroundColor: 'white',
-            paddingVertical: 20
+            paddingVertical: 30
     },
     titleContainer: {
         flex: 1,
