@@ -5,17 +5,11 @@ import { Dimensions,
          TouchableHighlight, 
          View, 
          KeyboardAvoidingView,
-         ScrollView } from 'react-native';
+         ScrollView, 
+         TextInput } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
-import Email from './Email'
-import Username from './Username'
-import Password from './Password'
-import PassConfirm from './PassConfirm'
-
-const window = Dimensions.get('window');
-const width = window.width
-
+const width = Dimensions.get('window').width
 
 export default class Account extends React.Component {
     static navigationOptions = {
@@ -43,10 +37,31 @@ export default class Account extends React.Component {
                       <ScrollView contentContainerStyle={styles.account}
                                   showsVerticalScrollIndicator={false}>
 
-                    <Email />
-                    <Username />
-                    <Password />
-                    <PassConfirm />
+                        <View style={styles.titleContainer}> 
+
+                          <Text style={styles.title}> Please enter your Brokoli credentials </Text>
+
+                          </View>
+
+                        <View style={styles.inputContainer}> 
+                          <TextInput style={styles.input} 
+                                     placeholder='username' />
+                        </View>
+
+                        <View style={styles.inputContainer}> 
+                          <TextInput style={styles.input} 
+                                     placeholder='email' />
+                        </View>
+
+                        <View style={styles.inputContainer}> 
+                          <TextInput style={styles.input} 
+                                     placeholder='password' />
+                        </View>
+
+                        <View style={styles.inputContainer}> 
+                          <TextInput style={styles.input} 
+                                     placeholder='confirm password' />
+                        </View>
 
                     <TouchableHighlight 
                                 onPress={()=> navigate('Professional')}
@@ -72,10 +87,42 @@ const styles = StyleSheet.create({
             justifyContent: 'center',
             backgroundColor: 'white',
     },
+    titleContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: 10,
+        marginTop: 20,
+        width: width - 100,
+    },
+    title: {
+      color: 'grey',
+      fontWeight: '600',
+      padding: 10,
+      width: width - 100,
+      fontSize: 17,
+    },
+    inputContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 5,
+        marginTop: 20,
+        marginBottom: 20,
+        borderWidth: 1,
+        borderColor: 'grey',
+        width: width - 100,
+    },
+    input: {
+      color: '#42D260',
+      padding: 10,
+      width: width - 100,
+    },
     button: {
             backgroundColor: '#42D260',
             width: width - 100,
-            marginBottom: 20,
+            marginTop: 20,
+            marginBottom: 40,
             borderRadius: 10,
             alignItems: 'center'
     },
