@@ -44,21 +44,25 @@ export default class Account extends React.Component {
                           </View>
 
                         <View style={styles.inputContainer}> 
+                          <Text style={[styles.cond, {color: '#EEAD0E'}]}> O </Text>
                           <TextInput style={styles.input} 
                                      placeholder='username' />
                         </View>
 
                         <View style={styles.inputContainer}> 
+                          <Text style={[styles.cond, {color: '#BE2625'}]}> R </Text>
                           <TextInput style={styles.input} 
                                      placeholder='email' />
                         </View>
 
                         <View style={styles.inputContainer}> 
+                          <Text style={[styles.cond, {color: '#BE2625'}]}> R </Text>
                           <TextInput style={styles.input} 
                                      placeholder='password' />
                         </View>
 
-                        <View style={styles.inputContainer}> 
+                        <View style={styles.inputContainer}>
+                          <Text style={[styles.cond, {color: '#BE2625'}]}> R </Text> 
                           <TextInput style={styles.input} 
                                      placeholder='confirm password' />
                         </View>
@@ -86,18 +90,19 @@ const styles = StyleSheet.create({
             alignItems: 'center',
             justifyContent: 'center',
             backgroundColor: 'white',
+            paddingVertical: 20
     },
     titleContainer: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom: 10,
-        marginTop: 20,
-        width: width - 100,
+        marginBottom: 15,
+        marginTop: 15,
+        width: width,
     },
     title: {
       color: 'grey',
-      fontWeight: '600',
+      fontWeight: '900',
       padding: 10,
       width: width - 100,
       fontSize: 17,
@@ -106,21 +111,30 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius: 5,
-        marginTop: 20,
-        marginBottom: 20,
-        borderWidth: 1,
-        borderColor: 'grey',
-        width: width - 100,
+        width: width,
+        flexDirection: 'row'
     },
     input: {
       color: '#42D260',
       padding: 10,
       width: width - 100,
+      borderRadius: 5,
+      marginTop: 15,
+      marginBottom: 15,
+      marginRight: 20,
+      borderWidth: 1,
+      borderColor: 'grey',
+    },
+    cond: {
+        fontSize: 17,
+        paddingRight: 20,
+        fontWeight: '600',
+        
+
     },
     button: {
             backgroundColor: '#42D260',
-            width: width - 100,
+            width: width - 300,
             marginTop: 20,
             marginBottom: 40,
             borderRadius: 10,
