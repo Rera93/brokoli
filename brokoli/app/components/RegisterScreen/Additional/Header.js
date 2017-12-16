@@ -12,18 +12,30 @@ export default class Header extends React.Component {
         super(props)
 
         this.state = {
-            header : ' '
+            headerContent : ' ',
+            header: false
         }
     }
-    _grapHeader = (text) => {
+    _grabHeader = (text) => {
 
-        this.state.header = ' ' + text
+        this.state.headerContent = text
+        this.setState({headerContent: this.state.headerContent})
+        console.log('Child Header: ', this.state.headerContent)
+        this._verifyHeader();
+    }
 
-        this.setState({header: this.state.header})
-
-        console.log('Child Header: ', this.state.header)
-
-        this.props.callbackFromParent(this.state.header);
+    _verifyHeader() {
+        if(this.state.headerContent.length >= 0)
+        {
+            this.setState({header: true})
+            console.log('isheaderChild: ', this.state.header)
+        }
+        else 
+        {
+            this.setState({header: false})
+            console.log('isheaderChild: ', this.state.header)
+        }
+        this.props.callbackFromParent(this.state.headerContent, this.state.header);
     }
 
     render(){
@@ -45,7 +57,8 @@ export default class Header extends React.Component {
                          multiline = {true}
                          numberOfLines = {3} 
                          maxLength={120}
-                         onChangeText={(text) => this._grapHeader(text)}/>
+                         onChangeText={(text) => this._grabHeader(text)}
+                         value={this.state.headerContent}/>
 
               </View>
 
