@@ -1,5 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, Dimensions } from 'react-native';
+import { StyleSheet, 
+         Text, 
+         TouchableOpacity, 
+         Dimensions, 
+         KeyboardAvoidingView, 
+         View,
+        ScrollView } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 import FullName from './FullName'
@@ -25,7 +31,12 @@ export default class Personal extends React.Component {
         
         return(
 
-            <ViewContainer style={styles.personal}>
+            
+            <KeyboardAvoidingView behavior="padding">
+            
+                        <ScrollView contentContainerStyle={styles.personal}
+                                    showsVerticalScrollIndicator={false}>
+
                 <FullName />
                 <ProfilePic />
                 <BirthDate />
@@ -39,7 +50,12 @@ export default class Personal extends React.Component {
 
                 </TouchableOpacity>
 
-                </ViewContainer>
+                </ScrollView>
+
+                <View style={{height: 80}} />
+
+                </KeyboardAvoidingView>
+
 
         )
     }
@@ -47,7 +63,9 @@ export default class Personal extends React.Component {
 
 const styles = StyleSheet.create({
     personal: {
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        alignItems: 'center',
+        justifyContent: 'center',
 
     },
     button: {

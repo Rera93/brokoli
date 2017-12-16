@@ -1,5 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, Dimensions, ScrollView } from 'react-native';
+import { 
+    StyleSheet, 
+    Text, 
+    TouchableOpacity, 
+    Dimensions, 
+    ScrollView, 
+    KeyboardAvoidingView, 
+    View } from 'react-native';
 
 import Education from './Education'
 import JobExp from './JobExp'
@@ -23,6 +30,8 @@ export default class Career extends React.Component {
         
         return(
 
+            <KeyboardAvoidingView behavior="padding">
+
             <ScrollView contentContainerStyle={styles.career}
                         showsVerticalScrollIndicator={false}>
                 {/* Create collapsable */}
@@ -37,6 +46,9 @@ export default class Career extends React.Component {
                 </TouchableOpacity>
 
                 </ScrollView>
+
+                <View style={{height: 80}}/> 
+                </KeyboardAvoidingView>
 
         )
     }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, Dimensions, TextInput, View, ScrollView } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, Dimensions, TextInput, View, ScrollView, KeyboardAvoidingView } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 import Header from './Header'
@@ -92,6 +92,8 @@ export default class Additional extends React.Component {
     render(){
         return(
 
+            <KeyboardAvoidingView behavior="padding">
+
             <ScrollView contentContainerStyle={styles.additional}
                         showsVerticalScrollIndicator={false}>
 
@@ -124,6 +126,9 @@ export default class Additional extends React.Component {
                 </TouchableOpacity>
 
                 </ScrollView>
+
+                <View style={{ height: 80 }} />
+                </KeyboardAvoidingView>
 
         )
     }
