@@ -23,20 +23,25 @@ export default class Additional extends React.Component {
 
         this.state={
             passSkillsToDb : [],
-        //    passHeadertoDb : [],
-        //    passScreenToDb : passHeadertoDb.concat(passSkillsToDb)
+            passHeadertoDb : ' ',
         }
     }
+    
+    /* callbackHeader and callbackSkills update the state for passHeaderToDb and 
+       passSkillsToDB respectively from their child components imported in this file.
+       
+       Alan TODO: passHeaderToDb and passSkillsToDb have to be sent to db. 
+    */
 
-   /* callbackHeader = (dataFromChild) => {
+    callbackHeader = (dataFromChild) => {
+        //Alan TODO
         this.setState({ passHeadertoDb: dataFromChild });
-        console.log("Parent Header Arr: ", this.state.passHeadertoDb)
-        this._onFlip()
-    }*/
+        console.log("Header: ", this.state.passHeadertoDb)
+    }
 
     callbackSkills = (dataFromChild) => {
         this.setState({ passSkillsToDb: dataFromChild });
-        console.log("Parent Skills Arr: ", this.state.passSkillsToDb)
+        console.log("Skills: ", this.state.passSkillsToDb)
     }
     
     render(){
@@ -47,7 +52,7 @@ export default class Additional extends React.Component {
             <ScrollView contentContainerStyle={styles.additional}
                         showsVerticalScrollIndicator={false}>
 
-                <Header />
+                <Header callbackFromParent = {this.callbackHeader}/>
 
                 <Skills callbackFromParent = {this.callbackSkills} />
 

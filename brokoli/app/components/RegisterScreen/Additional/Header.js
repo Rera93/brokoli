@@ -17,11 +17,13 @@ export default class Header extends React.Component {
     }
     _grapHeader = (text) => {
 
-        this.state.header = text
+        this.state.header = ' ' + text
 
         this.setState({header: this.state.header})
 
         console.log('Child Header: ', this.state.header)
+
+        this.props.callbackFromParent(this.state.header);
     }
 
     render(){
