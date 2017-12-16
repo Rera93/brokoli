@@ -33,7 +33,9 @@ export default class BirthDate extends React.Component {
 
         return(
 
-            <ViewContainer>
+            <ViewContainer style={styles.container}>
+
+                <Text style={[styles.cond, {color: '#BE2625'}]}> R </Text>
                 
               <TouchableOpacity style={styles.dateBirthCont} onPress={this._showDatePicker}>
               <Text style={styles.dateBirth}> {this.state.text} </Text>
@@ -52,16 +54,27 @@ export default class BirthDate extends React.Component {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        marginTop: 15,
+        marginBottom: 15,
+        flexDirection: 'row'
+    },
     dateBirthCont: {
         alignItems: 'center',
         borderWidth: 1,
         padding: 10,
-        width: width - 80,
+        width: width - 60,
+        marginRight: 15,
         borderRadius: 5,
-        borderColor: '#1ED760'
+        borderColor: 'grey'
     },
     dateBirth:{
-        color: 'grey'
+        color: '#42D260'
+    },
+    cond: {
+        fontSize: 17,
+        fontWeight: '600',
+        paddingRight: 5,
     }
     });
     

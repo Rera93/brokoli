@@ -25,7 +25,8 @@ export default class Gender extends React.Component {
 
         
                 return(
-                    <ViewContainer>
+                    <ViewContainer style={styles.container}>
+                    <Text style={[styles.cond, {color: '#BE2625'}]}> R </Text>
                     <RadioForm formHorizontal={true} animation={true}>
                     {/* To create radio buttons, loop through your array of options */}
                     {this.state.radio_props.map((obj, i) => {
@@ -72,4 +73,18 @@ export default class Gender extends React.Component {
                 )
     }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 15,
+    marginBottom: 15,
+    flexDirection: 'row'
+  },
+  cond: {
+    fontSize: 17,
+    paddingRight: 20,
+    paddingBottom: 5,
+    fontWeight: '600',
+  }
+})
 

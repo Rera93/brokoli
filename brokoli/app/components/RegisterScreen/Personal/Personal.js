@@ -9,11 +9,9 @@ import { StyleSheet,
          TextInput } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
-import FullName from './FullName'
 import ProfilePic from './ProfilePic'
 import BirthDate from './BirthDate'
 import Gender from './Gender'
-import Location from './Location'
 import ViewContainer from '../../ViewContainer'
 
 const width = Dimensions.get('window').width
@@ -38,15 +36,21 @@ export default class Personal extends React.Component {
                         <ScrollView contentContainerStyle={styles.personal}
                                     showsVerticalScrollIndicator={false}>
 
-                <FullName />
+                
+            <View style={styles.inputCont}> 
+                    <Text style={[styles.cond, {color: '#BE2625'}]}> R </Text>
+                    <TextInput style={styles.locInput} placeholder='first name' />
+                    <Text style={[styles.cond, {color: '#BE2625'}]}> R </Text>
+                    <TextInput style={styles.locInput} placeholder='last name'/>  
+                </View>
                 <ProfilePic />
                 <BirthDate />
                 <Gender />
 
-                <View style={styles.whereabouts}> 
-                    <Text style={[styles.cond, {color: '#EEAD0E'}]}> O </Text>
+                <View style={styles.inputCont}> 
+                    <Text style={[styles.cond, {color: '#BE2625'}]}> R </Text>
                     <TextInput style={styles.locInput} placeholder='city' />
-                    <Text style={[styles.cond, {color: '#EEAD0E'}]}> O </Text>
+                    <Text style={[styles.cond, {color: '#BE2625'}]}> R </Text>
                     <TextInput style={styles.locInput} placeholder='country'/>  
                 </View>
 
@@ -76,7 +80,7 @@ const styles = StyleSheet.create({
         paddingVertical: 40,
 
     },
-    whereabouts: {
+    inputCont: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
@@ -97,9 +101,11 @@ const styles = StyleSheet.create({
     cond: {
         fontSize: 17,
         fontWeight: '600',
+        paddingRight: 5,
     }, 
     button: {
     backgroundColor: '#42D260',
+    marginTop: 20,
     marginBottom: 20,
     borderRadius: 10,
     width: width - 300,
