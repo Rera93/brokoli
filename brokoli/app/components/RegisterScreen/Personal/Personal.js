@@ -61,6 +61,15 @@ export default class Personal extends React.Component {
 
         
     }
+    callbackBirthDate = (data) => {
+        this.state.dateOfBirth = data 
+        this.setState(function(prevState, props){
+            return {dateOfBirth: prevState.dateOfBirth}
+         });
+
+         console.log('Date of Birth: ', this.state.dateOfBirth)
+    }
+
     
 
     _grabCity = (text) => {
@@ -116,8 +125,8 @@ export default class Personal extends React.Component {
                                onChangeText={(text) => this._grabLastName(text)}/>  
                 </View>
                 <ProfilePic />
-                <BirthDate />
-                <Gender />
+                <BirthDate callbackFromParent = {this.callbackBirthDate}/>
+                <Gender callbackFromParent = {this.callbackGender}/>
 
                 <View style={styles.inputCont}> 
                     <Text style={[styles.cond, {color: '#BE2625'}]}> R </Text>
