@@ -27,6 +27,7 @@ export default class Account extends React.Component {
           email: '',
           password: '',
           passwordConf: '',
+          flip: false
 
         }
     
@@ -49,6 +50,8 @@ export default class Account extends React.Component {
           return {email: prevState.email}
          });
         console.log('Email: ', this.state.email)
+
+        this._flipNext()
         
       }
 
@@ -59,6 +62,8 @@ export default class Account extends React.Component {
           return {password: prevState.password}
          });
         console.log('Password: ', this.state.password)
+
+        this._flipNext()
         
       }
 
@@ -69,7 +74,28 @@ export default class Account extends React.Component {
           return {passwordConf: prevState.passwordConf}
         });
         console.log('ConfPassword: ', this.state.passwordConf)
+
+        this._flipNext()
       }
+
+      _flipNext(){
+        if(this.state.email != '' && this.state.password != '' &&
+            this.state.passwordConf != '')
+            {
+                this.state.flip = true
+                this.setState(function(prevState, props){
+                    return {flip: prevState.flip}
+                 });
+            }
+         else {
+            this.state.flip = false
+            this.setState(function(prevState, props){
+                return {flip: prevState.flip}
+             });
+             
+         }
+         console.log('Flip: ', this.state.flip)
+    }
 
     
 
@@ -119,11 +145,11 @@ export default class Account extends React.Component {
                                      onChangeText={(text) => this._grabPasswordConf(text)} />
                         </View>
 
-                    <TouchableHighlight 
-                                onPress={()=> navigate('Professional')}
-                                style={styles.button}>
+                    <TouchableHighlight disabled={this.state.flip ? false : true} 
+                                        onPress={()=> navigate('Professional')}
+                                        style={[styles.button, {backgroundColor: this.state.flip ? '#42D260' : 'white'}]}>
 
-                    <Text style={styles.btnText}> NEXT </Text>
+                    <Text style={[styles.btnText, {color: this.state.flip ? 'white' : '#42D260'}]}> NEXT </Text>
 
                     </TouchableHighlight>
 
@@ -185,15 +211,15 @@ const styles = StyleSheet.create({
 
     },
     button: {
-            backgroundColor: '#42D260',
             width: width - 300,
             marginTop: 20,
             marginBottom: 40,
             borderRadius: 10,
-            alignItems: 'center'
+            alignItems: 'center',
+            borderWidth: 1,
+            borderColor: '#42D260'
     },
     btnText: {
-      color : 'white',
       padding: 10,
       fontWeight: 'bold'
 
