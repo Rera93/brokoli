@@ -18,7 +18,7 @@ export default class Gender extends React.Component {
             {label: 'Other', value: 2 }
           ],
         selectedValue : 0,
-        selectedValueIndex: 0
+        selectedValueIndex: 0,
         }
     }
     render(){
@@ -31,10 +31,17 @@ export default class Gender extends React.Component {
                     {/* To create radio buttons, loop through your array of options */}
                     {this.state.radio_props.map((obj, i) => {
                          var onPress = (value, index) => {
-                            this.setState({
-                              selectedValue: value,
-                              selectedValueIndex: index
-                            })
+                          this.state.selectedValue = value
+                          this.state.selectedValueIndex = index
+
+                          this.setState(function(prevState, props){
+                            return {selectedValue: prevState.selectedValue,
+                                    selectedValueIndex: prevState.selectedValueIndex  }
+                              });
+
+                            this.props.callbackFromParent(this.state.radio_props[this.state.selectedValue].label);
+                          
+
                           }
                           return (
                       <RadioButton labelHorizontal={true} key={i} >

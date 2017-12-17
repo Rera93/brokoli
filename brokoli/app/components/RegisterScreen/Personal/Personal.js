@@ -70,6 +70,15 @@ export default class Personal extends React.Component {
          console.log('Date of Birth: ', this.state.dateOfBirth)
     }
 
+    callbackGender = (data) => {
+        this.state.gender = data 
+        this.setState(function(prevState, props){
+            return {gender: prevState.gender}
+         });
+
+         console.log('Gender: ', this.state.gender)
+    }
+
     
 
     _grabCity = (text) => {
