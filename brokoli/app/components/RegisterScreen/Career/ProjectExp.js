@@ -86,7 +86,7 @@ export default class ProjectExp extends React.Component {
             )
         }
         return(
-                <View style={{flex: 1}}>
+                <View style={{flex: 1, marginBottom: 10}}>
                 {rows}
 
                 </View>
@@ -125,7 +125,6 @@ export default class ProjectExp extends React.Component {
                 alignItems: "center",
                 justifyContent: 'center',
                 marginTop: 20,
-                marginBottom: 10,
             },
             title: {
                 fontWeight: '600',
@@ -141,9 +140,9 @@ export default class ProjectExp extends React.Component {
             },
             projectCont: {
                 flex: 1,
+                paddingTop: 10,
                 marginTop: 15,
-                marginBottom: 15,
-                borderBottomWidth: 1,
+                borderTopWidth: 0.7,
                 borderColor: '#42D260'
             },
             singleInput: {
@@ -154,7 +153,8 @@ export default class ProjectExp extends React.Component {
                 borderRadius: 5,
                 alignItems: 'center',
                 width: width - 20,
-                borderColor: 'grey'   
+                borderColor: 'grey', 
+                color: '#42D260'  
             },
 
         })
