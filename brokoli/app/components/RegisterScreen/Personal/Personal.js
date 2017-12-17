@@ -176,7 +176,7 @@ export default class Personal extends React.Component {
                                onChangeText={(text) => this._grabCountry(text)}/>  
                 </View>
 
-                <TouchableOpacity disabled={this.state.flip ? false : true}
+                <TouchableOpacity //disabled={this.state.flip ? false : true}
                                   onPress={()=> navigate('Account')}
                                   style={[styles.button, {backgroundColor: this.state.flip ? '#42D260' : 'white'}]}>
 

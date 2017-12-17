@@ -145,7 +145,7 @@ export default class Account extends React.Component {
                                      onChangeText={(text) => this._grabPasswordConf(text)} />
                         </View>
 
-                    <TouchableHighlight disabled={this.state.flip ? false : true} 
+                    <TouchableHighlight //disabled={this.state.flip ? false : true} 
                                         onPress={()=> navigate('Professional')}
                                         style={[styles.button, {backgroundColor: this.state.flip ? '#42D260' : 'white'}]}>
 

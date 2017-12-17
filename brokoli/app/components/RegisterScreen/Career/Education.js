@@ -171,6 +171,8 @@ export default class Education extends React.Component {
         },{
             value: 1990,
         }];
+
+        
     
         return(
 
@@ -184,32 +186,24 @@ export default class Education extends React.Component {
 
                 <View style={styles.topEdu}>
 
-                    <TextField
-                            ref={this.schoolNameRef}
-                            onFocus={this.onFocus}
-                            onChangeText={this.onChangeText}
-                            onSubmitEditing={this.onSubmitSchoolName}
-                            blurOnSubmit={true}
-                            label='Name'/>
+                    <View style={styles.nameCont}>
+
+                    <TextInput style={styles.name} placeholder="name of school"/>
+
+                    </View>
+
+                    <View style={styles.locationCont}>
+
+                    <TextInput style={styles.location} placeholder="city" />
+
+                    <TextInput style={styles.location} placeholder="country" />
+
+                    </View>
+
 
                 </View>
 
                 <View style={styles.middleEdu}>
-
-
-                    <View style={{flex: 1, marginLeft: 10, marginRight: 10}}>
-
-                       {/*<TextInput style={styles.location} placeholder="location" />*/}
-
-                       <TextField
-                       ref={this.schoolNameRef}
-                       onFocus={this.onFocus}
-                       onChangeText={this.onChangeText}
-                       onSubmitEditing={this.onSubmitSchoolName}
-                       blurOnSubmit={true}
-                       label='Name'/>
-
-                    </View>
 
                     <View style={styles.yearCont} >
 
@@ -276,6 +270,7 @@ export default class Education extends React.Component {
 const styles = StyleSheet.create({
 
     educationCont: {
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
         width: width - 20,
@@ -291,7 +286,14 @@ const styles = StyleSheet.create({
         color: 'grey'
     },
     topEdu: {
+        flex: 1,
+        alignItems: 'center'
 
+    },
+    nameCont: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     name: {
         borderWidth: 1,
@@ -302,6 +304,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: width - 40,
         borderColor: 'grey'   
+    },
+    locationCont:{
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     middleEdu: {
         flex: 1,
@@ -330,6 +338,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'center',
         marginBottom: 10
     }
 
