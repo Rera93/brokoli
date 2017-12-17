@@ -11,22 +11,10 @@ export default class Education extends React.Component {
     constructor(props){
         super(props)
 
-        this.onFocus = this.onFocus.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
-        this.onChangeText = this.onChangeText.bind(this);
-        this.onSubmitSchoolName = this.onSubmitSchoolName.bind(this);
-        this.onSubmitLocation = this.onSubmitLocation.bind(this);
-        
-        this.schoolNameRef = this.updateRef.bind(this, 'schoolName');
-        this.locationRef = this.updateRef.bind(this, 'location');
-        this.startYearRef = this.updateRef.bind(this, 'startYear');
-        this.endYearRef = this.updateRef.bind(this, 'endYear');
-        this.degreeRef = this.updateRef.bind(this, 'degree');
-        this.specializationRef = this.updateRef.bind(this, 'specialization');
-
         this.state = {
             schoolName: '',
-            location: '',
+            city: '',
+            country: '',
             startYear: '',
             endYear: '',
             degree: '',
@@ -34,70 +22,76 @@ export default class Education extends React.Component {
         }
     }
 
-    onFocus() {
-        let {errors = {}} = this.state
-  
-        for (let name in errors) {
-          let ref = this[name];
-  
-          if (ref && ref.isFocused()) {
-            delete errors[name];
-          }
-        }
-  
-        this.setState({ errors });
-     }
+    _grabSchoolName = (text) => {
+        
+                this.state.schoolName = text
+                this.setState(function(prevState, props){
+                  return {schoolName: prevState.schoolName}
+                 });
+                console.log('School Name: ', this.state.schoolName)
+                
+    }
 
-    onChangeText(text) {
-        ['schoolName', 'location', 'startYear', 'endYear', 'degree', 'specialization']
-          .map((name) => ({ name, ref: this[name] }))
-          .filter(({ ref }) => ref && ref.isFocused())
-          .forEach(({ name, ref }) => {
-            this.setState({ [name]: text });
-          });
+    _grabCity = (text) => {
+                
+                this.state.city = text
+                this.setState(function(prevState, props){
+                return {city: prevState.city}
+                });
+                console.log('City: ', this.state.city)
+                        
+    }
+    _grabCountry = (text) => {
+        
+                this.state.country = text
+                this.setState(function(prevState, props){
+                  return {country: prevState.country}
+                 });
+                console.log('Country: ', this.state.country)
+                
+    }
+    _grabStartYear = (text) => {
+        
+                this.state.startYear = text
+                this.setState(function(prevState, props){
+                  return {startYear: prevState.startYear}
+                 });
+                console.log('Start Year: ', this.state.startYear)
+                
+    }
 
-          // Updated states 
-          console.log("schoolName: ", this.state.schoolName)
-          console.log("location: ", this.state.location)
-          console.log("startYear: ", this.state.startYear)
-          console.log("endYear: ", this.state.endYear)
-          console.log("degree: ", this.state.degree)
-          console.log("specialization: ", this.state.specialization)
+    _grabEndYear = (text) => {
+                
+                this.state.endYear = text
+                this.setState(function(prevState, props){
+                return {endYear: prevState.endYear}
+                });
+                console.log('End Year: ', this.state.endYear)
+                        
+    }
+    _grabDegree = (text) => {
+        
+                this.state.degree = text
+                this.setState(function(prevState, props){
+                  return {degree: prevState.degree}
+                 });
+                console.log('Degree: ', this.state.degree)
+                
+    }
 
-         }
-         
-  
-        updateRef(name, ref) {
-        this[name] = ref;
-        }
-
-        onSubmitSchoolName(){
-            this.schoolName.focus();
-        }
-
-        onSubmitLocation(){
-            this.location.focus();
-        }
-
-        onSubmit() {
-            let errors = {};
-      
-            ['schoolName', 'location']
-              .forEach((name) => {
-                let value = this[name].value();
-      
-                if (!value) {
-                  errors[name] = 'Should not be empty';
-                } 
-              });
-      
-            this.setState({ errors });
-      }
+    _grabSpecialization = (text) => {
+                
+                this.state.specialization = text
+                this.setState(function(prevState, props){
+                return {specialization: prevState.specialization}
+                });
+                console.log('Specialization: ', this.state.specialization)
+                        
+    }
 
     
     render(){
 
-        let { errors = {} } = this.state
 
         let degreeData = [{
             value: 'Phd',
@@ -187,15 +181,21 @@ export default class Education extends React.Component {
 
                     <View style={styles.nameCont}>
 
-                    <TextInput style={styles.name} placeholder="name of school"/>
+                    <TextInput style={styles.name} 
+                               placeholder="name of school"
+                               onChangeText={(text) => this._grabSchoolName(text)}/>
 
                     </View>
 
                     <View style={styles.locationCont}>
 
-                    <TextInput style={styles.location} placeholder="city" />
+                    <TextInput style={styles.location}
+                               placeholder="city"
+                               onChangeText={(text) => this._grabCity(text)} />
 
-                    <TextInput style={styles.location} placeholder="country" />
+                    <TextInput style={styles.location}
+                               placeholder="country"
+                               onChangeText={(text) => this._grabCountry(text)} />
 
                     </View>
 
@@ -209,9 +209,8 @@ export default class Education extends React.Component {
                         <View style={{flex: 1, justifyContent: 'center'}}> 
 
                             <Dropdown
-                                ref={this.startYearRef}
                                 label='Starting Year'
-                                onChangeText={this.onChangeText}
+                                onChangeText={(text) => this._grabStartYear(text)}
                                 data={yyData}/> 
 
                         </View>
@@ -225,9 +224,8 @@ export default class Education extends React.Component {
                         <View style={{flex: 1}}>
 
                             <Dropdown
-                                ref={this.endYearRef}
                                 label='Ending Year'
-                                onChangeText={this.onChangeText}
+                                onChangeText={(text) => this._grabEndYear(text)}
                                 data={yyData}/> 
 
                         </View>
@@ -241,9 +239,8 @@ export default class Education extends React.Component {
                 <View style={{flex: 2, marginLeft: 10}}>
 
                 <Dropdown
-                    ref={this.degreeRef}
                     label='Degree'
-                    onChangeText={this.onChangeText}
+                    onChangeText={(text) => this._grabDegree(text)}
                     data={degreeData}/>    
 
                 </View>
@@ -251,9 +248,8 @@ export default class Education extends React.Component {
                 <View style={{flex: 3, marginLeft: 10, marginRight: 10}}>
 
                 <Dropdown
-                    ref={this.specializationRef}
                     label='Specialization'
-                    onChangeText={this.onChangeText}
+                    onChangeText={(text) => this._grabSpecialization(text)}
                     data={specializationData}/>   
 
                 </View>
