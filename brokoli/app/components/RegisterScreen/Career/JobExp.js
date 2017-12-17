@@ -20,9 +20,6 @@ export default class JobExp extends React.Component {
             startYears: Array(nrOfJobs).fill(''),
             endMonths: Array(nrOfJobs).fill(''),
             endYears: Array(nrOfJobs).fill(''),
-
-
-
         }
     }
 
@@ -63,7 +60,43 @@ export default class JobExp extends React.Component {
                 });
                 console.log('Countries: ', this.state.countries)
                         
-    }          
+    }
+    
+    _grabStartMonth = (text, i) => {
+        
+        this.state.startMonths[i] = text
+        this.setState(function(prevState, props){
+        return {startMonths: prevState.startMonths}
+        });
+        console.log('Start Months: ', this.state.startMonths)            
+    }    
+
+    _grabEndMonth = (text, i) => {
+        
+        this.state.endMonths[i] = text
+        this.setState(function(prevState, props){
+        return {endMonths: prevState.endMonths}
+        });
+        console.log('End Months: ', this.state.endMonths)           
+    }
+    
+    _grabStartYear = (text, i) => {
+        
+        this.state.startYears[i] = text
+        this.setState(function(prevState, props){
+        return {startYears: prevState.startYears}
+        });
+        console.log('Start Years: ', this.state.startYears)            
+    }    
+
+    _grabEndYear = (text, i) => {
+        
+        this.state.endYears[i] = text
+        this.setState(function(prevState, props){
+        return {endYears: prevState.endYears}
+        });
+        console.log('End Years: ', this.state.endYears)           
+    }  
 
     
 
@@ -199,7 +232,7 @@ export default class JobExp extends React.Component {
 
                         <Dropdown
                         label={'month ' + (i+1)} 
-                        onChangeText={this.onChangeText}
+                        onChangeText={(text) => this._grabStartMonth(text,i)}
                         data={monthData}/>  
 
                     </View>   
@@ -207,7 +240,7 @@ export default class JobExp extends React.Component {
                     <View style={[styles.dropdown, {marginLeft: 5}]}>
                         <Dropdown
                         label={'year ' + (i+1)} 
-                        onChangeText={this.onChangeText}
+                        onChangeText={(text) => this._grabStartYear(text,i)}
                         data={yyData}/>  
                     </View>    
 
@@ -225,7 +258,7 @@ export default class JobExp extends React.Component {
 
                         <Dropdown
                         label={'month ' + (i+1)} 
-                        onChangeText={this.onChangeText}
+                        onChangeText={(text) => this._grabEndMonth(text,i)}
                         data={monthData}/>  
 
                     </View>    
@@ -234,7 +267,7 @@ export default class JobExp extends React.Component {
 
                         <Dropdown
                         label={'year ' + (i+1)} 
-                        onChangeText={this.onChangeText}
+                        onChangeText={(text) => this._grabEndYear(text,i)}
                         data={yyData}/>
 
                     </View>      
