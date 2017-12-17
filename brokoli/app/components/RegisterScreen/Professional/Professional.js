@@ -21,7 +21,10 @@ export default class Professional extends React.Component {
     }
 
     myCallback = (dataFromChild) => {
-        this.setState({ isSelectedFromCategories: dataFromChild });
+        this.state.isSelectedFromCategories = dataFromChild
+        this.setState(function(prevState, props){
+            return {isSelectedFromCategories: prevState.isSelectedFromCategories}
+         });
         console.log("Parent", this.state.isSelectedFromCategories)
         this._onFlip()
     }
@@ -34,14 +37,20 @@ export default class Professional extends React.Component {
             if(this.state.isSelectedFromCategories[i] == true)
             { 
                   countCat++ 
-            }
+            } 
         }
         console.log('count', countCat)
         if(countCat >= 2)
-        {
-             this.setState({flip : true})
+        {   
+            this.state.flip = true
+            this.setState(function(prevState, props){
+                return {flip: prevState.flip}
+             });
         } else {
-            this.setState({flip : false})
+            this.state.flip = false
+            this.setState(function(prevState, props){
+                return {flip: prevState.flip}
+             });
         }
     }
 
@@ -51,6 +60,7 @@ export default class Professional extends React.Component {
          {
             if(this.state.isSelectedFromCategories[i] == true)
             {
+        
                 this.setState({passToDb: this.state.passToDb.push(categories[i].name)})   
                 //TODO: Fix bug when user goes back to category screen. 
             }
