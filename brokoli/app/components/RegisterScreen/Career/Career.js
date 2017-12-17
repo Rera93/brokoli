@@ -32,25 +32,24 @@ export default class Career extends React.Component {
         
         return(
 
-            <KeyboardAvoidingView behavior="padding">
-
-
-            <View style={styles.career}>
+            <KeyboardAvoidingView behavior="padding">     
                         
                 {/* Create collapsable */}
+
+                <ScrollView showsVerticalScrollIndicator={false}>
 
                 <View style={{height: 5}}/>
 
 
                 <Bar title='Education'
-                     titleStyle={{color: '#42D260'}}
+                     titleStyle={{color: '#42D260', fontWeight: '600', fontSize: 16}}
                      collapsible={true}
                      showOnStart={true}
                      iconCollapsed='chevron-right'
                      iconOpened='chevron-down'
                      style={styles.bar}> 
 
-                     <ScrollView>
+                     <ScrollView showsVerticalScrollIndicator={false}>
 
                         <Education />
 
@@ -61,14 +60,14 @@ export default class Career extends React.Component {
                 <View style={{height: 5}}/>
 
                 <Bar title='Job Experience'
-                     titleStyle={{color: '#42D260'}}
+                     titleStyle={{color: '#42D260',fontWeight: '600', fontSize: 16}}
                      collapsible={true}
                      showOnStart={false}
                      iconCollapsed='chevron-right'
                      iconOpened='chevron-down'
                      style={styles.bar}> 
 
-                     <ScrollView>
+                     <ScrollView showsVerticalScrollIndicator={false}>
 
                     <JobExp />
 
@@ -79,14 +78,14 @@ export default class Career extends React.Component {
                 <View style={{height: 5}}/>
 
                 <Bar title='Project Experience'
-                     titleStyle={{color: '#42D260'}}
+                     titleStyle={{color: '#42D260', fontWeight: '600', fontSize: 16}}
                      collapsible={true}
                      showOnStart={false}
                      iconCollapsed='chevron-right'
                      iconOpened='chevron-down'
                      style={styles.bar}> 
 
-                     <ScrollView>
+                     <ScrollView showsVerticalScrollIndicator={false}>
 
                         <ProjectExp />
 
@@ -100,7 +99,9 @@ export default class Career extends React.Component {
 
                 </TouchableOpacity>
 
-                </View>
+                </ScrollView>
+
+                
 
 
                 <View style={{height: 80}}/> 

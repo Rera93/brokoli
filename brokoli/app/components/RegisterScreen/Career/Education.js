@@ -3,7 +3,6 @@ import { StyleSheet, Text, TouchableOpacity, Dimensions, View, TextInput } from 
 
 import ViewContainer from '../../ViewContainer'
 import { Dropdown } from 'react-native-material-dropdown';
-import { TextField } from 'react-native-material-textfield';
 
 const width = Dimensions.get('window').width
 
@@ -273,7 +272,6 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        width: width - 20,
         backgroundColor: 'white',
         marginTop: 10,
     },
@@ -302,7 +300,7 @@ const styles = StyleSheet.create({
         padding: 5,
         borderRadius: 5,
         alignItems: 'center',
-        width: width - 40,
+        width: width - 20,
         borderColor: 'grey'   
     },
     locationCont:{
@@ -334,7 +332,7 @@ const styles = StyleSheet.create({
         padding: 5,
         borderRadius: 5, 
         borderColor: 'grey',
-        width: width/2 - 30  
+        width: width/2 - 20  
     },
     bottomEdu:{
         flex: 1,
