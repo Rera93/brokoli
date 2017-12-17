@@ -35,14 +35,19 @@ export default class Account extends React.Component {
       _grabUsername = (text) => {
 
         this.state.username = text
-        this.setState({username: this.state.username})
+        this.setState(function(prevState, props){
+          return {username: prevState.username}
+        });
+
         console.log('Username: ', this.state.username)
       }
 
       _grabEmail = (text) => {
 
         this.state.email = text
-        this.setState({email: this.state.email})
+        this.setState(function(prevState, props){
+          return {email: prevState.email}
+         });
         console.log('Email: ', this.state.email)
         
       }
@@ -50,7 +55,9 @@ export default class Account extends React.Component {
       _grabPassword = (text) => {
 
         this.state.password = text
-        this.setState({password: this.state.password})
+        this.setState(function(prevState, props){
+          return {password: prevState.password}
+         });
         console.log('Password: ', this.state.password)
         
       }
@@ -58,7 +65,9 @@ export default class Account extends React.Component {
       _grabPasswordConf = (text) => {
 
         this.state.passwordConf = text
-        this.setState({passwordConf: this.state.passwordConf}) 
+        this.setState(function(prevState, props){
+          return {passwordConf: prevState.passwordConf}
+        });
         console.log('ConfPassword: ', this.state.passwordConf)
       }
 
