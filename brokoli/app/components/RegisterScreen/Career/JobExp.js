@@ -8,6 +8,63 @@ const nrOfJobs = 3
 
 export default class JobExp extends React.Component {
 
+    constructor(props){
+        super(props)
+
+        this.state = {
+            companies : Array(nrOfJobs).fill(''),
+            positions : Array(nrOfJobs).fill(''),
+            cities: Array(nrOfJobs).fill(''),
+            countries: Array(nrOfJobs).fill(''),
+            startMonths: Array(nrOfJobs).fill(''),
+            startYears: Array(nrOfJobs).fill(''),
+            endMonths: Array(nrOfJobs).fill(''),
+            endYears: Array(nrOfJobs).fill(''),
+
+
+
+        }
+    }
+
+    _grabCompany = (text, i) => {
+        
+                this.state.companies[i] = text
+                this.setState(function(prevState, props){
+                  return {companies: prevState.companies}
+                 });
+                console.log('Companies: ', this.state.companies)
+                
+    }
+
+    _grabPosition = (text, i) => {
+                
+                this.state.positions[i] = text
+                this.setState(function(prevState, props){
+                return {positions: prevState.positions}
+                });
+                console.log('Positions: ', this.state.positions)
+                        
+    }
+    _grabCity = (text, i) => {
+        
+                this.state.cities[i] = text
+                this.setState(function(prevState, props){
+                  return {cities: prevState.cities}
+                 });
+                console.log('Cities: ', this.state.cities)
+                
+    }
+
+    _grabCountry = (text, i) => {
+                
+                this.state.countries[i] = text
+                this.setState(function(prevState, props){
+                return {countries: prevState.countries}
+                });
+                console.log('Countries: ', this.state.countries)
+                        
+    }          
+
     
 
     _renderJobForms(){
