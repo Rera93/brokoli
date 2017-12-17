@@ -86,7 +86,7 @@ export default class Professional extends React.Component {
 
              <Categories callbackFromParent = {this.myCallback} />
 
-             <TouchableOpacity //disabled={this.state.flip ? false : true} 
+             <TouchableOpacity disabled={this.state.flip ? false : true} 
                                style={[styles.button, {backgroundColor: this.state.flip ? '#42D260' : 'white'}]} 
                                onPress={this._onSubmit.bind(this)}>
 

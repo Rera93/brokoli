@@ -34,7 +34,7 @@ export default class Personal extends React.Component {
               lastName: '',
               dateOfBirth: '',
               profilePic: '',
-              gender: '',
+              gender: 'Male',
               city: '',
               country: '',
               flip: false
@@ -152,11 +152,15 @@ export default class Personal extends React.Component {
 
                 
                 <View style={styles.inputCont}> 
-                    <Text style={[styles.cond, {color: '#BE2625'}]}> R </Text>
+                    <View style={[styles.condCont, {backgroundColor: '#BE2625'} ]}>
+                    <Text style={styles.cond}> R </Text>
+                    </View>
                     <TextInput style={styles.locInput} 
                                placeholder='first name'
                                onChangeText={(text) => this._grabFirstName(text)}/>
-                    <Text style={[styles.cond, {color: '#BE2625'}]}> R </Text>
+                    <View style={[styles.condCont, {backgroundColor: '#BE2625'} ]}>
+                    <Text style={styles.cond}> R </Text>
+                    </View>
                     <TextInput style={styles.locInput} 
                                placeholder='last name'
                                onChangeText={(text) => this._grabLastName(text)}/>  
@@ -166,17 +170,22 @@ export default class Personal extends React.Component {
                 <Gender callbackFromParent = {this.callbackGender}/>
 
                 <View style={styles.inputCont}> 
-                    <Text style={[styles.cond, {color: '#BE2625'}]}> R </Text>
+                <View style={[styles.condCont, {backgroundColor: '#BE2625'} ]}>
+                    <Text style={styles.cond}> R </Text>
+                </View>    
                     <TextInput style={styles.locInput}
                                placeholder='city'
                                onChangeText={(text) => this._grabCity(text)} />
-                    <Text style={[styles.cond, {color: '#BE2625'}]}> R </Text>
+
+                    <View style={[styles.condCont, {backgroundColor: '#BE2625'}]}>           
+                    <Text style={styles.cond}> R </Text>
+                    </View>
                     <TextInput style={styles.locInput} 
                                placeholder='country'
                                onChangeText={(text) => this._grabCountry(text)}/>  
                 </View>
 
-                <TouchableOpacity //disabled={this.state.flip ? false : true}
+                <TouchableOpacity disabled={this.state.flip ? false : true}
                                   onPress={()=> navigate('Account')}
                                   style={[styles.button, {backgroundColor: this.state.flip ? '#42D260' : 'white'}]}>
 
@@ -200,7 +209,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingVertical: 30,
+        paddingVertical: 40,
 
     },
     titleContainer: {
@@ -208,13 +217,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginBottom: 15,
-        marginTop: 15,
         width: width,
     },
     title: {
       color: 'grey',
       fontWeight: '900',
-      padding: 10,
+      padding: 5,
       width: width - 60,
       fontSize: 17,
     },
@@ -223,11 +231,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         width: width,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        marginLeft: 15,
     },
     locInput: {
         color: '#42D260',
-        padding: 10,
+        padding: 5,
         width: width / 2 - 50,
         borderRadius: 5,
         marginTop: 15,
@@ -238,9 +247,18 @@ const styles = StyleSheet.create({
     },
     cond: {
         fontSize: 17,
+        textAlign: 'center',
         fontWeight: '600',
-        paddingRight: 5,
-    }, 
+        color: 'white'
+    },
+    condCont: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 25,
+        height: 25,
+        borderRadius: 25/2,
+        marginRight: 5,
+    },
     button: {
     marginTop: 20,
     marginBottom: 20,

@@ -118,34 +118,42 @@ export default class Account extends React.Component {
                           </View>
 
                         <View style={styles.inputContainer}> 
-                          <Text style={[styles.cond, {color: '#EEAD0E'}]}> O </Text>
+                        <View style={[styles.condCont, {backgroundColor: '#EEAD0E'}]}>
+                          <Text style={styles.cond}> O </Text>
+                          </View>
                           <TextInput style={styles.input} 
                                      placeholder='username'
                                      onChangeText={(text) => this._grabUsername(text)}/>
                         </View>
 
                         <View style={styles.inputContainer}> 
-                          <Text style={[styles.cond, {color: '#BE2625'}]}> R </Text>
+                         <View style={[styles.condCont, {backgroundColor: '#BE2625'}]}>
+                          <Text style={styles.cond}> R </Text>
+                          </View>
                           <TextInput style={styles.input} 
                                      placeholder='email'
                                      onChangeText={(text) => this._grabEmail(text)} />
                         </View>
 
                         <View style={styles.inputContainer}> 
-                          <Text style={[styles.cond, {color: '#BE2625'}]}> R </Text>
+                          <View style={[styles.condCont, {backgroundColor: '#BE2625'} ]}>
+                          <Text style={styles.cond}> R </Text>
+                          </View>
                           <TextInput style={styles.input} 
                                      placeholder='password'
                                      onChangeText={(text) => this._grabPassword(text)} />
                         </View>
 
                         <View style={styles.inputContainer}>
-                          <Text style={[styles.cond, {color: '#BE2625'}]}> R </Text> 
+                          <View style={[styles.condCont, {backgroundColor: '#BE2625'} ]}>
+                          <Text style={styles.cond}> R </Text> 
+                          </View>
                           <TextInput style={styles.input} 
                                      placeholder='confirm password'
                                      onChangeText={(text) => this._grabPasswordConf(text)} />
                         </View>
 
-                    <TouchableHighlight //disabled={this.state.flip ? false : true} 
+                    <TouchableHighlight disabled={this.state.flip ? false : true} 
                                         onPress={()=> navigate('Professional')}
                                         style={[styles.button, {backgroundColor: this.state.flip ? '#42D260' : 'white'}]}>
 
@@ -204,11 +212,18 @@ const styles = StyleSheet.create({
       borderColor: 'grey',
     },
     cond: {
-        fontSize: 17,
-        paddingRight: 20,
+        fontSize: 18.5,
+        textAlign: 'center',
         fontWeight: '600',
-        
-
+        color: 'white'
+    },
+    condCont: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 27.5,
+        height: 27.5,
+        borderRadius: 30/2,
+        marginRight: 10,
     },
     button: {
             width: width - 300,

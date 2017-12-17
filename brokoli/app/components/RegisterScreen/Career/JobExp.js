@@ -325,7 +325,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: 'center',
         marginTop: 20,
-        marginBottom: 10,
     },
     title: {
         fontWeight: '600',
@@ -342,8 +341,8 @@ const styles = StyleSheet.create({
     jobCont: {
         flex: 1,
         marginTop: 15,
-        marginBottom: 15,
-        borderBottomWidth: 1,
+        paddingTop: 10,
+        borderTopWidth: 0.7,
         borderColor: '#42D260'
     },
     singleInput: {
@@ -354,7 +353,8 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         alignItems: 'center',
         width: width - 20,
-        borderColor: 'grey'   
+        borderColor: 'grey',
+        color: '#42D260'   
     },
     location: {
         borderWidth: 1,

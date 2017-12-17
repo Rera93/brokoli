@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 
 import ViewContainer from '../../ViewContainer'
@@ -26,7 +26,9 @@ export default class Gender extends React.Component {
         
                 return(
                     <ViewContainer style={styles.container}>
-                    <Text style={[styles.cond, {color: '#BE2625'}]}> R </Text>
+                     <View style={[styles.condCont, {backgroundColor: '#BE2625'}]}> 
+                    <Text style={styles.cond}> R </Text>
+                    </View>
                     <RadioForm formHorizontal={true} animation={true}>
                     {/* To create radio buttons, loop through your array of options */}
                     {this.state.radio_props.map((obj, i) => {
@@ -85,13 +87,23 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 15,
     marginBottom: 15,
-    flexDirection: 'row'
+    paddingRight: 70,
+    flexDirection: 'row',
+    alignItems: 'flex-start'
   },
   cond: {
     fontSize: 17,
-    paddingRight: 20,
-    paddingBottom: 5,
+    textAlign: 'center',
     fontWeight: '600',
-  }
+    color: 'white'
+},
+condCont: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 25,
+    height: 25,
+    borderRadius: 25/2,
+    marginRight: 60,
+},
 })
 
