@@ -282,7 +282,6 @@ export default class JobExp extends React.Component {
                 </View>
             )
         }
-        //console.log(this.state.skills)
         return(
                 <View style={{flex: 1}}>
                 {rows}
