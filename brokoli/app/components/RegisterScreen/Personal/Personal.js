@@ -37,6 +37,7 @@ export default class Personal extends React.Component {
               gender: '',
               city: '',
               country: '',
+              flip: false
           }
       }
 
@@ -47,6 +48,7 @@ export default class Personal extends React.Component {
          });
 
          console.log('First Name: ', this.state.firstName)
+         this._flipNext()
 
     }
 
@@ -58,6 +60,7 @@ export default class Personal extends React.Component {
          });
 
          console.log('Last Name: ', this.state.lastName)
+         this._flipNext()
 
         
     }
@@ -68,6 +71,7 @@ export default class Personal extends React.Component {
          });
 
          console.log('Date of Birth: ', this.state.dateOfBirth)
+         this._flipNext()
     }
 
     callbackGender = (data) => {
@@ -77,6 +81,7 @@ export default class Personal extends React.Component {
          });
 
          console.log('Gender: ', this.state.gender)
+         this._flipNext()
     }
 
     
@@ -89,6 +94,7 @@ export default class Personal extends React.Component {
          });
 
          console.log('City: ', this.state.city)
+         this._flipNext()
 
         
     }
@@ -101,9 +107,31 @@ export default class Personal extends React.Component {
          });
 
          console.log('Country: ', this.state.country)
+         this._flipNext()
 
         
     }
+
+    _flipNext(){
+        if(this.state.firstName != '' && this.state.lastName != '' &&
+            this.state.gender != '' && this.state.dateOfBirth != '' &&
+            this.state.city != '' && this.state.country != '' )
+            {
+                this.state.flip = true
+                this.setState(function(prevState, props){
+                    return {flip: prevState.flip}
+                 });
+            }
+         else {
+            this.state.flip = false
+            this.setState(function(prevState, props){
+                return {flip: prevState.flip}
+             });
+             
+         }
+         console.log('Flip: ', this.state.flip)
+    }
+
     render(){
 
         const {navigate}= this.props.navigation
@@ -148,10 +176,11 @@ export default class Personal extends React.Component {
                                onChangeText={(text) => this._grabCountry(text)}/>  
                 </View>
 
-                <TouchableOpacity onPress={()=> navigate('Account')}
-                                  style={styles.button}>
+                <TouchableOpacity disabled={this.state.flip ? false : true}
+                                  onPress={()=> navigate('Account')}
+                                  style={[styles.button, {backgroundColor: this.state.flip ? '#42D260' : 'white'}]}>
 
-                <Text style={styles.btnText}> NEXT </Text>
+                <Text style={[styles.btnText, {color: this.state.flip ? 'white' : '#42D260'}]}> NEXT </Text>
 
                 </TouchableOpacity>
 
@@ -213,15 +242,15 @@ const styles = StyleSheet.create({
         paddingRight: 5,
     }, 
     button: {
-    backgroundColor: '#42D260',
     marginTop: 20,
     marginBottom: 20,
     borderRadius: 10,
     width: width - 300,
-    alignItems: 'center'
+    alignItems: 'center',
+    borderColor: '#42D260',
+    borderWidth: 1
     },
     btnText: {
-    color : 'white',
     padding: 10,
     fontWeight: 'bold'
 }
