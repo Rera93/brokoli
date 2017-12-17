@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
         
     },
     bar: {
-        width: width-60,
+        
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: 'white',

@@ -211,7 +211,7 @@ export default class Education extends React.Component {
 
                             <Dropdown
                                 ref={this.startYearRef}
-                                label='Start'
+                                label='Starting Year'
                                 onChangeText={this.onChangeText}
                                 data={yyData}/> 
 
@@ -227,7 +227,7 @@ export default class Education extends React.Component {
 
                             <Dropdown
                                 ref={this.endYearRef}
-                                label='End'
+                                label='Ending Year'
                                 onChangeText={this.onChangeText}
                                 data={yyData}/> 
 
@@ -309,7 +309,8 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginTop: 20,
     },
     middleEdu: {
         flex: 1,
@@ -332,7 +333,8 @@ const styles = StyleSheet.create({
         marginRight: 10,
         padding: 5,
         borderRadius: 5, 
-        borderColor: 'grey'   
+        borderColor: 'grey',
+        width: width/2 - 30  
     },
     bottomEdu:{
         flex: 1,
