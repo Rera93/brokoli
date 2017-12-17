@@ -13,30 +13,21 @@ export default class Header extends React.Component {
 
         this.state = {
             headerContent : ' ',
-            header: false
         }
     }
     _grabHeader = (text) => {
 
         this.state.headerContent = text
-        this.setState({headerContent: this.state.headerContent})
-        console.log('Child Header: ', this.state.headerContent)
-        this._verifyHeader();
+        this.setState(function(prevState, props){
+            return {headerContent: prevState.headerContent}
+         });
+         
+        //console.log('Child Header: ', this.state.headerContent)
+        this.props.callbackFromParent(this.state.headerContent);
     }
 
-    _verifyHeader() {
-        if(this.state.headerContent.length >= 0)
-        {
-            this.setState({header: true})
-            console.log('isheaderChild: ', this.state.header)
-        }
-        else 
-        {
-            this.setState({header: false})
-            console.log('isheaderChild: ', this.state.header)
-        }
-        this.props.callbackFromParent(this.state.headerContent, this.state.header);
-    }
+       
+    
 
     render(){
         return(

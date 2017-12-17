@@ -47,7 +47,10 @@ export default class Skills extends React.Component {
 
         this.state.skills[i] = text
 
-        this.setState({skills: this.state.skills})
+        this.setState(function(prevState, props){
+            return {skills: prevState.skills}
+         });
+         
 
         //console.log('Child Skills Arr: ',this.state.skills)
 

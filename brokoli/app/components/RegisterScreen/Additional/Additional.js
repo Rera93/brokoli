@@ -25,7 +25,6 @@ export default class Additional extends React.Component {
         this.state={
             passSkillsToDb : [],
             passHeadertoDb : '',
-            header: false,
             skills: false,
             flip: false
         }
@@ -37,23 +36,33 @@ export default class Additional extends React.Component {
        Alan TODO: passHeaderToDb and passSkillsToDb have to be sent to db. 
     */
 
-    callbackHeader = (dateHeaderContent, dataHeader ) => {
-        this.setState({ passHeadertoDb: dateHeaderContent });
+    callbackHeader = (dataFromChild) => {
+        this.state.passHeadertoDb = dataFromChild
+        this.setState(function(prevState, props){
+            return {passHeadertoDb: prevState.passHeadertoDb}
+         });
+
         console.log("Header: ", this.state.passHeadertoDb)
-        this.setState({header: dataHeader})
-        console.log("isHeader: ", this.state.header)
         this._updateFlip()
     }
 
 
     callbackSkills = (dataFromChild) => {
-        this.setState({ passSkillsToDb: dataFromChild });
+        this.state.passSkillsToDb = dataFromChild
+        this.setState(function(prevState, props){
+            return {passSkillsToDb: prevState.passSkillsToDb}
+         });
         console.log("Skills: ", this.state.passSkillsToDb)
         this._verifySkills();
+        this._updateFlip();
     }
 
     _updateFlip(){
-       this.setState({flip: this.state.header && this.state.skills})
+        this.state.flip = this.state.passHeadertoDb != '' && this.state.skills
+        this.setState(function(prevState, props){
+            return {flip: prevState.flip}
+         });
+
        console.log('flip: ', this.state.flip)
     }
 
@@ -67,17 +76,20 @@ export default class Additional extends React.Component {
                 console.log('count: ', countSkills)
 
                 if(countSkills >= 5){
-                    this.setState({skills: true})
+
+                    this.state.skills = true
+                    this.setState(function(prevState, props){
+                        return {skills: prevState.skills}
+                     });
                     console.log('skills: ', this.state.skills)
-                    this.setState({flip: this.state.header && this.state.skills})
-                    console.log('flip: ', this.state.flip)
                 } 
                 else 
                 {  
-                    this.setState({skills: false})
+                    this.state.skills = false
+                    this.setState(function(prevState, props){
+                        return {skills: prevState.skills}
+                     });
                     console.log('skills: ', this.state.skills)
-                    this.setState({flip: this.state.header && this.state.skills})
-                    console.log('flip: ', this.state.flip)
                 }
             }
            
@@ -128,7 +140,9 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     borderRadius: 10,
     width: width - 300,
-    alignItems: 'center'
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#42D260'
     },
     btnText: {
     padding: 10,
