@@ -26,7 +26,9 @@ export default class ProjectExp extends React.Component {
                 this.setState(function(prevState, props){
                   return {projectNames: prevState.projectNames}
                  });
-                console.log('Project Names: ', this.state.projectNames)
+                //console.log('Project Names: ', this.state.projectNames)
+
+                this.props.callbackFromProjectNames(this.state.projectNames);
                 
     }
 
@@ -36,7 +38,9 @@ export default class ProjectExp extends React.Component {
                 this.setState(function(prevState, props){
                 return {positions: prevState.positions}
                 });
-                console.log('Positions: ', this.state.positions)
+                //console.log('Positions: ', this.state.positions)
+
+                this.props.callbackFromProjectPositions(this.state.positions);
                         
     }
     _grabCourse = (text, i) => {
@@ -45,7 +49,9 @@ export default class ProjectExp extends React.Component {
                 this.setState(function(prevState, props){
                   return {courses: prevState.courses}
                  });
-                console.log('Courses: ', this.state.courses)
+                //console.log('Courses: ', this.state.courses)
+
+                this.props.callbackFromCourses(this.state.courses);
                 
     }
 

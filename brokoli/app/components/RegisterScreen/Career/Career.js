@@ -17,6 +17,7 @@ import Bar from 'react-native-bar-collapsible';
 
 const width = Dimensions.get('window').width
 const nrOfJobs = 3
+const nrOfProjects = 3
 
 export default class Career extends React.Component {
 
@@ -48,8 +49,9 @@ export default class Career extends React.Component {
             jobEndMonths: Array(nrOfJobs).fill(''),
             jobEndYears: Array(nrOfJobs).fill(''),
             //Project states
-
-
+            projectNames : Array(nrOfProjects).fill(''),
+            projectPositions : Array(nrOfProjects).fill(''),
+            courses: Array(nrOfProjects).fill(''),
 
           }
       }
@@ -207,15 +209,40 @@ export default class Career extends React.Component {
             
         }
 
-        
+        //Callbacks for Projects
+
+        callbackProjects = (dataProjectNames) => {
+            
+                        this.state.projectNames = dataProjectNames
+                        this.setState(function(prevState, props){
+                        return {projectNames: prevState.projectNames}
+                        });
+                        console.log('Project Names: ', this.state.projectNames)
+            
+        }
+
+        callbackProjectPositions = (dataPositions) => {
+            
+                        this.state.projectPositions = dataPositions
+                        this.setState(function(prevState, props){
+                        return {projectPositions: prevState.projectPositions}
+                        });
+                        console.log('Project Positions: ', this.state.projectPositions)
+            
+        }
+
+        callbackCourses = (dataCourses) => {
+            
+                        this.state.courses = dataCourses
+                        this.setState(function(prevState, props){
+                        return {courses: prevState.courses}
+                        });
+                        console.log('Courses: ', this.state.courses)
+        }
 
 
 
 
-    
-
-    
-    
     render(){
 
         const {navigate}= this.props.navigation
@@ -290,7 +317,9 @@ export default class Career extends React.Component {
 
                      <ScrollView showsVerticalScrollIndicator={false}>
 
-                        <ProjectExp callbackFromParent = {this.callbackProjectExp} />
+                        <ProjectExp callbackFromProjectNames = {this.callbackProjects}
+                                    callbackFromProjectPositions = {this.callbackProjectPositions}
+                                       callbackFromCourses = {this.callbackCourses} />
 
                      </ScrollView>
 
