@@ -186,7 +186,7 @@ export default class Personal extends React.Component {
                 </View>
 
                 <TouchableOpacity disabled={this.state.flip ? false : true}
-                                  onPress={()=> navigate('Account')}
+                                  onPress={()=> navigate('Account', {firstName: this.state.firstName, lastName: this.state.lastName, dateOfBirth: this.state.dateOfBirth, gender: this.state.gender, city: this.state.city,  country: this.state.country })}
                                   style={[styles.button, {backgroundColor: this.state.flip ? '#42D260' : 'white'}]}>
 
                 <Text style={[styles.btnText, {color: this.state.flip ? 'white' : '#42D260'}]}> NEXT </Text>

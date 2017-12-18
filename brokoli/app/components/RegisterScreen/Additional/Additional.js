@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, Dimensions, TextInput, View, ScrollView, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, Dimensions, TextInput, View, ScrollView, KeyboardAvoidingView, Alert } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 import Header from './Header'
@@ -18,7 +18,6 @@ export default class Additional extends React.Component {
         headerTitleStyle: { color: 'white' },
       };
 
-
     constructor(props){
         super(props)
 
@@ -35,6 +34,11 @@ export default class Additional extends React.Component {
        
        Alan TODO: passHeaderToDb and passSkillsToDb have to be sent to db. 
     */
+    
+    componentDidMount() {
+        //Alert.alert("Props", this.props.navigation.state.params.date + this.props.navigation.state.params.gender) ;
+       this.setState({finalObj : this.props.navigation.state.params.finalObj})
+    }
 
     callbackHeader = (dataFromChild) => {
         this.state.passHeadertoDb = dataFromChild
@@ -96,6 +100,26 @@ export default class Additional extends React.Component {
         }
     }
 
+    _sendToDb(){
+        let update_final = this.state.finalObj;
+        update_final.passSkillsToDb = this.state.passSkillsToDb;
+        update_final.passHeadertoDb = this.state.passHeadertoDb; 
+        
+
+      //Alert.alert("Gonna send", this.state.firstName + " "+ this.state.lastName + " "+ this.state.gender +" "+ this.state.dateOfBirth);
+        fetch('https://brokoli.eu-gb.mybluemix.net/api/register', {  
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          finalObj: this.state.finalObj,
+
+        })
+      })
+    }
+
 
     
     render(){
@@ -110,7 +134,7 @@ export default class Additional extends React.Component {
 
                 <Skills callbackFromParent = {this.callbackSkills} />
                 
-                <TouchableOpacity disabled={this.state.flip ? false : true} 
+                <TouchableOpacity onPress={()=>this._sendToDb()} disabled={this.state.flip ? false : true} 
                                   style={[styles.button, {backgroundColor: this.state.flip ? '#42D260' : 'white'}]}>
 
                 <Text style={[styles.btnText, {color: this.state.flip ? 'white' :  '#42D260'}]}> PROCEED </Text>

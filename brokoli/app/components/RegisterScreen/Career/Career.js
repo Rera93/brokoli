@@ -240,6 +240,20 @@ export default class Career extends React.Component {
                         console.log('Courses: ', this.state.courses)
         }
 
+        componentDidMount() {
+        //Alert.alert("Props", this.props.navigation.state.params.date + this.props.navigation.state.params.gender) ;
+       this.setState({firstName : this.props.navigation.state.params.firstName,
+                    lastName: this.props.navigation.state.params.lastName,
+                    dateOfBirth: this.props.navigation.state.params.dateOfBirth,
+                    gender: this.props.navigation.state.params.gender,
+                    city: this.props.navigation.state.params.city,
+                    country: this.props.navigation.state.params.country,
+                    username: this.props.navigation.state.params.username,
+                    email: this.props.navigation.state.params.email,
+                    password: this.props.navigation.state.params.password,
+                    passToDb: this.props.navigation.state.params.categories})
+    }
+
 
 
 
@@ -325,7 +339,7 @@ export default class Career extends React.Component {
 
                 </Bar>
 
-                <TouchableOpacity style={styles.button} onPress={()=> navigate('Additional')}>
+                <TouchableOpacity style={styles.button} onPress={()=> navigate('Additional', {finalObj: this.state })}>
 
                 <Text style={styles.btnText}> NEXT </Text>
 

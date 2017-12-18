@@ -66,7 +66,7 @@ export default class Professional extends React.Component {
             }
          }
          console.log("passToBd: ", this.state.passToDb) 
-         this.props.navigation.navigate('Career')
+         this.props.navigation.navigate('Career',{firstName: this.state.firstName, lastName: this.state.lastName, dateOfBirth: this.state.dateOfBirth, gender: this.state.gender, city: this.state.city,  country: this.state.country, username: this.state.username, email: this.state.email, password: this.state.password, categories: this.state.passToDb})
 
     }
 
@@ -76,6 +76,19 @@ export default class Professional extends React.Component {
         headerStyle: { backgroundColor: '#42D260', marginTop: 24 },
         headerTitleStyle: { color: 'white' },
       };
+
+      componentDidMount() {
+        //Alert.alert("Props", this.props.navigation.state.params.date + this.props.navigation.state.params.gender) ;
+       this.setState({firstName : this.props.navigation.state.params.firstName,
+                    lastName: this.props.navigation.state.params.lastName,
+                    dateOfBirth: this.props.navigation.state.params.dateOfBirth,
+                    gender: this.props.navigation.state.params.gender,
+                    city: this.props.navigation.state.params.city,
+                    country: this.props.navigation.state.params.country,
+                    username: this.props.navigation.state.params.username,
+                    email: this.props.navigation.state.params.email,
+                    password: this.props.navigation.state.params.password})
+    }
     
     render(){
 

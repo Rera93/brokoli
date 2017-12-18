@@ -97,6 +97,16 @@ export default class Account extends React.Component {
          console.log('Flip: ', this.state.flip)
     }
 
+    componentDidMount() {
+        //Alert.alert("Props", this.props.navigation.state.params.date + this.props.navigation.state.params.gender) ;
+        this.setState({firstName : this.props.navigation.state.params.firstName,
+                        lastName: this.props.navigation.state.params.lastName,
+                        dateOfBirth: this.props.navigation.state.params.dateOfBirth,
+                        gender: this.props.navigation.state.params.gender,
+                        city: this.props.navigation.state.params.city,
+                        country: this.props.navigation.state.params.country})
+      }
+
     
 
     render(){
@@ -154,7 +164,7 @@ export default class Account extends React.Component {
                         </View>
 
                     <TouchableHighlight disabled={this.state.flip ? false : true} 
-                                        onPress={()=> navigate('Professional')}
+                                        onPress={()=> navigate('Professional', {firstName: this.state.firstName, lastName: this.state.lastName, dateOfBirth: this.state.dateOfBirth, gender: this.state.gender, city: this.state.city,  country: this.state.country, username: this.state.username, email: this.state.email, password: this.state.password})}
                                         style={[styles.button, {backgroundColor: this.state.flip ? '#42D260' : 'white'}]}>
 
                     <Text style={[styles.btnText, {color: this.state.flip ? 'white' : '#42D260'}]}> NEXT </Text>
