@@ -6,11 +6,15 @@ import {
 	Text,
 } from 'react-native';
 
+
 export default class SignupSection extends Component {
+
+
 	render() {
+		
 		return (
 			<View style={styles.container}>
-				<Text style={styles.text}>Create Account</Text>
+				<Text onPress={()=> navigate('Register')} style={styles.text}>Create Account</Text>
 				<Text style={styles.text}>Forgot Password?</Text>
 			</View>
 		);

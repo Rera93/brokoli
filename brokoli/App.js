@@ -13,6 +13,9 @@ import {createLogger} from 'redux-logger'
 import reducer from './app/reducers'
 import { Router, Scene, Actions, ActionConst, Stack } from 'react-native-router-flux'
 import { TabNavigator } from 'react-navigation';
+import { StackNavigator } from 'react-navigation';
+import getSlideFromRightTransition from 'react-navigation-slide-from-right-transition';
+
 
 import AppContainer from './app/containers/AppContainer'
 import ProjectScreen from './app/containers/ProjectScreen'
@@ -20,6 +23,9 @@ import BookmarkScreen from './app/containers/BookmarkScreen'
 import BrokoliScreen from './app/containers/BrokoliScreen'
 import ProfileScreen from './app/containers/ProfileScreen'
 import NotificationScreen from './app/containers/NotificationScreen'
+import LoginScreen from './app/containers/LoginScreen'
+import RegisterScreen from './app/containers/RegisterScreen'
+
 
 //middleware that logs actions
 const loggerMiddleware = createLogger({ predicate : (getState, action) => __DEV__});
@@ -76,6 +82,16 @@ const TabNav =  TabNavigator({
   
   },
 });
+
+const StackNav = StackNavigator({
+  
+      Login: {screen: LoginScreen},
+      Register: {screen: RegisterScreen},
+  }, {
+      transitionConfig: getSlideFromRightTransition
+  });
+  
+  
 export default class App extends React.Component {
 
   constructor(props){
@@ -84,8 +100,10 @@ export default class App extends React.Component {
 
   render() {
     return (
+        <StackNav />
+        //<LoginScreen />
 
-          <TabNav />
+          //<TabNav />
     );
   }
 }
