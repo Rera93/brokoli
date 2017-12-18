@@ -24,6 +24,93 @@ export default class Career extends React.Component {
         headerStyle: { backgroundColor: '#42D260', marginTop: 24 },
         headerTitleStyle: { color: 'white' },
       };
+
+      constructor(props){
+          super(props)
+
+          this.state = {
+            schoolName: '',
+            city: '',
+            country: '',
+            startYear: '',
+            endYear: '',
+            degree: '',
+            specialization: '',
+          }
+      }
+
+      callbackSchoolName = (dataSchoolName) => {
+        
+        this.state.schoolName = dataSchoolName
+        this.setState(function(prevState, props){
+            return {schoolName: prevState.schoolName}
+         });
+         console.log("SchoolName: ", this.state.schoolName)
+
+        }
+
+        callbackCity = (dataCity) => {
+
+            this.state.city = dataCity
+            this.setState(function(prevState, props){
+            return {city: prevState.city}
+            });
+            console.log('City: ', this.state.city)
+        }
+
+        callbackCountry = (dataCountry) => {
+
+            this.state.country = dataCountry
+            this.setState(function(prevState, props){
+              return {country: prevState.country}
+             });
+            console.log('Country: ', this.state.country)
+
+        }
+
+        callbackStartYY = (dataStartYear) => {
+
+            this.state.startYear = dataStartYear
+            this.setState(function(prevState, props){
+              return {startYear: prevState.startYear}
+             });
+            console.log('Start Year: ', this.state.startYear)
+
+        }
+
+        callbackEndYY = (dataEndYear) => {
+
+            this.state.endYear = dataEndYear
+            this.setState(function(prevState, props){
+            return {endYear: prevState.endYear}
+            });
+            console.log('End Year: ', this.state.endYear)
+
+        }
+
+        callbackDegree = (dataDegree) => {
+ 
+         this.state.degree = dataDegree
+         this.setState(function(prevState, props){
+           return {degree: prevState.degree}
+          });
+         console.log('Degree: ', this.state.degree)
+
+        }
+
+        callbackSpec = (dataSpecialization) => {
+
+         this.state.specialization = dataSpecialization
+         this.setState(function(prevState, props){
+         return {specialization: prevState.specialization}
+         });
+         console.log('Specialization: ', this.state.specialization)
+
+        }
+
+
+    
+
     
     
     render(){
@@ -51,7 +138,13 @@ export default class Career extends React.Component {
 
                      <ScrollView showsVerticalScrollIndicator={false}>
 
-                        <Education />
+                        <Education callbackFromParentSchool = {this.callbackSchoolName}
+                                   callbackFromParentCity = {this.callbackCity}
+                                   callbackFromParentCountry = {this.callbackCountry}
+                                   callbackFromParentStartYY = {this.callbackStartYY}
+                                   callbackFromParentEndYY = {this.callbackEndYY}
+                                   callbackFromParentDegree = {this.callbackDegree}
+                                   callbackFromParentSpec = {this.callbackSpec} />
 
                         </ScrollView>
 
@@ -69,7 +162,7 @@ export default class Career extends React.Component {
 
                      <ScrollView showsVerticalScrollIndicator={false}>
 
-                    <JobExp />
+                    <JobExp callbackFromParent = {this.callbackJobExp}/>
 
                     </ScrollView>
 
@@ -87,7 +180,7 @@ export default class Career extends React.Component {
 
                      <ScrollView showsVerticalScrollIndicator={false}>
 
-                        <ProjectExp />
+                        <ProjectExp callbackFromParent = {this.callbackProjectExp} />
 
                      </ScrollView>
 

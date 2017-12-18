@@ -109,7 +109,7 @@ export default class Additional extends React.Component {
                 <Header callbackFromParent = {this.callbackHeader}/>
 
                 <Skills callbackFromParent = {this.callbackSkills} />
-
+                
                 <TouchableOpacity disabled={this.state.flip ? false : true} 
                                   style={[styles.button, {backgroundColor: this.state.flip ? '#42D260' : 'white'}]}>
 
