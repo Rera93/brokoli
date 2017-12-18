@@ -8,17 +8,6 @@ import ViewContainer from '../components/ViewContainer'
 
 export default class LoginScreen extends React.Component {
 
-    static navigationOptions = {
-        tabBarLabel: 'Bookmark',
-        tabBarIcon: ({ tintColor }) => (
-          <Image
-            source={require('../../img/icons/bookmark.png')}
-            style={[styles.icon, {tintColor: tintColor}]}
-          />
-        ),
-      };
-
-
     render(){
 
         return(
@@ -36,8 +25,4 @@ export default class LoginScreen extends React.Component {
     }
 }
 const styles = StyleSheet.create({
-    icon: {
-      width: 24,
-      height: 24,
-    },
   });

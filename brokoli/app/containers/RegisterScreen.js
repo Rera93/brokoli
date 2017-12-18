@@ -26,17 +26,6 @@ const StackNav = StackNavigator({
 
 export default class RegisterScreen extends React.Component {
 
-    static navigationOptions = {
-        tabBarLabel: 'Mail',
-        tabBarIcon: ({ tintColor }) => (
-          <Image
-            source={require('../../img/icons/mail.png')}
-            style={[styles.icon, {tintColor: tintColor}]}
-          />
-        ),
-      };
-
-
     static navOptions = {
         title: 'Sign Up'
     };
@@ -55,8 +44,4 @@ export default class RegisterScreen extends React.Component {
     }
 }
 const styles = StyleSheet.create({
-    icon: {
-      width: 24,
-      height: 24,
-    },
   });

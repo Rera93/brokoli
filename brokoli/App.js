@@ -16,10 +16,10 @@ import { TabNavigator } from 'react-navigation';
 
 import AppContainer from './app/containers/AppContainer'
 import ProjectScreen from './app/containers/ProjectScreen'
-import BookmarkScreen from './app/containers/LoginScreen'
+import BookmarkScreen from './app/containers/BookmarkScreen'
 import BrokoliScreen from './app/containers/BrokoliScreen'
 import ProfileScreen from './app/containers/ProfileScreen'
-import NotificationScreen from './app/containers/RegisterScreen'
+import NotificationScreen from './app/containers/NotificationScreen'
 
 //middleware that logs actions
 const loggerMiddleware = createLogger({ predicate : (getState, action) => __DEV__});
@@ -35,17 +35,6 @@ function configureStore(initialState) {
 }
 
 const store = configureStore({});
-
-// TODO: pass an initial state to store
-
-/*
- * Displays the icon for the tab w/ color dependent upon selection
-
-const TabIcon = ({ selected, source }) => {
-  return (
-    <Image style={[styles.icon, {tintColor: selected ? 'yellow' :'#42D260'}]} source={source}/>
-  );
-}*/
 
 const TabNav =  TabNavigator({
   Project: {

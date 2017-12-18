@@ -35,8 +35,8 @@ class BookmarkScreen extends React.Component {
 
 const styles = StyleSheet.create({
     icon: {
-      width: 26,
-      height: 26,
+      width: 24,
+      height: 24,
     },
   });
 
