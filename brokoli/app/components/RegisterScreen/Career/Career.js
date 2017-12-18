@@ -16,6 +16,7 @@ import ViewContainer from '../../ViewContainer'
 import Bar from 'react-native-bar-collapsible';
 
 const width = Dimensions.get('window').width
+const nrOfJobs = 3
 
 export default class Career extends React.Component {
 
@@ -29,6 +30,7 @@ export default class Career extends React.Component {
           super(props)
 
           this.state = {
+            //Education state
             schoolName: '',
             city: '',
             country: '',
@@ -36,8 +38,23 @@ export default class Career extends React.Component {
             endYear: '',
             degree: '',
             specialization: '',
+            //Job states
+            companies : Array(nrOfJobs).fill(''),
+            jobPositions : Array(nrOfJobs).fill(''),
+            jobCities: Array(nrOfJobs).fill(''),
+            jobCountries: Array(nrOfJobs).fill(''),
+            jobStartMonths: Array(nrOfJobs).fill(''),
+            jobStartYears: Array(nrOfJobs).fill(''),
+            jobEndMonths: Array(nrOfJobs).fill(''),
+            jobEndYears: Array(nrOfJobs).fill(''),
+            //Project states
+
+
+
           }
       }
+
+      // Callbacks for Education.
 
       callbackSchoolName = (dataSchoolName) => {
         
@@ -108,6 +125,92 @@ export default class Career extends React.Component {
 
         }
 
+        // Call backs for Jobs 
+
+        callbackCompanies = (dataCompanies) => {
+
+            this.state.companies = dataCompanies
+            this.setState(function(prevState, props){
+            return {companies: prevState.companies}
+            });
+            console.log('Companies: ', this.state.companies)
+
+        }
+
+        callbackJobPositions = (dataPositions) => {
+
+            this.state.jobPositions = dataPositions
+            this.setState(function(prevState, props){
+            return {jobPositions: prevState.jobPositions}
+            });
+            console.log('Job Positions: ', this.state.jobPositions)
+
+        }
+
+        callbackJobCities = (dataCities) => {
+            
+                        this.state.jobCities = dataCities
+                        this.setState(function(prevState, props){
+                        return {jobCities: prevState.jobCities}
+                        });
+                        console.log('Job Cities: ', this.state.jobCities)
+            
+        }
+
+        callbackJobCountries = (dataCountries) => {
+            
+                        this.state.jobCountries = dataCountries
+                        this.setState(function(prevState, props){
+                        return {jobCountries: prevState.jobCountries}
+                        });
+                        console.log('Job Countries: ', this.state.jobCountries)
+            
+        }
+
+        callbackJobStartMM = (dataStartMM) => {
+            
+                        this.state.jobStartMonths = dataStartMM
+                        this.setState(function(prevState, props){
+                        return {jobStartMonths: prevState.jobStartMonths}
+                        });
+                        console.log('Job Start MM: ', this.state.jobStartMonths)
+            
+        }
+
+        callbackJobStartYY = (dataStartYY) => {
+            
+                        this.state.jobStartYears = dataStartYY
+                        this.setState(function(prevState, props){
+                        return {jobStartYears: prevState.jobStartYears}
+                        });
+                        console.log('Job Start YY: ', this.state.jobStartYears)
+            
+        }
+
+        callbackJobEndMM = (dataEndMM) => {
+            
+                        this.state.jobEndMonths = dataEndMM
+                        this.setState(function(prevState, props){
+                        return {jobEndMonths: prevState.jobEndMonths}
+                        });
+                        console.log('Job End MM: ', this.state.jobEndMonths)
+            
+        }
+
+        callbackJobEndYY = (dataEndYY) => {
+            
+                        this.state.jobEndYears = dataEndYY
+                        this.setState(function(prevState, props){
+                        return {jobEndYears: prevState.jobEndYears}
+                        });
+                        console.log('Job End YY: ', this.state.jobEndYears)
+            
+        }
+
+        
+
+
+
 
     
 
@@ -162,7 +265,14 @@ export default class Career extends React.Component {
 
                      <ScrollView showsVerticalScrollIndicator={false}>
 
-                    <JobExp callbackFromParent = {this.callbackJobExp}/>
+                    <JobExp callbackFromJobCompanies = {this.callbackCompanies}
+                            callbackFromJobPositions = {this.callbackJobPositions}
+                            callbackFromJobCities = {this.callbackJobCities}
+                            callbackFromJobCountries = {this.callbackJobCountries}
+                            callbackFromJobStartMM = {this.callbackJobStartMM}
+                            callbackFromJobStartYY = {this.callbackJobStartYY}
+                            callbackFromJobEndMM = {this.callbackJobEndMM}
+                            callbackFromJobEndYY = {this.callbackJobEndYY}/>
 
                     </ScrollView>
 

@@ -29,7 +29,9 @@ export default class JobExp extends React.Component {
                 this.setState(function(prevState, props){
                   return {companies: prevState.companies}
                  });
-                console.log('Companies: ', this.state.companies)
+             //   console.log('Companies: ', this.state.companies)
+
+                this.props.callbackFromJobCompanies(this.state.companies);
                 
     }
 
@@ -39,7 +41,9 @@ export default class JobExp extends React.Component {
                 this.setState(function(prevState, props){
                 return {positions: prevState.positions}
                 });
-                console.log('Positions: ', this.state.positions)
+             //   console.log('Positions: ', this.state.positions)
+
+                this.props.callbackFromJobPositions(this.state.positions);
                         
     }
     _grabCity = (text, i) => {
@@ -48,7 +52,9 @@ export default class JobExp extends React.Component {
                 this.setState(function(prevState, props){
                   return {cities: prevState.cities}
                  });
-                console.log('Cities: ', this.state.cities)
+            //    console.log('Cities: ', this.state.cities)
+
+                this.props.callbackFromJobCities(this.state.cities);
                 
     }
 
@@ -58,7 +64,9 @@ export default class JobExp extends React.Component {
                 this.setState(function(prevState, props){
                 return {countries: prevState.countries}
                 });
-                console.log('Countries: ', this.state.countries)
+             //   console.log('Countries: ', this.state.countries)
+
+                this.props.callbackFromJobCountries(this.state.countries);
                         
     }
     
@@ -68,7 +76,9 @@ export default class JobExp extends React.Component {
         this.setState(function(prevState, props){
         return {startMonths: prevState.startMonths}
         });
-        console.log('Start Months: ', this.state.startMonths)            
+       //console.log('Start Months: ', this.state.startMonths) 
+
+        this.props.callbackFromJobStartMM(this.state.startMonths);
     }    
 
     _grabEndMonth = (text, i) => {
@@ -77,7 +87,10 @@ export default class JobExp extends React.Component {
         this.setState(function(prevState, props){
         return {endMonths: prevState.endMonths}
         });
-        console.log('End Months: ', this.state.endMonths)           
+       // console.log('End Months: ', this.state.endMonths) 
+        
+       this.props.callbackFromJobEndMM(this.state.endMonths);
+        
     }
     
     _grabStartYear = (text, i) => {
@@ -86,7 +99,10 @@ export default class JobExp extends React.Component {
         this.setState(function(prevState, props){
         return {startYears: prevState.startYears}
         });
-        console.log('Start Years: ', this.state.startYears)            
+       // console.log('Start Years: ', this.state.startYears)   
+
+        
+        this.props.callbackFromJobStartYY(this.state.startYears);
     }    
 
     _grabEndYear = (text, i) => {
@@ -95,7 +111,9 @@ export default class JobExp extends React.Component {
         this.setState(function(prevState, props){
         return {endYears: prevState.endYears}
         });
-        console.log('End Years: ', this.state.endYears)           
+       // console.log('End Years: ', this.state.endYears)  
+        
+        this.props.callbackFromJobEndYY(this.state.endYears);
     }  
 
     
