@@ -19,12 +19,43 @@ export default class Login extends React.Component {
         super(props);
       
         this.state = {username: '',
-                      password: ''};
+                      password: '',
+                      isLoggedIn: false};
       }
-      _createOnpress(username, password){
-      Alert.alert('User Logged in!',
-                  username+'\n'
-                  +password);
+
+
+      _createOnpress(){
+      console.log('called');
+      
+      
+      if(this.getData() == 'true')
+          Alert.alert("Valid user!")
+      else
+          Alert.alert("Invalid user!")
+      }
+
+      getData(){
+        fetch('https://brokoli.eu-gb.mybluemix.net/api/register', {  
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+          user: this.state.username,
+          pass: this.state.password,
+
+        })
+        })
+          // .then(function(response) { return response.json(); })
+          // .then(function(responseData) {
+          //   this.setState({ data : responseData})});
+
+          .then((response) => response.json())
+          .then((responseData) => {
+            return response.auth.validation;
+          });
+
       }
         render() {
           return (
@@ -52,12 +83,13 @@ export default class Login extends React.Component {
                     onChangeText={(password) => this.setState({password})}
                     />
         
-                <TouchableHighlight
-                    onPress={() => this._createOnpress(this.state.username, this.state.password) }
-                    color="#14FDD2"
-                    style={styles.button}>
-                    <Text style={styles.buttonTitle}>Login</Text>
-                </TouchableHighlight>
+                
+                <TouchableOpacity onPress={()=>this._createOnpress()}
+                >
+
+                <Text> PROCEED </Text>
+
+                </TouchableOpacity>
         
                 <Text style={styles.registerLink}>
                     I don't have a Brokoli account

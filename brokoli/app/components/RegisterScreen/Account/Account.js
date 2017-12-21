@@ -9,6 +9,8 @@ import { Dimensions,
          TextInput } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
+
+
 const width = Dimensions.get('window').width
 
 export default class Account extends React.Component {
@@ -163,7 +165,7 @@ export default class Account extends React.Component {
                                      onChangeText={(text) => this._grabPasswordConf(text)} />
                         </View>
 
-                    <TouchableHighlight disabled={this.state.flip ? false : true} 
+                    <TouchableHighlight //disabled={this.state.flip ? false : true} 
                                         onPress={()=> navigate('Professional', {firstName: this.state.firstName, lastName: this.state.lastName, dateOfBirth: this.state.dateOfBirth, gender: this.state.gender, city: this.state.city,  country: this.state.country, username: this.state.username, email: this.state.email, password: this.state.password})}
                                         style={[styles.button, {backgroundColor: this.state.flip ? '#42D260' : 'white'}]}>
 

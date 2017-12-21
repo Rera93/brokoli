@@ -53,7 +53,7 @@ export default class ButtonSubmit extends Component {
 		}, 2000);
 
 		setTimeout(() => {
-			Actions.secondScreen();
+			//Actions.secondScreen();
 			this.setState({ isLoading: false });
 			this.buttonAnimated.setValue(0);
 			this.growAnimated.setValue(0);
@@ -71,6 +71,49 @@ export default class ButtonSubmit extends Component {
 		).start();
 	}
 
+	_createOnpress(){
+    //  console.log('called');
+      
+      //Alert.alert(this.getData());
+      
+      console.log('this ' + this.getData());
+
+		this.getData().then((res) => {
+			console.log(res.auth.validation);
+    	if(res == 'true')
+	        Alert.alert("Valid user!");
+		else
+		    Alert.alert("Invalid user!");
+		
+		});
+    }
+
+
+      getData(){
+        return fetch('https://brokoli.eu-gb.mybluemix.net/api/auth', {  
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+          user: this.state.username,
+          pass: this.state.password,
+
+        })
+        })
+          // .then(function(response) { return response.json(); })
+          // .then(function(responseData) {
+          //   this.setState({ data : responseData})});
+
+          .then((response) => response.json())
+          .then((responseData) => {
+          	console.log(responseData.validation);
+            
+          });
+
+      }
+
 	render() {
 		const changeWidth = this.buttonAnimated.interpolate({
 	    inputRange: [0, 1],
@@ -85,7 +128,7 @@ export default class ButtonSubmit extends Component {
 			<View style={styles.container}>
 				<Animated.View style={{width: changeWidth}}>
 					<TouchableOpacity style={styles.button}
-						onPress={this._onPress}
+						onPress={()=> this._createOnpress()}
 						activeOpacity={1} >
 							{this.state.isLoading ?
 								<Image source={spinner} style={styles.image} />

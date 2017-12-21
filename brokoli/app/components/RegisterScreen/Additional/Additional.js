@@ -134,7 +134,7 @@ export default class Additional extends React.Component {
 
                 <Skills callbackFromParent = {this.callbackSkills} />
                 
-                <TouchableOpacity onPress={()=>this._sendToDb()} disabled={this.state.flip ? false : true} 
+                <TouchableOpacity onPress={()=>this._sendToDb()} //disabled={this.state.flip ? false : true} 
                                   style={[styles.button, {backgroundColor: this.state.flip ? '#42D260' : 'white'}]}>
 
                 <Text style={[styles.btnText, {color: this.state.flip ? 'white' :  '#42D260'}]}> PROCEED </Text>
