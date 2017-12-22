@@ -9,7 +9,7 @@ import {
 	Image,
 } from 'react-native';
 
-import logoImg from '../../../img/icons/brokoli.png';
+import logoImg from '../../../img/icons/logo1.png';
 import titleImg from '../../../img/icons/title.png';
 import sloganImg from '../../../img/icons/slogan.png';
 
