@@ -12,6 +12,7 @@ import { StyleSheet,
 
 
 
+
 export default class Projects extends React.Component {
 
     static navigationOptions = {
@@ -65,11 +66,19 @@ export default class Projects extends React.Component {
         const { navigate } = this.props.navigation
 
         return(
-          <View>
-          <TouchableOpacity onPress={() => navigate('Detail') }>
-          <Text> NEXT </Text>
-          </TouchableOpacity>
-          </View>
+          
+          <ScrollView contentContainerStyle={styles.container}>
+          <FlatList
+            data={this.state.data}
+            renderItem={({ item }) => (
+              <View>
+                <Text> {`${item.name.first} ${item.name.last}`} </Text>
+                <Text> {item.email} </Text>
+              </View>
+            )}
+          />
+        </ScrollView>
+       
                   
 
           )
