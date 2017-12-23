@@ -3,7 +3,13 @@ import React from 'react';
 import { StyleSheet, Text, TextInput, Button, Alert, ScrollView} from 'react-native';
 
 
-class Body extends React.Component {
+export default class Create extends React.Component {
+
+  static navigationOptions = {
+    title: 'Create',
+    headerStyle: { backgroundColor: '#42D260', marginTop: 24 },
+    headerTitleStyle: { color: 'white' },
+  };
 
   constructor(props) {
        super(props);
@@ -118,5 +124,3 @@ const styles = StyleSheet.create({
   },
 });
               
-
-export default Body

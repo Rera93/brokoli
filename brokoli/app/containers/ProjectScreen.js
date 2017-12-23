@@ -8,12 +8,19 @@
 'use strict'
 import React from 'react';
 import { StyleSheet, Text, TextInput, Button, Alert, ScrollView, Image} from 'react-native';
+import {StackNavigator} from 'react-navigation'
+import getSlideFromRightTransition from 'react-navigation-slide-from-right-transition';
+
+import Projects from '../components/ProjectScreen/Projects';
+import Create from '../components/ProjectScreen/Create';
 
 
-
-import Body from '../components/ProjectScreen/Body';
-import Header from '../components/ProjectScreen/Header';
-
+const ProjectStackNav = StackNavigator({
+  Projects: { screen: Projects},
+  Create: {screen: Create }
+},{
+    transitionConfig: getSlideFromRightTransition
+});
 
 
 class ProjectScreen extends React.Component {
@@ -28,19 +35,16 @@ class ProjectScreen extends React.Component {
         ),
       };
 
+      
+
      
 
 
     render(){
         return(
 
-
               
-           <ScrollView>
-               <Header/>
-                <Body />
-            
-            </ScrollView>
+           <ProjectStackNav />
 
         )
     }
