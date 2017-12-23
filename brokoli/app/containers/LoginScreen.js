@@ -13,6 +13,7 @@ import titleImg from '../../img/icons/title.png'
 import sloganImg from '../../img/icons/slogan.png';
 
 const width = Dimensions.get("window").width
+const height = Dimensions.get("window"). height
 
 export default class LoginScreen extends React.Component {
 
@@ -78,6 +79,7 @@ export default class LoginScreen extends React.Component {
               <KeyboardAvoidingView behavior='padding'>
 
               <ScrollView contentContainerStyle={styles.container}>
+              
 
                      <View style={styles.logoContainer}>
                           <Image source={logoImg} style={styles.image} />
@@ -113,8 +115,6 @@ export default class LoginScreen extends React.Component {
 
                     </ScrollView>
 
-                    <View style={{height: 80}}/> 
-
                     </KeyboardAvoidingView>
 
 
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-    paddingVertical: 20
+    height: height
   },
   logoContainer: {
 		flex: 1,
