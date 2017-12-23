@@ -15,6 +15,8 @@ import { StyleSheet,
 const width = Dimensions.get('window').width
 const height = Dimensions.get('window').height
 
+import FloatingAction from '../FloatingComponents/FloatingAction';
+
 export default class Projects extends React.Component {
 
     static navigationOptions = {
@@ -33,8 +35,35 @@ export default class Projects extends React.Component {
         seed: 1,
         error: null,
         refreshing: false,
+        actionButtonVisible: true
       };
      }
+
+        
+    
+  
+    offset = 0;
+  
+    handleScroll = (event) => {
+      const currentOffset = event.nativeEvent.contentOffset.y;
+  
+      if (currentOffset <= 0) {
+        this.setState({
+          actionButtonVisible: true
+        });
+  
+        return;
+      }
+  
+      const direction = currentOffset > this.offset ? 'down' : 'up';
+      this.offset = currentOffset;
+  
+      if (this.state.actionButtonVisible !== direction) {
+        this.setState({
+          actionButtonVisible: direction === 'up'
+        });
+      }
+    }
 
      componentDidMount() {
         this.makeRemoteRequest();
@@ -67,12 +96,37 @@ export default class Projects extends React.Component {
 
       render(){
 
+        const { actionButtonVisible } = this.state;
+
+        const actions = [{
+          text: 'Accessibility',
+          icon: require('../../../img/icons/applicants.png'),
+          name: 'bt_accessibility',
+          position: 2
+        }, {
+          text: 'Language',
+          icon: require('../../../img/icons/applicants.png'),
+          name: 'bt_language',
+          position: 1
+        }, {
+          text: 'Location',
+          icon: require('../../../img/icons/applicants.png'),
+          name: 'bt_room',
+          position: 3
+        }, {
+          text: 'Video',
+          icon: require('../../../img/icons/applicants.png'),
+          name: 'bt_videocam',
+          position: 4
+        }];
+
         const { navigate } = this.props.navigation
 
         return(
           
-          <ScrollView contentContainerStyle={styles.container}>
+          <View style={styles.container}>
           <FlatList
+            onScroll={this.handleScroll}
             data={this.state.data}
             renderItem={({ item }) => (
               <TouchableOpacity style={styles.item}>
@@ -97,12 +151,11 @@ export default class Projects extends React.Component {
             keyExtractor={item => item.email}
           />
 
-          <TouchableOpacity style={styles.createBtnCont}>
-            <Text style={styles.createBtn}> + </Text>
-            </TouchableOpacity>
-        </ScrollView>
+          <FloatingAction  actions={actions}
+                           visible={actionButtonVisible}
+                           onPressItem={ (name) => { Alert.alert('Icon pressed', `the icon ${name} was pressed`)}}/>
        
-                  
+          </View>   
 
           )
       }

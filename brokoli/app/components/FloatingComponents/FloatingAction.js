@@ -63,7 +63,7 @@ class FloatingAction extends Component {
       return <Image style={styles.buttonIcon} source={floatingIcon} />;
     }
 
-    return <Image style={styles.buttonIcon} source={require('../images/add.png')} />;
+    return <Image style={styles.buttonIcon} source={require('../../../img/icons/add.png')} />;
   };
 
   handlePressItem = (itemName) => {
