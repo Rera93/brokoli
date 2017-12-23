@@ -12,12 +12,15 @@ import {StackNavigator} from 'react-navigation'
 import getSlideFromRightTransition from 'react-navigation-slide-from-right-transition';
 
 import Projects from '../components/ProjectScreen/Projects';
-import Create from '../components/ProjectScreen/Create';
-
+import Detail from '../components/ProjectScreen/Create/Detail';
+import Categories from '../components/ProjectScreen/Create/Categories';
+import Positions from '../components/ProjectScreen/Create/Positions';
 
 const ProjectStackNav = StackNavigator({
   Projects: { screen: Projects},
-  Create: {screen: Create }
+  Detail: {screen: Detail },
+  Categories: {screen: Categories },
+  Positions: {screen: Positions }
 },{
     transitionConfig: getSlideFromRightTransition
 });
