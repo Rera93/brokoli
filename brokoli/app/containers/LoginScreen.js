@@ -1,11 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { StyleSheet, Image, Text, KeyboardAvoidingView, View, ScrollView, Dimensions, TextInput, TouchableOpacity } from 'react-native';
-import Logo from '../components/LoginScreen/Logo';
-import Form from '../components/LoginScreen/Form';
-import LoginForm from '../components/LoginScreen/LoginForm'
-import ButtonSubmit from '../components/LoginScreen/ButtonSubmit';
-import SignupSection from '../components/LoginScreen/SignupSection';
-import ViewContainer from '../components/ViewContainer'
 import { StackNavigator } from 'react-navigation';
 
 import logoImg from '../../img/icons/logo1.png';
@@ -80,7 +74,6 @@ export default class LoginScreen extends React.Component {
 
               <ScrollView contentContainerStyle={styles.container}>
               
-
                      <View style={styles.logoContainer}>
                           <Image source={logoImg} style={styles.image} />
                           <Image source={titleImg}/>
@@ -89,17 +82,21 @@ export default class LoginScreen extends React.Component {
 
                       <View style={styles.form}>
 
-                      <View style={styles.inputCont}>
+                      <View style={[styles.inputCont,{ marginTop: 0 }]}>
 
-                        <TextInput style={styles.input} placeholder='username'
-                        onChangeText={(username) => this.setState({username})} />
+                        <TextInput style={styles.input} 
+                                   placeholder='username'
+                                   onChangeText={(username) => this.setState({username})}
+                                   underlineColorAndroid='transparent'/>
 
                       </View>
 
-                      <View style={styles.inputCont}>
+                      <View style={[styles.inputCont,{ marginBottom: 0 }]}>
 
-                        <TextInput style={styles.input} placeholder='password'
-                        onChangeText={(password) => this.setState({password})} />
+                        <TextInput style={styles.input}
+                                   placeholder='password'
+                                   onChangeText={(password) => this.setState({password})}
+                                   underlineColorAndroid='transparent'/>
 
                       </View>
 
@@ -109,9 +106,14 @@ export default class LoginScreen extends React.Component {
 
                       </TouchableOpacity>
 
-                      <Text onPress={() => navigate('Register')}> Register </Text> 
-
                       </View>
+
+                      <TouchableOpacity style={styles.registerCont}
+                                        onPress={() => navigate('Register')}>
+
+                      <Text style={styles.btn} > I don't have an account. </Text>
+
+                      </TouchableOpacity> 
 
                     </ScrollView>
 
@@ -133,7 +135,8 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
-		paddingTop: 100,
+    paddingTop: 100,
+    paddingBottom: 15,
 
 	},
 	image: {
@@ -152,18 +155,40 @@ const styles = StyleSheet.create({
   form: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    marginTop: 40
   },
   input: {
-    borderWidth: 1,
-    padding: 10,
-    width: width - 100
+    borderWidth: 2,
+    borderColor: '#254D32',
+    borderRadius: 5,
+    paddingTop: 5, 
+    paddingBottom: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
+    width: width - 100,
+    color: '#254D32'
   },
   btnCont: {
     alignItems: 'center',
     justifyContent: 'center',
-    flex: 1,
     backgroundColor: '#42D260',
-    width: width - 300
+    width: width - 200,
+    marginTop: 10,
+    marginBottom: 60,
+    borderWidth: 2,
+    borderColor: '#254D32',
+    height: 50,
+    borderRadius: 5 
+    },
+    btn: {
+      color: '#254D32',
+      fontWeight: '600',
+      fontSize: 17
+    },
+    registerCont: {
+
+      paddingBottom: 20
+
     }
   });
