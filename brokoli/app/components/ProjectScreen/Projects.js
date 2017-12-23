@@ -8,10 +8,12 @@ import { StyleSheet,
          ScrollView, 
          View,
          FlatList,
-        TouchableOpacity, Image} from 'react-native';
+         TouchableOpacity,
+         Image,
+         Dimensions} from 'react-native';
 
-
-
+const width = Dimensions.get('window').width
+const height = Dimensions.get('window').height
 
 export default class Projects extends React.Component {
 
@@ -94,6 +96,10 @@ export default class Projects extends React.Component {
             )}
             keyExtractor={item => item.email}
           />
+
+          <TouchableOpacity style={styles.createBtnCont}>
+            <Text style={styles.createBtn}> + </Text>
+            </TouchableOpacity>
         </ScrollView>
        
                   
@@ -126,10 +132,13 @@ const styles = StyleSheet.create({
     height: 25,
     tintColor: '#254D32'
   },
-  nameCont: {
-
-
-
+  createBtnCont:{
+    position: 'absolute',
+    top: 0,
+    left: 0,
+  },
+  createBtn: {
+    fontSize: 25
   }
 
 });
