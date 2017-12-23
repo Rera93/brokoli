@@ -1,5 +1,14 @@
 import React, { Component, PropTypes } from 'react';
-import { StyleSheet, Image, Text, KeyboardAvoidingView, View, ScrollView, Dimensions, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, 
+         Image, 
+         Text,
+         KeyboardAvoidingView, 
+         View, 
+         ScrollView, 
+         Dimensions, 
+         TextInput, 
+         TouchableOpacity,
+         Alert } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 import logoImg from '../../img/icons/logo1.png';
@@ -87,7 +96,8 @@ export default class LoginScreen extends React.Component {
                         <TextInput style={styles.input} 
                                    placeholder='username'
                                    onChangeText={(username) => this.setState({username})}
-                                   underlineColorAndroid='transparent'/>
+                                   underlineColorAndroid='transparent'
+                                   keyboardType = 'email-address'/>
 
                       </View>
 
@@ -96,7 +106,8 @@ export default class LoginScreen extends React.Component {
                         <TextInput style={styles.input}
                                    placeholder='password'
                                    onChangeText={(password) => this.setState({password})}
-                                   underlineColorAndroid='transparent'/>
+                                   underlineColorAndroid='transparent'
+                                   secureTextEntry = {true}/>
 
                       </View>
 
