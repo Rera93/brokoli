@@ -26,6 +26,7 @@ export default class Categories extends React.Component {
         this.state = {
             isSelectedFromCategories : Array(categories.length).fill(false),
             flip : false,
+            passCategoriesToDb : []
         }
 
 
@@ -65,6 +66,26 @@ export default class Categories extends React.Component {
         }
     }
 
+    _onSubmit() {
+
+        var tempCatArr =  []
+
+        for(let i = 0; i < categories.length; i++)
+        {
+           if(this.state.isSelectedFromCategories[i] == true)
+           {
+                tempCatArr.push(categories[i].name)
+           }
+        }
+        this.state.passCategoriesToDb = tempCatArr
+        this.setState(function(prevState,props){
+            return {passCategoriesToDb: prevState.passCategoriesToDb}
+        })
+        console.log("passToBd: ", this.state.passCategoriesToDb) 
+
+        this.props.navigation.navigate('Positions')
+    }
+
 
     
 
@@ -74,9 +95,15 @@ export default class Categories extends React.Component {
         return(
             <View style={styles.container}>
             <ProjectCategories callbackFromParent = {this.myCallback}/>
-            <TouchableOpacity onPress={() => navigate('Positions') }>
-            <Text> NEXT </Text>
-            </TouchableOpacity>
+
+            <TouchableOpacity disabled={this.state.flip ? false : true} 
+                               style={[styles.button, {backgroundColor: this.state.flip ? '#42D260' : 'white'}]} 
+                               onPress={this._onSubmit.bind(this)}>
+
+                <Text style={[styles.btnText, {color: this.state.flip ? 'white' : '#42D260'}]}> NEXT </Text>
+
+                </TouchableOpacity>
+           
             </View>
         )
     }
