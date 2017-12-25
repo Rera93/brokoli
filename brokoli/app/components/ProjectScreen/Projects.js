@@ -38,10 +38,6 @@ export default class Projects extends React.Component {
         actionButtonVisible: true
       };
      }
-
-        
-    
-  
     offset = 0;
   
     handleScroll = (event) => {
