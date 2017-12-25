@@ -97,6 +97,12 @@ export default class Positions extends React.Component {
                 return {positions: prevState.positions}
             })
             console.log('posArr: ', this.state.positions)
+            //Release text inputs value
+            this.state.position = ''
+            this.setState(function(prevState,props){
+                return {position: prevState.position}
+            })
+
       }
       
 
@@ -121,7 +127,8 @@ export default class Positions extends React.Component {
 
                     <TextInput placeholder='position'
                                style={styles.input}
-                               onChangeText={(text) => this._grabPosition(text)}/>
+                               onChangeText={(text) => this._grabPosition(text)}
+                               value={this.state.position}/>
 
                 </View>
                    
@@ -139,8 +146,8 @@ export default class Positions extends React.Component {
             extraData={this.state}
             data={this.state.positions}
             renderItem={({ item }) => (
-                <View style={styles.positionContainer}>
-                <Text style={styles.position}> {item} </Text>
+                <View style={styles.posContainer}>
+                <Text style={styles.pos}> {item} </Text>
                 </View>
             )}
             keyExtractor={item => item}
@@ -165,7 +172,6 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: 'white'
     },
     posForm: {
         flexDirection: 'row',
@@ -205,7 +211,21 @@ const styles = StyleSheet.create({
         width: 14,
         resizeMode: 'contain'
     },
-    posList: {
+    posContainer:{
+        width: width - 20,
+        backgroundColor: 'white',
+        marginBottom: 5,
+        marginLeft: 5,
+        marginRight: 5,
+        paddingLeft: 10,
+        paddingRight: 10,
+        paddingBottom: 20,
+        paddingTop: 20,
+      },
+    pos: {
+        color: 'grey',
+        fontSize: 17,
+        fontWeight: '400'
     }
 
 
