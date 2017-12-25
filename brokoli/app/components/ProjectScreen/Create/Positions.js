@@ -60,6 +60,31 @@ export default class Positions extends React.Component {
         }
       }
 
+      _grabPosition = (text) => {
+          this.state.position = text
+          this.setState(function(prevState,props){
+              return {position: prevState.position}
+          })
+          console.log('Position: ', this.state.position)
+
+          if(this.state.position != '')
+          {
+              this.state.flip = true
+              this.setState(function(prevState,props){
+                  return {flip: prevState.flip}
+              })
+          }
+          else {
+            this.state.flip = false
+            this.setState(function(prevState,props){
+                return {flip: prevState.flip}
+            })
+
+          }
+          console.log('Flip: ', this.state.flip)
+      }
+      
+
     render(){
         const { navigate } = this.props.navigation
 
@@ -79,11 +104,13 @@ export default class Positions extends React.Component {
 
                 <View style={styles.inputContainer}>
 
-                    <TextInput style={styles.input}/>
+                    <TextInput placeholder='position'
+                               style={styles.input}
+                               onChangeText={(text) => this._grabPosition(text)}/>
 
                 </View>
                    
-                <TouchableOpacity disabled={!this.state.flip}
+                <TouchableOpacity  disabled={!this.state.flip}
                                    style={[styles.btnContainer, {backgroundColor: this.state.flip ? '#42D260' : 'white' }]}>
                         <Text style={[styles.btnText,{color: this.state.flip ? 'white' : '#42D260'}]}> CREATE </Text>
                         <Image style={[styles.btnIcon, {tintColor: this.state.flip ? 'white' : '#42D260'}]} source={require('../../../../img/icons/greater.png')}/>
@@ -98,12 +125,13 @@ export default class Positions extends React.Component {
             renderItem={({ item }) => (
                 <View style={styles.inputContainer}>
                 <TextInput style={styles.input}
-                           placeholder='position'
+                           
                            onChange={this.handleChange}
                            value={this.state.position} />
                 </View>
             )}
             keyExtractor={item => item.email}
+            style={styles.posList}
           />
                
 
@@ -127,14 +155,13 @@ const styles = StyleSheet.create({
         backgroundColor: 'white'
     },
     posForm: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        padding: 10,
     },
     inputContainer: {
-        alignItems: 'center',
-        justifyContent: 'center'
+        flex: 4,
     },
     input: {
-        width: width - 50,
         borderWidth: 2,
         borderColor: 'grey',
         backgroundColor: '#F8F9FB',
@@ -143,18 +170,18 @@ const styles = StyleSheet.create({
         paddingBottom: 5,
         paddingLeft: 15,
         paddingRight: 15,
-        marginBottom: 20,
+        marginRight: 5,
     },
     btnContainer: {
+        flex: 1,
         flexDirection: 'row',  
         borderWidth: 2,
         borderColor: '#42D260',
         borderRadius: 5,
         alignItems: 'center',
         justifyContent: 'center',
-        width: width - 300,
         padding: 5,
-        marginBottom: 10
+        marginLeft: 5,
     },
     btnText: {
         fontSize: 16,
@@ -164,6 +191,8 @@ const styles = StyleSheet.create({
         height: 14,
         width: 14,
         resizeMode: 'contain'
+    },
+    posList: {
     }
 
 
