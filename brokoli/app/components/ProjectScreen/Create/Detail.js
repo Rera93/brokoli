@@ -32,6 +32,7 @@ export default class Detail extends React.Component {
             abstract : '',
             header: '',
             flip: false,
+            height: 0
         }
     }
 
@@ -67,6 +68,14 @@ export default class Detail extends React.Component {
         this._flip()
     }
 
+    _autoExpand = (event) => {
+        this.state.height = event.nativeEvent.contentSize.height
+        this.setState(function(prevState,props){
+            return {height: prevState.height}
+        })
+       
+    }
+
     _flip(){
 
         if(this.state.title != '' && this.state.header != '' && this.state.abstract != '')
@@ -91,8 +100,6 @@ export default class Detail extends React.Component {
         }
 
     }
-
-    
 
 
     render(){
@@ -145,13 +152,14 @@ export default class Detail extends React.Component {
 
                 <View style={styles.inputContainer}>
 
-                     <TextInput  placeholder = 'abstract'
+                     <TextInput  {...this.props}
+                                 placeholder = 'abstract'
                                  underlineColorAndroid = 'transparent'  
                                  multiline = {true}
-                                 maxLength={300}
                                  numberOfLines = {5} 
-                                 style = {styles.input}
-                                 onChangeText = {(text) => this._grabAbstract(text)}/>
+                                 style = {[styles.input, {height: Math.max(100, this.state.height)}]}
+                                 onChangeText = {(text) => this._grabAbstract(text)}
+                                 onContentSizeChange = {(event) => this._autoExpand(event)}/>
 
                 </View>
 
