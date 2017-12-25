@@ -28,11 +28,43 @@ export default class Detail extends React.Component {
         super(props)
 
         this.state = {
-            name : '',
+            title : '',
             abstract : '',
-            goal: '',
+            header: '',
             flip: false,
         }
+    }
+
+    _grabTitle = (text) => {
+        this.state.title = text 
+        this.setState(function(prevState, props){
+            return {title: prevState.title}
+         });
+
+         console.log('Project Title', this.state.title)
+
+    }
+
+    _grabHeader = (text) => {
+
+        this.state.header = text
+        this.setState(function(prevState,props){
+            return {header: prevState.header}
+        })
+
+        console.log('Project Header', this.state.header)
+        
+    }
+
+    _grabAbstract = (text) => {
+
+        this.state.abstract = text
+        this.setState(function(prevState,props){
+            return {abstract: prevState.abstract}
+        })
+
+        console.log('Project Abstract', this.state.abstract)
+        
     }
 
     
@@ -57,7 +89,8 @@ export default class Detail extends React.Component {
                      <TextInput placeholder='title'
                                 underlineColorAndroid='transparent' 
                                 multiline={true}
-                                style={styles.input}/>
+                                style={styles.input}
+                                onChangeText = {(text) => this._grabTitle(text)}/>
 
                 </View>
 
@@ -74,7 +107,8 @@ export default class Detail extends React.Component {
                                  multiline = {true}
                                  maxLength={120}
                                  numberOfLines = {3} 
-                                 style = {styles.input}/>
+                                 style = {styles.input}
+                                 onChangeText = {(text) => this._grabHeader(text)}/>
 
                 </View>
 
@@ -91,7 +125,8 @@ export default class Detail extends React.Component {
                                  multiline = {true}
                                  maxLength={300}
                                  numberOfLines = {5} 
-                                 style = {styles.input}/>
+                                 style = {styles.input}
+                                 onChangeText = {(text) => this._grabAbstract(text)}/>
 
                 </View>
 
