@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     width: 25,
     height: 25,
-    tintColor: '#254D32'
+    tintColor: '#42D260'
   },
   createBtnCont:{
     position: 'absolute',

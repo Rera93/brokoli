@@ -284,7 +284,7 @@ FloatingAction.propTypes = {
 FloatingAction.defaultProps = {
   overrideWithAction: false,
   visible: true,
-  buttonColor: '#254D32',
+  buttonColor: '#42D260',
   overlayColor: 'rgba(68, 68, 68, 0.6)',
   position: 'right',
   distanceToEdge: 30
