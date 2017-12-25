@@ -17,6 +17,8 @@ const height = Dimensions.get('window').height
 
 import FloatingAction from '../../FloatingComponents/FloatingAction';
 
+var tempArr = []
+
 export default class Positions extends React.Component {
 
 
@@ -37,6 +39,9 @@ export default class Positions extends React.Component {
         }
 
     }
+
+
+    
     offset = 0;
     
       handleScroll = (event) => {
@@ -83,6 +88,16 @@ export default class Positions extends React.Component {
           }
           console.log('Flip: ', this.state.flip)
       }
+
+      _onAdd(){
+            tempArr.push(this.state.position)
+            console.log('tempArr: ', tempArr)
+            this.state.positions = tempArr
+            this.setState(function(prevState,props){
+                return {positions: prevState.positions}
+            })
+            console.log('posArr: ', this.state.positions)
+      }
       
 
     render(){
@@ -111,9 +126,9 @@ export default class Positions extends React.Component {
                 </View>
                    
                 <TouchableOpacity  disabled={!this.state.flip}
-                                   style={[styles.btnContainer, {backgroundColor: this.state.flip ? '#42D260' : 'white' }]}>
-                        <Text style={[styles.btnText,{color: this.state.flip ? 'white' : '#42D260'}]}> CREATE </Text>
-                        <Image style={[styles.btnIcon, {tintColor: this.state.flip ? 'white' : '#42D260'}]} source={require('../../../../img/icons/greater.png')}/>
+                                   style={[styles.btnContainer, {backgroundColor: this.state.flip ? '#42D260' : 'white' }]}
+                                   onPress={() => this._onAdd()}>
+                        <Text style={[styles.btnText,{color: this.state.flip ? 'white' : '#42D260'}]}> ADD </Text>
                 </TouchableOpacity>
             
             </View>
@@ -121,16 +136,14 @@ export default class Positions extends React.Component {
             
 
             <FlatList
+            extraData={this.state}
             data={this.state.positions}
             renderItem={({ item }) => (
-                <View style={styles.inputContainer}>
-                <TextInput style={styles.input}
-                           
-                           onChange={this.handleChange}
-                           value={this.state.position} />
+                <View style={styles.positionContainer}>
+                <Text style={styles.position}> {item} </Text>
                 </View>
             )}
-            keyExtractor={item => item.email}
+            keyExtractor={item => item}
             style={styles.posList}
           />
                
