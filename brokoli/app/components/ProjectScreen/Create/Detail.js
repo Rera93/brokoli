@@ -42,7 +42,7 @@ export default class Detail extends React.Component {
          });
 
          console.log('Project Title', this.state.title)
-
+         this._flip()
     }
 
     _grabHeader = (text) => {
@@ -53,7 +53,7 @@ export default class Detail extends React.Component {
         })
 
         console.log('Project Header', this.state.header)
-        
+        this._flip()
     }
 
     _grabAbstract = (text) => {
@@ -64,7 +64,32 @@ export default class Detail extends React.Component {
         })
 
         console.log('Project Abstract', this.state.abstract)
-        
+        this._flip()
+    }
+
+    _flip(){
+
+        if(this.state.title != '' && this.state.header != '' && this.state.abstract != '')
+        {
+            this.state.flip = true
+            this.setState(function(prevState, props){
+
+                return {flip: prevState.flip}
+
+                console.log('Flip: ', this.state.flip)
+                
+            })
+        } else {
+            this.state.flip = false
+            this.setState(function(prevState, props){
+
+                return {flip: prevState.flip}
+
+                console.log('Flip: ', this.state.flip)
+                
+            })
+        }
+
     }
 
     
