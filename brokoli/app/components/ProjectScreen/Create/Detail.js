@@ -8,7 +8,8 @@ import { StyleSheet,
          View,
          TouchableOpacity,
          Image,
-         Dimensions
+         Dimensions,
+         KeyboardAvoidingView
          } from 'react-native';
 
 const width = Dimensions.get('window').width
@@ -40,11 +41,14 @@ export default class Detail extends React.Component {
     render(){
         const { navigate } = this.props.navigation
         return(
-            <View style={styles.container}>
+
+            <KeyboardAvoidingView behavior="padding">
+            <ScrollView contentContainerStyle ={styles.container}
+                        showsVerticalScrollIndicator={false}>
 
                 <View style={styles.labelContainer}>
                 
-                     <Text style={styles.label}> Project Title </Text>
+                     <Text style={styles.label}>Project Title</Text>
 
                 </View>
            
@@ -52,21 +56,42 @@ export default class Detail extends React.Component {
 
                      <TextInput placeholder='title'
                                 underlineColorAndroid='transparent' 
+                                multiline={true}
                                 style={styles.input}/>
 
                 </View>
 
                 <View style={styles.labelContainer}>
 
-                     <Text style={styles.label}> Shortly describe project insight  </Text>
+                     <Text style={styles.label}>Project Header</Text>
 
                 </View>
 
                 <View style={styles.inputContainer}>
 
-                     <TextInput  placeholder='header description'
-                                 underlineColorAndroid='transparent'  
-                                 style={styles.input}/>
+                     <TextInput  placeholder = 'header'
+                                 underlineColorAndroid = 'transparent'  
+                                 multiline = {true}
+                                 maxLength={120}
+                                 numberOfLines = {3} 
+                                 style = {styles.input}/>
+
+                </View>
+
+                <View style={styles.labelContainer}>
+
+                     <Text style={styles.label}>Project Abstract </Text>
+
+                </View>
+
+                <View style={styles.inputContainer}>
+
+                     <TextInput  placeholder = 'abstract'
+                                 underlineColorAndroid = 'transparent'  
+                                 multiline = {true}
+                                 maxLength={300}
+                                 numberOfLines = {5} 
+                                 style = {styles.input}/>
 
                 </View>
 
@@ -77,7 +102,9 @@ export default class Detail extends React.Component {
                         <Text style={[styles.btnText,{color: this.state.flip ? 'white' : '#42D260'}]}> NEXT </Text>
                         <Image style={[styles.btnIcon, {tintColor: this.state.flip ? 'white' : '#42D260'}]} source={require('../../../../img/icons/greater.png')}/>
                 </TouchableOpacity>
-            </View>
+            </ScrollView>
+            <View style={{height: 80}}/>
+            </KeyboardAvoidingView>
         )
     }
 
@@ -87,18 +114,28 @@ export default class Detail extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        height: height - 150,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: 'white'
     },
+    labelContainer:{
+        width: width - 50,
+        alignItems: 'flex-start',
+        justifyContent: 'center',
+        marginBottom: 20,
+    },
+    label: {
+        color: '#42D260',
+        fontSize: 20,
+        fontWeight: '600'
+    },
     inputContainer: {
-        flex: 1,
         alignItems: 'center',
         justifyContent: 'center'
     },
     input: {
-        width: width - 100,
+        width: width - 50,
         borderWidth: 2,
         borderColor: 'grey',
         backgroundColor: '#F8F9FB',
