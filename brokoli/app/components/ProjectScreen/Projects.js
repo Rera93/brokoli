@@ -89,35 +89,16 @@ export default class Projects extends React.Component {
             this.setState({ error, loading: false });
           });
       };
-    
-
-
-   
 
       render(){
 
         const { actionButtonVisible } = this.state;
 
         const actions = [{
-          text: 'Accessibility',
-          icon: require('../../../img/icons/applicants.png'),
-          name: 'bt_accessibility',
-          position: 2
-        }, {
-          text: 'Language',
-          icon: require('../../../img/icons/applicants.png'),
-          name: 'bt_language',
+          text: 'Create',
+          icon: require('../../../img/icons/create.png'),
+          name: 'bt_create',
           position: 1
-        }, {
-          text: 'Location',
-          icon: require('../../../img/icons/applicants.png'),
-          name: 'bt_room',
-          position: 3
-        }, {
-          text: 'Video',
-          icon: require('../../../img/icons/applicants.png'),
-          name: 'bt_videocam',
-          position: 4
         }];
 
         const { navigate } = this.props.navigation
@@ -153,7 +134,8 @@ export default class Projects extends React.Component {
 
           <FloatingAction  actions={actions}
                            visible={actionButtonVisible}
-                           onPressItem={ (name) => { Alert.alert('Icon pressed', `the icon ${name} was pressed`)}}/>
+                           overrideWithAction
+                           onPressItem={() => navigate('Detail')}/>
        
           </View>   
 

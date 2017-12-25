@@ -246,13 +246,13 @@ class FloatingAction extends Component {
         pointerEvents="box-none"
         style={[styles.overlay, { backgroundColor: 'transparent' }]}
       >
-        {
+        {/*{
           this.state.active &&
           this.renderTappableBackground()
-        }
-        {
+        }*/}
+        {/*{
           this.renderActions()
-        }
+        */}
         {
           this.renderMainButton()
         }
@@ -278,13 +278,13 @@ FloatingAction.propTypes = {
   floatingIcon: PropTypes.any,
   overrideWithAction: PropTypes.bool, // use the first action like main action
   onPressItem: PropTypes.func,
-  distanceToEdge: PropTypes.number
+  distanceToEdge: PropTypes.number,
 };
 
 FloatingAction.defaultProps = {
   overrideWithAction: false,
   visible: true,
-  buttonColor: '#1253bc',
+  buttonColor: '#254D32',
   overlayColor: 'rgba(68, 68, 68, 0.6)',
   position: 'right',
   distanceToEdge: 30
