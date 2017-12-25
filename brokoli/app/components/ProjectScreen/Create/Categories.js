@@ -6,11 +6,15 @@ import { StyleSheet,
          Alert, 
          ScrollView, 
          View,
-         TouchableOpacity
+         TouchableOpacity,
+         Image,
+         Dimensions
          } from 'react-native';
 
 import ProjectCategories from '../../RegisterScreen/Professional/Categories'
 import categories from '../../RegisterScreen/categories.js'
+
+const width = Dimensions.get('window').width
 
 export default class Categories extends React.Component {
 
@@ -52,7 +56,7 @@ export default class Categories extends React.Component {
             } 
         }
         console.log('count', countCat)
-        if(countCat >= 2)
+        if(countCat >= 1)
         {   
             this.state.flip = true
             this.setState(function(prevState, props){
@@ -94,13 +98,22 @@ export default class Categories extends React.Component {
         const { navigate } = this.props.navigation
         return(
             <View style={styles.container}>
+
+            <View style={styles.labelContainer}>
+
+            <Text style={styles.label}>Allow interested people to find your project by specifying the areas of expertise that are available. Pick at least one category</Text>  
+
+            </View>
+
             <ProjectCategories callbackFromParent = {this.myCallback}/>
 
             <TouchableOpacity disabled={this.state.flip ? false : true} 
-                               style={[styles.button, {backgroundColor: this.state.flip ? '#42D260' : 'white'}]} 
+                               style={[styles.btnContainer, {backgroundColor: this.state.flip ? '#42D260' : 'white'}]} 
                                onPress={this._onSubmit.bind(this)}>
 
                 <Text style={[styles.btnText, {color: this.state.flip ? 'white' : '#42D260'}]}> NEXT </Text>
+
+                <Image style={[styles.btnIcon, {tintColor: this.state.flip ? 'white' : '#42D260'}]} source={require('../../../../img/icons/greater.png')}/>
 
                 </TouchableOpacity>
            
@@ -118,6 +131,38 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    labelContainer:{
+        width: width - 50,
+        alignItems: 'flex-start',
+        justifyContent: 'center',
+        marginTop: 20,
+        marginBottom: 10,
+    },
+    label: {
+        color: '#42D260',
+        fontSize: 17,
+        fontWeight: '400'
+    },
+    btnContainer: {
+        flexDirection: 'row',  
+        borderWidth: 2,
+        borderColor: '#42D260',
+        borderRadius: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: width - 300,
+        padding: 5,
+        marginBottom: 10
+    },
+    btnText: {
+        fontSize: 16,
+        fontWeight: '600',
+    },
+    btnIcon:{
+        height: 14,
+        width: 14,
+        resizeMode: 'contain'
     }
 
 
