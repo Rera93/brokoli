@@ -164,7 +164,7 @@ export default class Detail extends React.Component {
                 </View>
 
 
-                <TouchableOpacity disabled={!this.state.flip}
+                <TouchableOpacity //disabled={!this.state.flip}
                                 style={[styles.btnContainer, {backgroundColor: this.state.flip ? '#42D260' : 'white' }]} 
                                 onPress={() => navigate('Categories') }>
                         <Text style={[styles.btnText,{color: this.state.flip ? 'white' : '#42D260'}]}> NEXT </Text>
