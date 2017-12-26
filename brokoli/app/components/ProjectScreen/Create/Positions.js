@@ -103,7 +103,7 @@ export default class Positions extends React.Component {
     }
 
       _onAdd(){
-            tempArr.push({pos: this.state.position, exp: this.state.experience})
+            tempArr.push({pos: this.state.position, exp: this.state.experience, posNr: this.state.nrOfPos})
             console.log('tempArr: ', tempArr)
             this.state.positions = tempArr
             this.setState(function(prevState,props){
@@ -120,6 +120,11 @@ export default class Positions extends React.Component {
             this.state.experience = "1"
             this.setState(function(prevState,props){
                 return {experience: prevState.experience}
+            })
+            //Release number of positions value
+            this.state.nrOfPos = "1"
+            this.setState(function(prevState,props){
+                return {nrOfPos: prevState.nrOfPos}
             })
 
             
@@ -159,6 +164,15 @@ export default class Positions extends React.Component {
         console.log("Experience: ", this.state.experience)
 
       }
+
+      _grabNrOfPos = (nrOfPos) => {
+
+        this.state.nrOfPos = nrOfPos
+        this.setState(function(prevState,props){
+            return {nrOfPos: prevState.nrOfPos}
+        })
+        console.log("Positions Number: ", this.state.nrOfPos)
+      }
       
 
     render(){
@@ -182,7 +196,7 @@ export default class Positions extends React.Component {
                    
                 <View style={styles.posInputContainer}>
 
-                    <TextInput placeholder='position'
+                    <TextInput placeholder='Position'
                                style={styles.input}
                                onChangeText={(text) => this._grabPosition(text)}
                                value={this.state.position}/>
@@ -252,7 +266,8 @@ export default class Positions extends React.Component {
             renderItem={({ item }) => (
                 <View style={styles.posContainer}>
                 <Text style={styles.pos}>Position: {item.pos} </Text>
-                {this._renderBrokolis({item})}    
+                {this._renderBrokolis({item})} 
+                <Text style={styles.pos}>Number of Positions: {item.posNr} </Text>    
                 </View>
             )}
             keyExtractor={item => item.pos}
@@ -296,6 +311,7 @@ const styles = StyleSheet.create({
         paddingRight: 15,
         marginRight: 5,
         marginBottom: 5,
+        color: '#C7C7CD',
     },
     expInput: {
         flex: 5,
@@ -358,6 +374,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         marginTop: 5,
+        marginBottom: 5
     },
     itemExp: {
         fontSize: 17,
