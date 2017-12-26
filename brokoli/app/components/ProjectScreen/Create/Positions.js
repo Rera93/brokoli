@@ -43,7 +43,8 @@ export default class Positions extends React.Component {
             brokolis: [true,false,false,false,false],
             tempExp: "1",
             nrOfPos: '1',
-            activeRowKey : null
+            activeRowKey : null,
+            deleteRowKey : null
         }
 
     }
@@ -175,6 +176,15 @@ export default class Positions extends React.Component {
         })
         console.log("Positions Number: ", this.state.nrOfPos)
       }
+
+      refreshFlatList = (deletedKey) => {
+            this.state.deleteRowKey = deletedKey
+            this.setState(function(prevState, props){
+                return {
+                    deleteRowKey: prevState.deleteRowKey
+                }
+        })
+      }
       
 
     render(){
@@ -212,6 +222,8 @@ export default class Positions extends React.Component {
                 {
                     onPress: () => {
 
+                        const deletingRow = this.state.activeRowKey
+
                         Alert.alert(
                             'Alert',
                             'Are you sure you want to delete?',
@@ -220,6 +232,8 @@ export default class Positions extends React.Component {
                                 {text: 'Yes', onPress: () => {
 
                                     this.state.positions.splice(this.props.index, 1);
+                                    //Refresh FlatList
+                                    this.refreshFlatList(deletingRow)
 
                                 }},
                             ],
