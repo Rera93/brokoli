@@ -35,12 +35,12 @@ export default class Positions extends React.Component {
 
         this.state = {
             flip: false,
-            
             positions : [],
             position : '',
             actionButtonVisible: true,
-            nrOfBrokoli: 0,
             experience: "1",
+            brokolis: [true,false,false,false,false],
+            tempExp: "1"
         }
 
     }
@@ -77,22 +77,29 @@ export default class Positions extends React.Component {
           })
           console.log('Position: ', this.state.position)
 
-          if(this.state.position != '')
-          {
-              this.state.flip = true
-              this.setState(function(prevState,props){
-                  return {flip: prevState.flip}
-              })
-          }
-          else {
-            this.state.flip = false
-            this.setState(function(prevState,props){
-                return {flip: prevState.flip}
-            })
-
-          }
-          console.log('Flip: ', this.state.flip)
+          this._flip()
       }
+
+      _flip(){
+
+      if(this.state.position != '')
+      {
+          this.state.flip = true
+          this.setState(function(prevState,props){
+              return {flip: prevState.flip}
+          })
+      }
+      else {
+        this.state.flip = false
+        this.setState(function(prevState,props){
+            return {flip: prevState.flip}
+        })
+
+      }
+      
+      console.log('Flip: ', this.state.flip)
+
+    }
 
       _onAdd(){
             tempArr.push({pos: this.state.position, exp: this.state.experience})
@@ -107,18 +114,29 @@ export default class Positions extends React.Component {
             this.setState(function(prevState,props){
                 return {position: prevState.position}
             })
+            this._flip()
+            //Release experience value
+            this.state.experience = "1"
+            this.setState(function(prevState,props){
+                return {experience: prevState.experience}
+            })
+
+            
+
 
       }
 
-      _renderBrokolis(){
+      _renderBrokolis = ({item}) =>{
         var rows = []
-        for(let i=1; i <= 5; i++)
+        console.log('Exp: ', item.exp)
+        for(let i=1; i <= this.state.brokolis.length; i++)
         {
             rows.push(
 
                <View key = {i}>
 
-                   <Image onPress={(i)=>this._grapBrokoli(i)} style = {styles.icon} source={require('../../../../img/icons/brokoli.png')}  />
+                   <Image  style = {[styles.icon,{tintColor: i<=item.exp ? '#42D260' : 'grey'}]} 
+                           source={require('../../../../img/icons/broccoli.png')}  />
 
                    </View>
             )
@@ -130,22 +148,14 @@ export default class Positions extends React.Component {
         )
       }
 
-      _grapBrokoli(i){
-            this.state.nrOfBrokoli = i
-            this.setState(function(prevState,props){
-                return {nrOfBrokoli: prevState.nrOfBrokoli}
-            })
-            console.log('BrokoliNr: ', this.state.nrOfBrokoli )
-      }
-
       _grapExperience = (experience) => {
 
         this.state.experience = experience
         this.setState(function(prevState,props){
             return {experience: prevState.experience}
         })
-
         console.log("Experience: ", this.state.experience)
+
       }
       
 
@@ -216,7 +226,7 @@ export default class Positions extends React.Component {
             renderItem={({ item }) => (
                 <View style={styles.posContainer}>
                 <Text style={styles.pos}> {item.pos} </Text>
-                <Text style={styles.pos}> {item.exp} </Text>    
+                {this._renderBrokolis({item})}    
                 </View>
             )}
             keyExtractor={item => item.pos}
@@ -308,6 +318,9 @@ const styles = StyleSheet.create({
         height: 27,
         resizeMode: 'contain'
     },
+    expContainer: {
+        flexDirection: 'row'
+    }
 
 
 
