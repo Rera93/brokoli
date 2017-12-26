@@ -19,6 +19,7 @@ import FloatingAction from '../../FloatingComponents/FloatingAction';
 import { Picker } from 'react-native-picker-dropdown'
 
 var tempArr = []
+var valueToPush = new Array ()
 
 export default class Positions extends React.Component {
 
@@ -34,6 +35,7 @@ export default class Positions extends React.Component {
 
         this.state = {
             flip: false,
+            
             positions : [],
             position : '',
             actionButtonVisible: true,
@@ -93,7 +95,7 @@ export default class Positions extends React.Component {
       }
 
       _onAdd(){
-            tempArr.push(this.state.position)
+            tempArr.push({pos: this.state.position, exp: this.state.experience})
             console.log('tempArr: ', tempArr)
             this.state.positions = tempArr
             this.setState(function(prevState,props){
@@ -213,10 +215,11 @@ export default class Positions extends React.Component {
             data={this.state.positions}
             renderItem={({ item }) => (
                 <View style={styles.posContainer}>
-                <Text style={styles.pos}> {item} </Text>
+                <Text style={styles.pos}> {item.pos} </Text>
+                <Text style={styles.pos}> {item.exp} </Text>    
                 </View>
             )}
-            keyExtractor={item => item}
+            keyExtractor={item => item.pos}
             style={styles.posList}
           />
                
