@@ -22,11 +22,6 @@ export default class Categories extends React.Component {
 
             <View style={styles.container}>
 
-                <View style={styles.headerCont}> 
-
-                    <Text style={styles.header}> Pick at least 2 categories </Text>
-
-                </View>
                 {this._renderCategories()}
                 
 
@@ -43,7 +38,7 @@ export default class Categories extends React.Component {
             rows.push(
                 <TouchableOpacity key = {i} 
                                   onPress={this._onToggleCategory.bind(this,i)} 
-                                  style={[styles.category, {backgroundColor: this.state.isSelected[i] ? '#42D260' : 'white'}]}>
+                                  style={[styles.category, {backgroundColor: this.state.isSelected[i] ? '#42D260' : '#F8F9FB'}]}>
                   <Text style={[styles.title,{color: this.state.isSelected[i] ? 'white' : 'grey' }]}> {categories[i].name} </Text>
                 </TouchableOpacity>
             )
@@ -93,7 +88,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     category: {
-        borderWidth: 1,
+        borderWidth: 2,
         padding: 10,
         borderRadius: 5,
         borderColor: '#42D260',
