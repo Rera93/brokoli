@@ -33,6 +33,7 @@
     "react-native-material-dropdown": "^0.6.1",
     "react-native-material-textfield": "^0.11.0",
     "react-native-modal-datetime-picker": "^4.13.0",
+    "react-native-picker-dropdown": "0.0.2",
     "react-native-router-flux": "^4.0.0-beta.22",
     "react-native-simple-radio-button": "^2.7.0",
     "react-native-swipe-cards": "^0.1.1",

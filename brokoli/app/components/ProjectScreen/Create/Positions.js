@@ -16,6 +16,7 @@ const width = Dimensions.get('window').width
 const height = Dimensions.get('window').height
 
 import FloatingAction from '../../FloatingComponents/FloatingAction';
+import { Picker } from 'react-native-picker-dropdown'
 
 var tempArr = []
 
@@ -35,7 +36,9 @@ export default class Positions extends React.Component {
             flip: false,
             positions : [],
             position : '',
-            actionButtonVisible: true
+            actionButtonVisible: true,
+            nrOfBrokoli: 0,
+            experience: "1",
         }
 
     }
@@ -104,6 +107,44 @@ export default class Positions extends React.Component {
             })
 
       }
+
+      _renderBrokolis(){
+        var rows = []
+        for(let i=1; i <= 5; i++)
+        {
+            rows.push(
+
+               <View key = {i}>
+
+                   <Image onPress={(i)=>this._grapBrokoli(i)} style = {styles.icon} source={require('../../../../img/icons/brokoli.png')}  />
+
+                   </View>
+            )
+        }
+        return(
+            <View style={styles.expContainer}>
+                {rows}
+                </View>
+        )
+      }
+
+      _grapBrokoli(i){
+            this.state.nrOfBrokoli = i
+            this.setState(function(prevState,props){
+                return {nrOfBrokoli: prevState.nrOfBrokoli}
+            })
+            console.log('BrokoliNr: ', this.state.nrOfBrokoli )
+      }
+
+      _grapExperience = (experience) => {
+
+        this.state.experience = experience
+        this.setState(function(prevState,props){
+            return {experience: prevState.experience}
+        })
+
+        console.log("Experience: ", this.state.experience)
+      }
       
 
     render(){
@@ -124,11 +165,36 @@ export default class Positions extends React.Component {
             <View style={styles.posForm}>
 
                 <View style={styles.inputContainer}>
+                   
+                <View style={styles.posInputContainer}>
 
                     <TextInput placeholder='position'
                                style={styles.input}
                                onChangeText={(text) => this._grabPosition(text)}
                                value={this.state.position}/>
+
+                </View>
+
+                <View style={styles.expInput}>
+
+                    <Picker
+                        selectedValue={this.state.experience}
+                        onValueChange={(experience) => this._grapExperience(experience)}
+                        mode="dropdown"
+                        itemStyle = {{fontSize: 12}}
+                        style={{
+                        color: '#C7C7CD',
+                        height: 40,
+                        }}>
+                        <Picker.Item label="Beginner (basic knowledge)" value="1" />
+                        <Picker.Item label="Novice (limited experience)" value="2" />
+                        <Picker.Item label="Intermediate (practical application)" value="3" />
+                        <Picker.Item label="Advanced (applied theory)" value="4" />
+                        <Picker.Item label="Expert (recognized authority)" value="5" />
+                    </Picker>
+                 
+                </View>
+
 
                 </View>
                    
@@ -190,10 +256,17 @@ const styles = StyleSheet.create({
         paddingLeft: 15,
         paddingRight: 15,
         marginRight: 5,
+        marginBottom: 5,
+    },
+    expInput: {
+        borderWidth: 2,
+        borderColor: 'grey',
+        backgroundColor: '#F8F9FB',
+        borderRadius: 5,
+        marginRight: 5,
     },
     btnContainer: {
         flex: 1,
-        flexDirection: 'row',  
         borderWidth: 2,
         borderColor: '#42D260',
         borderRadius: 5,
@@ -226,7 +299,12 @@ const styles = StyleSheet.create({
         color: 'grey',
         fontSize: 17,
         fontWeight: '400'
-    }
+    },
+    icon: {
+        width: 27,
+        height: 27,
+        resizeMode: 'contain'
+    },
 
 
 
