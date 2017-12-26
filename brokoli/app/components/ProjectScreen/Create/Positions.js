@@ -40,7 +40,8 @@ export default class Positions extends React.Component {
             actionButtonVisible: true,
             experience: "1",
             brokolis: [true,false,false,false,false],
-            tempExp: "1"
+            tempExp: "1",
+            nrOfPos: '1'
         }
 
     }
@@ -149,7 +150,7 @@ export default class Positions extends React.Component {
         )
       }
 
-      _grapExperience = (experience) => {
+      _grabExperience = (experience) => {
 
         this.state.experience = experience
         this.setState(function(prevState,props){
@@ -188,11 +189,13 @@ export default class Positions extends React.Component {
 
                 </View>
 
+                <View style={{flexDirection:'row'}}>
+
                 <View style={styles.expInput}>
 
                     <Picker
                         selectedValue={this.state.experience}
-                        onValueChange={(experience) => this._grapExperience(experience)}
+                        onValueChange={(experience) => this._grabExperience(experience)}
                         mode="dropdown"
                         itemStyle = {{fontSize: 12}}
                         style={{
@@ -206,6 +209,28 @@ export default class Positions extends React.Component {
                         <Picker.Item label="Expert (recognized authority)" value="5" />
                     </Picker>
                  
+                </View>
+
+                <View style={styles.nrOfPosInput}>
+
+                    <Picker
+                        selectedValue={this.state.nrOfPos}
+                        onValueChange={(nrOfPos) => this._grabNrOfPos(nrOfPos)}
+                        mode="dropdown"
+                        itemStyle = {{fontSize: 10}}
+                        style={{
+                        color: '#C7C7CD',
+                        height: 40,
+                        }}>
+                        <Picker.Item label="1" value="1" />
+                        <Picker.Item label="2" value="2" />
+                        <Picker.Item label="3" value="3" />
+                        <Picker.Item label="4" value="4" />
+                        <Picker.Item label="5" value="5" />
+                    </Picker>
+                 
+                </View>
+
                 </View>
 
 
@@ -258,7 +283,7 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     inputContainer: {
-        flex: 4,
+        flex: 6,
     },
     input: {
         borderWidth: 2,
@@ -273,11 +298,21 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     },
     expInput: {
+        flex: 5,
         borderWidth: 2,
         borderColor: 'grey',
         backgroundColor: '#F8F9FB',
         borderRadius: 5,
         marginRight: 5,
+    },
+    nrOfPosInput: {
+        flex: 1,
+        borderWidth: 2,
+        borderColor: 'grey',
+        backgroundColor: '#F8F9FB',
+        borderRadius: 5,
+        marginRight: 5,
+        marginLeft: 5,
     },
     btnContainer: {
         flex: 1,
