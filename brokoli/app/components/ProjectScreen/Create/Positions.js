@@ -143,6 +143,7 @@ export default class Positions extends React.Component {
         }
         return(
             <View style={styles.expContainer}>
+            <Text style={styles.itemExp} >Experience Level: </Text>
                 {rows}
                 </View>
         )
@@ -225,7 +226,7 @@ export default class Positions extends React.Component {
             data={this.state.positions}
             renderItem={({ item }) => (
                 <View style={styles.posContainer}>
-                <Text style={styles.pos}> {item.pos} </Text>
+                <Text style={styles.pos}>Position: {item.pos} </Text>
                 {this._renderBrokolis({item})}    
                 </View>
             )}
@@ -314,12 +315,19 @@ const styles = StyleSheet.create({
         fontWeight: '400'
     },
     icon: {
-        width: 27,
-        height: 27,
+        width: 20,
+        height: 20,
         resizeMode: 'contain'
     },
     expContainer: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: 5,
+    },
+    itemExp: {
+        fontSize: 17,
+        color: 'grey',
+        fontWeight: '400'
     }
 
 
