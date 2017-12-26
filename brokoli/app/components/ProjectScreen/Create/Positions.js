@@ -17,6 +17,7 @@ const height = Dimensions.get('window').height
 
 import FloatingAction from '../../FloatingComponents/FloatingAction';
 import { Picker } from 'react-native-picker-dropdown'
+import Swipeout from 'react-native-swipeout'
 
 var tempArr = []
 var valueToPush = new Array ()
@@ -41,7 +42,9 @@ export default class Positions extends React.Component {
             experience: "1",
             brokolis: [true,false,false,false,false],
             tempExp: "1",
-            nrOfPos: '1'
+            nrOfPos: '1',
+            activeRowKey : null,
+            deleteRowKey : null
         }
 
     }
@@ -173,6 +176,15 @@ export default class Positions extends React.Component {
         })
         console.log("Positions Number: ", this.state.nrOfPos)
       }
+
+      refreshFlatList = (deletedKey) => {
+            this.state.deleteRowKey = deletedKey
+            this.setState(function(prevState, props){
+                return {
+                    deleteRowKey: prevState.deleteRowKey
+                }
+        })
+      }
       
 
     render(){
@@ -186,6 +198,56 @@ export default class Positions extends React.Component {
             name: 'bt_done',
             position: 1
           }];
+
+        const swipeSettings = {
+            autoClose: true,
+            onClose: (secId, rowId, direction) => {
+                if(this.state.activeRowKey != null)
+                {
+                    this.state.activeRowKey = null 
+                    this.setState(function(prevState, props){
+                        return {activeRowKey: prevState.activeRowKey}
+                    })
+                }
+            },
+            onOpen: (secId, rowId, direction) => {
+                console.log(this.props.item)
+                this.state.activeRowKey = this.props.item
+                this.setState(function(prevState, props){
+                    return {activeRowKey: prevState.activeRowKey}
+                })
+
+            },
+            right: [
+                {
+                    onPress: () => {
+
+                        const deletingRow = this.state.activeRowKey
+
+                        Alert.alert(
+                            'Alert',
+                            'Are you sure you want to delete?',
+                            [
+                                {text: 'No', onPress: () => console.log('Cancel Pressed'), style:'cancel'},
+                                {text: 'Yes', onPress: () => {
+
+                                    this.state.positions.splice(this.props.index, 1);
+                                    //Refresh FlatList
+                                    this.refreshFlatList(deletingRow)
+
+                                }},
+                            ],
+                            {cancelable: true}
+                        );
+
+                    },
+                    text: 'Delete', type: 'delete'
+                }
+            ],
+            rowId: this.props.index,
+            secId: 1,
+
+        }
 
         return(
             <View style={styles.container}>
@@ -263,12 +325,14 @@ export default class Positions extends React.Component {
             <FlatList
             extraData={this.state}
             data={this.state.positions}
-            renderItem={({ item }) => (
+            renderItem={({ item, index }) => (
+                <Swipeout {...swipeSettings} item={item} index={index}>
                 <View style={styles.posContainer}>
                 <Text style={styles.pos}>Position: {item.pos} </Text>
                 {this._renderBrokolis({item})} 
                 <Text style={styles.pos}>Number of Positions: {item.posNr} </Text>    
                 </View>
+                </Swipeout>
             )}
             keyExtractor={item => item.pos}
             style={styles.posList}
