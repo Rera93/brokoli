@@ -37,6 +37,8 @@
     "react-native-router-flux": "^4.0.0-beta.22",
     "react-native-simple-radio-button": "^2.7.0",
     "react-native-swipe-cards": "^0.1.1",
+    "react-native-swipe-out": "^2.0.14",
+    "react-native-swipeout": "^2.3.3",
     "react-native-textinput-effects": "^0.4.2",
     "react-native-vector-icons": "^4.4.3",
     "react-navigation": "^1.0.0-beta.19",
