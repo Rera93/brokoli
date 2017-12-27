@@ -21,6 +21,17 @@ const height = Dimensions.get('window').height
 
 export default class Profile extends React.Component {
 
+    constructor(props){
+        super(props)
+
+        this.state = {
+            name: 'Alan.R.Andrade',
+            header: 'Time you enjoy wasting was not wasted.',
+            projectNr: 50,
+
+        }
+    }
+
     render(){
         return(
             <View style={styles.container}>
@@ -34,9 +45,9 @@ export default class Profile extends React.Component {
 
                 <View style={styles.textContainer}>
                    
-                        <Text style={styles.text}>Achraf Bekkali</Text>
+                        <Text style={styles.nameTxt}>{this.state.name}</Text>
                  
-                        <Text style={styles.text}>SomeHeader</Text>
+                        <Text style={styles.headerTxt}>{this.state.header}</Text>
 
                     </View>
                   </View>  
@@ -65,34 +76,38 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: 'white',
-        borderWidth: 1,
         width: width,
-        borderColor: 'blue'
     },
     profilePicCont: {
         alignItems: 'center',
         justifyContent:'center',
-        borderWidth: 4,
-        borderRadius: 75,
+        borderWidth: 3,
+        borderRadius: 65,
         padding: 5,
         borderColor: '#42D260'
     },
     profileIcon: {
         resizeMode: 'contain',
         padding: 10,
-        width: 140,
-        height: 140,
+        width: 120,
+        height: 120,
     },
     textContainer: {
         paddingTop: 20,
         alignItems: 'center',
         justifyContent: 'center'
     },
-    text:{
+    nameTxt:{
         color: 'grey',
-        fontSize: 16,
+        fontSize: 20,
         fontWeight: '400',
         padding: 5,
+    },
+    headerTxt:{
+        color: 'grey',
+        fontSize: 17,
+        fontWeight: '300',
+        padding: 5.
     },
     body: {
         flex: 1,
