@@ -35,15 +35,20 @@ export default class LoginScreen extends React.Component {
         //Alert.alert(this.getData());
         
         console.log('this ' + this.getData());
-  
-      this.getData().then((res) => {
-        console.log(res);
-        if(res == 'true')
-            Alert.alert("Valid user!");
-      else
-          Alert.alert("Invalid user!");
-      
-      });
+
+        this.getData().then((res) => {
+          console.log(res.validation + " " + res.id);
+          if(res.validation == 'true'){
+              
+              //Alert.alert("Valid user!", res.id);
+              this.props.navigation.navigate('Home', {userId: res.id});
+          }
+        else{
+            Alert.alert("Invalid user!");
+            //this.props._callbackLogin(res.validation, 0);
+        }
+        
+        });
       }
   
   
@@ -66,10 +71,7 @@ export default class LoginScreen extends React.Component {
             //   this.setState({ data : responseData})});
   
             .then((response) => response.json())
-            .then((responseData) => {
-              console.log(responseData.validation);
-              return responseData.validation;
-            });
+            ;
   
         }
 

@@ -87,6 +87,7 @@ const StackNav = StackNavigator({
   
       Login: {screen: LoginScreen},
       Register: {screen: RegisterScreen},
+      Home: {screen : TabNav}
   }, { headerMode: 'none',
        transitionConfig: getSlideFromRightTransition
       
