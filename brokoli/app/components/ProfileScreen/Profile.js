@@ -27,7 +27,8 @@ export default class Profile extends React.Component {
         this.state = {
             name: 'Alan.R.Andrade',
             header: 'Time you enjoy wasting was not wasted.',
-            projectNr: 50,
+            projectNr: 0,
+            applicationNr: 0
 
         }
     }
@@ -48,6 +49,29 @@ export default class Profile extends React.Component {
                         <Text style={styles.nameTxt}>{this.state.name}</Text>
                  
                         <Text style={styles.headerTxt}>{this.state.header}</Text>
+
+                    </View>
+
+                <View style={styles.reactionsCont}>
+
+                    <View style={styles.reaction}>
+
+                        <Text style={styles.reactionTxt}>{this.state.projectNr}</Text>
+                        <Text style={styles.reactionTxt}>Projects</Text>
+
+                    </View>
+
+                    <View style={{width: 1, backgroundColor:'#C7C7CD'}} />
+
+                    <View style={styles.reaction}>
+
+                        <Text style={styles.reactionTxt}>{this.state.applicationNr}</Text>
+                        <Text style={styles.reactionTxt}>Applications</Text>
+
+                    </View>
+
+
+
 
                     </View>
                   </View>  
@@ -73,6 +97,7 @@ const styles = StyleSheet.create({
     },
     header:{
         flex: 1,
+        paddingTop: 10,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: 'white',
@@ -93,9 +118,25 @@ const styles = StyleSheet.create({
         height: 120,
     },
     textContainer: {
-        paddingTop: 20,
+        paddingTop: 10,
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    reactionsCont: {
+        marginTop: 10,
+        flexDirection: 'row',
+        marginBottom: 10,
+    },
+    reaction: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    reactionTxt: {
+        color: '#C7C7CD',
+        fontSize: 15,
+        fontWeight: '300',
+        padding: 2.5,
     },
     nameTxt:{
         color: 'grey',
