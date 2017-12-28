@@ -35,6 +35,7 @@ export default class Skills extends React.Component
         isModalVisible: false,
         newSkill : '',
         newExperience: "1",
+        flip: false
         }
     }
 
@@ -114,7 +115,7 @@ export default class Skills extends React.Component
             })
             console.log('New Skill: ', this.state.newSkill)
   
-            //this._flip()
+            this._flip()
         }
 
         _grabNewExperience = (experience) => {
@@ -125,6 +126,27 @@ export default class Skills extends React.Component
             console.log("Experience: ", this.state.newExperience)
                 
         }
+
+        _flip(){
+            
+                  if(this.state.newSkill != '')
+                  {
+                      this.state.flip = true
+                      this.setState(function(prevState,props){
+                          return {flip: prevState.flip}
+                      })
+                  }
+                  else {
+                    this.state.flip = false
+                    this.setState(function(prevState,props){
+                        return {flip: prevState.flip}
+                    })
+            
+                  }
+                  
+                  console.log('Flip: ', this.state.flip)
+            
+                }
         
           _renderModalContent = () => (
             <View style={styles.modalContent}>
@@ -166,15 +188,16 @@ export default class Skills extends React.Component
 
               <View style={{flexDirection: 'row'}}>
 
-              <TouchableOpacity style={[styles.button,{backgroundColor: '#254D32'} ]} 
+              <TouchableOpacity  disabled={!this.state.flip}
+                                style={[styles.button,{borderWidth: 1, borderColor: '#254D32', backgroundColor: this.state.flip ? '#254D32' : 'white'} ]} 
                                 onPress={() => this._toggleModal()}>
-                <Text style={styles.btnTxt}>Add</Text>
+                <Text style={[styles.btnTxt, {color: this.state.flip ? 'white' : '#254D32'}]}>Add</Text>
  
               </TouchableOpacity>
 
               <TouchableOpacity style={[styles.button, {backgroundColor: '#A7333F'}]} 
                                 onPress={() => this._toggleModal()}>
-                <Text style={styles.btnTxt}>Close</Text>
+                <Text style={[styles.btnTxt, {color: 'white'}]}>Close</Text>
  
               </TouchableOpacity>
 
@@ -284,7 +307,6 @@ const styles = StyleSheet.create({
         margin: 0,
       },
       btnTxt: {
-          color: 'white',
           fontSize: 16,
           fontWeight: '400'
       },
