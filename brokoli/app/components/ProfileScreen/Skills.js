@@ -5,9 +5,11 @@ import { StyleSheet,
          Image, 
          Dimensions,
          FlatList,
-         Alert } from 'react-native';
+         Alert,
+        TouchableOpacity } from 'react-native';
 
 import FloatingAction from '../FloatingComponents/FloatingAction'
+import Modal from 'react-native-modal'
 
 
 const width = Dimensions.get('window').width
@@ -27,6 +29,7 @@ export default class Skills extends React.Component
         ],
         brokolis: [true,false,false,false,false],
         actionButtonVisible: true,
+        isModalVisible: false
         }
     }
 
@@ -91,6 +94,29 @@ export default class Skills extends React.Component
           });
         }
       }
+
+      _toggleModal = () => {
+          this.state.isModalVisible = !this.state.isModalVisible
+          this.setState(function(prevState, props){
+              return {isModalVisible: prevState.isModalVisible}
+          })
+        }
+
+        
+           
+          
+        
+          _renderModalContent = () => (
+            <View style={styles.modalContent}>
+              <Text>Hello!</Text>
+
+              <TouchableOpacity style={styles.button} 
+                                onPress={() => this._toggleModal()}>
+                <Text>Close</Text>
+            </TouchableOpacity>
+            
+            </View>
+          );
     render(){
         const { actionButtonVisible } = this.state;
         
@@ -123,7 +149,14 @@ export default class Skills extends React.Component
                            actions={actions}
                            visible={actionButtonVisible}
                            overrideWithAction
-                           onPressItem={() => Alert.alert('Button pressed.')}/>
+                           onPressItem={() => this._toggleModal()}/>
+
+                  <Modal isVisible = {this.state.isModalVisible}
+                  animationIn={'slideInLeft'}
+          animationOut={'slideOutRight'}>
+
+          {this._renderModalContent()}
+                  </Modal>          
 
                  </View>
 
@@ -164,5 +197,26 @@ const styles = StyleSheet.create({
         fontSize: 17,
         color: 'grey',
         fontWeight: '400'
-    }
+    },
+    button: {
+        backgroundColor: 'lightblue',
+        padding: 12,
+        margin: 16,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 4,
+        borderColor: 'rgba(0, 0, 0, 0.1)',
+      },
+      modalContent: {
+        backgroundColor: 'white',
+        padding: 22,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 4,
+        borderColor: 'rgba(0, 0, 0, 0.1)',
+      },
+      bottomModal: {
+        justifyContent: 'flex-end',
+        margin: 0,
+      },
 })
