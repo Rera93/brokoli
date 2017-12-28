@@ -41,6 +41,7 @@ export default class LoginScreen extends React.Component {
           if(res.validation == 'true'){
               
               //Alert.alert("Valid user!", res.id);
+              console.log('id: ', res.id)
               this.props.navigation.navigate('Home', {userId: res.id});
           }
         else{

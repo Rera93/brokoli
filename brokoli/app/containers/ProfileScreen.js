@@ -26,6 +26,7 @@ class ProfileScreen extends React.Component {
 
 
     render(){
+        console.log('idPass: ', this.props.screenProps)
         return(
             <ViewContainer style={styles.profile}>
                <Profile />

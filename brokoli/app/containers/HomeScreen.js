@@ -54,8 +54,10 @@ const TabNav =  TabNavigator({
     export default class HomeScreen extends React.Component {
 
         render(){
+            const { params } = this.props.navigation.state
+            console.log('idTab: ', params.userId)
             return (
-                <TabNav />
+                <TabNav screenProps={params.userId} />
             )
         }
 
