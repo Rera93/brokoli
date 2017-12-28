@@ -29,7 +29,7 @@ class ProfileScreen extends React.Component {
         console.log('idPass: ', this.props.screenProps)
         return(
             <ViewContainer style={styles.profile}>
-               <Profile />
+               <Profile screenProps={this.props.screenProps}/>
                 </ViewContainer>
 
         )

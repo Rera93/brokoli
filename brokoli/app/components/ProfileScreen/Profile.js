@@ -22,12 +22,49 @@ export default class Profile extends React.Component {
         super(props)
 
         this.state = {
-            name: 'Alan.R.Andrade',
-            header: 'Time you enjoy wasting was not wasted.',
+            userData: '',
+            name: '',
+            header: '',
             projectNr: 0,
             applicationNr: 0,
         }
     }
+
+    componentWillMount(){
+    //const { params } = this.props.navigation.state;console.log(this.navigation.state.params.userID);
+       this.getData();
+
+       //const { params } = this.props.navigation.state;
+     }
+
+     getData(){
+     
+           fetch('https://brokoli.eu-gb.mybluemix.net/api/loadProfile', {  
+             method: 'POST',
+             headers: {
+               'Accept': 'application/json',
+               'Content-Type': 'application/json',
+             }
+           ,
+              body: JSON.stringify({
+              userID: this.props.screenProps,
+
+            })
+            })
+             // .then(function(response) { return response.json(); })
+             // .then(function(responseData) {
+             //   this.setState({ data : responseData})});
+     
+             .then((response) => response.json())
+             .then((responseData) => {
+                this.setState({ data : responseData.data,
+                                name: responseData.data.firstName + " " + responseData.data.lastName,
+                                header: responseData.data.passHeadertoDb});
+               
+             });
+     
+         }
+
     render(){
         console.log(this.state.routes)
         return(
