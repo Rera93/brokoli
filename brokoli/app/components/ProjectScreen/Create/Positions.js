@@ -106,7 +106,7 @@ export default class Positions extends React.Component {
     }
 
       _onAdd(){
-            tempArr.push({pos: this.state.position, exp: this.state.experience, posNr: this.state.nrOfPos})
+            tempArr.unshift({pos: this.state.position, exp: this.state.experience, posNr: this.state.nrOfPos})
             console.log('tempArr: ', tempArr)
             this.state.positions = tempArr
             this.setState(function(prevState,props){
