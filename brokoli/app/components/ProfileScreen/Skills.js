@@ -117,9 +117,14 @@ export default class Skills extends React.Component
             //this._flip()
         }
 
-        
-           
-          
+        _grabNewExperience = (experience) => {
+            this.state.newExperience = experience
+            this.setState(function(prevState,props){
+            return {newExperience: prevState.newExperience}
+            })
+            console.log("Experience: ", this.state.newExperience)
+                
+        }
         
           _renderModalContent = () => (
             <View style={styles.modalContent}>
@@ -159,11 +164,21 @@ export default class Skills extends React.Component
 
               </View>
 
-              <TouchableOpacity style={styles.button} 
+              <View style={{flexDirection: 'row'}}>
+
+              <TouchableOpacity style={[styles.button,{backgroundColor: '#254D32'} ]} 
+                                onPress={() => this._toggleModal()}>
+                <Text style={styles.btnTxt}>Add</Text>
+ 
+              </TouchableOpacity>
+
+              <TouchableOpacity style={[styles.button, {backgroundColor: '#A7333F'}]} 
                                 onPress={() => this._toggleModal()}>
                 <Text style={styles.btnTxt}>Close</Text>
  
               </TouchableOpacity>
+
+              </View>
             
             </View>
           );
@@ -249,7 +264,6 @@ const styles = StyleSheet.create({
         fontWeight: '400'
     },
     button: {
-        backgroundColor: '#A7333F',
         padding: 12,
         margin: 16,
         justifyContent: 'center',
