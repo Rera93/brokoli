@@ -4,19 +4,21 @@
   Header will contain user profile picture, name and position.
 */
 
-'use strict'
-import React from 'react';
+/* @flow */
+import React, {PureComponent} from 'react';
 import { StyleSheet, Text, View, Image, Dimensions } from 'react-native';
-
-const profileIcon = require("../../../img/icons/profile_pic.png")
-const locationIcon = require("../../../img/icons/location.png")
-const occupationIcon = require("../../../img/icons/briefcase.png")
-const pinIcon = require("../../../img/icons/pin.png")
-const userNameIcon = require("../../../img/icons/user_name.png")
+import Skills from './Skills'
+import Projects from './Projects'
+import Jobs from './Jobs'
+import Overview from './Overview'
 
 const width = Dimensions.get('window').width
 const height = Dimensions.get('window').height
-
+const profileIcon = require('../../../img/icons/profile_pic.png')
+const initialLayout = {
+    height: 0,
+    width: width,
+  };
 
 
 export default class Profile extends React.Component {
@@ -28,12 +30,20 @@ export default class Profile extends React.Component {
             name: 'Alan.R.Andrade',
             header: 'Time you enjoy wasting was not wasted.',
             projectNr: 0,
-            applicationNr: 0
-
+            applicationNr: 0,
+            index: 1,
+            routes: [
+                {key: '1', title: 'Overview'},
+                {key: '2', title: 'Skills'},
+                {key: '3', title: 'Jobs'},
+                {key: '4', title: 'Projects'}
+            ],
         }
     }
 
+
     render(){
+        console.log(this.state.routes)
         return(
             <View style={styles.container}>
 
