@@ -6,10 +6,13 @@ import { StyleSheet,
          Dimensions,
          FlatList,
          Alert,
-        TouchableOpacity } from 'react-native';
+         TextInput,
+         TouchableOpacity } from 'react-native';
 
 import FloatingAction from '../FloatingComponents/FloatingAction'
 import Modal from 'react-native-modal'
+import { Picker } from 'react-native-picker-dropdown'
+
 
 
 const width = Dimensions.get('window').width
@@ -29,7 +32,9 @@ export default class Skills extends React.Component
         ],
         brokolis: [true,false,false,false,false],
         actionButtonVisible: true,
-        isModalVisible: false
+        isModalVisible: false,
+        newSkill : '',
+        newExperience: "1",
         }
     }
 
@@ -102,18 +107,63 @@ export default class Skills extends React.Component
           })
         }
 
+        _grabNewSkill = (skill) => {
+            this.state.newSkill = skill
+            this.setState(function(prevState,props){
+                return {newSkill: prevState.newSkill}
+            })
+            console.log('New Skill: ', this.state.newSkill)
+  
+            //this._flip()
+        }
+
         
            
           
         
           _renderModalContent = () => (
             <View style={styles.modalContent}>
-              <Text>Hello!</Text>
+
+              <View style={styles.form}> 
+
+              <Text style={styles.title}>Add new skill</Text> 
+
+              <View style={{marginTop: 10}}>
+              
+              <TextInput placeholder='New skill'
+                         style={styles.input}
+                         onChangeText={(text) => this._grabNewSkill(text)}
+                         value={this.state.newSkill}/>
+
+              </View>
+
+              <View style={styles.expInput}>
+
+                    <Picker
+                        selectedValue={this.state.newExperience}
+                        onValueChange={(exp) => this._grabNewExperience(exp)}
+                        mode="dropdown"
+                        itemStyle = {{fontSize: 12}}
+                        style={{
+                        color: '#C7C7CD',
+                        height: 40,
+                        }}>
+                        <Picker.Item label="Beginner (basic knowledge)" value="1" />
+                        <Picker.Item label="Novice (limited experience)" value="2" />
+                        <Picker.Item label="Intermediate (practical application)" value="3" />
+                        <Picker.Item label="Advanced (applied theory)" value="4" />
+                        <Picker.Item label="Expert (recognized authority)" value="5" />
+                    </Picker>
+                 
+                </View>
+
+              </View>
 
               <TouchableOpacity style={styles.button} 
                                 onPress={() => this._toggleModal()}>
-                <Text>Close</Text>
-            </TouchableOpacity>
+                <Text style={styles.btnTxt}>Close</Text>
+ 
+              </TouchableOpacity>
             
             </View>
           );
@@ -199,7 +249,7 @@ const styles = StyleSheet.create({
         fontWeight: '400'
     },
     button: {
-        backgroundColor: 'lightblue',
+        backgroundColor: '#A7333F',
         padding: 12,
         margin: 16,
         justifyContent: 'center',
@@ -219,4 +269,37 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         margin: 0,
       },
+      btnTxt: {
+          color: 'white',
+          fontSize: 16,
+          fontWeight: '400'
+      },
+      input: {
+        borderWidth: 2,
+        borderColor: 'grey',
+        backgroundColor: '#F8F9FB',
+        borderRadius: 5,
+        paddingTop: 5,
+        paddingBottom: 5,
+        paddingLeft: 15,
+        paddingRight: 15,
+        marginRight: 5,
+        marginBottom: 5,
+        color: '#C7C7CD',
+    },
+    form:{
+        width: width - 100
+    },
+    expInput:{
+        borderWidth: 2,
+        borderColor: 'grey',
+        backgroundColor: '#F8F9FB',
+        borderRadius: 5,
+        marginRight: 5,
+    },
+    title: {
+        color: '#254D32',
+        fontSize: 20,
+        fontWeight: '400'
+    }
 })
