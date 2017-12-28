@@ -216,7 +216,7 @@ export default class Skills extends React.Component
           );
 
           _addSkill(){
-            tempArr.push({skill: this.state.newSkill, experience: this.state.newExperience})
+            tempArr.unshift({skill: this.state.newSkill, experience: this.state.newExperience})
             console.log('tempArr: ', tempArr)
             this.state.data = tempArr
             this.setState(function(prevState,props){
