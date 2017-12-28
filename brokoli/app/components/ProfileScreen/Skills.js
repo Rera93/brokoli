@@ -33,7 +33,8 @@ export default class Skills extends React.Component
         ],
             brokolis: [true,false,false,false,false],
             actionButtonVisible: true,
-            isModalVisible: false,
+            isModalAddVisible: false,
+            isModalDeleteVisible: false,
             newSkill : '',
             newExperience: "1",
             flip: false,
@@ -109,13 +110,21 @@ export default class Skills extends React.Component
         }
       }
 
-      _toggleModal = () => {
-          this.state.isModalVisible = !this.state.isModalVisible
+      _toggleModalAdd = () => {
+          this.state.isModalAddVisible = !this.state.isModalAddVisible
           this.setState(function(prevState, props){
-              return {isModalVisible: prevState.isModalVisible}
+              return {isModalAddVisible: prevState.isModalAddVisible}
           })
           this._releaseNewData()
         }
+
+        _toggleModalDelete = () => {
+            this.state.isModalDeleteVisible = !this.state.isModalDeleteVisible
+            this.setState(function(prevState, props){
+                return {isModalDeleteVisible: prevState.isModalDeleteVisible}
+            })
+            console.log('deleteModal: ', this.state.isModalDeleteVisible)
+          }
 
         _grabNewSkill = (skill) => {
             this.state.newSkill = skill
@@ -215,7 +224,7 @@ export default class Skills extends React.Component
               </TouchableOpacity>
 
               <TouchableOpacity style={[styles.button, {backgroundColor: '#A7333F'}]} 
-                                onPress={() => this._toggleModal()}>
+                                onPress={() => this._toggleModalAdd()}>
                 <Text style={[styles.btnTxt, {color: 'white'}]}>Close</Text>
  
               </TouchableOpacity>
@@ -233,7 +242,7 @@ export default class Skills extends React.Component
                 return {data: prevState.data}
             })
             console.log('updatedDataArr: ', this.state.data)
-            this._toggleModal()
+            this._toggleModalAdd()
           }
 
           _releaseNewData(){
@@ -248,6 +257,39 @@ export default class Skills extends React.Component
             this.setState(function(prevState,props){
                 return {newExperience: prevState.newExperience}
             })
+          }
+          _renderDeleteModalContent = () => (
+
+            <View style={styles.modalContent}>
+            
+                <Text style={styles.title}>Are you sure you want to delete the selected skills from your profile?</Text>
+            
+                <View style={{flexDirection: 'row'}}>
+            
+                                    <TouchableOpacity 
+                                                    style={[styles.button,{backgroundColor: '#254D32'}]} 
+                                                    onPress={() => this._deleteItem() }>
+                                    <Text style={[styles.btnTxt, {color: 'white'}]}>Ok</Text>
+                    
+                                    </TouchableOpacity>
+            
+                                    <TouchableOpacity style={[styles.button, {backgroundColor: '#A7333F'}]} 
+                                                    onPress={() => this._toggleModalDelete()}>
+                                    <Text style={[styles.btnTxt, {color: 'white'}]}>Cancel</Text>
+                    
+                                    </TouchableOpacity>
+            
+                                </View>
+            
+                            </View>
+            
+          )
+          _deleteItem(){
+            const deletingRow = this.state.activeRowKey            
+            this.state.data.splice(this.props.index, 1)
+            //Refresh FlatList
+            this.refreshFlatList(deletingRow)
+            this._toggleModalDelete()
           }
 
 
@@ -285,24 +327,8 @@ export default class Skills extends React.Component
                 {
                     onPress: () => {
 
-                        const deletingRow = this.state.activeRowKey
-
-                        Alert.alert(
-                            'Alert',
-                            'Are you sure you want to delete?',
-                            [
-                                {text: 'No', onPress: () => console.log('Cancel Pressed'), style:'cancel'},
-                                {text: 'Yes', onPress: () => {
-
-                                    this.state.data.splice(this.props.index, 1);
-                                    //Refresh FlatList
-                                    this.refreshFlatList(deletingRow)
-
-                                }},
-                            ],
-                            {cancelable: true}
-                        );
-
+                        this._toggleModalDelete()
+                        
                     },
                     text: 'Delete', type: 'delete'
                 }
@@ -334,14 +360,23 @@ export default class Skills extends React.Component
                            actions={actions}
                            visible={actionButtonVisible}
                            overrideWithAction
-                           onPressItem={() => this._toggleModal()}/>
+                           onPressItem={() => this._toggleModalAdd()}/>
 
-                  <Modal isVisible = {this.state.isModalVisible}
-                  animationIn={'slideInLeft'}
-          animationOut={'slideOutRight'}>
+                  <Modal isVisible = {this.state.isModalAddVisible}
+                         animationIn={'slideInLeft'}
+                         animationOut={'slideOutRight'}>
 
-          {this._renderModalContent()}
-                  </Modal>          
+                         {this._renderModalContent()}
+                  </Modal>   
+
+                   <Modal isVisible = {this.state.isModalDeleteVisible}
+                          animationIn={'slideInLeft'}
+                          animationOut={'slideOutRight'}>
+
+                         {this._renderDeleteModalContent()}
+
+                    </Modal>      
+                   
 
                  </View>
 
