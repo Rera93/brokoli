@@ -4,7 +4,11 @@ import { StyleSheet,
          View, 
          Image, 
          Dimensions,
-         FlatList } from 'react-native';
+         FlatList,
+         Alert } from 'react-native';
+
+import FloatingAction from '../FloatingComponents/FloatingAction'
+
 
 const width = Dimensions.get('window').width
 
@@ -22,6 +26,7 @@ export default class Skills extends React.Component
                 {skill: 'Front-End Development', experience: 5},
         ],
         brokolis: [true,false,false,false,false],
+        actionButtonVisible: true,
         }
     }
 
@@ -64,12 +69,43 @@ export default class Skills extends React.Component
         )
     }
 
+    offset = 0;
+    
+      handleScroll = (event) => {
+        const currentOffset = event.nativeEvent.contentOffset.y;
+    
+        if (currentOffset <= 0) {
+          this.setState({
+            actionButtonVisible: true
+          });
+    
+          return;
+        }
+    
+        const direction = currentOffset > this.offset ? 'down' : 'up';
+        this.offset = currentOffset;
+    
+        if (this.state.actionButtonVisible !== direction) {
+          this.setState({
+            actionButtonVisible: direction === 'up'
+          });
+        }
+      }
     render(){
+        const { actionButtonVisible } = this.state;
+        
+        const actions = [{
+                text: 'Add',
+                icon: require('../../../img/icons/add.png'),
+                name: 'bt_add',
+                position: 1
+        }];
         return(
 
             <View style={styles.container}> 
 
                  <FlatList
+                     onScroll={this.handleScroll}  
                      extraData={this.state}
                      data={this.state.data}
                      renderItem={({ item, index }) => (
@@ -82,6 +118,12 @@ export default class Skills extends React.Component
                      keyExtractor={item => item.skill}
                      ItemSeparatorComponent={this._renderSeparator}
                  />
+
+                 <FloatingAction 
+                           actions={actions}
+                           visible={actionButtonVisible}
+                           overrideWithAction
+                           onPressItem={() => Alert.alert('Button pressed.')}/>
 
                  </View>
 
