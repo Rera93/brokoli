@@ -17,6 +17,8 @@ import { Picker } from 'react-native-picker-dropdown'
 
 const width = Dimensions.get('window').width
 
+var tempArr = []
+
 export default class Skills extends React.Component
 {
 
@@ -43,6 +45,11 @@ export default class Skills extends React.Component
     from the db. Momentarily when adding skills in register only the skill
     name is required and no exp yet. 
     */
+
+    componentDidMount() {
+        //When compoment is first loaded the temp array is used as a placeholder for the skils key value pair array 
+        tempArr = this.state.data
+    }
 
     _renderBrokolis = ({item}) =>{
         var rows = []
@@ -106,6 +113,7 @@ export default class Skills extends React.Component
           this.setState(function(prevState, props){
               return {isModalVisible: prevState.isModalVisible}
           })
+          this._releaseNewData()
         }
 
         _grabNewSkill = (skill) => {
@@ -159,6 +167,7 @@ export default class Skills extends React.Component
               
               <TextInput placeholder='New skill'
                          style={styles.input}
+                         underlineColorAndroid='transparent'
                          onChangeText={(text) => this._grabNewSkill(text)}
                          value={this.state.newSkill}/>
 
@@ -189,8 +198,8 @@ export default class Skills extends React.Component
               <View style={{flexDirection: 'row'}}>
 
               <TouchableOpacity  disabled={!this.state.flip}
-                                style={[styles.button,{borderWidth: 1, borderColor: '#254D32', backgroundColor: this.state.flip ? '#254D32' : 'white'} ]} 
-                                onPress={() => this._toggleModal()}>
+                                style={[styles.button,{borderWidth: 2, borderColor: '#254D32', backgroundColor: this.state.flip ? '#254D32' : 'white'} ]} 
+                                onPress={() => this._addSkill()}>
                 <Text style={[styles.btnTxt, {color: this.state.flip ? 'white' : '#254D32'}]}>Add</Text>
  
               </TouchableOpacity>
@@ -205,6 +214,34 @@ export default class Skills extends React.Component
             
             </View>
           );
+
+          _addSkill(){
+            tempArr.push({skill: this.state.newSkill, experience: this.state.newExperience})
+            console.log('tempArr: ', tempArr)
+            this.state.data = tempArr
+            this.setState(function(prevState,props){
+                return {data: prevState.data}
+            })
+            console.log('updatedDataArr: ', this.state.data)
+            this._toggleModal()
+          }
+
+          _releaseNewData(){
+            //Release text inputs value
+            this.state.newSkill = ''
+            this.setState(function(prevState,props){
+                return {newSkill: prevState.newSkill}
+            })
+            this._flip()
+            //Release experience value
+            this.state.newExperience = "1"
+            this.setState(function(prevState,props){
+                return {newExperience: prevState.newExperience}
+            })
+          }
+
+
+
     render(){
         const { actionButtonVisible } = this.state;
         
