@@ -4,22 +4,17 @@
   Header will contain user profile picture, name and position.
 */
 
-/* @flow */
-import React, {PureComponent} from 'react';
-import { StyleSheet, Text, View, Image, Dimensions } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, View, Image, Dimensions, ScrollView } from 'react-native';
 import Skills from './Skills'
 import Projects from './Projects'
 import Jobs from './Jobs'
 import Overview from './Overview'
+import Tabs from './Tabs'
 
 const width = Dimensions.get('window').width
 const height = Dimensions.get('window').height
 const profileIcon = require('../../../img/icons/profile_pic.png')
-const initialLayout = {
-    height: 0,
-    width: width,
-  };
-
 
 export default class Profile extends React.Component {
 
@@ -31,17 +26,8 @@ export default class Profile extends React.Component {
             header: 'Time you enjoy wasting was not wasted.',
             projectNr: 0,
             applicationNr: 0,
-            index: 1,
-            routes: [
-                {key: '1', title: 'Overview'},
-                {key: '2', title: 'Skills'},
-                {key: '3', title: 'Jobs'},
-                {key: '4', title: 'Projects'}
-            ],
         }
     }
-
-
     render(){
         console.log(this.state.routes)
         return(
@@ -88,8 +74,15 @@ export default class Profile extends React.Component {
 
                 <View style={styles.body}>
 
+                <Tabs>
 
+                    <Overview title='OVERVIEW'/>
+                    <Skills title='SKILLS' />
+                    <Jobs title='JOBS' />
+                    <Projects title='PROJECTS' />
 
+                </Tabs>
+                    
                     </View>
 
 
@@ -162,8 +155,8 @@ const styles = StyleSheet.create({
     },
     body: {
         flex: 1,
-        borderWidth: 1,
-        borderColor: 'red'
+        borderTopWidth: 1,
+        borderColor: '#C7C7CD'
     },
   });
 
