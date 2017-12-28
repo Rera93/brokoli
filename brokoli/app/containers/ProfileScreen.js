@@ -9,8 +9,8 @@ import React from 'react';
 import { StyleSheet, Text, Image } from 'react-native';
 
 import ViewContainer from '../components/ViewContainer';
-import Header from '../components/ProfileScreen/Header';
-import Body from '../components/ProfileScreen/Body';
+import Profile from '../components/ProfileScreen/Profile';
+
 
 class ProfileScreen extends React.Component {
 
@@ -28,8 +28,7 @@ class ProfileScreen extends React.Component {
     render(){
         return(
             <ViewContainer style={styles.profile}>
-                <Header />
-                <Body />
+               <Profile />
                 </ViewContainer>
 
         )
