@@ -12,8 +12,7 @@ import { StyleSheet,
 import FloatingAction from '../FloatingComponents/FloatingAction'
 import Modal from 'react-native-modal'
 import { Picker } from 'react-native-picker-dropdown'
-
-
+import Swipeout from 'react-native-swipeout'
 
 const width = Dimensions.get('window').width
 
@@ -32,12 +31,14 @@ export default class Skills extends React.Component
                 {skill: 'IOS Development', experience: 1},
                 {skill: 'Front-End Development', experience: 5},
         ],
-        brokolis: [true,false,false,false,false],
-        actionButtonVisible: true,
-        isModalVisible: false,
-        newSkill : '',
-        newExperience: "1",
-        flip: false
+            brokolis: [true,false,false,false,false],
+            actionButtonVisible: true,
+            isModalVisible: false,
+            newSkill : '',
+            newExperience: "1",
+            flip: false,
+            activeRowKey : null,
+            deleteRowKey : null
         }
     }
 
@@ -134,6 +135,15 @@ export default class Skills extends React.Component
             console.log("Experience: ", this.state.newExperience)
                 
         }
+
+        refreshFlatList = (deletedKey) => {
+            this.state.deleteRowKey = deletedKey
+            this.setState(function(prevState, props){
+                return {
+                    deleteRowKey: prevState.deleteRowKey
+                }
+        })
+      }
 
         _flip(){
             
@@ -251,6 +261,56 @@ export default class Skills extends React.Component
                 name: 'bt_add',
                 position: 1
         }];
+
+        const swipeSettings = {
+            autoClose: true,
+            onClose: (secId, rowId, direction) => {
+                if(this.state.activeRowKey != null)
+                {
+                    this.state.activeRowKey = null 
+                    this.setState(function(prevState, props){
+                        return {activeRowKey: prevState.activeRowKey}
+                    })
+                }
+            },
+            onOpen: (secId, rowId, direction) => {
+                console.log(this.props.item)
+                this.state.activeRowKey = this.props.item
+                this.setState(function(prevState, props){
+                    return {activeRowKey: prevState.activeRowKey}
+                })
+
+            },
+            left: [
+                {
+                    onPress: () => {
+
+                        const deletingRow = this.state.activeRowKey
+
+                        Alert.alert(
+                            'Alert',
+                            'Are you sure you want to delete?',
+                            [
+                                {text: 'No', onPress: () => console.log('Cancel Pressed'), style:'cancel'},
+                                {text: 'Yes', onPress: () => {
+
+                                    this.state.data.splice(this.props.index, 1);
+                                    //Refresh FlatList
+                                    this.refreshFlatList(deletingRow)
+
+                                }},
+                            ],
+                            {cancelable: true}
+                        );
+
+                    },
+                    text: 'Delete', type: 'delete'
+                }
+            ],
+            rowId: this.props.index,
+            secId: 1,
+
+        }
         return(
 
             <View style={styles.container}> 
@@ -260,10 +320,10 @@ export default class Skills extends React.Component
                      extraData={this.state}
                      data={this.state.data}
                      renderItem={({ item, index }) => (
-                         <View style={styles.skillContainer}>
+                         <Swipeout {...swipeSettings} item={item} index={index} style={styles.skillContainer}>
                             <Text style={styles.item}>{item.skill}</Text>
-                            {this._renderBrokolis({item})} 
-                             </View>
+                            {this._renderBrokolis({item})}  
+                          </Swipeout>   
                     
                      )}
                      keyExtractor={item => item.skill}
