@@ -7,13 +7,13 @@ import { StyleSheet,
          FlatList,
          Alert,
          TextInput,
-         TouchableOpacity } from 'react-native';
+         TouchableOpacity,
+         KeyboardAvoidingView } from 'react-native';
 
 import FloatingAction from '../FloatingComponents/FloatingAction'
 import Modal from 'react-native-modal'
 import { Picker } from 'react-native-picker-dropdown'
 import Swipeout from 'react-native-swipeout'
-import NumericInput from 'react-numeric-input';
 
 const width = Dimensions.get('window').width
 
@@ -40,9 +40,9 @@ export default class Jobs extends React.Component
             newCity: '',
             newCountry: '',
             newStartMonth: '1',
-            newStartYear: '2010',
+            newStartYear: 2010,
             newEndMonth: '1',
-            newEndYear: '2010',
+            newEndYear: 2010,
             flip: false,
             activeRowKey : null,
             deleteRowKey : null
@@ -214,6 +214,7 @@ export default class Jobs extends React.Component
                 }
         
           _renderModalContent = () => (
+
             <View style={styles.modalContent}>
 
               <View style={styles.form}> 
@@ -262,7 +263,13 @@ export default class Jobs extends React.Component
 
               <View style={styles.dateInputCont}>
 
-              <View style={styles.dateInput}>
+              <View style={{flex: 3, justifyContent: 'center', paddingLeft: 10}}>
+
+              <Text style={{fontSize: 16, fontWeight: '400', color: '#C7C7CD'}}>Start Date </Text>
+
+              </View>
+
+              <View style={styles.dateInput}> 
 
                     <Picker
                         selectedValue={this.state.newStartMonth}
@@ -271,7 +278,7 @@ export default class Jobs extends React.Component
                         itemStyle = {{fontSize: 12}}
                         style={{
                         color: '#C7C7CD',
-                        height: 40,
+                        height: 35,
                         }}>
                         <Picker.Item label="Jan" value="1" />
                         <Picker.Item label="Feb" value="2" />
@@ -287,18 +294,40 @@ export default class Jobs extends React.Component
                         <Picker.Item label="Dec" value="12" />
                     </Picker>
                  
-              </View>
+                </View>
 
-              <NumericInput min={0} 
-                            max={100} 
-                            value={50}
-                            onChange={(year) => this._grabNewStartYear(year)}/>
+                <View style={styles.yearCounter}>
+
+                <View style={{flex: 6}}>
+
+                <TextInput  keyboardType={'numeric'} value={this.state.newStartYear.toString()}/>
+
+                </View>
+
+                <View style={{flex: 2,alignItems: 'center', justifyContent: 'center', marginRight: 5}}>
+                    <TouchableOpacity>
+                        <Image style={styles.arrow} source={require('../../../img/icons/up-arrow.png')}/>
+                        </TouchableOpacity>
+                    <TouchableOpacity >
+                        <Image style={styles.arrow} source={require('../../../img/icons/down-arrow.png')}/>
+                        </TouchableOpacity>
+
+                    </View>
+
+                </View>
+        
 
                 </View>
 
                 <View style={styles.dateInputCont}>
 
-                <View style={styles.dateInput}>
+                <View style={{flex: 3, justifyContent: 'center', paddingLeft: 5}}>
+
+                <Text style={{fontSize: 16, fontWeight: '400', color: '#C7C7CD'}}>End Date </Text>
+
+                </View>
+                
+                <View style={styles.dateInput}> 
 
                     <Picker
                         selectedValue={this.state.newEndMonth}
@@ -306,8 +335,8 @@ export default class Jobs extends React.Component
                         mode="dropdown"
                         itemStyle = {{fontSize: 12}}
                         style={{
+                        height: 35,
                         color: '#C7C7CD',
-                        height: 40,
                         }}>
                         <Picker.Item label="Jan" value="1" />
                         <Picker.Item label="Feb" value="2" />
@@ -322,13 +351,29 @@ export default class Jobs extends React.Component
                         <Picker.Item label="Nov" value="11" />
                         <Picker.Item label="Dec" value="12" />
                     </Picker>
-                 
-              </View>
 
-                <NumericInput min={0} 
-                              max={100} 
-                              value={50}
-                              onChange={(year) => this._grabNewEndYear(year)}/>
+                </View>
+
+              <View style={styles.yearCounter}>
+
+                <View style={{flex: 6}}>
+
+                <TextInput keyboardType={'numeric'} value={this.state.newEndYear.toString()}/>
+
+                </View>
+
+                <View style={{flex: 2, alignItems: 'center', justifyContent: 'center', marginRight: 5}} >
+                    <TouchableOpacity onPress={()=>this._increaseEndYear()}>
+                        <Image style={styles.arrow} source={require('../../../img/icons/up-arrow.png')}/>
+                        </TouchableOpacity>
+                    <TouchableOpacity onPress={()=>this._decreaseEndYear()}>
+                        <Image style={styles.arrow} source={require('../../../img/icons/down-arrow.png')}/>
+                        </TouchableOpacity>
+
+                    </View>
+
+                </View>
+
 
               </View>
 
@@ -353,6 +398,23 @@ export default class Jobs extends React.Component
             
             </View>
           );
+
+          _increaseEndYear(){
+
+                this.state.newEndYear = this.state.newEndYear + 1
+                this.setState(function(prevState, props){
+                    return {newEndYear: prevState.newEndYear}
+                })
+                console.log('End year: ', this.state.newEndYear)
+
+          }
+          _decreaseEndYear(){
+            this.state.newEndYear = this.state.newEndYear - 1
+            this.setState(function(prevState, props){
+                return {newEndYear: prevState.newEndYear}
+            })
+            console.log('End year: ', this.state.newEndYear)
+          }
 
           _addJob(){
             tempArr.unshift({startMonth: this.state.newStartMonth, 
@@ -414,7 +476,7 @@ export default class Jobs extends React.Component
 
             <View style={styles.modalContent}>
             
-                <Text style={styles.title}>Are you sure you want to delete the selected skills from your profile?</Text>
+                <Text style={styles.title}>Are you sure you want to delete the selected job from your profile?</Text>
             
                 <View style={{flexDirection: 'row'}}>
             
@@ -619,16 +681,21 @@ const styles = StyleSheet.create({
         color: '#C7C7CD',
     },
     form:{
-        width: width - 100
+        width: width - 100,
     },
     dateInputCont:{
-        flexDirection: 'row'
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: 5,
     },
     dateInput:{
+        flex: 3,
         borderWidth: 2,
         borderColor: 'grey',
         backgroundColor: '#F8F9FB',
         borderRadius: 5,
+        marginTop: 5,
         marginRight: 5,
     },
     title: {
@@ -638,5 +705,30 @@ const styles = StyleSheet.create({
     },
     period:{
         flexDirection: 'row'
+    },
+    arrow: {
+        resizeMode: 'contain',
+        width: 14,
+        height: 14,
+    },
+    yearCounter: {
+        flex: 2,
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'row',
+        borderWidth: 2,
+        borderColor: 'grey',
+        backgroundColor: '#F8F9FB',
+        borderRadius: 5,
+        paddingBottom: 5,
+        paddingLeft: 10,
+        marginRight: 5,
+        marginTop: 5,
+        // width: (width - 100) /2
+    },
+    arrowCont: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        
     }
 })
