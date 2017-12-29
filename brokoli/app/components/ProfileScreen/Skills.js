@@ -392,6 +392,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white'
     },
     skillContainer:{
+        flex: 1,
             width: width - 20,
             backgroundColor: 'white',
             marginBottom: 5,
