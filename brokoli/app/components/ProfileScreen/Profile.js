@@ -5,7 +5,7 @@
 */
 
 import React from 'react';
-import { StyleSheet, Text, View, Image, Dimensions, ScrollView, Alert, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, Dimensions, ScrollView, Alert, TouchableOpacity, TextInput } from 'react-native';
 import Skills from './Skills'
 import Projects from './Projects'
 import Jobs from './Jobs'
@@ -30,7 +30,14 @@ export default class Profile extends React.Component {
             header: 'Time you enjoy wasting was not wasted.',
             projectNr: 0,
             applicationNr: 0,
-            isModalLogoutVisible: false
+            isModalLogoutVisible: false,
+            isModalAccountVisible: false,
+            isModalProfileVisible: false,
+            oldPassword: '',
+            newPassword: '',
+            newPasswordConfirm: '',
+            oldEmail: '',
+            newEmail: '',
         }
     }
     _onActionPressed(action){
@@ -44,7 +51,7 @@ export default class Profile extends React.Component {
             break;
             case 'bt_account': 
 
-            console.log('bt_account')
+           {this._toggleAccountModal()}
             
             break;
             case 'bt_logout': 
@@ -66,6 +73,196 @@ export default class Profile extends React.Component {
         })
         console.log('isModalLogoutVisible: ', this.state.isModalLogoutVisible)
       }
+
+      _renderLogoutModal = () => (
+        <View style={[styles.modalContent, {backgroundColor: '#254D32'}]}>
+        
+            <Text style={[styles.title, {color: 'white'}]}>Are you sure you want to logout?</Text>
+        
+            <View style={{flexDirection: 'row'}}>
+        
+                <TouchableOpacity style={[styles.button,{backgroundColor: 'white'}]} >
+                    <Text style={[styles.btnTxt, {color: '#254D32'}]}>Ok</Text>
+                
+                </TouchableOpacity>
+        
+                <TouchableOpacity style={[styles.button, {backgroundColor: '#A7333F'}]} 
+                                  onPress={() => this._toggleLogoutModal()}>
+                    <Text style={[styles.btnTxt, {color: 'white'}]}>Cancel</Text>
+                
+                </TouchableOpacity>
+        
+            </View>
+        
+        </View>
+
+      )
+
+      _toggleAccountModal = () => {
+        
+        this.state.isModalAccountVisible = !this.state.isModalAccountVisible
+        this.setState(function(prevState, props){
+            return {isModalAccountVisible: prevState.isModalAccountVisible}
+        })
+        console.log('isModalAccountVisible: ', this.state.isModalAccountVisible)
+        }
+
+        _renderAccountModal = () => (
+
+            <View style={styles.modalContent}>
+            
+                    <View style={styles.form}> 
+            
+                    <Text style={styles.title}>Update account settings</Text> 
+            
+                    <View style={{marginTop: 10}}>
+                          
+                    <TextInput placeholder='old email'
+                                     style={styles.input}
+                                     underlineColorAndroid='transparent'
+                                     onChangeText={(text) => this._grabOldEmail(text)}
+                                     value={this.state.oldEmail}/>
+            
+                     </View>
+
+                     <View style={{marginTop: 10}}>
+                          
+                    <TextInput placeholder='new email'
+                                     style={styles.input}
+                                     underlineColorAndroid='transparent'
+                                     onChangeText={(text) => this._grabNewEmail(text)}
+                                     value={this.state.newEmail}/>
+            
+                     </View>
+
+                     <View style={{marginTop: 10}}>
+                          
+                    <TextInput placeholder='old password'
+                                     style={styles.input}
+                                     underlineColorAndroid='transparent'
+                                     onChangeText={(text) => this._grabOldPassword(text)}
+                                     value={this.state.oldPassword}/>
+            
+                     </View>
+
+                     <View style={{marginTop: 10}}>
+                          
+                    <TextInput placeholder='new password'
+                                     style={styles.input}
+                                     underlineColorAndroid='transparent'
+                                     onChangeText={(text) => this._grabNewPassword(text)}
+                                     value={this.state.newPassword}/>
+            
+                     </View>
+
+                     <View style={{marginTop: 10}}>
+                          
+                    <TextInput placeholder='re-enter new password'
+                                     style={styles.input}
+                                     underlineColorAndroid='transparent'
+                                     onChangeText={(text) => this._grabNewPasswordConfirm(text)}
+                                     value={this.state.newPassConfirm}/>
+            
+                     </View>
+            
+            
+                          </View>
+            
+                          <View style={{flexDirection: 'row'}}>
+            
+                          <TouchableOpacity  disabled={!this.state.flip}
+                                            style={[styles.button,{borderWidth: 2, borderColor: '#254D32', backgroundColor: this.state.flip ? '#254D32' : 'white'} ]} 
+                                            onPress={() => this._updateAccountSettings()}>
+                            <Text style={[styles.btnTxt, {color: this.state.flip ? 'white' : '#254D32'}]}>Change</Text>
+             
+                          </TouchableOpacity>
+            
+                          <TouchableOpacity style={[styles.button, {backgroundColor: '#A7333F'}]} 
+                                            onPress={() => this._toggleAccountModal()}>
+                            <Text style={[styles.btnTxt, {color: 'white'}]}>Close</Text>
+             
+                          </TouchableOpacity>
+            
+                          </View>
+                        
+                        </View>
+
+        )
+
+        _grabOldEmail = (email) => {
+            this.state.oldEmail = email
+            this.setState(function(prevState,props){
+                return {oldEmail: prevState.oldEmail}
+            })
+            console.log('Old Email: ', this.state.oldEmail)
+  
+            this._flip()
+        }
+        _grabNewEmail = (email) => {
+            this.state.newEmail = email
+            this.setState(function(prevState,props){
+                return {newEmail: prevState.newEmail}
+            })
+            console.log('New Email: ', this.state.newEmail)
+  
+            this._flip()
+        }
+        _grabOldPassword = (password) => {
+            this.state.oldPassword = password
+            this.setState(function(prevState,props){
+                return {oldPassword: prevState.oldPassword}
+            })
+            console.log('Old Password: ', this.state.oldPassword)
+  
+            this._flip()
+        }
+        _grabNewPassword = (password) => {
+            this.state.newPassword = password
+            this.setState(function(prevState,props){
+                return {newPassword: prevState.newPassword}
+            })
+            console.log('New Password: ', this.state.newPassword)
+  
+            this._flip()
+        }
+
+        _grabNewPasswordConfirm = (password) => {
+            this.state.newPasswordConfirm = password
+            this.setState(function(prevState,props){
+                return {newPasswordConfirm: prevState.newPasswordConfirm}
+            })
+            console.log('New Password Confirm: ', this.state.newPasswordConfirm)
+  
+            this._flip()
+        }
+
+        _flip(){
+            if((this.state.oldEmail != '' && this.state.newEmail != '') || 
+               (this.state.oldPassword != '' && this.state.newPassword != '' 
+               && this.state.newPasswordConfirm != '' && this.state.newPassword === this.state.newPasswordConfirm))
+            {
+                this.state.flip = true
+                this.setState(function(prevState,props){
+                    return {flip: prevState.flip}
+                })
+            }
+            else {
+              this.state.flip = false
+              this.setState(function(prevState,props){
+                  return {flip: prevState.flip}
+              })
+      
+            }
+            
+            console.log('Flip: ', this.state.flip)
+      
+          }
+        
+       
+
+        _updateAccountSettings() {
+            console.log('Update Account')
+        }
 
     render(){
         const actions = [{
@@ -151,30 +348,17 @@ export default class Profile extends React.Component {
                          animationIn={'slideInLeft'}
                          animationOut={'slideOutRight'}>
 
-                         <View style={[styles.modalContent, {backgroundColor: '#254D32'}]}>
-        
-                            <Text style={[styles.title, {color: 'white'}]}>Are you sure you want to logout?</Text>
-        
-                            <View style={{flexDirection: 'row'}}>
-        
-                                <TouchableOpacity 
-                                                style={[styles.button,{backgroundColor: 'white'}]} >
-                                <Text style={[styles.btnTxt, {color: '#254D32'}]}>Ok</Text>
-                
-                                </TouchableOpacity>
-        
-                                <TouchableOpacity style={[styles.button, {backgroundColor: '#A7333F'}]} 
-                                                onPress={() => this._toggleLogoutModal()}>
-                                <Text style={[styles.btnTxt, {color: 'white'}]}>Cancel</Text>
-                
-                                </TouchableOpacity>
-        
-                            </View>
-        
-                        </View>
-
+                       {this._renderLogoutModal()}
                          
-                    </Modal>   
+                    </Modal> 
+
+                     <Modal isVisible = {this.state.isModalAccountVisible}
+                         animationIn={'slideInLeft'}
+                         animationOut={'slideOutRight'}>
+
+                      {this._renderAccountModal()}
+
+                         </Modal>  
                 </View>
         
            
@@ -272,5 +456,19 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         borderColor: 'rgba(0, 0, 0, 0.1)',
       },
+
+      input: {
+        borderWidth: 2,
+        borderColor: 'grey',
+        backgroundColor: '#F8F9FB',
+        borderRadius: 5,
+        paddingTop: 5,
+        paddingBottom: 5,
+        paddingLeft: 15,
+        paddingRight: 15,
+        marginRight: 5,
+        marginBottom: 5,
+        color: '#C7C7CD',
+    },
   });
 
