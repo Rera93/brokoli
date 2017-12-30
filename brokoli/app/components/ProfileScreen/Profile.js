@@ -469,6 +469,24 @@ export default class Profile extends React.Component {
 
                 _updateProfileSettings(){
                     console.log('update profile settings')
+                    //Update name
+                    if(this.state.newFullName != '') 
+                    {
+                    this.state.name = this.state.newFullName
+                    this.setState(function(prevState, props){
+                        return {name: prevState.name}
+                    })
+                    }
+                    //Update header
+                    if(this.state.newHeader != '')
+                    {
+                    this.state.header = this.state.newHeader
+                    this.setState(function(prevState, props){
+                        return {header: prevState.header}
+                    })
+                    }
+
+                    this._toggleProfileModal()
                 }
 
                 _autoExpand = (event) => {
