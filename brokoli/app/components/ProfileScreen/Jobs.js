@@ -305,10 +305,10 @@ export default class Jobs extends React.Component
                 </View>
 
                 <View style={{flex: 2,alignItems: 'center', justifyContent: 'center', marginRight: 5}}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => this._increaseStartYear()}>
                         <Image style={styles.arrow} source={require('../../../img/icons/up-arrow.png')}/>
                         </TouchableOpacity>
-                    <TouchableOpacity >
+                    <TouchableOpacity onPress={() => this._decreaseStartYear()}>
                         <Image style={styles.arrow} source={require('../../../img/icons/down-arrow.png')}/>
                         </TouchableOpacity>
 
@@ -409,12 +409,33 @@ export default class Jobs extends React.Component
 
           }
           _decreaseEndYear(){
+
             this.state.newEndYear = this.state.newEndYear - 1
             this.setState(function(prevState, props){
                 return {newEndYear: prevState.newEndYear}
             })
             console.log('End year: ', this.state.newEndYear)
           }
+
+          _increaseStartYear(){
+            
+             this.state.newStartYear = this.state.newStartYear + 1
+             this.setState(function(prevState, props){
+                return {newStartYear: prevState.newStartYear}
+            })
+            console.log('Start year: ', this.state.newEndYear)
+            
+          }
+
+          _decreaseStartYear(){
+
+            this.state.newStartYear = this.state.newStartYear - 1
+            this.setState(function(prevState, props){
+                return {newStartYear: prevState.newStartYear}
+            })
+            console.log('Start year: ', this.state.newStartYear)
+                      
+        }
 
           _addJob(){
             tempArr.unshift({startMonth: this.state.newStartMonth, 
