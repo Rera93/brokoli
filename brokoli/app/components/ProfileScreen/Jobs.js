@@ -29,10 +29,10 @@ export default class Jobs extends React.Component
 
         this.state = {
             data: [
-                {startMonth: 'Mar', startYear: '2007', endMonth: 'Jun', endYear: '2007', position: 'Java', company: 'Google', city: 'Boston', country: 'MA'},
-                {startMonth: 'Mar', startYear: '2007', endMonth: 'Jun', endYear: '2007', position: 'Java1', company: 'Google', city: 'Boston', country: 'MA'},
-                {startMonth: 'Mar', startYear: '2007', endMonth: 'Jun', endYear: '2007', position: 'Java2', company: 'Google', city: 'Boston', country: 'MA'},
-                {startMonth: 'Mar', startYear: '2007', endMonth: 'Jun', endYear: '2007', position: 'Java3', company: 'Google', city: 'Boston', country: 'MA'},
+                {startMonth: 'Mar', startYear: '2007', endMonth: 'Jun', endYear: '2007', position: 'Java Developer', company: 'Google', city: 'Boston', country: 'MA'},
+                {startMonth: 'Jan', startYear: '2015', endMonth: 'Mar', endYear: '2015', position: 'Financial Analyst', company: 'ING', city: 'Utrecht', country: 'The Netherlands'},
+                {startMonth: 'Oct', startYear: '2017', endMonth: 'Dec', endYear: '2017', position: 'Managerial Accountant', company: 'Deloitte', city: 'Rotterdam', country: 'The Netherlands'},
+                {startMonth: 'Jun', startYear: '2016', endMonth: 'Aug', endYear: '2016', position: 'IT, Development Engineer', company: 'KPN', city: 'Den Haag', country: 'The Netherlands'},
         ],
             actionButtonVisible: true,
             isModalAddVisible: false,
@@ -608,15 +608,25 @@ export default class Jobs extends React.Component
                      renderItem={({ item, index }) => (
                          <Swipeout {...swipeSettings} item={item} index={index} style={styles.skillContainer}>
                             <View style={styles.period}>
+                             
+                                <Image source={require('../../../img/icons/calendar.png')} style={styles.itemIcon} />
                                 <Text style={styles.item}>{item.startMonth}</Text>
-                                <Text style={styles.item}>{item.startYear}</Text>
+                        
+                                <Text style={styles.item}> {item.startYear} - </Text>
                                 <Text style={styles.item}>{item.endMonth}</Text>
-                                <Text style={styles.item}>{item.endYear}</Text>
+                                <Text style={styles.item}> {item.endYear}</Text>
                             </View>
+                            <View style={{flexDirection: 'row', marginTop: 5}}>
+                            <Image source={require('../../../img/icons/workpos.png')} style={styles.itemIcon} />
                             <Text style={styles.item}>{item.position}</Text>
+                            </View>
+                            <View style={{flexDirection: 'row', marginTop: 5}}>
+                            <Image source={require('../../../img/icons/company.png')} style={styles.itemIcon} />
                             <Text style={styles.item}>{item.company}</Text>
-                            <View style={styles.period}>
-                            <Text style={styles.item}>{item.city}</Text>
+                            </View>
+                            <View style={[styles.period, {marginTop: 5}]}>
+                            <Image source={require('../../../img/icons/cityCountry.png')} style={styles.itemIcon} />
+                            <Text style={styles.item}>{item.city}, </Text>
                             <Text style={styles.item}>{item.country}</Text>
                             </View>
                           </Swipeout>   
@@ -766,12 +776,18 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         flexDirection: 'row',
         borderRadius: 5,
-        // width: (width - 100) /2
     },
     arrowCont: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center'
         
+    },
+    itemIcon: {
+        resizeMode: 'center',
+        width: 20,
+        height: 20,
+        tintColor: '#C7C7CD',
+        marginRight: 10,
     }
 })
