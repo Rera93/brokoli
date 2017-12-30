@@ -38,6 +38,14 @@ export default class Profile extends React.Component {
             newPasswordConfirm: '',
             oldEmail: '',
             newEmail: '',
+            newFullName: '',
+            newHeader: '',
+            //current whereabouts
+            newCity: '',
+            newCountry: '',
+            newProfilePic: '',
+
+
         }
     }
     _onActionPressed(action){
@@ -46,7 +54,7 @@ export default class Profile extends React.Component {
 
             case 'bt_profile': 
 
-            console.log('bt_profile')
+            {this._toggleProfileModal()}
 
             break;
             case 'bt_account': 
@@ -116,7 +124,7 @@ export default class Profile extends React.Component {
             
                     <Text style={styles.title}>Update account settings</Text> 
             
-                    <View style={{marginTop: 10}}>
+                    <View style={{marginTop: 20}}>
                           
                     <TextInput placeholder='old email'
                                      style={styles.input}
@@ -169,7 +177,7 @@ export default class Profile extends React.Component {
             
                           </View>
             
-                          <View style={{flexDirection: 'row'}}>
+                          <View style={{flexDirection: 'row', marginTop: 20}}>
             
                           <TouchableOpacity  disabled={!this.state.flip}
                                             style={[styles.button,{borderWidth: 2, borderColor: '#254D32', backgroundColor: this.state.flip ? '#254D32' : 'white'} ]} 
@@ -197,7 +205,7 @@ export default class Profile extends React.Component {
             })
             console.log('Old Email: ', this.state.oldEmail)
   
-            this._flip()
+            this._flipAccount()
         }
         _grabNewEmail = (email) => {
             this.state.newEmail = email
@@ -206,7 +214,7 @@ export default class Profile extends React.Component {
             })
             console.log('New Email: ', this.state.newEmail)
   
-            this._flip()
+            this._flipAccount()
         }
         _grabOldPassword = (password) => {
             this.state.oldPassword = password
@@ -215,7 +223,7 @@ export default class Profile extends React.Component {
             })
             console.log('Old Password: ', this.state.oldPassword)
   
-            this._flip()
+            this._flipAccount()
         }
         _grabNewPassword = (password) => {
             this.state.newPassword = password
@@ -224,7 +232,7 @@ export default class Profile extends React.Component {
             })
             console.log('New Password: ', this.state.newPassword)
   
-            this._flip()
+            this._flipAccount()
         }
 
         _grabNewPasswordConfirm = (password) => {
@@ -234,10 +242,10 @@ export default class Profile extends React.Component {
             })
             console.log('New Password Confirm: ', this.state.newPasswordConfirm)
   
-            this._flip()
+            this._flipAccount()
         }
 
-        _flip(){
+        _flipAccount(){
             if((this.state.oldEmail != '' && this.state.newEmail != '') || 
                (this.state.oldPassword != '' && this.state.newPassword != '' 
                && this.state.newPasswordConfirm != '' && this.state.newPassword === this.state.newPasswordConfirm))
@@ -281,7 +289,7 @@ export default class Profile extends React.Component {
             this.setState(function(prevState,props){
                 return {newPasswordConfirm: prevState.newPasswordConfirm}
             })
-            this._flip()
+            this._flipAccount()
           }
         
        
@@ -291,6 +299,173 @@ export default class Profile extends React.Component {
             //I have created the interface so that the user may either update email or password or both. 
             console.log('Update Account')
         }
+
+        _toggleProfileModal = () => {
+            
+            this.state.isModalProfileVisible = !this.state.isModalProfileVisible
+            this.setState(function(prevState, props){
+                return {isModalProfileVisible: prevState.isModalProfileVisible}
+            })
+            console.log('isModalProfileVisible: ', this.state.isModalProfileVisible)
+           // this._releaseNewProfileData()
+            }
+
+            _renderProfileModal = () => (
+                
+                            <View style={styles.modalContent}>
+                            
+                                    <View style={styles.form}> 
+                            
+                                    <Text style={styles.title}>Update personal settings</Text> 
+                            
+                                    <View style={{marginTop: 20}}>
+                                          
+                                    <TextInput placeholder='full name'
+                                                     style={styles.input}
+                                                     underlineColorAndroid='transparent'
+                                                     onChangeText={(text) => this._grabNewFullName(text)}
+                                                     value={this.state.newFullName}/>
+                            
+                                     </View>
+                
+                                     <View style={{marginTop: 10}}>
+                                          
+                                    <TextInput placeholder='header'
+                                                     style={styles.input}
+                                                     underlineColorAndroid='transparent'
+                                                     onChangeText={(text) => this._grabNewHeader(text)}
+                                                     value={this.state.newHeader}/>
+                            
+                                     </View>
+                
+                                     <View style={{marginTop: 10}}>
+                                          
+                                    <TextInput placeholder='city'
+                                                     style={styles.input}
+                                                     underlineColorAndroid='transparent'
+                                                     onChangeText={(text) => this._grabNewCity(text)}
+                                                     value={this.state.newCity}/>
+                            
+                                     </View>
+                
+                                     <View style={{marginTop: 10}}>
+                                          
+                                    <TextInput placeholder='country'
+                                                     style={styles.input}
+                                                     underlineColorAndroid='transparent'
+                                                     onChangeText={(text) => this._grabNewCountry(text)}
+                                                     value={this.state.newCountry}/>
+                            
+                                     </View>
+                            
+                                          </View>
+                            
+                                          <View style={{flexDirection: 'row', marginTop: 20}}>
+                            
+                                          <TouchableOpacity  disabled={!this.state.flip}
+                                                            style={[styles.button,{borderWidth: 2, borderColor: '#254D32', backgroundColor: this.state.flip ? '#254D32' : 'white'} ]} 
+                                                            onPress={() => this._updateProfileSettings()}>
+                                            <Text style={[styles.btnTxt, {color: this.state.flip ? 'white' : '#254D32'}]}>Change</Text>
+                             
+                                          </TouchableOpacity>
+                            
+                                          <TouchableOpacity style={[styles.button, {backgroundColor: '#A7333F'}]} 
+                                                            onPress={() => this._toggleProfileModal()}>
+                                            <Text style={[styles.btnTxt, {color: 'white'}]}>Close</Text>
+                             
+                                          </TouchableOpacity>
+                            
+                                          </View>
+                                        
+                                        </View>
+                
+                        )
+
+            _grabNewFullName = (name) => {
+            this.state.newFullName = name
+            this.setState(function(prevState,props){
+                return {newFullName: prevState.newFullName}
+            })
+            console.log('New Full Name: ', this.state.newFullName)
+  
+            this._flipProfile()
+        }
+        _grabNewHeader = (header) => {
+            this.state.newHeader = header
+            this.setState(function(prevState,props){
+                return {newHeader: prevState.newHeader}
+            })
+            console.log('New Header: ', this.state.newHeader)
+  
+            this._flipProfile()
+        }
+
+        _grabNewCity = (city) => {
+            this.state.newCity= city
+            this.setState(function(prevState,props){
+                return {newCity: prevState.newCity}
+            })
+            console.log('New City: ', this.state.newCity)
+  
+            this._flipProfile()
+        }
+        _grabNewCountry = (country) => {
+            this.state.newCountry = country
+            this.setState(function(prevState,props){
+                return {newCountry: prevState.newCountry}
+            })
+            console.log('New Country: ', this.state.newCountry)
+  
+            this._flipProfile()
+        }
+
+        _flipProfile(){
+            if(this.state.newFullName != '' || this.state.newHeader != '' 
+               || this.state.newCity != '' || this.state.newCountry != '' )
+               {
+                this.state.flip = true
+                this.setState(function(prevState,props){
+                    return {flip: prevState.flip}
+                })
+            }
+            else {
+              this.state.flip = false
+              this.setState(function(prevState,props){
+                  return {flip: prevState.flip}
+              })
+      
+            }
+            console.log('Flip: ', this.state.flip)
+            
+        }
+      
+         _releaseNewAccountData(){
+                  //Release text inputs value
+                  this.state.newFullName = ''
+                  this.setState(function(prevState,props){
+                      return {newFullName: prevState.newFullName}
+                  })
+                  this.state.newHeader = ''
+                  this.setState(function(prevState,props){
+                      return {newHeader: prevState.newHeader}
+                  })
+                  this.state.newCity = ''
+                  this.setState(function(prevState,props){
+                      return {newCity: prevState.newCity}
+                  })
+                  this.state.newCountry = ''
+                  this.setState(function(prevState,props){
+                      return {newCountry: prevState.newCountry}
+                  })
+                 
+                  this._flipProfile()
+                }
+
+                _updateProfileSettings(){
+                    console.log('update profile settings')
+                }
+
+
 
     render(){
         const actions = [{
@@ -386,7 +561,15 @@ export default class Profile extends React.Component {
 
                       {this._renderAccountModal()}
 
-                         </Modal>  
+                         </Modal> 
+
+                       <Modal isVisible = {this.state.isModalProfileVisible}
+                         animationIn={'slideInLeft'}
+                         animationOut={'slideOutRight'}>
+
+                      {this._renderProfileModal()}
+
+                         </Modal>      
                 </View>
         
            
@@ -497,6 +680,9 @@ const styles = StyleSheet.create({
         marginRight: 5,
         marginBottom: 5,
         color: '#C7C7CD',
+    },
+    form:{
+        width: width - 100
     },
   });
 
