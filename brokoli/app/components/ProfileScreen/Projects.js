@@ -253,16 +253,16 @@ export default class Projects extends React.Component
           }
           _renderDeleteModalContent = () => (
 
-            <View style={styles.modalContent}>
+            <View style={[styles.modalContent, {backgroundColor: '#254D32'}]}>
             
-                <Text style={styles.title}>Are you sure you want to delete the selected project from your profile?</Text>
+                <Text style={[styles.title, {color: 'white'}]}>Are you sure you want to delete the selected project from your profile?</Text>
             
                 <View style={{flexDirection: 'row'}}>
             
                                     <TouchableOpacity 
-                                                    style={[styles.button,{backgroundColor: '#254D32'}]} 
+                                                    style={[styles.button,{backgroundColor: 'white'}]} 
                                                     onPress={() => this._deleteItem() }>
-                                    <Text style={[styles.btnTxt, {color: 'white'}]}>Ok</Text>
+                                    <Text style={[styles.btnTxt, {color: '#254D32'}]}>Ok</Text>
                     
                                     </TouchableOpacity>
             
