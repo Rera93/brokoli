@@ -44,6 +44,7 @@ export default class Profile extends React.Component {
             newCity: '',
             newCountry: '',
             newProfilePic: '',
+            height: 0
 
 
         }
@@ -307,7 +308,7 @@ export default class Profile extends React.Component {
                 return {isModalProfileVisible: prevState.isModalProfileVisible}
             })
             console.log('isModalProfileVisible: ', this.state.isModalProfileVisible)
-           // this._releaseNewProfileData()
+            this._releaseNewProfileData()
             }
 
             _renderProfileModal = () => (
@@ -330,11 +331,16 @@ export default class Profile extends React.Component {
                 
                                      <View style={{marginTop: 10}}>
                                           
-                                    <TextInput placeholder='header'
+                                    <TextInput       {...this.props}
+                                                     placeholder='header'
                                                      style={styles.input}
                                                      underlineColorAndroid='transparent'
                                                      onChangeText={(text) => this._grabNewHeader(text)}
-                                                     value={this.state.newHeader}/>
+                                                     value={this.state.newHeader}
+                                                     multiline = {true}
+                                                     maxLength = {100}
+                                                     style = {[styles.input, {height: Math.max(40, this.state.height)}]}
+                                                     onContentSizeChange = {(event) => this._autoExpand(event)}/>
                             
                                      </View>
                 
@@ -439,7 +445,7 @@ export default class Profile extends React.Component {
             
         }
       
-         _releaseNewAccountData(){
+         _releaseNewProfileData(){
                   //Release text inputs value
                   this.state.newFullName = ''
                   this.setState(function(prevState,props){
@@ -463,6 +469,14 @@ export default class Profile extends React.Component {
 
                 _updateProfileSettings(){
                     console.log('update profile settings')
+                }
+
+                _autoExpand = (event) => {
+                    this.state.height = event.nativeEvent.contentSize.height
+                    this.setState(function(prevState,props){
+                        return {height: prevState.height}
+                    })
+                   
                 }
 
 
