@@ -41,6 +41,14 @@ export default class Profile extends React.Component {
             newEmail: '',
         }
     }
+
+    componentWillMount(){
+        //const { params } = this.props.navigation.state;console.log(this.navigation.state.params.userID);
+           this.getData();
+    
+           //const { params } = this.props.navigation.state;
+         }
+         
     _onActionPressed(action){
 
         switch(action){
@@ -66,14 +74,7 @@ export default class Profile extends React.Component {
         }
 
     }
-<<<<<<< HEAD
-
-    componentWillMount(){
-    //const { params } = this.props.navigation.state;console.log(this.navigation.state.params.userID);
-       this.getData();
-
-       //const { params } = this.props.navigation.state;
-     }
+    
 
      getData(){
      
@@ -102,7 +103,6 @@ export default class Profile extends React.Component {
              });
      
          }
-=======
     _toggleLogoutModal = () => {
 
         this.state.isModalLogoutVisible = !this.state.isModalLogoutVisible
@@ -329,7 +329,6 @@ export default class Profile extends React.Component {
             //I have created the interface so that the user may either update email or password or both. 
             console.log('Update Account')
         }
->>>>>>> profile
 
     render(){
         const actions = [{
