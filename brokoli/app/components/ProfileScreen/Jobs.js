@@ -18,6 +18,8 @@ import Swipeout from 'react-native-swipeout'
 const width = Dimensions.get('window').width
 
 var tempArr = []
+const minYY = 1990
+const maxYY = 2018
 
 export default class Jobs extends React.Component
 {
@@ -221,7 +223,7 @@ export default class Jobs extends React.Component
 
               <Text style={styles.title}>Add new job</Text> 
 
-              <View style={{marginTop: 10}}>
+              <View style={{marginTop: 20}}>
               
               <TextInput placeholder='company'
                          style={styles.input}
@@ -263,9 +265,9 @@ export default class Jobs extends React.Component
 
               <View style={styles.dateInputCont}>
 
-              <View style={{flex: 1, justifyContent: 'center'}}>
+              <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
 
-              <Text style={{fontSize: 16, fontWeight: '400', color: '#C7C7CD'}}> Start Date</Text>
+              <Text style={{fontSize: 16, fontWeight: '400', color: '#C7C7CD'}}>Start Date</Text>
 
               </View>
 
@@ -321,9 +323,9 @@ export default class Jobs extends React.Component
 
                 <View style={styles.dateInputCont}>
 
-                <View style={{flex: 1, alignItems:'flex-start', justifyContent: 'center', paddingLeft: 5}}>
+                <View style={{flex: 1, alignItems:'center', justifyContent: 'center', paddingLeft: 5}}>
 
-                <Text style={{fontSize: 16, fontWeight: '400', color: '#C7C7CD'}}>End Date </Text>
+                <Text style={{fontSize: 16, fontWeight: '400', color: '#C7C7CD'}}>End Date</Text>
 
                 </View>
                 
@@ -335,7 +337,7 @@ export default class Jobs extends React.Component
                         mode="dropdown"
                         itemStyle = {{fontSize: 12}}
                         style={{
-                        height: 35,
+                        height: 30,
                         color: '#C7C7CD',
                         }}>
                         <Picker.Item label="Jan" value="1" />
@@ -378,7 +380,7 @@ export default class Jobs extends React.Component
 
               </View>
 
-              <View style={{flexDirection: 'row'}}>
+              <View style={{flexDirection: 'row', paddingTop: 20}}>
 
               <TouchableOpacity  disabled={!this.state.flip}
                                 style={[styles.button,{borderWidth: 2, borderColor: '#254D32', backgroundColor: this.state.flip ? '#254D32' : 'white'} ]} 
@@ -400,14 +402,23 @@ export default class Jobs extends React.Component
 
           _increaseEndYear(){
 
+                if(this.state.newEndYear < maxYY)
+
+                {
+
                 this.state.newEndYear = this.state.newEndYear + 1
                 this.setState(function(prevState, props){
                     return {newEndYear: prevState.newEndYear}
                 })
                 console.log('End year: ', this.state.newEndYear)
 
+                }
+
           }
           _decreaseEndYear(){
+
+            if (this.state.newEndYear > minYY){
+
 
             this.state.newEndYear = this.state.newEndYear - 1
             this.setState(function(prevState, props){
@@ -416,23 +427,38 @@ export default class Jobs extends React.Component
             console.log('End year: ', this.state.newEndYear)
           }
 
+        }
+
           _increaseStartYear(){
+
+            if(this.state.newStartYear < maxYY)
+            
+            {
             
              this.state.newStartYear = this.state.newStartYear + 1
              this.setState(function(prevState, props){
                 return {newStartYear: prevState.newStartYear}
             })
-            console.log('Start year: ', this.state.newEndYear)
+           
+            console.log('Start year: ', this.state.newStartYear)
+
+            }
             
           }
 
           _decreaseStartYear(){
+
+            if(this.state.newStartYear > minYY)
+
+            {
 
             this.state.newStartYear = this.state.newStartYear - 1
             this.setState(function(prevState, props){
                 return {newStartYear: prevState.newStartYear}
             })
             console.log('Start year: ', this.state.newStartYear)
+
+        }
                       
         }
 
@@ -611,6 +637,7 @@ export default class Jobs extends React.Component
                          animationOut={'slideOutRight'}>
 
                          {this._renderModalContent()}
+
                   </Modal>   
 
                    <Modal isVisible = {this.state.isModalDeleteVisible}
