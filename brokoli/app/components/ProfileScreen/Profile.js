@@ -105,6 +105,7 @@ export default class Profile extends React.Component {
             return {isModalAccountVisible: prevState.isModalAccountVisible}
         })
         console.log('isModalAccountVisible: ', this.state.isModalAccountVisible)
+        this._releaseNewAccountData()
         }
 
         _renderAccountModal = () => (
@@ -257,10 +258,37 @@ export default class Profile extends React.Component {
             console.log('Flip: ', this.state.flip)
       
           }
+
+          _releaseNewAccountData(){
+            //Release text inputs value
+            this.state.oldEmail = ''
+            this.setState(function(prevState,props){
+                return {oldEmail: prevState.oldEmail}
+            })
+            this.state.newEmail = ''
+            this.setState(function(prevState,props){
+                return {newEmail: prevState.newEmail}
+            })
+            this.state.oldPassword = ''
+            this.setState(function(prevState,props){
+                return {oldPassword: prevState.oldPassword}
+            })
+            this.state.newPassword = ''
+            this.setState(function(prevState,props){
+                return {newPassword: prevState.newPassword}
+            })
+            this.state.newPasswordConfirm = ''
+            this.setState(function(prevState,props){
+                return {newPasswordConfirm: prevState.newPasswordConfirm}
+            })
+            this._flip()
+          }
         
        
 
         _updateAccountSettings() {
+            //This is your part Alan. Need to update db for email and password.
+            //I have created the interface so that the user may either update email or password or both. 
             console.log('Update Account')
         }
 
