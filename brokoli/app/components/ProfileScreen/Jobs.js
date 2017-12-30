@@ -263,9 +263,9 @@ export default class Jobs extends React.Component
 
               <View style={styles.dateInputCont}>
 
-              <View style={{flex: 3, justifyContent: 'center', paddingLeft: 10}}>
+              <View style={{flex: 1, justifyContent: 'center'}}>
 
-              <Text style={{fontSize: 16, fontWeight: '400', color: '#C7C7CD'}}>Start Date </Text>
+              <Text style={{fontSize: 16, fontWeight: '400', color: '#C7C7CD'}}> Start Date</Text>
 
               </View>
 
@@ -278,7 +278,7 @@ export default class Jobs extends React.Component
                         itemStyle = {{fontSize: 12}}
                         style={{
                         color: '#C7C7CD',
-                        height: 35,
+                        height: 30,
                         }}>
                         <Picker.Item label="Jan" value="1" />
                         <Picker.Item label="Feb" value="2" />
@@ -298,30 +298,30 @@ export default class Jobs extends React.Component
 
                 <View style={styles.yearCounter}>
 
-                <View style={{flex: 6}}>
+                <TouchableOpacity style={{flex: 1, alignItems: 'center', justifyContent: 'center'}} onPress={() => this._decreaseStartYear()}>
+                        <Image style={[styles.arrow, {tintColor: '#A7333F'}]} source={require('../../../img/icons/decrement.png')}/>
+                        </TouchableOpacity>
 
-                <TextInput  keyboardType={'numeric'} value={this.state.newStartYear.toString()}/>
+                <View style={{flex: 2}}>
+
+                <TextInput style={{textAlign: 'center', fontSize: 17, color: '#C7C7CD'}} keyboardType={'numeric'} value={this.state.newStartYear.toString()}/>
 
                 </View>
 
-                <View style={{flex: 2,alignItems: 'center', justifyContent: 'center', marginRight: 5}}>
-                    <TouchableOpacity onPress={() => this._increaseStartYear()}>
-                        <Image style={styles.arrow} source={require('../../../img/icons/up-arrow.png')}/>
-                        </TouchableOpacity>
-                    <TouchableOpacity onPress={() => this._decreaseStartYear()}>
-                        <Image style={styles.arrow} source={require('../../../img/icons/down-arrow.png')}/>
-                        </TouchableOpacity>
+                <TouchableOpacity style={{flex: 1, alignItems: 'center', justifyContent: 'center'}} onPress={() => this._increaseStartYear()}>
+                        <Image style={[styles.arrow, {tintColor: '#254D32'}]} source={require('../../../img/icons/increment.png')}/>
+                </TouchableOpacity>
+                    
 
                     </View>
 
-                </View>
         
 
                 </View>
 
                 <View style={styles.dateInputCont}>
 
-                <View style={{flex: 3, justifyContent: 'center', paddingLeft: 5}}>
+                <View style={{flex: 1, alignItems:'flex-start', justifyContent: 'center', paddingLeft: 5}}>
 
                 <Text style={{fontSize: 16, fontWeight: '400', color: '#C7C7CD'}}>End Date </Text>
 
@@ -354,25 +354,24 @@ export default class Jobs extends React.Component
 
                 </View>
 
-              <View style={styles.yearCounter}>
-
-                <View style={{flex: 6}}>
-
-                <TextInput keyboardType={'numeric'} value={this.state.newEndYear.toString()}/>
-
-                </View>
-
-                <View style={{flex: 2, alignItems: 'center', justifyContent: 'center', marginRight: 5}} >
-                    <TouchableOpacity onPress={()=>this._increaseEndYear()}>
-                        <Image style={styles.arrow} source={require('../../../img/icons/up-arrow.png')}/>
-                        </TouchableOpacity>
-                    <TouchableOpacity onPress={()=>this._decreaseEndYear()}>
-                        <Image style={styles.arrow} source={require('../../../img/icons/down-arrow.png')}/>
-                        </TouchableOpacity>
-
-                    </View>
-
-                </View>
+                <View style={styles.yearCounter}>
+                
+                                <TouchableOpacity style={{flex: 1, alignItems: 'center', justifyContent: 'center'}} onPress={() => this._decreaseEndYear()}>
+                                        <Image style={[styles.arrow, {tintColor: '#A7333F'}]} source={require('../../../img/icons/decrement.png')}/>
+                                        </TouchableOpacity>
+                
+                                <View style={{flex: 2}}>
+                
+                                <TextInput style={{textAlign: 'center', fontSize: 17, color: '#C7C7CD'}} keyboardType={'numeric'} value={this.state.newEndYear.toString()}/>
+                
+                                </View>
+                
+                                <TouchableOpacity style={{flex: 1, alignItems: 'center', justifyContent: 'center'}} onPress={() => this._increaseEndYear()}>
+                                        <Image style={[styles.arrow, {tintColor: '#254D32'}]} source={require('../../../img/icons/increment.png')}/>
+                                </TouchableOpacity>
+                                    
+                
+                                    </View>
 
 
               </View>
@@ -708,10 +707,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
+        marginTop: 5,
         marginBottom: 5,
     },
     dateInput:{
-        flex: 3,
+        flex: 1,
         borderWidth: 2,
         borderColor: 'grey',
         backgroundColor: '#F8F9FB',
@@ -728,28 +728,23 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     arrow: {
-        resizeMode: 'contain',
-        width: 14,
-        height: 14,
+        borderWidth: 1,
+        width: 20,
+        height: 20,
+        resizeMode: 'center'
     },
     yearCounter: {
-        flex: 2,
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
-        borderWidth: 2,
-        borderColor: 'grey',
-        backgroundColor: '#F8F9FB',
         borderRadius: 5,
-        paddingBottom: 5,
-        paddingLeft: 10,
-        marginRight: 5,
-        marginTop: 5,
         // width: (width - 100) /2
     },
     arrowCont: {
+        flex: 1,
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'center'
         
     }
 })
