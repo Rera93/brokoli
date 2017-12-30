@@ -463,11 +463,11 @@ export default class Jobs extends React.Component
                 return {newEndMonth: prevState.newEndMonth}
             })
             //Release year values
-            this.state.newStartYear = "2010"
+            this.state.newStartYear = 2010
             this.setState(function(prevState,props){
                 return {newStartYear: prevState.newStartYear}
             })
-            this.state.newEndYear = "2010"
+            this.state.newEndYear = 2010
             this.setState(function(prevState,props){
                 return {newEndYear: prevState.newEndYear}
             })
