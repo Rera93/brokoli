@@ -12,6 +12,8 @@ import Jobs from './Jobs'
 import Overview from './Overview'
 import Tabs from './Tabs'
 
+import FloatingAction from '../FloatingTopComponent/FloatingAction'
+
 const width = Dimensions.get('window').width
 const height = Dimensions.get('window').height
 const profileIcon = require('../../../img/icons/profile_pic.png')
@@ -30,10 +32,41 @@ export default class Profile extends React.Component {
     }
     render(){
         console.log(this.state.routes)
+
+
+        const actions = [{
+            text: 'Change profile settings',
+            icon: require('../../../img/icons/add.png'),
+            name: 'bt_profile',
+            position: 1
+          }, {
+            text: 'Change email address',
+            icon: require('../../../img/icons/add.png'),
+            name: 'bt_email',
+            position: 2
+          }, {
+            text: 'Change password',
+            icon: require('../../../img/icons/add.png'),
+            name: 'bt_password',
+            position: 3
+          }, {
+            text: 'Logout',
+            icon: require('../../../img/icons/add.png'),
+            name: 'bt_logout',
+            position: 4
+          }];
         return(
             <View style={styles.container}>
 
             <View style={styles.header}>
+
+                <FloatingAction  actions={actions}
+                                 position="right"
+                                 onPressItem={
+                                             (name) => {
+                                Alert.alert('Icon pressed', `the icon ${name} was pressed`);
+                                }
+            }/>
 
 
                 <View style={styles.profilePicCont}>
