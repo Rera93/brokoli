@@ -35,25 +35,17 @@ export default class Profile extends React.Component {
 
 
         const actions = [{
-            text: 'Change profile settings',
-            icon: require('../../../img/icons/add.png'),
+            icon: require('../../../img/icons/edit-profile.png'),
             name: 'bt_profile',
             position: 1
           }, {
-            text: 'Change email address',
-            icon: require('../../../img/icons/add.png'),
+            icon: require('../../../img/icons/lock.png'),
             name: 'bt_email',
             position: 2
           }, {
-            text: 'Change password',
-            icon: require('../../../img/icons/add.png'),
+            icon: require('../../../img/icons/exit.png'),
             name: 'bt_password',
             position: 3
-          }, {
-            text: 'Logout',
-            icon: require('../../../img/icons/add.png'),
-            name: 'bt_logout',
-            position: 4
           }];
         return(
             <View style={styles.container}>
@@ -62,10 +54,10 @@ export default class Profile extends React.Component {
 
                 <FloatingAction  actions={actions}
                                  position="right"
-                                 onPressItem={
-                                             (name) => {
-                                Alert.alert('Icon pressed', `the icon ${name} was pressed`);
-                                }
+                                   onPressItem={
+              (name) => {
+                Alert.alert('Icon pressed', `the icon ${name} was pressed`);
+              }
             }/>
 
 

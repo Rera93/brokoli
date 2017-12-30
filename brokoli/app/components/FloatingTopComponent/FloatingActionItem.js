@@ -151,7 +151,7 @@ FloatingActionItem.propTypes = {
 };
 
 FloatingActionItem.defaultProps = {
-  color: '#1253bc',
+  color: '#42D260',
   elevation: 5,
   textColor: '#444444',
   textBackground: '#ffffff',
@@ -223,9 +223,9 @@ const styles = StyleSheet.create({
     borderRadius: 20
   },
   icon: {
-    resizeMode: 'contain',
-    width: 20,
-    height: 20
+    resizeMode: 'center',
+    width: 30,
+    height: 30
   }
 });
 

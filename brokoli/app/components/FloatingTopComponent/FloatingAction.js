@@ -63,7 +63,7 @@ class FloatingAction extends Component {
       return <Image style={styles.buttonIcon} source={floatingIcon} />;
     }
 
-    return <Image style={styles.buttonIcon} source={require('../../../img/icons/add.png')} />;
+    return <Image style={styles.buttonIcon} source={require('../../../img/icons/settings-gears.png')} />;
   };
 
   handlePressItem = (itemName) => {
@@ -284,10 +284,10 @@ FloatingAction.propTypes = {
 FloatingAction.defaultProps = {
   overrideWithAction: false,
   visible: true,
-  buttonColor: '#1253bc',
+  buttonColor: '#42D260',
   overlayColor: 'rgba(68, 68, 68, 0.6)',
   position: 'right',
-  distanceToEdge: 30
+  distanceToEdge: 10
 };
 
 const styles = StyleSheet.create({
