@@ -500,11 +500,11 @@ export default class Jobs extends React.Component
             })
             this._flip()
             //Release month values
-            this.state.newStartMonth = "1"
+            this.state.newStartMonth = "Jan"
             this.setState(function(prevState,props){
                 return {newStartMonth: prevState.newStartMonth}
             })
-            this.state.newEndMonth = "1"
+            this.state.newEndMonth = "Jan"
             this.setState(function(prevState,props){
                 return {newEndMonth: prevState.newEndMonth}
             })
