@@ -41,9 +41,9 @@ export default class Jobs extends React.Component
             newCompany: '',
             newCity: '',
             newCountry: '',
-            newStartMonth: '1',
+            newStartMonth: 'Jan',
             newStartYear: 2010,
-            newEndMonth: '1',
+            newEndMonth: 'Jan',
             newEndYear: 2010,
             flip: false,
             activeRowKey : null,
@@ -282,18 +282,18 @@ export default class Jobs extends React.Component
                         color: '#C7C7CD',
                         height: 30,
                         }}>
-                        <Picker.Item label="Jan" value="1" />
-                        <Picker.Item label="Feb" value="2" />
-                        <Picker.Item label="Mar" value="3" />
-                        <Picker.Item label="Apr" value="4" />
-                        <Picker.Item label="May" value="5" />
-                        <Picker.Item label="Jun" value="6" />
-                        <Picker.Item label="Jul" value="7" />
-                        <Picker.Item label="Aug" value="8" />
-                        <Picker.Item label="Sep" value="9" />
-                        <Picker.Item label="Oct" value="10" />
-                        <Picker.Item label="Nov" value="11" />
-                        <Picker.Item label="Dec" value="12" />
+                        <Picker.Item label="Jan" value="Jan" />
+                        <Picker.Item label="Feb" value="Feb" />
+                        <Picker.Item label="Mar" value="Mar" />
+                        <Picker.Item label="Apr" value="Apr" />
+                        <Picker.Item label="May" value="May" />
+                        <Picker.Item label="Jun" value="Jun" />
+                        <Picker.Item label="Jul" value="Jul" />
+                        <Picker.Item label="Aug" value="Aug" />
+                        <Picker.Item label="Sep" value="Sep" />
+                        <Picker.Item label="Oct" value="Oct" />
+                        <Picker.Item label="Nov" value="Nov" />
+                        <Picker.Item label="Dec" value="Dec" />
                     </Picker>
                  
                 </View>
@@ -340,18 +340,18 @@ export default class Jobs extends React.Component
                         height: 30,
                         color: '#C7C7CD',
                         }}>
-                        <Picker.Item label="Jan" value="1" />
-                        <Picker.Item label="Feb" value="2" />
-                        <Picker.Item label="Mar" value="3" />
-                        <Picker.Item label="Apr" value="4" />
-                        <Picker.Item label="May" value="5" />
-                        <Picker.Item label="Jun" value="6" />
-                        <Picker.Item label="Jul" value="7" />
-                        <Picker.Item label="Aug" value="8" />
-                        <Picker.Item label="Sep" value="9" />
-                        <Picker.Item label="Oct" value="10" />
-                        <Picker.Item label="Nov" value="11" />
-                        <Picker.Item label="Dec" value="12" />
+                        <Picker.Item label="Jan" value="Jan" />
+                        <Picker.Item label="Feb" value="Feb" />
+                        <Picker.Item label="Mar" value="Mar" />
+                        <Picker.Item label="Apr" value="Apr" />
+                        <Picker.Item label="May" value="May" />
+                        <Picker.Item label="Jun" value="Jun" />
+                        <Picker.Item label="Jul" value="Jul" />
+                        <Picker.Item label="Aug" value="Aug" />
+                        <Picker.Item label="Sep" value="Sep" />
+                        <Picker.Item label="Oct" value="Oct" />
+                        <Picker.Item label="Nov" value="Nov" />
+                        <Picker.Item label="Dec" value="Dec" />
                     </Picker>
 
                 </View>
