@@ -342,7 +342,7 @@ export default class Projects extends React.Component
                          <Swipeout {...swipeSettings} item={item} index={index} style={styles.skillContainer}>
 
                             <View style={{flexDirection: 'row', marginTop: 5}}>
-                            <Image source={require('../../../img/icons/company.png')} style={styles.itemIcon} />
+                            <Image source={require('../../../img/icons/projection-screen.png')} style={styles.itemIcon} />
                             <Text style={styles.item}>{item.project}</Text>
                             </View>
 
@@ -352,8 +352,8 @@ export default class Projects extends React.Component
                             </View>
                            
                             <View style={[styles.period, {marginTop: 5}]}>
-                            <Image source={require('../../../img/icons/cityCountry.png')} style={styles.itemIcon} />
-                            <Text style={styles.item}>{item.course}, </Text>
+                            <Image source={require('../../../img/icons/books.png')} style={styles.itemIcon} />
+                            <Text style={styles.item}>{item.course}</Text>
                             </View>
 
                           </Swipeout>   
