@@ -1,30 +1,143 @@
 import React, { Component } from 'react';
-import {ScrollView,StyleSheet, Text, View, Image, Dimensions} from 'react-native';
+import {ScrollView,
+        StyleSheet, 
+        Text, 
+        View, 
+        Image, 
+        Dimensions,
+        TouchableOpacity,
+        TouchableWithoutFeedback} from 'react-native';
 
 import SwipeCards from '../../lib/SwipeCards'
+import Modal from 'react-native-modal'
 
 const window = Dimensions.get('window');
 const width = window.width
+
 
 import tie from '../../../img/icons/tie.png'
 
 class Project extends React.Component {
     constructor(props) {
       super(props);
+
+      this.state = {
+          bookmark: false,
+          isInfoVisible: false,
+          applicants: 17,
+          projectAbstract: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremququo voluptas nulla pariatur?Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremququo voluptas nulla pariatur?Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremququo voluptas nulla pariatur.',
+      }
       
     }
+
+    _toogleBookmark()
+    {
+      this.state.bookmark = true
+      this.setState(function(prevState, props){
+        return {bookmark: prevState.bookmark}
+      })
+      console.log('Toogled Bookmark: ', this.state.bookmark)
+    }
+
+    _untoogleBookmark()
+    {
+      this.state.bookmark = false
+      this.setState(function(prevState, props){
+        return {bookmark: prevState.bookmark}
+      })
+      console.log('Untoogled Bookmark: ', this.state.bookmark)
+    }
+    
+    _toggleInfoModal()
+    {
+      this.state.isInfoVisible = !this.state.isInfoVisible
+      this.setState(function(prevState, props){
+        return { isInfoVisible: prevState.isInfoVisible}
+      })
+      console.log('isInfoVisible: ', this.state.isInfoVisible)
+    }
+
+    _renderModalInfo = () =>
+    (
+
+      <View style={{flex: 1}}>
+
+      <View style={styles.infoHeader}>
+
+
+              <View style={{flex: 3,flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', paddingLeft: 10}}> 
+
+                <Image source={require('../../../img/icons/applicants.png')} style={styles.icon} />
+
+                <Text style={styles.title}> {this.state.applicants} </Text> 
+
+                </View>
+      
+              <TouchableOpacity style={{alignItems: 'center', backgroundColor: '#A7333F', justifyContent: 'center', paddingRight: 10,paddingLeft: 10, borderTopRightRadius: 4,}}
+                                onPress={()=> this._toggleInfoModal()}>
+      
+                        <Text style={[styles.btnTxt, {color: 'white'}]}>Close</Text>
+
+                        </TouchableOpacity>
+
+
+
+                        </View>
+      
+      <View style={styles.infoModalContent}>
+
+          <View style={{paddingBottom: 10}}>
+
+          <Text style={[styles.title, {fontWeight: '600', color: '#254D32'}]}>Project Abstract</Text>
+
+          </View>
+
+          <View style={{paddingTop: 10,}}>
+      
+          <Text style={[styles.title, {color: 'grey'}]}>{this.state.projectAbstract}</Text>
+
+          </View>
+      
+              
+      </View>
+      </View>
+    )
+      
+    
+
   
      render() {
       return (
+        
         <View style={[styles.card]}>
-          <View style = {styles.header} />
 
-          <View style = {styles.tieCont}>
-            <Image source = {tie} style={styles.tie} /> 
+          <View style = {styles.header}>
+
+              <TouchableOpacity style={styles.iCont} onPress={() => this._toggleInfoModal()}>
+                <Image source={require('../../../img/icons/info.png')} style={styles.icon} />
+              </TouchableOpacity> 
+
+              <View style={styles.titleCont}>
+                <Text style={styles.title}> Project Title </Text>
+              </View>
+
+              <View style={styles.bookmarkCont}>
+                <TouchableWithoutFeedback
+                                  onPress={() => this._toogleBookmark()}
+                                  onLongPress={() => this._untoogleBookmark()}>
+
+                      <Image source={this.state.bookmark ? require('../../../img/icons/bookmark-fill.png')
+                                      : require('../../../img/icons/bookmark-outline.png') } 
+                                    style={styles.icon} />
+                </TouchableWithoutFeedback>
+              </View>
+
+          
+           
           </View>
 
           <View style = {styles.nameCont}>
-            <Text style={styles.name}> firstName lastName </Text>
+            <Text style={styles.name}> firstName </Text>
           </View>
 
           <View style = {styles.infoCont}>
@@ -46,6 +159,17 @@ class Project extends React.Component {
                    {this.props.doc.positions}</Text>
             </View>
           </View>
+
+          <Modal isVisible = {this.state.isInfoVisible}
+                         animationIn={'slideInLeft'}
+                         animationOut={'slideOutRight'}
+                         onBackdropPress={() => this.setState({ isInfoVisible: false })}
+                         avoidKeyboard={true}>
+
+                         {this._renderModalInfo()}
+
+                  </Modal>   
+
         </View>
       )
     }
@@ -150,7 +274,6 @@ class Project extends React.Component {
     card: {
       flex: 1,
       alignItems: 'center',
-      borderRadius: 15,
       borderColor: 'grey',
       backgroundColor: 'white',
       borderWidth: 0.7,
@@ -158,7 +281,7 @@ class Project extends React.Component {
       elevation: 1,
       marginBottom: 10,
       marginTop: 30,
-      width: width - 20,
+      width: width - 10,
     },
     text: {
       fontSize: 20,
@@ -175,31 +298,11 @@ class Project extends React.Component {
       justifyContent: 'center',
       alignItems: 'center',
     },
-    tieCont:{
-      marginTop: 10,
-      width: 80,
-      height: 80,
-      position: 'absolute',
-      justifyContent: 'center',
-      backgroundColor: 'white',
-      marginTop: 25,
-      borderRadius: width / 2,
-      alignItems: 'center',
-      justifyContent: 'center',
-      borderWidth: 1,
-      borderColor: '#50C878'
-    },
     header: {
-      borderTopLeftRadius: 25,
-      borderTopRightRadius: 25,
-      width: width, 
+      flexDirection: 'row',
+      flex: 1,
       height: 60,
       backgroundColor: '#50C878',
-    },
-    tie: {
-      width: 70,
-      height: 70,
-      resizeMode: 'cover'
     },
     nameCont: {
         flex: 1,
@@ -228,7 +331,7 @@ class Project extends React.Component {
       justifyContent: 'center'
     },
     titleCont:{
-      flex: 1,
+      flex: 3,
       alignItems: 'center',
       justifyContent: 'center'
     },
@@ -245,7 +348,53 @@ class Project extends React.Component {
       alignItems: 'center',
       justifyContent: 'center'
     },
-    position:{
-      
-    }
+    iCont: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'flex-start',
+      paddingLeft: 10,
+    },
+    bookmarkCont: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'flex-end',
+      paddingRight: 10,
+    },
+    icon: {
+      width: 20,
+      height: 20,
+      resizeMode: 'center',
+      tintColor: 'white'
+    },
+    title: {
+      fontSize: 20,
+      fontWeight: '400',
+      color: 'white'
+    },
+    button: {
+      padding: 12,
+      margin: 16,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 4,
+      borderColor: 'rgba(0, 0, 0, 0.1)',
+    },
+    infoModalContent: {
+      backgroundColor: 'white',
+      padding: 22,
+      justifyContent: 'flex-start',
+      alignItems: 'flex-start',
+      borderBottomRightRadius: 4,
+      borderBottomLeftRadius: 4,
+      borderColor: '#C7C7CD',
+      flex: 3,
+    },
+    infoHeader: {
+      flexDirection: 'row', 
+      justifyContent: 'center', 
+      height: 40, 
+      backgroundColor: '#254D32',
+      borderTopRightRadius: 4,
+      borderTopLeftRadius: 4,
+    },
   })
