@@ -9,9 +9,11 @@ import {ScrollView,
         TouchableWithoutFeedback} from 'react-native';
 
 import SwipeCards from '../../lib/SwipeCards'
+import Modal from 'react-native-modal'
 
 const window = Dimensions.get('window');
 const width = window.width
+
 
 import tie from '../../../img/icons/tie.png'
 
@@ -21,12 +23,15 @@ class Project extends React.Component {
 
       this.state = {
           bookmark: false,
+          isInfoVisible: false,
+          applicants: 17,
+          projectAbstract: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremququo voluptas nulla pariatur?Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremququo voluptas nulla pariatur?Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremququo voluptas nulla pariatur.',
       }
       
     }
 
-    _toogleBookmark(){
-
+    _toogleBookmark()
+    {
       this.state.bookmark = true
       this.setState(function(prevState, props){
         return {bookmark: prevState.bookmark}
@@ -34,24 +39,81 @@ class Project extends React.Component {
       console.log('Toogled Bookmark: ', this.state.bookmark)
     }
 
-    _untoogleBookmark(){
-
+    _untoogleBookmark()
+    {
       this.state.bookmark = false
       this.setState(function(prevState, props){
         return {bookmark: prevState.bookmark}
       })
       console.log('Untoogled Bookmark: ', this.state.bookmark)
     }
+    
+    _toggleInfoModal()
+    {
+      this.state.isInfoVisible = !this.state.isInfoVisible
+      this.setState(function(prevState, props){
+        return { isInfoVisible: prevState.isInfoVisible}
+      })
+      console.log('isInfoVisible: ', this.state.isInfoVisible)
+    }
+
+    _renderModalInfo = () =>
+    (
+
+      <View style={{flex: 1}}>
+
+      <View style={styles.infoHeader}>
+
+
+              <View style={{flex: 3,flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', paddingLeft: 10}}> 
+
+                <Image source={require('../../../img/icons/applicants.png')} style={styles.icon} />
+
+                <Text style={styles.title}> {this.state.applicants} </Text> 
+
+                </View>
+      
+              <TouchableOpacity style={{alignItems: 'center', backgroundColor: '#A7333F', justifyContent: 'center', paddingRight: 10,paddingLeft: 10, borderTopRightRadius: 4,}}
+                                onPress={()=> this._toggleInfoModal()}>
+      
+                        <Text style={[styles.btnTxt, {color: 'white'}]}>Close</Text>
+
+                        </TouchableOpacity>
+
+
+
+                        </View>
+      
+      <View style={styles.infoModalContent}>
+
+          <View style={{paddingBottom: 10}}>
+
+          <Text style={[styles.title, {fontWeight: '600', color: '#254D32'}]}>Project Abstract</Text>
+
+          </View>
+
+          <View style={{paddingTop: 10,}}>
+      
+          <Text style={[styles.title, {color: 'grey'}]}>{this.state.projectAbstract}</Text>
+
+          </View>
+      
+              
+      </View>
+      </View>
+    )
+      
+    
+
   
      render() {
-       console.log(this.state.bookmark)
       return (
         
         <View style={[styles.card]}>
 
           <View style = {styles.header}>
 
-              <TouchableOpacity onPressstyle={styles.iCont}>
+              <TouchableOpacity style={styles.iCont} onPress={() => this._toggleInfoModal()}>
                 <Image source={require('../../../img/icons/info.png')} style={styles.icon} />
               </TouchableOpacity> 
 
@@ -97,6 +159,15 @@ class Project extends React.Component {
                    {this.props.doc.positions}</Text>
             </View>
           </View>
+
+          <Modal isVisible = {this.state.isInfoVisible}
+                         animationIn={'slideInLeft'}
+                         animationOut={'slideOutRight'}>
+
+                         {this._renderModalInfo()}
+
+                  </Modal>   
+
         </View>
       )
     }
@@ -297,5 +368,31 @@ class Project extends React.Component {
       fontSize: 20,
       fontWeight: '400',
       color: 'white'
-    }
+    },
+    button: {
+      padding: 12,
+      margin: 16,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 4,
+      borderColor: 'rgba(0, 0, 0, 0.1)',
+    },
+    infoModalContent: {
+      backgroundColor: 'white',
+      padding: 22,
+      justifyContent: 'flex-start',
+      alignItems: 'flex-start',
+      borderBottomRightRadius: 4,
+      borderBottomLeftRadius: 4,
+      borderColor: '#C7C7CD',
+      flex: 3,
+    },
+    infoHeader: {
+      flexDirection: 'row', 
+      justifyContent: 'center', 
+      height: 40, 
+      backgroundColor: '#254D32',
+      borderTopRightRadius: 4,
+      borderTopLeftRadius: 4,
+    },
   })
