@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-import {ScrollView,StyleSheet, Text, View, Image, Dimensions} from 'react-native';
+import {ScrollView,
+        StyleSheet, 
+        Text, 
+        View, 
+        Image, 
+        Dimensions,
+        TouchableOpacity} from 'react-native';
 
 import SwipeCards from '../../lib/SwipeCards'
 
@@ -11,20 +17,45 @@ import tie from '../../../img/icons/tie.png'
 class Project extends React.Component {
     constructor(props) {
       super(props);
+
+      this.state = {
+          bookmark: false,
+      }
       
+    }
+
+    _setBookmark(){
+      this.state.bookmark = !this.state.bookmark
+      this.setState(function(prevState, props){
+        return {bookmark: prevState.bookmark}
+      })
+      console.log('Bookmark: ', this.state.bookmark)
     }
   
      render() {
       return (
         <View style={[styles.card]}>
-          <View style = {styles.header} />
 
-          <View style = {styles.tieCont}>
-            <Image source = {tie} style={styles.tie} /> 
+          <View style = {styles.header}>
+
+              <TouchableOpacity style={styles.iCont}>
+                <Image source={require('../../../img/icons/info.png')} style={styles.icon} />
+              </TouchableOpacity> 
+
+              <View style={styles.titleCont}>
+                <Text style={styles.title}> Project Title </Text>
+              </View>
+
+              <TouchableOpacity onPress={() => this._setBookmark()} style={styles.bookmarkCont}>
+                <Image source={this.state.bookmark ? require('../../../img/icons/bookmark-fill.png') : require('../../../img/icons/bookmark-outline.png') } style={styles.icon} />
+              </TouchableOpacity>
+
+          
+           
           </View>
 
           <View style = {styles.nameCont}>
-            <Text style={styles.name}> firstName lastName </Text>
+            <Text style={styles.name}> firstName </Text>
           </View>
 
           <View style = {styles.infoCont}>
@@ -150,7 +181,6 @@ class Project extends React.Component {
     card: {
       flex: 1,
       alignItems: 'center',
-      borderRadius: 15,
       borderColor: 'grey',
       backgroundColor: 'white',
       borderWidth: 0.7,
@@ -158,7 +188,7 @@ class Project extends React.Component {
       elevation: 1,
       marginBottom: 10,
       marginTop: 30,
-      width: width - 20,
+      width: width - 10,
     },
     text: {
       fontSize: 20,
@@ -175,31 +205,11 @@ class Project extends React.Component {
       justifyContent: 'center',
       alignItems: 'center',
     },
-    tieCont:{
-      marginTop: 10,
-      width: 80,
-      height: 80,
-      position: 'absolute',
-      justifyContent: 'center',
-      backgroundColor: 'white',
-      marginTop: 25,
-      borderRadius: width / 2,
-      alignItems: 'center',
-      justifyContent: 'center',
-      borderWidth: 1,
-      borderColor: '#50C878'
-    },
     header: {
-      borderTopLeftRadius: 25,
-      borderTopRightRadius: 25,
-      width: width, 
+      flexDirection: 'row',
+      flex: 1,
       height: 60,
       backgroundColor: '#50C878',
-    },
-    tie: {
-      width: 70,
-      height: 70,
-      resizeMode: 'cover'
     },
     nameCont: {
         flex: 1,
@@ -228,7 +238,7 @@ class Project extends React.Component {
       justifyContent: 'center'
     },
     titleCont:{
-      flex: 1,
+      flex: 3,
       alignItems: 'center',
       justifyContent: 'center'
     },
@@ -245,7 +255,27 @@ class Project extends React.Component {
       alignItems: 'center',
       justifyContent: 'center'
     },
-    position:{
-      
+    iCont: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'flex-start',
+      paddingLeft: 10,
+    },
+    bookmarkCont: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'flex-end',
+      paddingRight: 10,
+    },
+    icon: {
+      width: 20,
+      height: 20,
+      resizeMode: 'center',
+      tintColor: 'white'
+    },
+    title: {
+      fontSize: 20,
+      fontWeight: '400',
+      color: 'white'
     }
   })
