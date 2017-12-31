@@ -5,7 +5,8 @@ import {ScrollView,
         View, 
         Image, 
         Dimensions,
-        TouchableOpacity} from 'react-native';
+        TouchableOpacity,
+        TouchableWithoutFeedback} from 'react-native';
 
 import SwipeCards from '../../lib/SwipeCards'
 
@@ -24,21 +25,33 @@ class Project extends React.Component {
       
     }
 
-    _setBookmark(){
-      this.state.bookmark = !this.state.bookmark
+    _toogleBookmark(){
+
+      this.state.bookmark = true
       this.setState(function(prevState, props){
         return {bookmark: prevState.bookmark}
       })
-      console.log('Bookmark: ', this.state.bookmark)
+      console.log('Toogled Bookmark: ', this.state.bookmark)
+    }
+
+    _untoogleBookmark(){
+
+      this.state.bookmark = false
+      this.setState(function(prevState, props){
+        return {bookmark: prevState.bookmark}
+      })
+      console.log('Untoogled Bookmark: ', this.state.bookmark)
     }
   
      render() {
+       console.log(this.state.bookmark)
       return (
+        
         <View style={[styles.card]}>
 
           <View style = {styles.header}>
 
-              <TouchableOpacity style={styles.iCont}>
+              <TouchableOpacity onPressstyle={styles.iCont}>
                 <Image source={require('../../../img/icons/info.png')} style={styles.icon} />
               </TouchableOpacity> 
 
@@ -46,9 +59,16 @@ class Project extends React.Component {
                 <Text style={styles.title}> Project Title </Text>
               </View>
 
-              <TouchableOpacity onPress={() => this._setBookmark()} style={styles.bookmarkCont}>
-                <Image source={this.state.bookmark ? require('../../../img/icons/bookmark-fill.png') : require('../../../img/icons/bookmark-outline.png') } style={styles.icon} />
-              </TouchableOpacity>
+              <View style={styles.bookmarkCont}>
+                <TouchableWithoutFeedback
+                                  onPress={() => this._toogleBookmark()}
+                                  onLongPress={() => this._untoogleBookmark()}>
+
+                      <Image source={this.state.bookmark ? require('../../../img/icons/bookmark-fill.png')
+                                      : require('../../../img/icons/bookmark-outline.png') } 
+                                    style={styles.icon} />
+                </TouchableWithoutFeedback>
+              </View>
 
           
            
