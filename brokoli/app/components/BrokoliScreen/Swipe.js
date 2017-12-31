@@ -162,7 +162,9 @@ class Project extends React.Component {
 
           <Modal isVisible = {this.state.isInfoVisible}
                          animationIn={'slideInLeft'}
-                         animationOut={'slideOutRight'}>
+                         animationOut={'slideOutRight'}
+                         onBackdropPress={() => this.setState({ isInfoVisible: false })}
+                         avoidKeyboard={true}>
 
                          {this._renderModalInfo()}
 
