@@ -118,6 +118,18 @@ class Project extends React.Component {
       console.log('Brokolis: ', this.state.brokolis)
 
     }
+
+    _takeBrokoli()
+    {
+
+      this.state.brokolis = this.state.brokolis - 1
+      this.setState(function(prevState, props){
+        return { brokolis: this.state.brokolis}
+      })
+
+      console.log('Brokolis: ', this.state.brokolis)
+
+    }
       
     
 
