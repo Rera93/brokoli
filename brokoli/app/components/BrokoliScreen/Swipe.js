@@ -221,7 +221,7 @@ class Project extends React.Component {
               <View style={{flex:1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
              
                 <Image source={require('../../../img/icons/profile_pic.png')} style={{resizeMode: 'center', width: 40, height: 40}}  />
-                <Text style={{fontSize: 20, fontWeight: '100', color: '#C7C7CD'}}> {this.state.projectOwner} </Text>
+                <Text style={{fontSize: 20, fontWeight: '100', color: '#C7C7CD', paddingLeft: 5}}> {this.state.projectOwner} </Text>
                      
               </View>
 
@@ -236,7 +236,11 @@ class Project extends React.Component {
                                             style={{borderWidth: 0.5}}>
 
                         <Image source={require('../../../img/icons/brokoli.png') } 
-                              style={{resizeMode: 'center', width: 40, height: 40}} />
+                              style={{resizeMode: 'center', width: 40, height: 40, tintColor: this.state.brokoliCounter == 1 ? '#85c59a' : 
+                                                                                              this.state.brokoliCounter == 2 ? '#5eb179' : 
+                                                                                              this.state.brokoliCounter == 3 ? '#4b9c66' : 
+                                                                                              this.state.brokoliCounter == 4 ? '#38754c' : 
+                                                                                              this.state.brokoliCounter == 5 ? '#2b5a3b' : '#C7C7CD'}} />
                   </TouchableWithoutFeedback>
 
                   </View>
@@ -366,7 +370,7 @@ class Project extends React.Component {
       // borderColor: 'grey',
       backgroundColor: 'white',
       borderWidth: 2,
-      borderColor: '#50C878',
+      borderColor: '#42D260',
       elevation: 0,
       marginBottom: 10,
       marginTop: 30,
@@ -390,7 +394,7 @@ class Project extends React.Component {
     header: {
       flexDirection: 'row',
       flex: 1,
-      backgroundColor: '#50C878',
+      backgroundColor: '#42D260',
     },
     body: {
       flex: 8,
