@@ -28,7 +28,8 @@ class Project extends React.Component {
           projectAbstract: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremququo voluptas nulla pariatur?Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremququo voluptas nulla pariatur?Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremququo voluptas nulla pariatur.',
           projectOwner: 'Alan Andrade',
           projectOwnerPic: '',
-          brokolis: 0,
+          brokoliCounter: 0,
+          totalBrokolis : 17
         }
 
       
@@ -109,29 +110,64 @@ class Project extends React.Component {
 
     _giveBrokoli()
     {
+      if(this.state.brokoliCounter < 5)
+      {
+      //increment if brokoliCounter is less than or equal to 5
+      this._incrementBrokoliCounter()
 
-      this.state.brokolis = this.state.brokolis + 1
+      this.state.totalBrokolis = this.state.totalBrokolis + 1
       this.setState(function(prevState, props){
-        return { brokolis: this.state.brokolis}
+        return { totalBrokolis: this.state.totalBrokolis}
       })
 
-      console.log('Brokolis: ', this.state.brokolis)
-
+      console.log('Brokolis: ', this.state.totalBrokolis)
+      }
     }
 
     _takeBrokoli()
     {
+      if(this.state.brokoliCounter > 0)
+      {
+      //decrement if brokoliCounter is greater than or equal to 0
+      this._decrementBrokoliCounter()
 
-      this.state.brokolis = this.state.brokolis - 1
+      this.state.totalBrokolis = this.state.totalBrokolis - 1
       this.setState(function(prevState, props){
-        return { brokolis: this.state.brokolis}
+        return { totalBrokolis: this.state.totalBrokolis}
       })
 
-      console.log('Brokolis: ', this.state.brokolis)
-
+      console.log('Brokolis: ', this.state.totalBrokolis)
+      }
     }
-      
+
     
+
+    _incrementBrokoliCounter()
+    {    
+     
+        this.state.brokoliCounter = this.state.brokoliCounter + 1
+        this.setState(function(prevState, props){
+          return { brokoliCounter: this.state.brokoliCounter}
+        })
+
+        console.log('BrokoliCount: ', this.state.brokoliCounter)
+      
+    }
+
+    _decrementBrokoliCounter()
+    {
+      
+        this.state.brokoliCounter = this.state.brokoliCounter - 1
+        this.setState(function(prevState, props){
+          return { brokoliCounter: this.state.brokoliCounter}
+        })
+
+        console.log('BrokoliCount: ', this.state.brokoliCounter)
+    }
+
+     
+
+
 
   
      render() {
@@ -193,7 +229,7 @@ class Project extends React.Component {
 
                 <View style={{flexDirection: 'row', flex: 1, alignItems: 'center', justifyContent: 'flex-end', paddingRight: 10}}> 
 
-                  <Text style={{fontSize: 20, fontWeight: '100', color: '#C7C7CD'}}> {this.state.brokolis} </Text>
+                  <Text style={{fontSize: 20, fontWeight: '100', color: '#C7C7CD'}}> {this.state.totalBrokolis} </Text>
 
                   <TouchableWithoutFeedback onPress={() => this._giveBrokoli()}
                                             onLongPress={() => this._takeBrokoli()}
