@@ -30,7 +30,7 @@ class Project extends React.Component {
           projectOwner: 'Alan Andrade',
           projectOwnerPic: '',
           brokoliCounter: 0,
-          totalBrokolis : 17
+          totalBrokolis : 17,
         }
 
       
@@ -110,7 +110,8 @@ class Project extends React.Component {
     )
 
     _giveBrokoli()
-    {
+    { 
+
       if(this.state.brokoliCounter < 5)
       {
       //increment if brokoliCounter is less than or equal to 5
@@ -165,6 +166,7 @@ class Project extends React.Component {
 
         console.log('BrokoliCount: ', this.state.brokoliCounter)
     }
+
 
      
 
@@ -242,8 +244,8 @@ class Project extends React.Component {
                                             onLongPress={() => this._takeBrokoli()}
                                             style={{borderWidth: 0.5}}>
 
-                        <Animatable.Image source={require('../../../img/icons/brokoli.png') } 
-                                          animation={(this.state.brokoliCounter == 5) ? 'shake' : ''}
+                        <Animatable.Image source={require('../../../img/icons/brokoli-counter.png') } 
+                                          animation={this.state.brokoliCounter == 5 ? 'shake' : ''}
                                           style={{resizeMode: 'center', width: 40, height: 40, tintColor: this.state.brokoliCounter == 1 ? '#85c59a' : 
                                                                                               this.state.brokoliCounter == 2 ? '#5eb179' : 
                                                                                               this.state.brokoliCounter == 3 ? '#4b9c66' : 
