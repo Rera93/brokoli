@@ -106,6 +106,18 @@ class Project extends React.Component {
       </View>
       </View>
     )
+
+    _giveBrokoli()
+    {
+
+      this.state.brokolis = this.state.brokolis + 1
+      this.setState(function(prevState, props){
+        return { brokolis: this.state.brokolis}
+      })
+
+      console.log('Brokolis: ', this.state.brokolis)
+
+    }
       
     
 
@@ -171,7 +183,9 @@ class Project extends React.Component {
 
                   <Text style={{fontSize: 20, fontWeight: '100', color: '#C7C7CD'}}> {this.state.brokolis} </Text>
 
-                  <TouchableWithoutFeedback onPress={() => this._giveBrokoli()}>
+                  <TouchableWithoutFeedback onPress={() => this._giveBrokoli()}
+                                            onLongPress={() => this._takeBrokoli()}
+                                            style={{borderWidth: 0.5}}>
 
                         <Image source={require('../../../img/icons/brokoli.png') } 
                               style={{resizeMode: 'center', width: 40, height: 40}} />
