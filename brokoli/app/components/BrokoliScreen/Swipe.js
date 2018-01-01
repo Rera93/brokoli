@@ -10,6 +10,7 @@ import {ScrollView,
 
 import SwipeCards from '../../lib/SwipeCards'
 import Modal from 'react-native-modal'
+import * as Animatable from 'react-native-animatable'
 
 const window = Dimensions.get('window');
 const width = window.width
@@ -26,7 +27,12 @@ class Project extends React.Component {
           isInfoVisible: false,
           applicants: 17,
           projectAbstract: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremququo voluptas nulla pariatur?Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremququo voluptas nulla pariatur?Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremququo voluptas nulla pariatur.',
-      }
+          projectOwner: 'Alan Andrade',
+          projectOwnerPic: '',
+          brokoliCounter: 0,
+          totalBrokolis : 17,
+        }
+
       
     }
 
@@ -102,14 +108,75 @@ class Project extends React.Component {
       </View>
       </View>
     )
-      
+
+    _giveBrokoli()
+    { 
+
+      if(this.state.brokoliCounter < 5)
+      {
+      //increment if brokoliCounter is less than or equal to 5
+      this._incrementBrokoliCounter()
+
+      this.state.totalBrokolis = this.state.totalBrokolis + 1
+      this.setState(function(prevState, props){
+        return { totalBrokolis: this.state.totalBrokolis}
+      })
+
+      console.log('Brokolis: ', this.state.totalBrokolis)
+      }
+    }
+
+    _takeBrokoli()
+    {
+      if(this.state.brokoliCounter > 0)
+      {
+      //decrement if brokoliCounter is greater than or equal to 0
+      this._decrementBrokoliCounter()
+
+      this.state.totalBrokolis = this.state.totalBrokolis - 1
+      this.setState(function(prevState, props){
+        return { totalBrokolis: this.state.totalBrokolis}
+      })
+
+      console.log('Brokolis: ', this.state.totalBrokolis)
+      }
+    }
+
     
+
+    _incrementBrokoliCounter()
+    {    
+     
+        this.state.brokoliCounter = this.state.brokoliCounter + 1
+        this.setState(function(prevState, props){
+          return { brokoliCounter: this.state.brokoliCounter}
+        })
+
+        console.log('BrokoliCount: ', this.state.brokoliCounter)
+      
+    }
+
+    _decrementBrokoliCounter()
+    {
+      
+        this.state.brokoliCounter = this.state.brokoliCounter - 1
+        this.setState(function(prevState, props){
+          return { brokoliCounter: this.state.brokoliCounter}
+        })
+
+        console.log('BrokoliCount: ', this.state.brokoliCounter)
+    }
+
+
+     
+
+
 
   
      render() {
       return (
         
-        <View style={[styles.card]}>
+        <View style={styles.card}>
 
           <View style = {styles.header}>
 
@@ -136,15 +203,7 @@ class Project extends React.Component {
            
           </View>
 
-          <View style = {styles.nameCont}>
-            <Text style={styles.name}> firstName </Text>
-          </View>
-
-          <View style = {styles.infoCont}>
-            <Text style={styles.info}> Master student at Radboud University Nijmegen </Text>
-          </View>
-
-          <View style={styles.projectCont}>
+          <View style={styles.body}>
 
             <View style={styles.titleCont}>
               <Text style={styles.projectTitle}>{this.props.doc.name}</Text>
@@ -159,6 +218,50 @@ class Project extends React.Component {
                    {this.props.doc.positions}</Text>
             </View>
           </View>
+
+          <View style={styles.footer}> 
+
+              <View style={{flex:1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+             
+                <Image source={require('../../../img/icons/profile_pic.png')} style={{resizeMode: 'center', width: 40, height: 40}}  />
+                <Text style={{fontSize: 20, fontWeight: '100', color: '#C7C7CD', paddingLeft: 5}}> {this.state.projectOwner} </Text>
+                     
+              </View>
+
+              <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+
+                <View style={{flexDirection: 'row', flex: 1, alignItems: 'center', justifyContent: 'flex-end', paddingRight: 10}}> 
+
+                  <Text style={{fontSize: 20, fontWeight: '100',paddingRight: 5, color: this.state.brokoliCounter == 1 ? '#85c59a' : 
+                                                                                        this.state.brokoliCounter == 2 ? '#5eb179' : 
+                                                                                        this.state.brokoliCounter == 3 ? '#4b9c66' : 
+                                                                                        this.state.brokoliCounter == 4 ? '#38754c' : 
+                                                                                        this.state.brokoliCounter == 5 ? '#2b5a3b' : '#C7C7CD'}}> 
+                        {this.state.totalBrokolis} 
+                        </Text>
+
+                  <TouchableWithoutFeedback onPress={() => this._giveBrokoli()}
+                                            onLongPress={() => this._takeBrokoli()}
+                                            style={{borderWidth: 0.5}}>
+
+                        <Animatable.Image source={require('../../../img/icons/brokoli-counter.png') } 
+                                          animation={this.state.brokoliCounter == 5 ? 'shake' : ''}
+                                          style={{resizeMode: 'center', width: 40, height: 40, tintColor: this.state.brokoliCounter == 1 ? '#85c59a' : 
+                                                                                              this.state.brokoliCounter == 2 ? '#5eb179' : 
+                                                                                              this.state.brokoliCounter == 3 ? '#4b9c66' : 
+                                                                                              this.state.brokoliCounter == 4 ? '#38754c' : 
+                                                                                              this.state.brokoliCounter == 5 ? '#2b5a3b' : '#C7C7CD'}} />
+                  </TouchableWithoutFeedback>
+
+                  </View>
+
+
+                
+                </View>
+
+
+
+            </View>
 
           <Modal isVisible = {this.state.isInfoVisible}
                          animationIn={'slideInLeft'}
@@ -274,11 +377,11 @@ class Project extends React.Component {
     card: {
       flex: 1,
       alignItems: 'center',
-      borderColor: 'grey',
+      // borderColor: 'grey',
       backgroundColor: 'white',
-      borderWidth: 0.7,
-      borderColor: '#50C878',
-      elevation: 1,
+      borderWidth: 2,
+      borderColor: '#42D260',
+      elevation: 0,
       marginBottom: 10,
       marginTop: 30,
       width: width - 10,
@@ -301,34 +404,10 @@ class Project extends React.Component {
     header: {
       flexDirection: 'row',
       flex: 1,
-      height: 60,
-      backgroundColor: '#50C878',
+      backgroundColor: '#42D260',
     },
-    nameCont: {
-        flex: 1,
-        marginTop: 60,
-    },
-    infoCont: {
-        flex: 1,
-        paddingBottom: 10,
-        borderBottomWidth: 0.7,
-        borderColor: 'grey',
-        width: width,
-        alignItems: 'center'
-        
-    },
-    name:{
-      fontSize: 20,
-      color: 'grey'
-    },
-    info:{
-      fontSize: 16,
-      color: 'grey',
-    },
-    projectCont: {
-      flex: 10,
-      alignItems: 'center',
-      justifyContent: 'center'
+    body: {
+      flex: 8,
     },
     titleCont:{
       flex: 3,
@@ -339,9 +418,6 @@ class Project extends React.Component {
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center'
-    },
-    abstract:{
-
     },
     posiCont: {
       flex: 1,
@@ -361,8 +437,8 @@ class Project extends React.Component {
       paddingRight: 10,
     },
     icon: {
-      width: 20,
-      height: 20,
+      width: 25,
+      height: 25,
       resizeMode: 'center',
       tintColor: 'white'
     },
@@ -397,4 +473,13 @@ class Project extends React.Component {
       borderTopRightRadius: 4,
       borderTopLeftRadius: 4,
     },
+    footer:{
+      flex: 1,
+      backgroundColor: 'white',
+      flexDirection: 'row',
+      borderTopWidth: 0.5,
+      borderColor: '#C7C7CD',
+      justifyContent: 'space-between'
+    
+    }
   })
