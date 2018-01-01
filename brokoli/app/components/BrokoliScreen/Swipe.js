@@ -10,6 +10,7 @@ import {ScrollView,
 
 import SwipeCards from '../../lib/SwipeCards'
 import Modal from 'react-native-modal'
+import * as Animatable from 'react-native-animatable'
 
 const window = Dimensions.get('window');
 const width = window.width
@@ -241,8 +242,9 @@ class Project extends React.Component {
                                             onLongPress={() => this._takeBrokoli()}
                                             style={{borderWidth: 0.5}}>
 
-                        <Image source={require('../../../img/icons/brokoli.png') } 
-                              style={{resizeMode: 'center', width: 40, height: 40, tintColor: this.state.brokoliCounter == 1 ? '#85c59a' : 
+                        <Animatable.Image source={require('../../../img/icons/brokoli.png') } 
+                                          animation={(this.state.brokoliCounter == 5) ? 'shake' : ''}
+                                          style={{resizeMode: 'center', width: 40, height: 40, tintColor: this.state.brokoliCounter == 1 ? '#85c59a' : 
                                                                                               this.state.brokoliCounter == 2 ? '#5eb179' : 
                                                                                               this.state.brokoliCounter == 3 ? '#4b9c66' : 
                                                                                               this.state.brokoliCounter == 4 ? '#38754c' : 
