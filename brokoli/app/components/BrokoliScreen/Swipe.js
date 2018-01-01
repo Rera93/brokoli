@@ -26,7 +26,11 @@ class Project extends React.Component {
           isInfoVisible: false,
           applicants: 17,
           projectAbstract: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremququo voluptas nulla pariatur?Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremququo voluptas nulla pariatur?Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremququo voluptas nulla pariatur.',
-      }
+          projectOwner: 'Alan Andrade',
+          projectOwnerPic: '',
+          brokolis: 0,
+        }
+
       
     }
 
@@ -109,7 +113,7 @@ class Project extends React.Component {
      render() {
       return (
         
-        <View style={[styles.card]}>
+        <View style={styles.card}>
 
           <View style = {styles.header}>
 
@@ -136,15 +140,7 @@ class Project extends React.Component {
            
           </View>
 
-          <View style = {styles.nameCont}>
-            <Text style={styles.name}> firstName </Text>
-          </View>
-
-          <View style = {styles.infoCont}>
-            <Text style={styles.info}> Master student at Radboud University Nijmegen </Text>
-          </View>
-
-          <View style={styles.projectCont}>
+          <View style={styles.body}>
 
             <View style={styles.titleCont}>
               <Text style={styles.projectTitle}>{this.props.doc.name}</Text>
@@ -159,6 +155,37 @@ class Project extends React.Component {
                    {this.props.doc.positions}</Text>
             </View>
           </View>
+
+          <View style={styles.footer}> 
+
+              <View style={{flex:1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+             
+                <Image source={require('../../../img/icons/profile_pic.png')} style={{resizeMode: 'center', width: 40, height: 40}}  />
+                <Text style={{fontSize: 20, fontWeight: '100', color: '#C7C7CD'}}> {this.state.projectOwner} </Text>
+                     
+              </View>
+
+              <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+
+                <View style={{flexDirection: 'row', flex: 1, alignItems: 'center', justifyContent: 'flex-end', paddingRight: 10}}> 
+
+                  <Text style={{fontSize: 20, fontWeight: '100', color: '#C7C7CD'}}> {this.state.brokolis} </Text>
+
+                  <TouchableWithoutFeedback onPress={() => this._giveBrokoli()}>
+
+                        <Image source={require('../../../img/icons/brokoli.png') } 
+                              style={{resizeMode: 'center', width: 40, height: 40}} />
+                  </TouchableWithoutFeedback>
+
+                  </View>
+
+
+                
+                </View>
+
+
+
+            </View>
 
           <Modal isVisible = {this.state.isInfoVisible}
                          animationIn={'slideInLeft'}
@@ -274,11 +301,11 @@ class Project extends React.Component {
     card: {
       flex: 1,
       alignItems: 'center',
-      borderColor: 'grey',
+      // borderColor: 'grey',
       backgroundColor: 'white',
-      borderWidth: 0.7,
+      borderWidth: 2,
       borderColor: '#50C878',
-      elevation: 1,
+      elevation: 0,
       marginBottom: 10,
       marginTop: 30,
       width: width - 10,
@@ -301,34 +328,10 @@ class Project extends React.Component {
     header: {
       flexDirection: 'row',
       flex: 1,
-      height: 60,
       backgroundColor: '#50C878',
     },
-    nameCont: {
-        flex: 1,
-        marginTop: 60,
-    },
-    infoCont: {
-        flex: 1,
-        paddingBottom: 10,
-        borderBottomWidth: 0.7,
-        borderColor: 'grey',
-        width: width,
-        alignItems: 'center'
-        
-    },
-    name:{
-      fontSize: 20,
-      color: 'grey'
-    },
-    info:{
-      fontSize: 16,
-      color: 'grey',
-    },
-    projectCont: {
-      flex: 10,
-      alignItems: 'center',
-      justifyContent: 'center'
+    body: {
+      flex: 8,
     },
     titleCont:{
       flex: 3,
@@ -339,9 +342,6 @@ class Project extends React.Component {
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center'
-    },
-    abstract:{
-
     },
     posiCont: {
       flex: 1,
@@ -361,8 +361,8 @@ class Project extends React.Component {
       paddingRight: 10,
     },
     icon: {
-      width: 20,
-      height: 20,
+      width: 25,
+      height: 25,
       resizeMode: 'center',
       tintColor: 'white'
     },
@@ -397,4 +397,13 @@ class Project extends React.Component {
       borderTopRightRadius: 4,
       borderTopLeftRadius: 4,
     },
+    footer:{
+      flex: 1,
+      backgroundColor: 'white',
+      flexDirection: 'row',
+      borderTopWidth: 0.5,
+      borderColor: '#C7C7CD',
+      justifyContent: 'space-between'
+    
+    }
   })
