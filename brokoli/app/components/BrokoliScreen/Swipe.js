@@ -118,7 +118,7 @@ const width = window.width
 
                 <Image source={require('../../../img/icons/applicants.png')} style={[styles.icon, {tintColor: 'white'}]} />
 
-                <Text style={[styles.title, {color: 'white'}]}> {card.applicants} </Text> 
+                <Text style={[styles.title, {color: 'white'}]}> {this.state.cards[this.state.cardIndex].applicants} </Text> 
 
                 </View>
       
@@ -143,7 +143,7 @@ const width = window.width
 
           <View style={{paddingTop: 10,}}>
       
-          <Text style={[styles.title, {color: 'grey'}]}>{card.abstract}</Text>
+          <Text style={[styles.title, {color: 'grey'}]}>{this.state.cards[this.state.cardIndex].abstract}</Text>
 
           </View>
       
