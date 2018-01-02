@@ -281,7 +281,7 @@ class Project extends React.Component {
                                             style={{borderWidth: 0.5}}>
 
                         <Animatable.Image source={require('../../../img/icons/brokoli-counter.png') } 
-                                          animation={this.state.brokoliCounter == 5 ? 'shake' : ''}
+                                          animation={this.state.brokoliCounter == 5 ? 'rubberBand' : ''}
                                           style={{resizeMode: 'center', width: 40, height: 40, tintColor: this.state.brokoliCounter == 1 ? '#85c59a' : 
                                                                                               this.state.brokoliCounter == 2 ? '#5eb179' : 
                                                                                               this.state.brokoliCounter == 3 ? '#4b9c66' : 
