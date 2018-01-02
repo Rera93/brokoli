@@ -12,77 +12,90 @@ import {ScrollView,
 import SwipeCards from '../../lib/SwipeCards'
 import Modal from 'react-native-modal'
 import * as Animatable from 'react-native-animatable'
+import Swiper from 'react-native-deck-swiper'
 
 const window = Dimensions.get('window');
 const width = window.width
 
-import tie from '../../../img/icons/tie.png'
-
-class Project extends React.Component {
+  export default class Swipe extends React.Component {
     constructor(props) {
       super(props);
-
       this.state = {
-          bookmark: false,
-          isInfoVisible: false,
-          applicants: 17,
-          projectAbstract: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremququo voluptas nulla pariatur?Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremququo voluptas nulla pariatur?Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremququo voluptas nulla pariatur.',
-          projectOwner: 'Alan Andrade',
-          projectOwnerPic: '',
-          brokoliCounter: 0,
-          totalBrokolis : 17,
-          isExceedBrokolisVisible: false,
-          projectTitle: 'Brokoli',
-          projectHeader: 'Tinder for projects',
-          posData: [
-                      {pos: 'Java Developer', exp: 4, posNr: 2},
-                      {pos: 'React Native Architect', exp: 2, posNr: 2},
-                      {pos: 'Financial Analyst', exp: 3, posNr: 1},
-                      {pos: 'Managerial Accountant', exp: 5, posNr: 1},
-                      {pos: 'C# Software Engineer', exp: 4, posNr: 1},
-                      {pos: 'Unit Tester', exp: 1, posNr: 3},
+        projects: [],
+        isInfoVisible: false,
+        applicants: 17,
+        isExceedBrokolisVisible: false,
+        posData: [
+                    {pos: 'Java Developer', exp: 4, posNr: 2},
+                    {pos: 'React Native Architect', exp: 2, posNr: 2},
+                    {pos: 'Financial Analyst', exp: 3, posNr: 1},
+                    {pos: 'Managerial Accountant', exp: 5, posNr: 1},
+                    {pos: 'C# Software Engineer', exp: 4, posNr: 1},
+                    {pos: 'Unit Tester', exp: 1, posNr: 3},
 
-          ],
-          brokolis: [true,false,false,false,false],
-        }
-
-      
+        ],
+        brokolis: [true,false,false,false,false],
+        cards: [
+          {projectOwner: 'Alan Andrade', bookmark: true, brokoliCounter: 2, totalBrokolis: 17, applicants: 34, title: 'Brokoli1', abstract: 'someAbstract', header: 'Tinder for Project. Bringing people and projects together in a virtual environment.'},
+          {projectOwner: 'Brigel Pineti', bookmark: false, brokoliCounter: 4, totalBrokolis: 99, applicants: 8, title: 'Finding Dory1', abstract: 'someAbstract2', header: 'I like purple shells.'},
+          {projectOwner: 'Alan Andrade', bookmark: true, brokoliCounter: 2, totalBrokolis: 17, applicants: 35, title: 'Brokoli2', abstract: 'someAbstract', header: 'Tinder for Project. Bringing people and projects together in a virtual environment.'},
+          {projectOwner: 'Brigel Pineti', bookmark: false, brokoliCounter: 4, totalBrokolis: 99, applicants: 9, title: 'Finding Dory2', abstract: 'someAbstract2', header: 'I like purple shells.'},
+        ],
+        cardIndex: 0,
+        allCardsSwiped: false,
+      }
     }
 
-  /*  <FlatList
-    onScroll={this.handleScroll} 
-    extraData={this.state}
-    data={this.state.posData}
-    renderItem={({ item, index }) => (
-          <View item={item} index={index} style={itemCont}> 
-          <Text style={styles.item}>{item.pos}</Text>
-          <Text style={styles.item}>{item.posNr} </Text> 
-          {this._renderBrokolis({item})}  
-          
-        </View>   
- 
-    )}
-    keyExtractor={item => item.pos}
-    ItemSeparatorComponent={this._renderSeparator}
-  />*/
-    //Alan you used this format to fetch positions from db  {this.props.doc.positions}
+    componentDidMount(){
+      this.getData();
+    }
 
+    getData(){
+      var arrayProjects = [];
+      return fetch('https://brokoli.eu-gb.mybluemix.net/api/visitors', {  
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        }
+      })
+        .then((response) => response.json())
+        .then((responseData) => {
+          for (var i = 0; i < responseData.length; i++) {
+            var object = responseData[i];
+            arrayProjects.push(object);
+          }
+          this.setState({projects: arrayProjects})
+         
+        });
+
+        console.log('Projects: ', this.state.projects)
+
+    }
+
+    _incrementCardIndex(cardIndex){
+      this.state.cardIndex = cardIndex + 1
+      this.setState(function(prevState, props){
+        return { cardIndex: prevState.cardIndex }
+      })
+      console.log('Card Index: ', this.state.cardIndex)
+    }
     _toogleBookmark()
     {
-      this.state.bookmark = true
+      this.state.cards[this.state.cardIndex].bookmark = true
       this.setState(function(prevState, props){
-        return {bookmark: prevState.bookmark}
+        return {cards: prevState.cards}
       })
-      console.log('Toogled Bookmark: ', this.state.bookmark)
+      console.log('Toogled Bookmark: ', this.state.cards[this.state.cardIndex].bookmark)
     }
 
     _untoogleBookmark()
     {
-      this.state.bookmark = false
+      this.state.cards[this.state.cardIndex].bookmark = false
       this.setState(function(prevState, props){
         return {bookmark: prevState.bookmark}
       })
-      console.log('Untoogled Bookmark: ', this.state.bookmark)
+      console.log('Untoogled Bookmark: ', this.state.cards[this.state.cardIndex].bookmark)
     }
     
     _toggleInfoModal()
@@ -94,7 +107,7 @@ class Project extends React.Component {
       console.log('isInfoVisible: ', this.state.isInfoVisible)
     }
 
-    _renderModalInfo = () =>
+    _renderModalInfo = ({card}) =>
     (
 
       <View style={{flex: 1}}>
@@ -104,9 +117,9 @@ class Project extends React.Component {
 
               <View style={{flex: 3,flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', paddingLeft: 10}}> 
 
-                <Image source={require('../../../img/icons/applicants.png')} style={styles.icon} />
+                <Image source={require('../../../img/icons/applicants.png')} style={[styles.icon, {tintColor: 'white'}]} />
 
-                <Text style={styles.title}> {this.state.applicants} </Text> 
+                <Text style={[styles.title, {color: 'white'}]}> {this.state.cards[this.state.cardIndex].applicants} </Text> 
 
                 </View>
       
@@ -131,7 +144,7 @@ class Project extends React.Component {
 
           <View style={{paddingTop: 10,}}>
       
-          <Text style={[styles.title, {color: 'grey'}]}>{this.state.projectAbstract}</Text>
+          <Text style={[styles.title, {color: 'grey'}]}>{this.state.cards[this.state.cardIndex].abstract}</Text>
 
           </View>
       
@@ -143,17 +156,17 @@ class Project extends React.Component {
     _giveBrokoli()
     { 
 
-      if(this.state.brokoliCounter < 5)
+      if(this.state.cards[this.state.cardIndex].brokoliCounter < 5)
       {
       //increment if brokoliCounter is less than or equal to 5
       this._incrementBrokoliCounter()
 
-      this.state.totalBrokolis = this.state.totalBrokolis + 1
+      this.state.cards[this.state.cardIndex].totalBrokolis = this.state.cards[this.state.cardIndex].totalBrokolis + 1
       this.setState(function(prevState, props){
-        return { totalBrokolis: this.state.totalBrokolis}
+        return { cards: this.state.cards}
       })
 
-      console.log('Brokolis: ', this.state.totalBrokolis)
+      console.log('Brokolis: ', this.state.cards[this.state.cardIndex].totalBrokolis)
       }
       else{
         
@@ -164,17 +177,17 @@ class Project extends React.Component {
 
     _takeBrokoli()
     {
-      if(this.state.brokoliCounter > 0)
+      if(this.state.cards[this.state.cardIndex].brokoliCounter > 0)
       {
       //decrement if brokoliCounter is greater than or equal to 0
       this._decrementBrokoliCounter()
 
-      this.state.totalBrokolis = this.state.totalBrokolis - 1
+      this.state.cards[this.state.cardIndex].totalBrokolis = this.state.cards[this.state.cardIndex].totalBrokolis - 1
       this.setState(function(prevState, props){
-        return { totalBrokolis: this.state.totalBrokolis}
+        return { cards: this.state.cards}
       })
 
-      console.log('Brokolis: ', this.state.totalBrokolis)
+      console.log('Brokolis: ', this.state.cards[this.state.cardIndex].brokoliCounter)
       }
     }
 
@@ -183,24 +196,24 @@ class Project extends React.Component {
     _incrementBrokoliCounter()
     {    
      
-        this.state.brokoliCounter = this.state.brokoliCounter + 1
+      this.state.cards[this.state.cardIndex].brokoliCounter = this.state.cards[this.state.cardIndex].brokoliCounter + 1
         this.setState(function(prevState, props){
-          return { brokoliCounter: this.state.brokoliCounter}
+          return { cards: prevState.cards}
         })
 
-        console.log('BrokoliCount: ', this.state.brokoliCounter)
+        console.log('BrokoliCount: ', this.state.cards[this.state.cardIndex].brokoliCounter)
       
     }
 
     _decrementBrokoliCounter()
     {
       
-        this.state.brokoliCounter = this.state.brokoliCounter - 1
+      this.state.cards[this.state.cardIndex].brokoliCounter = this.state.cards[this.state.cardIndex].brokoliCounter - 1
         this.setState(function(prevState, props){
-          return { brokoliCounter: this.state.brokoliCounter}
+          return { cards: prevState.cards}
         })
 
-        console.log('BrokoliCount: ', this.state.brokoliCounter)
+        console.log('BrokoliCount: ', this.state.cards[this.state.cardIndex].brokoliCounter)
     }
 
     _renderExceedBrokolis = () => (
@@ -233,17 +246,6 @@ class Project extends React.Component {
       console.log('BrokoliModal: ', this.state.isExceedBrokolisVisible)
     }
 
-    _renderSeparator = () => {
-      return (
-        <View
-          style={{
-            height: 0.5,
-            width: width - 10,
-            backgroundColor: "#C7C7CD",
-          }}
-        />
-      )
-  }
   _renderBrokolis = ({item}) =>{
     var rows = []
     for(let i=1; i <= this.state.brokolis.length; i++)
@@ -265,19 +267,31 @@ class Project extends React.Component {
     )
   }
 
-     render() {
-      return (
-        
-        <View style={styles.card}>
+  _allCardsSwiped(){
 
-          <View style = {styles.header}>
+    this.state.allCardsSwiped = true
+    this.setState(function(prevState, props){
+      return { allCardsSwiped: prevState.allCardsSwiped}
+    })
+    console.log("All cards have been swiped. Deck is empty")
+  }
+  
+    
+    render() {
+      return (
+        <Swiper
+            cards={this.state.cards}
+            renderCard={(card) => {
+                return (
+                  <View style={styles.card} card={card}>
+                  <View style = {styles.header}>
 
               <TouchableOpacity style={styles.iCont} onPress={() => this._toggleInfoModal()}>
                 <Image source={require('../../../img/icons/info.png')} style={styles.icon} />
               </TouchableOpacity> 
 
               <View style={styles.titleCont}>
-                <Text style={styles.title}> {this.props.doc.name} </Text>
+                <Text style={styles.title}> {card.title} </Text>
               </View>
 
               <View style={styles.bookmarkCont}>
@@ -285,7 +299,7 @@ class Project extends React.Component {
                                   onPress={() => this._toogleBookmark()}
                                   onLongPress={() => this._untoogleBookmark()}>
 
-                      <Image source={this.state.bookmark ? require('../../../img/icons/bookmark-fill.png')
+                      <Image source={card.bookmark ? require('../../../img/icons/bookmark-fill.png')
                                       : require('../../../img/icons/bookmark-outline.png') } 
                                     style={styles.icon} />
                 </TouchableWithoutFeedback>
@@ -298,8 +312,10 @@ class Project extends React.Component {
           <View style={styles.body}>
 
             <View style={styles.headerCont}>
-              <Text style={styles.headerTitle}> {this.state.projectHeader}</Text>
+              <Text style={styles.headerTitle}>{card.header}</Text>
             </View>
+
+            <TouchableWithoutFeedback>
 
             <View style={styles.posiCont}>
             
@@ -309,29 +325,53 @@ class Project extends React.Component {
           extraData={this.state}
           data={this.state.posData}
           renderItem={({ item, index }) => (
-                <View item={item} index={index} style={styles.itemCont}> 
-                <Text style={styles.item}>{item.pos}</Text>
-                <Text style={styles.item}>{item.posNr} </Text> 
-                {this._renderBrokolis({item})}  
-                
-              </View>   
+
+                <View style={{paddingTop: 10, paddingBottom: 10}}>
+       
+
+                  <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+
+                  <View style={{flex: 3, justifyContent: 'center', alignItems: 'flex-start', paddingLeft: 5}}>
+                  <Text style={styles.itemText}>{item.pos}</Text>
+                  </View>
+                  {this._renderBrokolis({item})} 
+                  </View> 
+
+                  <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+
+                  <View style={{flex: 1, justifyContent: 'center', alignItems: 'flex-start', paddingLeft: 5}}>
+                  <Text style={[styles.itemText, {color: '#A7333F', padding: 5}]}>{item.posNr} left</Text>
+                  </View>
+
+                  <View style={{alignContent: 'flex-end', alignItems: 'center', justifyContent: 'center', marginRight: 5, backgroundColor: '#42D260', borderRadius: 5}}> 
+
+                  <Text style={[styles.itemText, {color: 'white', padding: 5}]}>Apply</Text>
+
+                    </View>
+                  
+                  </View> 
+
+              </View>
+
+
+              
       
           )}
           keyExtractor={item => item.pos}
-          ItemSeparatorComponent={this._renderSeparator}
         />
 
           
                    
             </View>
+            </TouchableWithoutFeedback>
           </View>
 
           <View style={styles.footer}> 
 
-              <View style={{flex:1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+              <View style={{flex:1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', paddingLeft: 5}}>
              
                 <Image source={require('../../../img/icons/profile_pic.png')} style={{resizeMode: 'center', width: 40, height: 40}}  />
-                <Text style={{fontSize: 20, fontWeight: '100', color: '#C7C7CD', paddingLeft: 5}}> {this.state.projectOwner} </Text>
+                <Text style={{fontSize: 20, fontWeight: '100', color: '#C7C7CD', paddingLeft: 5}}> {card.projectOwner} </Text>
                      
               </View>
 
@@ -339,12 +379,12 @@ class Project extends React.Component {
 
                 <View style={{flexDirection: 'row', flex: 1, alignItems: 'center', justifyContent: 'flex-end', paddingRight: 10}}> 
 
-                  <Text style={{fontSize: 20, fontWeight: '100',paddingRight: 5, color: this.state.brokoliCounter == 1 ? '#85c59a' : 
-                                                                                        this.state.brokoliCounter == 2 ? '#5eb179' : 
-                                                                                        this.state.brokoliCounter == 3 ? '#4b9c66' : 
-                                                                                        this.state.brokoliCounter == 4 ? '#38754c' : 
-                                                                                        this.state.brokoliCounter == 5 ? '#2b5a3b' : '#C7C7CD'}}> 
-                        {this.state.totalBrokolis} 
+                  <Text style={{fontSize: 20, fontWeight: '100',paddingRight: 5, color: card.brokoliCounter == 1 ? '#85c59a' : 
+                                                                                        card.brokoliCounter == 2 ? '#5eb179' : 
+                                                                                        card.brokoliCounter == 3 ? '#4b9c66' : 
+                                                                                        card.brokoliCounter == 4 ? '#38754c' : 
+                                                                                        card.brokoliCounter == 5 ? '#2b5a3b' : '#C7C7CD'}}> 
+                        {card.totalBrokolis} 
                         </Text>
 
                   <TouchableWithoutFeedback onPress={() => this._giveBrokoli()}
@@ -352,12 +392,12 @@ class Project extends React.Component {
                                             style={{borderWidth: 0.5}}>
 
                         <Animatable.Image source={require('../../../img/icons/brokoli-counter.png') } 
-                                          animation={this.state.brokoliCounter == 5 ? 'rubberBand' : ''}
-                                          style={{resizeMode: 'center', width: 40, height: 40, tintColor: this.state.brokoliCounter == 1 ? '#85c59a' : 
-                                                                                              this.state.brokoliCounter == 2 ? '#5eb179' : 
-                                                                                              this.state.brokoliCounter == 3 ? '#4b9c66' : 
-                                                                                              this.state.brokoliCounter == 4 ? '#38754c' : 
-                                                                                              this.state.brokoliCounter == 5 ? '#2b5a3b' : '#C7C7CD'}} />
+                                          animation={card.brokoliCounter == 5 ? 'rubberBand' : ''}
+                                          style={{resizeMode: 'center', width: 40, height: 40, tintColor: card.brokoliCounter == 1 ? '#85c59a' : 
+                                                                                              card.brokoliCounter == 2 ? '#5eb179' : 
+                                                                                              card.brokoliCounter == 3 ? '#4b9c66' : 
+                                                                                              card.brokoliCounter == 4 ? '#38754c' : 
+                                                                                              card.brokoliCounter == 5 ? '#2b5a3b' : '#C7C7CD'}} />
                   </TouchableWithoutFeedback>
 
                   </View>
@@ -376,7 +416,7 @@ class Project extends React.Component {
                          onBackdropPress={() => this.setState({ isInfoVisible: false })}
                          avoidKeyboard={true}>
 
-                         {this._renderModalInfo()}
+                         {this._renderModalInfo({card})}
 
                   </Modal>  
 
@@ -388,110 +428,109 @@ class Project extends React.Component {
                          {this._renderExceedBrokolis()}
 
                   </Modal> 
+                  </View>
+                )
+            }}
+             overlayLabels={{
+            bottom: {
+              title: 'Bleah',
+              style: {
+                label: {
+                  backgroundColor: 'white',
+                  borderColor: '#A7333F',
+                  color: '#A7333F',
+                  borderWidth: 2
+                },
+                wrapper: {
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }
+              }
+            },
+            left: {
+              title: 'Discard',
+              style: {
+                label: {
+                  backgroundColor: 'white',
+                  borderColor: '#A7333F',
+                  color: '#A7333F',
+                  borderWidth: 2
+                },
+                wrapper: {
+                  flexDirection: 'column',
+                  alignItems: 'flex-end',
+                  justifyContent: 'center',
+                  marginRight: 10
+                }
+              }
+            },
+            right: {
+              title: 'Discard',
+              style: {
+                label: {
+                  backgroundColor: 'white',
+                  borderColor: '#A7333F',
+                  color: '#A7333F',
+                  borderWidth: 2
+                },
+                wrapper: {
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
+                  justifyContent: 'center',
+                  marginLeft: 10,
+                }
+              }
+            },
+            top: {
+              title: 'Nice',
+              style: {
+                label: {
+                  backgroundColor: 'white',
+                  borderColor: '#42D260',
+                  color: '#42D260',
+                  borderWidth: 1
+                },
+                wrapper: {
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }
+              }
+            }
+          }}
+            onSwipedAll={() => this._allCardsSwiped() }
+            cardIndex={this.state.cardIndex}
+            backgroundColor={'#42D260'}
+            onSwiped={(cardIndex) => this._incrementCardIndex(cardIndex)}
+            cardVerticalMargin={40}
+            animateOverlayLabelsOpacity
+            animateCardOpacity>
+        </Swiper>
 
-        </View>
-      )
-    }
-  }
-  
-  class NoMoreProjects extends React.Component {
-    constructor(props) {
-      super(props);
-    }
-  
-    render() {
-      return (
-        <View style={styles.noMoreProjects}>
-          <Text>No more projects</Text>
-        </View>
-      )
-    }
-  }
-  
-  export default class Swipe extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        projects: [],
-        outOfProjects: false
-      }
-    }
-
-    componentDidMount(){
-      this.getData();
-    }
-
-    getData(){
-      var arrayProjects = [];
-      return fetch('https://brokoli.eu-gb.mybluemix.net/api/visitors', {  
-        method: 'GET',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }
-      })
-        // .then(function(response) { return response.json(); })
-        // .then(function(responseData) {
-        //   this.setState({ data : responseData})});
-
-        .then((response) => response.json())
-        .then((responseData) => {
-          for (var i = 0; i < responseData.length; i++) {
-            var object = responseData[i];
-            arrayProjects.push(object);
-          }
-          this.setState({projects: arrayProjects})
-        });
-
-    }
-  
-    handleYup (card) {
-      console.log("yup")
-    }
-  
-    handleNope (card) {
-      console.log("nope")
-    }
-  
-    
-    render() {
-      return (
-        <SwipeCards
-          cards={this.state.projects}
-          renderCard={(projectData) => <Project {...projectData} />}
-          renderNoMoreProjects={() => <NoMoreProjects />}
-
-          handleYup={this.handleYup}
-          handleNope={this.handleNope}
-          handleMaybe={this.handleMaybe}
-          hasMaybeAction
-        />
+        
       )
     }
   }
   
   const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#F5FCFF'
+    },
     card: {
       flex: 1,
-      alignItems: 'center',
-      // borderColor: 'grey',
-      backgroundColor: 'white',
+      borderRadius: 4,
       borderWidth: 2,
-      borderColor: '#42D260',
-      elevation: 0,
-      marginBottom: 10,
-      marginTop: 30,
-      width: width - 10,
-    },
-    noMoreProjects: {
-      flex: 1,
+      borderColor: '#E8E8E8',
       justifyContent: 'center',
-      alignItems: 'center',
+      backgroundColor: 'white',
+      marginBottom: 40,
     },
     header: {
       flexDirection: 'row',
       flex: 1,
-      backgroundColor: '#42D260',
+      backgroundColor: 'white',
     },
     body: {
       flex: 8,
@@ -520,12 +559,12 @@ class Project extends React.Component {
       width: 25,
       height: 25,
       resizeMode: 'center',
-      tintColor: 'white'
+      tintColor: '#42D260'
     },
     title: {
       fontSize: 20,
       fontWeight: '400',
-      color: 'white'
+      color: '#42D260'
     },
     button: {
       padding: 12,
@@ -580,16 +619,18 @@ class Project extends React.Component {
     },
     headerCont: {
       flex: 1,
-      alignItems: 'center',
+      alignItems: 'flex-start',
       justifyContent: 'center',
       borderBottomWidth: 0.5,
       borderColor: '#C7C7CD',
-      width: width - 10
+      width: width - 45,
+      paddingLeft: 10,
+      paddingRight: 10
     },
     headerTitle: {
-      fontSize: 17,
+      fontSize: 18,
       fontWeight: '400',
-      color: '#C7C7CD'
+      color: '#C7C7CD',
     },
     brokolIcon:{
       width: 20,
@@ -599,16 +640,21 @@ class Project extends React.Component {
     itemCont:{
       flex: 1,
       backgroundColor: 'white',
-      flexDirection: 'row',
-      marginLeft: 10,
-      marginRight: 10,
-      paddingTop: 10,
-      paddingBottom: 10
+      marginTop: 10,
+      marginBottom: 10
     },
     expContainer: {
+      flex: 1,
       flexDirection: 'row',
       alignItems: 'center',
       marginTop: 5,
-      marginBottom: 5
+      marginBottom: 5,
+      marginRight: 20,
+
   },
+  itemText: {
+    fontSize: 17,
+    fontWeight: '300',
+    color: '#C7C7CD'
+  }
   })
