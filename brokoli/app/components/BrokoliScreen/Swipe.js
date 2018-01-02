@@ -23,12 +23,7 @@ const width = window.width
       this.state = {
         projects: [],
         isInfoVisible: false,
-
-        //Need to relate create this fields in the db. (bookmark, applications, brokoliCounter, and totalBrokolis) 
-        bookmark: false,
         applicants: 17,
-        brokoliCounter: 0,
-        totalBrokolis : 17,
         isExceedBrokolisVisible: false,
         posData: [
                     {pos: 'Java Developer', exp: 4, posNr: 2},
@@ -41,8 +36,10 @@ const width = window.width
         ],
         brokolis: [true,false,false,false,false],
         cards: [
-          {projectOwner: 'Alan Andrade', bookmark: true, title: 'Brokoli', abstract: 'someAbstract', header: 'Tinder for Project. Bringing people and projects together in a virtual environment.'},
-          {projectOwner: 'Brigel Pineti', bookmark: false, title: 'Finding Dory', abstract: 'someAbstract2', header: 'I like purple shells.'},
+          {projectOwner: 'Alan Andrade', bookmark: true, brokoliCounter: 2, totalBrokolis: 17, applicants: 34, title: 'Brokoli1', abstract: 'someAbstract', header: 'Tinder for Project. Bringing people and projects together in a virtual environment.'},
+          {projectOwner: 'Brigel Pineti', bookmark: false, brokoliCounter: 4, totalBrokolis: 99, applicants: 8, title: 'Finding Dory1', abstract: 'someAbstract2', header: 'I like purple shells.'},
+          {projectOwner: 'Alan Andrade', bookmark: true, brokoliCounter: 2, totalBrokolis: 17, applicants: 35, title: 'Brokoli2', abstract: 'someAbstract', header: 'Tinder for Project. Bringing people and projects together in a virtual environment.'},
+          {projectOwner: 'Brigel Pineti', bookmark: false, brokoliCounter: 4, totalBrokolis: 99, applicants: 9, title: 'Finding Dory2', abstract: 'someAbstract2', header: 'I like purple shells.'},
         ],
         cardIndex: 0
       }
@@ -75,8 +72,8 @@ const width = window.width
 
     }
 
-    _incrementCardIndex(){
-      this.state.cardIndex = this.state.cardIndex + 1
+    _incrementCardIndex(cardIndex){
+      this.state.cardIndex = cardIndex + 1
       this.setState(function(prevState, props){
         return { cardIndex: prevState.cardIndex }
       })
@@ -97,7 +94,7 @@ const width = window.width
       this.setState(function(prevState, props){
         return {bookmark: prevState.bookmark}
       })
-      console.log('Untoogled Bookmark: ', this.state.bookmark)
+      console.log('Untoogled Bookmark: ', this.state.cards[this.state.cardIndex].bookmark)
     }
     
     _toggleInfoModal()
@@ -121,7 +118,7 @@ const width = window.width
 
                 <Image source={require('../../../img/icons/applicants.png')} style={[styles.icon, {tintColor: 'white'}]} />
 
-                <Text style={[styles.title, {color: 'white'}]}> {this.state.applicants} </Text> 
+                <Text style={[styles.title, {color: 'white'}]}> {card.applicants} </Text> 
 
                 </View>
       
@@ -158,17 +155,17 @@ const width = window.width
     _giveBrokoli()
     { 
 
-      if(this.state.brokoliCounter < 5)
+      if(this.state.cards[this.state.cardIndex].brokoliCounter < 5)
       {
       //increment if brokoliCounter is less than or equal to 5
       this._incrementBrokoliCounter()
 
-      this.state.totalBrokolis = this.state.totalBrokolis + 1
+      this.state.cards[this.state.cardIndex].totalBrokolis = this.state.cards[this.state.cardIndex].totalBrokolis + 1
       this.setState(function(prevState, props){
-        return { totalBrokolis: this.state.totalBrokolis}
+        return { cards: this.state.cards}
       })
 
-      console.log('Brokolis: ', this.state.totalBrokolis)
+      console.log('Brokolis: ', this.state.cards[this.state.cardIndex].totalBrokolis)
       }
       else{
         
@@ -179,17 +176,17 @@ const width = window.width
 
     _takeBrokoli()
     {
-      if(this.state.brokoliCounter > 0)
+      if(this.state.cards[this.state.cardIndex].brokoliCounter > 0)
       {
       //decrement if brokoliCounter is greater than or equal to 0
       this._decrementBrokoliCounter()
 
-      this.state.totalBrokolis = this.state.totalBrokolis - 1
+      this.state.cards[this.state.cardIndex].totalBrokolis = this.state.cards[this.state.cardIndex].totalBrokolis - 1
       this.setState(function(prevState, props){
-        return { totalBrokolis: this.state.totalBrokolis}
+        return { cards: this.state.cards}
       })
 
-      console.log('Brokolis: ', this.state.totalBrokolis)
+      console.log('Brokolis: ', this.state.cards[this.state.cardIndex].brokoliCounter)
       }
     }
 
@@ -198,24 +195,24 @@ const width = window.width
     _incrementBrokoliCounter()
     {    
      
-        this.state.brokoliCounter = this.state.brokoliCounter + 1
+      this.state.cards[this.state.cardIndex].brokoliCounter = this.state.cards[this.state.cardIndex].brokoliCounter + 1
         this.setState(function(prevState, props){
-          return { brokoliCounter: this.state.brokoliCounter}
+          return { cards: prevState.cards}
         })
 
-        console.log('BrokoliCount: ', this.state.brokoliCounter)
+        console.log('BrokoliCount: ', this.state.cards[this.state.cardIndex].brokoliCounter)
       
     }
 
     _decrementBrokoliCounter()
     {
       
-        this.state.brokoliCounter = this.state.brokoliCounter - 1
+      this.state.cards[this.state.cardIndex].brokoliCounter = this.state.cards[this.state.cardIndex].brokoliCounter - 1
         this.setState(function(prevState, props){
-          return { brokoliCounter: this.state.brokoliCounter}
+          return { cards: prevState.cards}
         })
 
-        console.log('BrokoliCount: ', this.state.brokoliCounter)
+        console.log('BrokoliCount: ', this.state.cards[this.state.cardIndex].brokoliCounter)
     }
 
     _renderExceedBrokolis = () => (
@@ -289,10 +286,10 @@ const width = window.width
 
               <View style={styles.bookmarkCont}>
                 <TouchableWithoutFeedback
-                                  onPress={(card) => this._toogleBookmark(card)}
-                                  onLongPress={(card) => this._untoogleBookmark(card)}>
+                                  onPress={() => this._toogleBookmark()}
+                                  onLongPress={() => this._untoogleBookmark()}>
 
-                      <Image source={this.state.cards[this.state.cardIndex].bookmark ? require('../../../img/icons/bookmark-fill.png')
+                      <Image source={card.bookmark ? require('../../../img/icons/bookmark-fill.png')
                                       : require('../../../img/icons/bookmark-outline.png') } 
                                     style={styles.icon} />
                 </TouchableWithoutFeedback>
@@ -372,12 +369,12 @@ const width = window.width
 
                 <View style={{flexDirection: 'row', flex: 1, alignItems: 'center', justifyContent: 'flex-end', paddingRight: 10}}> 
 
-                  <Text style={{fontSize: 20, fontWeight: '100',paddingRight: 5, color: this.state.brokoliCounter == 1 ? '#85c59a' : 
-                                                                                        this.state.brokoliCounter == 2 ? '#5eb179' : 
-                                                                                        this.state.brokoliCounter == 3 ? '#4b9c66' : 
-                                                                                        this.state.brokoliCounter == 4 ? '#38754c' : 
-                                                                                        this.state.brokoliCounter == 5 ? '#2b5a3b' : '#C7C7CD'}}> 
-                        {this.state.totalBrokolis} 
+                  <Text style={{fontSize: 20, fontWeight: '100',paddingRight: 5, color: card.brokoliCounter == 1 ? '#85c59a' : 
+                                                                                        card.brokoliCounter == 2 ? '#5eb179' : 
+                                                                                        card.brokoliCounter == 3 ? '#4b9c66' : 
+                                                                                        card.brokoliCounter == 4 ? '#38754c' : 
+                                                                                        card.brokoliCounter == 5 ? '#2b5a3b' : '#C7C7CD'}}> 
+                        {card.totalBrokolis} 
                         </Text>
 
                   <TouchableWithoutFeedback onPress={() => this._giveBrokoli()}
@@ -385,12 +382,12 @@ const width = window.width
                                             style={{borderWidth: 0.5}}>
 
                         <Animatable.Image source={require('../../../img/icons/brokoli-counter.png') } 
-                                          animation={this.state.brokoliCounter == 5 ? 'rubberBand' : ''}
-                                          style={{resizeMode: 'center', width: 40, height: 40, tintColor: this.state.brokoliCounter == 1 ? '#85c59a' : 
-                                                                                              this.state.brokoliCounter == 2 ? '#5eb179' : 
-                                                                                              this.state.brokoliCounter == 3 ? '#4b9c66' : 
-                                                                                              this.state.brokoliCounter == 4 ? '#38754c' : 
-                                                                                              this.state.brokoliCounter == 5 ? '#2b5a3b' : '#C7C7CD'}} />
+                                          animation={card.brokoliCounter == 5 ? 'rubberBand' : ''}
+                                          style={{resizeMode: 'center', width: 40, height: 40, tintColor: card.brokoliCounter == 1 ? '#85c59a' : 
+                                                                                              card.brokoliCounter == 2 ? '#5eb179' : 
+                                                                                              card.brokoliCounter == 3 ? '#4b9c66' : 
+                                                                                              card.brokoliCounter == 4 ? '#38754c' : 
+                                                                                              card.brokoliCounter == 5 ? '#2b5a3b' : '#C7C7CD'}} />
                   </TouchableWithoutFeedback>
 
                   </View>
@@ -428,7 +425,7 @@ const width = window.width
             onSwipedAll={() => {console.log('onSwipedAll')}}
             cardIndex={this.state.cardIndex}
             backgroundColor={'#42D260'}
-            onSwiped={this._incrementCardIndex()}>
+            onSwiped={(cardIndex) => this._incrementCardIndex(cardIndex)}>
         </Swiper>
 
         
