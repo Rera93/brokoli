@@ -31,6 +31,7 @@ class Project extends React.Component {
           projectOwnerPic: '',
           brokoliCounter: 0,
           totalBrokolis : 17,
+          isExceedBrokolisVisible: false
         }
 
       
@@ -124,6 +125,11 @@ class Project extends React.Component {
 
       console.log('Brokolis: ', this.state.totalBrokolis)
       }
+      else{
+        
+        this._toggleExceedBrokolis()
+        
+      }
     }
 
     _takeBrokoli()
@@ -165,6 +171,36 @@ class Project extends React.Component {
         })
 
         console.log('BrokoliCount: ', this.state.brokoliCounter)
+    }
+
+    _renderExceedBrokolis = () => (
+
+      <View style={[styles.modalContent, {backgroundColor: '#254D32'}]}>
+      
+          <Text style={[styles.title, {color: 'white'}]}>No more than 5 brokoli's can be given to a project.</Text>
+      
+          <View style={{flexDirection: 'row'}}>
+      
+                              <TouchableOpacity style={[styles.button, {backgroundColor: '#A7333F'}]} 
+                                              onPress={() => this._toggleExceedBrokolis()}>
+                              <Text style={[styles.btnTxt, {color: 'white'}]}>Understood</Text>
+              
+                              </TouchableOpacity>
+      
+                          </View>
+      
+                      </View>
+
+
+    )
+
+    _toggleExceedBrokolis(){
+
+      this.state.isExceedBrokolisVisible = !this.state.isExceedBrokolisVisible
+      this.setState(function(prevState, props){
+        return { isExceedBrokolisVisible: prevState.isExceedBrokolisVisible}
+      })
+      console.log('BrokoliModal: ', this.state.isExceedBrokolisVisible)
     }
 
 
@@ -271,7 +307,16 @@ class Project extends React.Component {
 
                          {this._renderModalInfo()}
 
-                  </Modal>   
+                  </Modal>  
+
+            <Modal isVisible = {this.state.isExceedBrokolisVisible}
+                   animationIn={'slideInLeft'}
+                   animationOut={'slideOutRight'}
+                   onBackdropPress={() => this.setState({ isExceedBrokolisVisible: false })}>
+
+                         {this._renderExceedBrokolis()}
+
+                  </Modal> 
 
         </View>
       )
@@ -481,5 +526,21 @@ class Project extends React.Component {
       borderColor: '#C7C7CD',
       justifyContent: 'space-between'
     
-    }
+    },
+    button: {
+      padding: 12,
+      margin: 16,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 4,
+      borderColor: 'rgba(0, 0, 0, 0.1)',
+    },
+    modalContent: {
+      backgroundColor: 'white',
+      padding: 22,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 4,
+      borderColor: 'rgba(0, 0, 0, 0.1)',
+    },
   })
