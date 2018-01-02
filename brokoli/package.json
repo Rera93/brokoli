@@ -28,6 +28,7 @@
     "react-native-bar-collapsible": "^1.6.0",
     "react-native-check-box": "^2.0.2",
     "react-native-datepicker": "^1.6.0",
+    "react-native-deck-swiper": "^1.4.6",
     "react-native-elements": "^0.18.5",
     "react-native-gesture-handler": "^1.0.0-alpha.36",
     "react-native-google-places-autocomplete": "^1.3.6",

@@ -12,6 +12,7 @@ import {ScrollView,
 import SwipeCards from '../../lib/SwipeCards'
 import Modal from 'react-native-modal'
 import * as Animatable from 'react-native-animatable'
+import Swiper from 'react-native-deck-swiper'
 
 const window = Dimensions.get('window');
 const width = window.width
@@ -21,52 +22,98 @@ import tie from '../../../img/icons/tie.png'
 class Project extends React.Component {
     constructor(props) {
       super(props);
-
-      this.state = {
-          bookmark: false,
-          isInfoVisible: false,
-          applicants: 17,
-          projectAbstract: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremququo voluptas nulla pariatur?Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremququo voluptas nulla pariatur?Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremququo voluptas nulla pariatur.',
-          projectOwner: 'Alan Andrade',
-          projectOwnerPic: '',
-          brokoliCounter: 0,
-          totalBrokolis : 17,
-          isExceedBrokolisVisible: false,
-          projectTitle: 'Brokoli',
-          projectHeader: 'Tinder for projects',
-          posData: [
-                      {pos: 'Java Developer', exp: 4, posNr: 2},
-                      {pos: 'React Native Architect', exp: 2, posNr: 2},
-                      {pos: 'Financial Analyst', exp: 3, posNr: 1},
-                      {pos: 'Managerial Accountant', exp: 5, posNr: 1},
-                      {pos: 'C# Software Engineer', exp: 4, posNr: 1},
-                      {pos: 'Unit Tester', exp: 1, posNr: 3},
-
-          ],
-          brokolis: [true,false,false,false,false],
-        }
-
       
     }
 
-  /*  <FlatList
-    onScroll={this.handleScroll} 
-    extraData={this.state}
-    data={this.state.posData}
-    renderItem={({ item, index }) => (
-          <View item={item} index={index} style={itemCont}> 
-          <Text style={styles.item}>{item.pos}</Text>
-          <Text style={styles.item}>{item.posNr} </Text> 
-          {this._renderBrokolis({item})}  
-          
-        </View>   
- 
-    )}
-    keyExtractor={item => item.pos}
-    ItemSeparatorComponent={this._renderSeparator}
-  />*/
     //Alan you used this format to fetch positions from db  {this.props.doc.positions}
 
+   
+
+     render() {
+      return (
+        
+        <View style={styles.card}>
+
+          
+
+        </View>
+      )
+    }
+  }
+  
+  class NoMoreProjects extends React.Component {
+    constructor(props) {
+      super(props);
+    }
+  
+    render() {
+      return (
+        <View style={styles.noMoreProjects}>
+          <Text>No more projects</Text>
+        </View>
+      )
+    }
+  }
+  
+  export default class Swipe extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        projects: [],
+        bookmark: false,
+        isInfoVisible: false,
+        applicants: 17,
+        projectAbstract: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremququo voluptas nulla pariatur?Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremququo voluptas nulla pariatur?Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremququo voluptas nulla pariatur.',
+        projectOwner: 'Alan Andrade',
+        projectOwnerPic: '',
+        brokoliCounter: 0,
+        totalBrokolis : 17,
+        isExceedBrokolisVisible: false,
+        projectTitle: 'Brokoli',
+        projectHeader: 'Tinder for projects',
+        posData: [
+                    {pos: 'Java Developer', exp: 4, posNr: 2},
+                    {pos: 'React Native Architect', exp: 2, posNr: 2},
+                    {pos: 'Financial Analyst', exp: 3, posNr: 1},
+                    {pos: 'Managerial Accountant', exp: 5, posNr: 1},
+                    {pos: 'C# Software Engineer', exp: 4, posNr: 1},
+                    {pos: 'Unit Tester', exp: 1, posNr: 3},
+
+        ],
+        brokolis: [true,false,false,false,false],
+      }
+    }
+
+    componentDidMount(){
+      this.getData();
+    }
+
+    getData(){
+      var arrayProjects = [];
+      return fetch('https://brokoli.eu-gb.mybluemix.net/api/visitors', {  
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        }
+      })
+        // .then(function(response) { return response.json(); })
+        // .then(function(responseData) {
+        //   this.setState({ data : responseData})});
+
+        .then((response) => response.json())
+        .then((responseData) => {
+          for (var i = 0; i < responseData.length; i++) {
+            var object = responseData[i];
+            arrayProjects.push(object);
+          }
+          this.setState({projects: arrayProjects})
+         
+        });
+
+        console.log('Projects: ', this.state.projects)
+
+    }
     _toogleBookmark()
     {
       this.state.bookmark = true
@@ -94,7 +141,7 @@ class Project extends React.Component {
       console.log('isInfoVisible: ', this.state.isInfoVisible)
     }
 
-    _renderModalInfo = () =>
+    _renderModalInfo = ({card}) =>
     (
 
       <View style={{flex: 1}}>
@@ -131,7 +178,7 @@ class Project extends React.Component {
 
           <View style={{paddingTop: 10,}}>
       
-          <Text style={[styles.title, {color: 'grey'}]}>{this.state.projectAbstract}</Text>
+          <Text style={[styles.title, {color: 'grey'}]}>{card.abstract}</Text>
 
           </View>
       
@@ -264,20 +311,28 @@ class Project extends React.Component {
             </View>
     )
   }
-
-     render() {
+  
+    
+    render() {
       return (
-        
-        <View style={styles.card}>
 
-          <View style = {styles.header}>
+       
+
+        <Swiper
+            cards={[{title: 'someTitle', abstract: 'someAbstract'},
+                    {title: 'someTitle1', abstract: 'someAbstract1'},
+                    ]}
+            renderCard={(card) => {
+                return (
+                  <View style={styles.card} card={card}>
+                  <View style = {styles.header}>
 
               <TouchableOpacity style={styles.iCont} onPress={() => this._toggleInfoModal()}>
                 <Image source={require('../../../img/icons/info.png')} style={styles.icon} />
               </TouchableOpacity> 
 
               <View style={styles.titleCont}>
-                <Text style={styles.title}> {this.props.doc.name} </Text>
+                <Text style={styles.title}> {card.title} </Text>
               </View>
 
               <View style={styles.bookmarkCont}>
@@ -376,7 +431,7 @@ class Project extends React.Component {
                          onBackdropPress={() => this.setState({ isInfoVisible: false })}
                          avoidKeyboard={true}>
 
-                         {this._renderModalInfo()}
+                         {this._renderModalInfo({card})}
 
                   </Modal>  
 
@@ -388,100 +443,44 @@ class Project extends React.Component {
                          {this._renderExceedBrokolis()}
 
                   </Modal> 
+                  </View>
+                )
+            }}
+            onSwiped={(cardIndex) => {console.log(cardIndex)}}
+            onSwipedAll={() => {console.log('onSwipedAll')}}
+            cardIndex={0}
+            backgroundColor={'#42D260'}>
+        </Swiper>
 
-        </View>
-      )
-    }
-  }
-  
-  class NoMoreProjects extends React.Component {
-    constructor(props) {
-      super(props);
-    }
-  
-    render() {
-      return (
-        <View style={styles.noMoreProjects}>
-          <Text>No more projects</Text>
-        </View>
-      )
-    }
-  }
-  
-  export default class Swipe extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        projects: [],
-        outOfProjects: false
-      }
-    }
-
-    componentDidMount(){
-      this.getData();
-    }
-
-    getData(){
-      var arrayProjects = [];
-      return fetch('https://brokoli.eu-gb.mybluemix.net/api/visitors', {  
-        method: 'GET',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }
-      })
-        // .then(function(response) { return response.json(); })
-        // .then(function(responseData) {
-        //   this.setState({ data : responseData})});
-
-        .then((response) => response.json())
-        .then((responseData) => {
-          for (var i = 0; i < responseData.length; i++) {
-            var object = responseData[i];
-            arrayProjects.push(object);
-          }
-          this.setState({projects: arrayProjects})
-        });
-
-    }
-  
-    handleYup (card) {
-      console.log("yup")
-    }
-  
-    handleNope (card) {
-      console.log("nope")
-    }
-  
-    
-    render() {
-      return (
-        <SwipeCards
-          cards={this.state.projects}
-          renderCard={(projectData) => <Project {...projectData} />}
-          renderNoMoreProjects={() => <NoMoreProjects />}
-
-          handleYup={this.handleYup}
-          handleNope={this.handleNope}
-          handleMaybe={this.handleMaybe}
-          hasMaybeAction
-        />
+        
       )
     }
   }
   
   const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#F5FCFF'
+    },
     card: {
       flex: 1,
-      alignItems: 'center',
-      // borderColor: 'grey',
-      backgroundColor: 'white',
+      borderRadius: 4,
       borderWidth: 2,
-      borderColor: '#42D260',
-      elevation: 0,
-      marginBottom: 10,
-      marginTop: 30,
-      width: width - 10,
+      borderColor: '#E8E8E8',
+      justifyContent: 'center',
+      backgroundColor: 'white',
+      marginBottom: 20
+    },
+    text: {
+      textAlign: 'center',
+      fontSize: 50,
+      backgroundColor: 'transparent'
+    },
+    done: {
+      textAlign: 'center',
+      fontSize: 30,
+      color: 'white',
+      backgroundColor: 'transparent'
     },
     noMoreProjects: {
       flex: 1,
