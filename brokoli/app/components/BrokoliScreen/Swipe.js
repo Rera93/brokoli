@@ -41,7 +41,8 @@ const width = window.width
           {projectOwner: 'Alan Andrade', bookmark: true, brokoliCounter: 2, totalBrokolis: 17, applicants: 35, title: 'Brokoli2', abstract: 'someAbstract', header: 'Tinder for Project. Bringing people and projects together in a virtual environment.'},
           {projectOwner: 'Brigel Pineti', bookmark: false, brokoliCounter: 4, totalBrokolis: 99, applicants: 9, title: 'Finding Dory2', abstract: 'someAbstract2', header: 'I like purple shells.'},
         ],
-        cardIndex: 0
+        cardIndex: 0,
+        allCardsSwiped: false,
       }
     }
 
@@ -265,6 +266,15 @@ const width = window.width
             </View>
     )
   }
+
+  _allCardsSwiped(){
+
+    this.state.allCardsSwiped = true
+    this.setState(function(prevState, props){
+      return { allCardsSwiped: prevState.allCardsSwiped}
+    })
+    console.log("All cards have been swiped. Deck is empty")
+  }
   
     
     render() {
@@ -421,11 +431,11 @@ const width = window.width
                   </View>
                 )
             }}
-            onSwiped={(cardIndex) => {console.log(cardIndex)}}
-            onSwipedAll={() => {console.log('onSwipedAll')}}
+            onSwipedAll={() => this._allCardsSwiped() }
             cardIndex={this.state.cardIndex}
             backgroundColor={'#42D260'}
-            onSwiped={(cardIndex) => this._incrementCardIndex(cardIndex)}>
+            onSwiped={(cardIndex) => this._incrementCardIndex(cardIndex)}
+            cardVerticalMargin={40}>
         </Swiper>
 
         
