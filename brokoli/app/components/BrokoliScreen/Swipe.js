@@ -350,12 +350,15 @@ class Project extends React.Component {
           renderItem={({ item, index }) => (
                <TouchableWithoutFeedback>
 
-
-                <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
-                <Text style={styles.item}>{item.pos}</Text>
-                <Text style={styles.item}>{item.posNr} </Text> 
+                <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', paddingTop: 10, paddingBottom: 10}}>
+                <View style={{flex: 3, justifyContent: 'center', alignItems: 'flex-start', paddingLeft: 5}}>
+                <Text style={styles.itemText}>{item.pos}</Text>
+                </View>
                 {this._renderBrokolis({item})} 
+                
+                
                 </View> 
+
 
                 
               </TouchableWithoutFeedback>   
@@ -572,15 +575,21 @@ class Project extends React.Component {
     itemCont:{
       flex: 1,
       backgroundColor: 'white',
-      marginLeft: 10,
-      marginRight: 10,
-      paddingTop: 10,
-      paddingBottom: 10
+      marginTop: 10,
+      marginBottom: 10
     },
     expContainer: {
+      flex: 1,
       flexDirection: 'row',
       alignItems: 'center',
       marginTop: 5,
-      marginBottom: 5
+      marginBottom: 5,
+      marginRight: 20,
+
   },
+  itemText: {
+    fontSize: 17,
+    fontWeight: '300',
+    color: '#C7C7CD'
+  }
   })
