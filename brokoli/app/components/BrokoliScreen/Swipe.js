@@ -17,44 +17,6 @@ import Swiper from 'react-native-deck-swiper'
 const window = Dimensions.get('window');
 const width = window.width
 
-import tie from '../../../img/icons/tie.png'
-
-class Project extends React.Component {
-    constructor(props) {
-      super(props);
-      
-    }
-
-    //Alan you used this format to fetch positions from db  {this.props.doc.positions}
-
-   
-
-     render() {
-      return (
-        
-        <View style={styles.card}>
-
-          
-
-        </View>
-      )
-    }
-  }
-  
-  class NoMoreProjects extends React.Component {
-    constructor(props) {
-      super(props);
-    }
-  
-    render() {
-      return (
-        <View style={styles.noMoreProjects}>
-          <Text>No more projects</Text>
-        </View>
-      )
-    }
-  }
-  
   export default class Swipe extends React.Component {
     constructor(props) {
       super(props);
@@ -79,9 +41,10 @@ class Project extends React.Component {
         ],
         brokolis: [true,false,false,false,false],
         cards: [
-          {projectOwner: 'Alan Andrade', title: 'Brokoli', abstract: 'someAbstract', header: 'Tinder for Project. Bringing people and projects together in a virtual environment.'},
-          {projectOwner: 'Brigel Pineti', title: 'Finding Dory', abstract: 'someAbstract1', header: 'I like purple shells.'},
-        ]
+          {projectOwner: 'Alan Andrade', bookmark: true, title: 'Brokoli', abstract: 'someAbstract', header: 'Tinder for Project. Bringing people and projects together in a virtual environment.'},
+          {projectOwner: 'Brigel Pineti', bookmark: false, title: 'Finding Dory', abstract: 'someAbstract2', header: 'I like purple shells.'},
+        ],
+        cardIndex: 0
       }
     }
 
@@ -111,18 +74,26 @@ class Project extends React.Component {
         console.log('Projects: ', this.state.projects)
 
     }
+
+    _incrementCardIndex(){
+      this.state.cardIndex = this.state.cardIndex + 1
+      this.setState(function(prevState, props){
+        return { cardIndex: prevState.cardIndex }
+      })
+      console.log('Card Index: ', this.state.cardIndex)
+    }
     _toogleBookmark()
     {
-      this.state.bookmark = true
+      this.state.cards[this.state.cardIndex].bookmark = true
       this.setState(function(prevState, props){
-        return {bookmark: prevState.bookmark}
+        return {cards: prevState.cards}
       })
-      console.log('Toogled Bookmark: ', this.state.bookmark)
+      console.log('Toogled Bookmark: ', this.state.cards[this.state.cardIndex].bookmark)
     }
 
     _untoogleBookmark()
     {
-      this.state.bookmark = false
+      this.state.cards[this.state.cardIndex].bookmark = false
       this.setState(function(prevState, props){
         return {bookmark: prevState.bookmark}
       })
@@ -301,9 +272,6 @@ class Project extends React.Component {
     
     render() {
       return (
-
-       
-
         <Swiper
             cards={this.state.cards}
             renderCard={(card) => {
@@ -321,10 +289,10 @@ class Project extends React.Component {
 
               <View style={styles.bookmarkCont}>
                 <TouchableWithoutFeedback
-                                  onPress={() => this._toogleBookmark()}
-                                  onLongPress={() => this._untoogleBookmark()}>
+                                  onPress={(card) => this._toogleBookmark(card)}
+                                  onLongPress={(card) => this._untoogleBookmark(card)}>
 
-                      <Image source={this.state.bookmark ? require('../../../img/icons/bookmark-fill.png')
+                      <Image source={this.state.cards[this.state.cardIndex].bookmark ? require('../../../img/icons/bookmark-fill.png')
                                       : require('../../../img/icons/bookmark-outline.png') } 
                                     style={styles.icon} />
                 </TouchableWithoutFeedback>
@@ -458,8 +426,9 @@ class Project extends React.Component {
             }}
             onSwiped={(cardIndex) => {console.log(cardIndex)}}
             onSwipedAll={() => {console.log('onSwipedAll')}}
-            cardIndex={0}
-            backgroundColor={'#42D260'}>
+            cardIndex={this.state.cardIndex}
+            backgroundColor={'#42D260'}
+            onSwiped={this._incrementCardIndex()}>
         </Swiper>
 
         
