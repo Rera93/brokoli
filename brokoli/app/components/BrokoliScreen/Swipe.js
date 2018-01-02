@@ -431,11 +431,81 @@ const width = window.width
                   </View>
                 )
             }}
+             overlayLabels={{
+            bottom: {
+              title: 'Bleah',
+              style: {
+                label: {
+                  backgroundColor: 'white',
+                  borderColor: '#A7333F',
+                  color: '#A7333F',
+                  borderWidth: 2
+                },
+                wrapper: {
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }
+              }
+            },
+            left: {
+              title: 'Discard',
+              style: {
+                label: {
+                  backgroundColor: 'white',
+                  borderColor: '#A7333F',
+                  color: '#A7333F',
+                  borderWidth: 2
+                },
+                wrapper: {
+                  flexDirection: 'column',
+                  alignItems: 'flex-end',
+                  justifyContent: 'center',
+                  marginRight: 10
+                }
+              }
+            },
+            right: {
+              title: 'Discard',
+              style: {
+                label: {
+                  backgroundColor: 'white',
+                  borderColor: '#A7333F',
+                  color: '#A7333F',
+                  borderWidth: 2
+                },
+                wrapper: {
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
+                  justifyContent: 'center',
+                  marginLeft: 10,
+                }
+              }
+            },
+            top: {
+              title: 'Nice',
+              style: {
+                label: {
+                  backgroundColor: 'white',
+                  borderColor: '#42D260',
+                  color: '#42D260',
+                  borderWidth: 1
+                },
+                wrapper: {
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }
+              }
+            }
+          }}
             onSwipedAll={() => this._allCardsSwiped() }
             cardIndex={this.state.cardIndex}
             backgroundColor={'#42D260'}
             onSwiped={(cardIndex) => this._incrementCardIndex(cardIndex)}
-            cardVerticalMargin={40}>
+            cardVerticalMargin={40}
+            animateOverlayLabelsOpacity
+            animateCardOpacity>
         </Swiper>
 
         
