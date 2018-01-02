@@ -63,14 +63,9 @@ class Project extends React.Component {
         bookmark: false,
         isInfoVisible: false,
         applicants: 17,
-        projectAbstract: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremququo voluptas nulla pariatur?Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremququo voluptas nulla pariatur?Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremququo voluptas nulla pariatur.',
-        projectOwner: 'Alan Andrade',
-        projectOwnerPic: '',
         brokoliCounter: 0,
         totalBrokolis : 17,
         isExceedBrokolisVisible: false,
-        projectTitle: 'Brokoli',
-        projectHeader: 'Tinder for projects',
         posData: [
                     {pos: 'Java Developer', exp: 4, posNr: 2},
                     {pos: 'React Native Architect', exp: 2, posNr: 2},
@@ -81,6 +76,10 @@ class Project extends React.Component {
 
         ],
         brokolis: [true,false,false,false,false],
+        cards: [
+          {projectOwner: 'Alan Andrade', title: 'Brokoli', abstract: 'someAbstract', header: 'Tinder for Project. Bringing people and projects together in a virtual environment.'},
+          {projectOwner: 'Brigel Pineti', title: 'Finding Dory', abstract: 'someAbstract1', header: 'I like purple shells.'},
+        ]
       }
     }
 
@@ -97,10 +96,6 @@ class Project extends React.Component {
           'Content-Type': 'application/json',
         }
       })
-        // .then(function(response) { return response.json(); })
-        // .then(function(responseData) {
-        //   this.setState({ data : responseData})});
-
         .then((response) => response.json())
         .then((responseData) => {
           for (var i = 0; i < responseData.length; i++) {
@@ -151,9 +146,9 @@ class Project extends React.Component {
 
               <View style={{flex: 3,flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', paddingLeft: 10}}> 
 
-                <Image source={require('../../../img/icons/applicants.png')} style={styles.icon} />
+                <Image source={require('../../../img/icons/applicants.png')} style={[styles.icon, {tintColor: 'white'}]} />
 
-                <Text style={styles.title}> {this.state.applicants} </Text> 
+                <Text style={[styles.title, {color: 'white'}]}> {this.state.applicants} </Text> 
 
                 </View>
       
@@ -319,9 +314,7 @@ class Project extends React.Component {
        
 
         <Swiper
-            cards={[{title: 'someTitle', abstract: 'someAbstract'},
-                    {title: 'someTitle1', abstract: 'someAbstract1'},
-                    ]}
+            cards={this.state.cards}
             renderCard={(card) => {
                 return (
                   <View style={styles.card} card={card}>
@@ -353,7 +346,7 @@ class Project extends React.Component {
           <View style={styles.body}>
 
             <View style={styles.headerCont}>
-              <Text style={styles.headerTitle}> {this.state.projectHeader}</Text>
+              <Text style={styles.headerTitle}>{card.header}</Text>
             </View>
 
             <View style={styles.posiCont}>
@@ -373,7 +366,6 @@ class Project extends React.Component {
       
           )}
           keyExtractor={item => item.pos}
-          ItemSeparatorComponent={this._renderSeparator}
         />
 
           
@@ -383,10 +375,10 @@ class Project extends React.Component {
 
           <View style={styles.footer}> 
 
-              <View style={{flex:1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+              <View style={{flex:1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', paddingLeft: 5}}>
              
                 <Image source={require('../../../img/icons/profile_pic.png')} style={{resizeMode: 'center', width: 40, height: 40}}  />
-                <Text style={{fontSize: 20, fontWeight: '100', color: '#C7C7CD', paddingLeft: 5}}> {this.state.projectOwner} </Text>
+                <Text style={{fontSize: 20, fontWeight: '100', color: '#C7C7CD', paddingLeft: 5}}> {card.projectOwner} </Text>
                      
               </View>
 
@@ -469,28 +461,12 @@ class Project extends React.Component {
       borderColor: '#E8E8E8',
       justifyContent: 'center',
       backgroundColor: 'white',
-      marginBottom: 20
-    },
-    text: {
-      textAlign: 'center',
-      fontSize: 50,
-      backgroundColor: 'transparent'
-    },
-    done: {
-      textAlign: 'center',
-      fontSize: 30,
-      color: 'white',
-      backgroundColor: 'transparent'
-    },
-    noMoreProjects: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
+      marginBottom: 40,
     },
     header: {
       flexDirection: 'row',
       flex: 1,
-      backgroundColor: '#42D260',
+      backgroundColor: 'white',
     },
     body: {
       flex: 8,
@@ -519,12 +495,12 @@ class Project extends React.Component {
       width: 25,
       height: 25,
       resizeMode: 'center',
-      tintColor: 'white'
+      tintColor: '#42D260'
     },
     title: {
       fontSize: 20,
       fontWeight: '400',
-      color: 'white'
+      color: '#42D260'
     },
     button: {
       padding: 12,
@@ -579,16 +555,18 @@ class Project extends React.Component {
     },
     headerCont: {
       flex: 1,
-      alignItems: 'center',
+      alignItems: 'flex-start',
       justifyContent: 'center',
       borderBottomWidth: 0.5,
       borderColor: '#C7C7CD',
-      width: width - 10
+      width: width - 45,
+      paddingLeft: 10,
+      paddingRight: 10
     },
     headerTitle: {
       fontSize: 17,
       fontWeight: '400',
-      color: '#C7C7CD'
+      color: '#C7C7CD',
     },
     brokolIcon:{
       width: 20,
