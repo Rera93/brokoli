@@ -60,8 +60,10 @@ class Project extends React.Component {
       super(props);
       this.state = {
         projects: [],
-        bookmark: false,
         isInfoVisible: false,
+
+        //Need to relate create this fields in the db. (bookmark, applications, brokoliCounter, and totalBrokolis) 
+        bookmark: false,
         applicants: 17,
         brokoliCounter: 0,
         totalBrokolis : 17,
@@ -275,17 +277,6 @@ class Project extends React.Component {
       console.log('BrokoliModal: ', this.state.isExceedBrokolisVisible)
     }
 
-    _renderSeparator = () => {
-      return (
-        <View
-          style={{
-            height: 0.5,
-            width: width - 10,
-            backgroundColor: "#C7C7CD",
-          }}
-        />
-      )
-  }
   _renderBrokolis = ({item}) =>{
     var rows = []
     for(let i=1; i <= this.state.brokolis.length; i++)
@@ -357,12 +348,17 @@ class Project extends React.Component {
           extraData={this.state}
           data={this.state.posData}
           renderItem={({ item, index }) => (
-                <View item={item} index={index} style={styles.itemCont}> 
+               <TouchableWithoutFeedback>
+
+
+                <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
                 <Text style={styles.item}>{item.pos}</Text>
                 <Text style={styles.item}>{item.posNr} </Text> 
-                {this._renderBrokolis({item})}  
+                {this._renderBrokolis({item})} 
+                </View> 
+
                 
-              </View>   
+              </TouchableWithoutFeedback>   
       
           )}
           keyExtractor={item => item.pos}
@@ -576,7 +572,6 @@ class Project extends React.Component {
     itemCont:{
       flex: 1,
       backgroundColor: 'white',
-      flexDirection: 'row',
       marginLeft: 10,
       marginRight: 10,
       paddingTop: 10,
