@@ -340,6 +340,8 @@ class Project extends React.Component {
               <Text style={styles.headerTitle}>{card.header}</Text>
             </View>
 
+            <TouchableWithoutFeedback>
+
             <View style={styles.posiCont}>
             
             
@@ -348,20 +350,36 @@ class Project extends React.Component {
           extraData={this.state}
           data={this.state.posData}
           renderItem={({ item, index }) => (
-               <TouchableWithoutFeedback>
 
-                <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', paddingTop: 10, paddingBottom: 10}}>
-                <View style={{flex: 3, justifyContent: 'center', alignItems: 'flex-start', paddingLeft: 5}}>
-                <Text style={styles.itemText}>{item.pos}</Text>
-                </View>
-                {this._renderBrokolis({item})} 
-                
-                
-                </View> 
+                <View style={{paddingTop: 10, paddingBottom: 10}}>
+       
+
+                  <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+
+                  <View style={{flex: 3, justifyContent: 'center', alignItems: 'flex-start', paddingLeft: 5}}>
+                  <Text style={styles.itemText}>{item.pos}</Text>
+                  </View>
+                  {this._renderBrokolis({item})} 
+                  </View> 
+
+                  <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+
+                  <View style={{flex: 1, justifyContent: 'center', alignItems: 'flex-start', paddingLeft: 5}}>
+                  <Text style={[styles.itemText, {color: '#A7333F', padding: 5}]}>{item.posNr} left</Text>
+                  </View>
+
+                  <View style={{alignContent: 'flex-end', alignItems: 'center', justifyContent: 'center', marginRight: 5, backgroundColor: '#42D260', borderRadius: 5}}> 
+
+                  <Text style={[styles.itemText, {color: 'white', padding: 5}]}>Apply</Text>
+
+                    </View>
+                  
+                  </View> 
+
+              </View>
 
 
-                
-              </TouchableWithoutFeedback>   
+              
       
           )}
           keyExtractor={item => item.pos}
@@ -370,6 +388,7 @@ class Project extends React.Component {
           
                    
             </View>
+            </TouchableWithoutFeedback>
           </View>
 
           <View style={styles.footer}> 
@@ -563,7 +582,7 @@ class Project extends React.Component {
       paddingRight: 10
     },
     headerTitle: {
-      fontSize: 17,
+      fontSize: 18,
       fontWeight: '400',
       color: '#C7C7CD',
     },
