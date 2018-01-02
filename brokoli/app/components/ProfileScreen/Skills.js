@@ -49,7 +49,7 @@ export default class Skills extends React.Component
     */
 
     componentDidMount() {
-        //When compoment is first loaded the temp array is used as a placeholder for the skils key value pair array 
+        //When compoment is first loaded the temp array is used as a placeholder for the skills key value pair array 
         tempArr = this.state.data
     }
 
@@ -470,5 +470,6 @@ const styles = StyleSheet.create({
         color: '#254D32',
         fontSize: 20,
         fontWeight: '400'
-    }
+    },
+    
 })

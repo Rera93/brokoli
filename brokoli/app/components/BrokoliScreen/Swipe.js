@@ -6,7 +6,8 @@ import {ScrollView,
         Image, 
         Dimensions,
         TouchableOpacity,
-        TouchableWithoutFeedback} from 'react-native';
+        TouchableWithoutFeedback,
+        FlatList} from 'react-native';
 
 import SwipeCards from '../../lib/SwipeCards'
 import Modal from 'react-native-modal'
@@ -14,7 +15,6 @@ import * as Animatable from 'react-native-animatable'
 
 const window = Dimensions.get('window');
 const width = window.width
-
 
 import tie from '../../../img/icons/tie.png'
 
@@ -31,10 +31,41 @@ class Project extends React.Component {
           projectOwnerPic: '',
           brokoliCounter: 0,
           totalBrokolis : 17,
+          isExceedBrokolisVisible: false,
+          projectTitle: 'Brokoli',
+          projectHeader: 'Tinder for projects',
+          posData: [
+                      {pos: 'Java Developer', exp: 4, posNr: 2},
+                      {pos: 'React Native Architect', exp: 2, posNr: 2},
+                      {pos: 'Financial Analyst', exp: 3, posNr: 1},
+                      {pos: 'Managerial Accountant', exp: 5, posNr: 1},
+                      {pos: 'C# Software Engineer', exp: 4, posNr: 1},
+                      {pos: 'Unit Tester', exp: 1, posNr: 3},
+
+          ],
+          brokolis: [true,false,false,false,false],
         }
 
       
     }
+
+  /*  <FlatList
+    onScroll={this.handleScroll} 
+    extraData={this.state}
+    data={this.state.posData}
+    renderItem={({ item, index }) => (
+          <View item={item} index={index} style={itemCont}> 
+          <Text style={styles.item}>{item.pos}</Text>
+          <Text style={styles.item}>{item.posNr} </Text> 
+          {this._renderBrokolis({item})}  
+          
+        </View>   
+ 
+    )}
+    keyExtractor={item => item.pos}
+    ItemSeparatorComponent={this._renderSeparator}
+  />*/
+    //Alan you used this format to fetch positions from db  {this.props.doc.positions}
 
     _toogleBookmark()
     {
@@ -124,6 +155,11 @@ class Project extends React.Component {
 
       console.log('Brokolis: ', this.state.totalBrokolis)
       }
+      else{
+        
+        this._toggleExceedBrokolis()
+        
+      }
     }
 
     _takeBrokoli()
@@ -167,12 +203,68 @@ class Project extends React.Component {
         console.log('BrokoliCount: ', this.state.brokoliCounter)
     }
 
+    _renderExceedBrokolis = () => (
 
-     
+      <View style={[styles.modalContent, {backgroundColor: '#254D32'}]}>
+      
+          <Text style={[styles.title, {color: 'white'}]}>No more than 5 brokoli's can be given to a project.</Text>
+      
+          <View style={{flexDirection: 'row'}}>
+      
+                              <TouchableOpacity style={[styles.button, {backgroundColor: '#A7333F'}]} 
+                                              onPress={() => this._toggleExceedBrokolis()}>
+                              <Text style={[styles.btnTxt, {color: 'white'}]}>Understood</Text>
+              
+                              </TouchableOpacity>
+      
+                          </View>
+      
+                      </View>
 
 
+    )
 
-  
+    _toggleExceedBrokolis(){
+
+      this.state.isExceedBrokolisVisible = !this.state.isExceedBrokolisVisible
+      this.setState(function(prevState, props){
+        return { isExceedBrokolisVisible: prevState.isExceedBrokolisVisible}
+      })
+      console.log('BrokoliModal: ', this.state.isExceedBrokolisVisible)
+    }
+
+    _renderSeparator = () => {
+      return (
+        <View
+          style={{
+            height: 0.5,
+            width: width - 10,
+            backgroundColor: "#C7C7CD",
+          }}
+        />
+      )
+  }
+  _renderBrokolis = ({item}) =>{
+    var rows = []
+    for(let i=1; i <= this.state.brokolis.length; i++)
+    {
+        rows.push(
+
+           <View key = {i}>
+
+               <Image  style = {[styles.brokolIcon,{tintColor: i<=item.exp ? '#42D260' : '#C7C7CD'}]} 
+                       source={require('../../../img/icons/broccoli.png')}  />
+
+               </View>
+        )
+    }
+    return(
+        <View style={styles.expContainer}>
+            {rows}
+            </View>
+    )
+  }
+
      render() {
       return (
         
@@ -185,7 +277,7 @@ class Project extends React.Component {
               </TouchableOpacity> 
 
               <View style={styles.titleCont}>
-                <Text style={styles.title}> Project Title </Text>
+                <Text style={styles.title}> {this.props.doc.name} </Text>
               </View>
 
               <View style={styles.bookmarkCont}>
@@ -205,17 +297,32 @@ class Project extends React.Component {
 
           <View style={styles.body}>
 
-            <View style={styles.titleCont}>
-              <Text style={styles.projectTitle}>{this.props.doc.name}</Text>
-            </View>
-
-            <View style={styles.abstractCont}>
-              <Text style={styles.abstract}>{this.props.doc.description}</Text>
+            <View style={styles.headerCont}>
+              <Text style={styles.headerTitle}> {this.state.projectHeader}</Text>
             </View>
 
             <View style={styles.posiCont}>
-              <Text style={styles.positions}>Position(s) available in this project: {"\n"}
-                   {this.props.doc.positions}</Text>
+            
+            
+
+                  <FlatList
+          extraData={this.state}
+          data={this.state.posData}
+          renderItem={({ item, index }) => (
+                <View item={item} index={index} style={styles.itemCont}> 
+                <Text style={styles.item}>{item.pos}</Text>
+                <Text style={styles.item}>{item.posNr} </Text> 
+                {this._renderBrokolis({item})}  
+                
+              </View>   
+      
+          )}
+          keyExtractor={item => item.pos}
+          ItemSeparatorComponent={this._renderSeparator}
+        />
+
+          
+                   
             </View>
           </View>
 
@@ -245,7 +352,7 @@ class Project extends React.Component {
                                             style={{borderWidth: 0.5}}>
 
                         <Animatable.Image source={require('../../../img/icons/brokoli-counter.png') } 
-                                          animation={this.state.brokoliCounter == 5 ? 'shake' : ''}
+                                          animation={this.state.brokoliCounter == 5 ? 'rubberBand' : ''}
                                           style={{resizeMode: 'center', width: 40, height: 40, tintColor: this.state.brokoliCounter == 1 ? '#85c59a' : 
                                                                                               this.state.brokoliCounter == 2 ? '#5eb179' : 
                                                                                               this.state.brokoliCounter == 3 ? '#4b9c66' : 
@@ -271,7 +378,16 @@ class Project extends React.Component {
 
                          {this._renderModalInfo()}
 
-                  </Modal>   
+                  </Modal>  
+
+            <Modal isVisible = {this.state.isExceedBrokolisVisible}
+                   animationIn={'slideInLeft'}
+                   animationOut={'slideOutRight'}
+                   onBackdropPress={() => this.setState({ isExceedBrokolisVisible: false })}>
+
+                         {this._renderExceedBrokolis()}
+
+                  </Modal> 
 
         </View>
       )
@@ -291,25 +407,6 @@ class Project extends React.Component {
       )
     }
   }
-  
-  // var cards = [
-  //   {name: '1', image: 'https://media.giphy.com/media/GfXFVHUzjlbOg/giphy.gif'},
-  //   {name: '2', image: 'https://media.giphy.com/media/irTuv1L1T34TC/giphy.gif'},
-  //   {name: '3', image: 'https://media.giphy.com/media/LkLL0HJerdXMI/giphy.gif'},
-  //   {name: '4', image: 'https://media.giphy.com/media/fFBmUMzFL5zRS/giphy.gif'},
-  //   {name: '5', image: 'https://media.giphy.com/media/oDLDbBgf0dkis/giphy.gif'},
-  //   {name: '6', image: 'https://media.giphy.com/media/7r4g8V2UkBUcw/giphy.gif'},
-  //   {name: '7', image: 'https://media.giphy.com/media/K6Q7ZCdLy8pCE/giphy.gif'},
-  //   {name: '8', image: 'https://media.giphy.com/media/hEwST9KM0UGti/giphy.gif'},
-  //   {name: '9', image: 'https://media.giphy.com/media/3oEduJbDtIuA2VrtS0/giphy.gif'},
-  // ]
-  
-  // const cards2 = [
-  //   {name: '10', image: 'https://media.giphy.com/media/12b3E4U9aSndxC/giphy.gif'},
-  //   {name: '11', image: 'https://media4.giphy.com/media/6csVEPEmHWhWg/200.gif'},
-  //   {name: '12', image: 'https://media4.giphy.com/media/AA69fOAMCPa4o/200.gif'},
-  //   {name: '13', image: 'https://media.giphy.com/media/OVHFny0I7njuU/giphy.gif'},
-  // ]
   
   export default class Swipe extends React.Component {
     constructor(props) {
@@ -386,16 +483,6 @@ class Project extends React.Component {
       marginTop: 30,
       width: width - 10,
     },
-    text: {
-      fontSize: 20,
-      paddingTop: 10,
-      paddingBottom: 10
-    },
-    projectTitle: {
-      fontSize: 40,
-      paddingBottom: 10,
-      borderColor: 'grey'
-    },
     noMoreProjects: {
       flex: 1,
       justifyContent: 'center',
@@ -414,15 +501,8 @@ class Project extends React.Component {
       alignItems: 'center',
       justifyContent: 'center'
     },
-    abstractCont: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center'
-    },
     posiCont: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center'
+      flex: 6,
     },
     iCont: {
       flex: 1,
@@ -481,5 +561,54 @@ class Project extends React.Component {
       borderColor: '#C7C7CD',
       justifyContent: 'space-between'
     
-    }
+    },
+    button: {
+      padding: 12,
+      margin: 16,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 4,
+      borderColor: 'rgba(0, 0, 0, 0.1)',
+    },
+    modalContent: {
+      backgroundColor: 'white',
+      padding: 22,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 4,
+      borderColor: 'rgba(0, 0, 0, 0.1)',
+    },
+    headerCont: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderBottomWidth: 0.5,
+      borderColor: '#C7C7CD',
+      width: width - 10
+    },
+    headerTitle: {
+      fontSize: 17,
+      fontWeight: '400',
+      color: '#C7C7CD'
+    },
+    brokolIcon:{
+      width: 20,
+      height: 20,
+      resizeMode: 'center'
+    },
+    itemCont:{
+      flex: 1,
+      backgroundColor: 'white',
+      flexDirection: 'row',
+      marginLeft: 10,
+      marginRight: 10,
+      paddingTop: 10,
+      paddingBottom: 10
+    },
+    expContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginTop: 5,
+      marginBottom: 5
+  },
   })
