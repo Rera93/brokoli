@@ -27,6 +27,7 @@ var tempArr = []
         applicants: 17,
         isExceedBrokolisVisible: false,
         brokolis: [true,false,false,false,false],
+        isApplyModalVisible: false,
 
         /*The format of the cards is shown below. The info is hardcoded and need to be replaced with real data from db. 
           The db fields need to match the format below. Once fetching data from db, setState of the `cards`. 
@@ -151,7 +152,7 @@ var tempArr = []
       console.log('isInfoVisible: ', this.state.isInfoVisible)
     }
 
-    _renderModalInfo = ({card}) =>
+    _renderModalInfo = () =>
     (
 
       <View style={{flex: 1}}>
@@ -319,6 +320,63 @@ var tempArr = []
     })
     console.log("All cards have been swiped. Deck is empty")
   }
+
+  _toggleApplyModal(){
+
+    this.state.isApplyModalVisible = !this.state.isApplyModalVisible
+    this.setState(function(prevState, props){
+      return { isApplyModalVisible: prevState.isApplyModalVisible}
+    })
+    console.log('isApplyModalVisible: ', this.state.isApplyModalVisible)
+  }
+
+  _renderApplyModal = () => (
+
+    
+    <View style={{flex: 1}}>
+    
+          <View style={styles.infoHeader}>
+    
+    
+                  <View style={{flex: 3,flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', paddingLeft: 10}}> 
+    
+                    <Image source={require('../../../img/icons/applicants.png')} style={[styles.icon, {tintColor: 'white'}]} />
+    
+                    <Text style={[styles.title, {color: 'white'}]}> {this.state.cards[this.state.cardIndex].applicants} </Text> 
+    
+                    </View>
+          
+                  <TouchableOpacity style={{alignItems: 'center', backgroundColor: '#A7333F', justifyContent: 'center', paddingRight: 10,paddingLeft: 10, borderTopRightRadius: 4,}}
+                                    onPress={()=> this._toggleApplyModal()}>
+          
+                            <Text style={[styles.btnTxt, {color: 'white'}]}>Close</Text>
+    
+                            </TouchableOpacity>
+    
+    
+    
+                            </View>
+          
+          <View style={styles.infoModalContent}>
+    
+              <View style={{paddingBottom: 10}}>
+    
+              <Text style={[styles.title, {fontWeight: '600', color: '#254D32'}]}>Project Abstract</Text>
+    
+              </View>
+    
+              <View style={{paddingTop: 10,}}>
+          
+              <Text style={[styles.title, {color: 'grey'}]}>{this.state.cards[this.state.cardIndex].abstract}</Text>
+    
+              </View>
+          
+                  
+          </View>
+          </View>
+
+
+  )
   
     
     render() {
@@ -387,11 +445,12 @@ var tempArr = []
                   <Text style={[styles.itemText, {color: '#A7333F', padding: 5}]}>{item.posNr} left</Text>
                   </View>
 
-                  <View style={{alignContent: 'flex-end', alignItems: 'center', justifyContent: 'center', marginRight: 5, backgroundColor: '#42D260', borderRadius: 5}}> 
+                  <TouchableOpacity style={{alignContent: 'flex-end', alignItems: 'center', justifyContent: 'center', marginRight: 5, backgroundColor: '#42D260', borderRadius: 5}}
+                                    onPress={() => this._toggleApplyModal() }> 
 
                   <Text style={[styles.itemText, {color: 'white', padding: 5}]}>Apply</Text>
 
-                    </View>
+                    </TouchableOpacity>
                   
                   </View> 
 
@@ -460,7 +519,7 @@ var tempArr = []
                          onBackdropPress={() => this.setState({ isInfoVisible: false })}
                          avoidKeyboard={true}>
 
-                         {this._renderModalInfo({card})}
+                         {this._renderModalInfo()}
 
                   </Modal>  
 
@@ -472,6 +531,16 @@ var tempArr = []
                          {this._renderExceedBrokolis()}
 
                   </Modal> 
+
+                  <Modal isVisible = {this.state.isApplyModalVisible}
+                   animationIn={'slideInLeft'}
+                   animationOut={'slideOutRight'}
+                   onBackdropPress={() => this.setState({ isApplyModalVisible: false })}>
+
+                         {this._renderApplyModal()}
+
+                  </Modal> 
+
                   </View>
                 )
             }}
