@@ -29,6 +29,7 @@ var tempArr = []
         brokolis: [true,false,false,false,false],
         isApplyModalVisible: false,
         tempPosDescription: '',
+        tempPos: '',
 
         /*The format of the cards is shown below. The info is hardcoded and need to be replaced with real data from db. 
           The db fields need to match the format below. Once fetching data from db, setState of the `cards`. 
@@ -336,7 +337,13 @@ var tempArr = []
     })
 
     console.log('Teporary PosDescription: ', this.state.tempPosDescription)
-    
+
+    this.state.tempPos = item.pos
+    this.setState(function(prevState, props){
+      return { tempPos: prevState.tempPos }
+    })
+
+    console.log('Teporary Position: ', this.state.tempPos)
     
   }
 
@@ -354,6 +361,14 @@ var tempArr = []
     })
 
     console.log('Teporary PosDescription: ', this.state.tempPosDescription)
+
+    this.state.tempPos = ''
+    this.setState(function(prevState, props){
+      return { tempPos: prevState.tempPos }
+    })
+
+    console.log('Teporary Position: ', this.state.tempPos)
+    
   }
 
   _renderApplyModal = () => (
@@ -361,44 +376,57 @@ var tempArr = []
     
     <View style={{flex: 1}}>
     
-          <View style={styles.infoHeader}>
-    
-    
-                  <View style={{flex: 3,flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', paddingLeft: 10}}> 
-    
-                    <Image source={require('../../../img/icons/applicants.png')} style={[styles.icon, {tintColor: 'white'}]} />
-    
-                    <Text style={[styles.title, {color: 'white'}]}> {this.state.cards[this.state.cardIndex].applicants} </Text> 
-    
-                    </View>
+          <View style={[styles.infoHeader, {justifyContent: 'flex-end'}]}>
           
                   <TouchableOpacity style={{alignItems: 'center', backgroundColor: '#A7333F', justifyContent: 'center', paddingRight: 10,paddingLeft: 10, borderTopRightRadius: 4,}}
                                     onPress={()=> this._untoggleApplyModal()}>
           
-                            <Text style={[styles.btnTxt, {color: 'white'}]}>Close</Text>
+                            <Text style={[styles.btnTxt, {color: 'white', fontSize: 20}]}>Close</Text>
     
                             </TouchableOpacity>
     
     
     
                             </View>
+
+                            <View style={{flex: 8}}>
           
-          <View style={styles.infoModalContent}>
-    
+          <ScrollView contentContainerStyle ={[styles.infoModalContent, {borderBottomRightRadius: 0,borderBottomLeftRadius: 0}]}>
+
               <View style={{paddingBottom: 10}}>
     
-              <Text style={[styles.title, {fontWeight: '600', color: '#254D32'}]}>Project Abstract</Text>
+              <Text style={[styles.title, {fontWeight: '600', color: '#254D32'}]}>Position</Text>
     
               </View>
     
-              <View style={{paddingTop: 10,}}>
+              <View style={{paddingTop: 10}}>
           
-              <Text style={[styles.title, {color: 'grey'}]}>{this.state.cards[this.state.cardIndex].abstract}</Text>
+              <Text style={[styles.title, {color: 'grey'}]}>{this.state.tempPos}</Text>
+    
+              </View>
+    
+              <View style={{paddingBottom: 10, paddingTop: 20}}>
+    
+              <Text style={[styles.title, {fontWeight: '600', color: '#254D32'}]}>Description</Text>
+    
+              </View>
+    
+              <View style={{paddingTop: 10}}>
+          
+              <Text style={[styles.title, {color: 'grey'}]}>{this.state.tempPosDescription}</Text>
     
               </View>
           
                   
+          </ScrollView>
+
           </View>
+
+          <View style={{flex: 1}}> 
+            <TouchableOpacity style={{backgroundColor: '#254D32', alignItems:'center', borderBottomRightRadius: 4, borderBottomLeftRadius: 4}}>
+               <Text style={{fontSize: 20, fontWeight: '600', color: 'white', padding: 10}}> Apply </Text>
+            </TouchableOpacity>
+            </View>
           </View>
 
 
@@ -627,13 +655,13 @@ var tempArr = []
               }
             },
             top: {
-              title: 'Nice',
+              title: 'Nice Idea',
               style: {
                 label: {
                   backgroundColor: 'white',
                   borderColor: '#42D260',
                   color: '#42D260',
-                  borderWidth: 1
+                  borderWidth: 2
                 },
                 wrapper: {
                   flexDirection: 'column',
