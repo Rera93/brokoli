@@ -22,6 +22,7 @@ import RegisterScreen from './app/containers/RegisterScreen'
 import HomeScreen from './app/containers/HomeScreen'
 
 
+
 //middleware that logs actions
 const loggerMiddleware = createLogger({ predicate : (getState, action) => __DEV__});
 
