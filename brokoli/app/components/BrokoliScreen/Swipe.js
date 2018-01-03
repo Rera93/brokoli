@@ -774,6 +774,8 @@ var tempArr = []
 
                       </TouchableOpacity> 
 
+                      <Text style={{color: 'white', fontWeight: '600', fontSize: 22}}> Tap Brokoli to fetch more projects </Text>
+
 
 
                       </View>
