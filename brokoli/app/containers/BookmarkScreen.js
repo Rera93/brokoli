@@ -6,9 +6,9 @@
 
 'use strict'
 import React from 'react';
-import { StyleSheet, Text, Image } from 'react-native';
+import { StyleSheet, Text, Image, View } from 'react-native';
 
-import ViewContainer from '../components/ViewContainer'
+import Bookmarks from '../components/BookmarkScreen/Bookmarks'
 
 class BookmarkScreen extends React.Component {
 
@@ -25,18 +25,23 @@ class BookmarkScreen extends React.Component {
 
     render(){
         return(
-            <ViewContainer>
-                <Text> Hello Bookmark Screen </Text>
-                </ViewContainer>
+            <View style={styles.container}>
+                <Bookmarks/>
+                </View>
 
         )
     }
 }
 
 const styles = StyleSheet.create({
+    container:{
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
     icon: {
-      width: 26,
-      height: 26,
+      width: 24,
+      height: 24,
     },
   });
 

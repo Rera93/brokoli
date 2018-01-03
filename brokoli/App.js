@@ -16,7 +16,7 @@ import { TabNavigator } from 'react-navigation';
 
 import AppContainer from './app/containers/AppContainer'
 import ProjectScreen from './app/containers/ProjectScreen'
-import BookmarkScreen from './app/containers/LoginScreen'
+import BookmarkScreen from './app/containers/BookmarkScreen'
 import BrokoliScreen from './app/containers/BrokoliScreen'
 import ProfileScreen from './app/containers/ProfileScreen'
 import NotificationScreen from './app/containers/RegisterScreen'
