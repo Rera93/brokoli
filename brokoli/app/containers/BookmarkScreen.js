@@ -7,8 +7,17 @@
 'use strict'
 import React from 'react';
 import { StyleSheet, Text, Image, View } from 'react-native';
-
+import {StackNavigator} from 'react-navigation'
+import getSlideFromRightTransition from 'react-navigation-slide-from-right-transition';
 import Bookmarks from '../components/BookmarkScreen/Bookmarks'
+import Project from '../components/BookmarkScreen/Project'
+
+const BookmarkStackNav = StackNavigator({
+  Bookmarks: { screen: Bookmarks},
+  Project: {screen: Project },
+},{
+    transitionConfig: getSlideFromRightTransition
+});
 
 class BookmarkScreen extends React.Component {
 
@@ -25,9 +34,8 @@ class BookmarkScreen extends React.Component {
 
     render(){
         return(
-            <View style={styles.container}>
-                <Bookmarks/>
-                </View>
+            
+          <BookmarkStackNav />
 
         )
     }

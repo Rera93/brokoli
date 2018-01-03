@@ -14,6 +14,12 @@ const width = Dimensions.get('window').width
 
 export default class Bookmarks extends React.Component{
 
+    static navigationOptions = {
+        title: 'Your Bookmarks',
+        headerStyle: { backgroundColor: '#42D260', marginTop: 24 },
+        headerTitleStyle: { color: 'white' },
+      };
+
 
     constructor(props){
         super(props)
