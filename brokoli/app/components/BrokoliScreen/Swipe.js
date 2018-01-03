@@ -112,7 +112,6 @@ var tempArr = []
             {pos: 'Managerial Accountant', exp: 5, posNr: 1, open: true, apply: false, posDescription: 'Te erat facer eum, te nisl referrentur ius. Eos tollit doming conceptam te, quis oporteat et eos. Vis ei tritani aperiri platonem, mei option alterum ea. Inimicus prodesset mediocritatem mei at, eam ullum essent detraxit no. Ius cu mucius efficiendi suscipiantur, tamquam suscipit dissentiet ne vel, ad illud mucius contentiones sed. Qui at essent dolores.'}]},
         ],
         cardIndex: 0,
-        swipedAllCards: false,
       }
     }
 
@@ -337,15 +336,6 @@ var tempArr = []
     )
   }
 
-  _allCardsSwiped(){
-
-    this.state.swipedAllCards = true
-    this.setState(function(prevState, props){
-      return { swipedAllCards: prevState.swipedAllCards}
-    })
-    console.log("All cards have been swiped. Deck is empty")
-  }
-
   _toggleApplyModal({item, index}){
 
     this.state.isApplyModalVisible = true
@@ -398,6 +388,14 @@ var tempArr = []
     })
 
     console.log('Teporary Position: ', this.state.tempPos)
+
+    this.state.tempPosIndex = ''
+    this.setState(function(prevState, props){
+      return { tempPosIndex: prevState.tempPosIndex }
+    })
+
+    console.log('Teporary Position Index: ', this.state.tempPosIndex)
+
     
   }
 
@@ -775,6 +773,8 @@ var tempArr = []
                              style={{resizeMode: 'center', width: 200, height: 200, tintColor: 'white'}}/>
 
                       </TouchableOpacity> 
+
+                      <Text style={{color: 'white', fontWeight: '600', fontSize: 22}}> Tap Brokoli to fetch more projects </Text>
 
 
 
