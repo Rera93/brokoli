@@ -16,6 +16,7 @@ import Swiper from 'react-native-deck-swiper'
 
 const window = Dimensions.get('window');
 const width = window.width
+var tempArr = []
 
   export default class Swipe extends React.Component {
     constructor(props) {
@@ -25,21 +26,64 @@ const width = window.width
         isInfoVisible: false,
         applicants: 17,
         isExceedBrokolisVisible: false,
-        posData: [
-                    {pos: 'Java Developer', exp: 4, posNr: 2},
-                    {pos: 'React Native Architect', exp: 2, posNr: 2},
-                    {pos: 'Financial Analyst', exp: 3, posNr: 1},
-                    {pos: 'Managerial Accountant', exp: 5, posNr: 1},
-                    {pos: 'C# Software Engineer', exp: 4, posNr: 1},
-                    {pos: 'Unit Tester', exp: 1, posNr: 3},
-
-        ],
         brokolis: [true,false,false,false,false],
+
+        /*The format of the cards is shown below. The info is hardcoded and need to be replaced with real data from db. 
+          The db fields need to match the format below. Once fetching data from db, setState of the `cards`. 
+          I believe setState will not work if you save data to cards directly. What you must do is to assign it to a temporary array 
+          and then setState of cards grabbing value of temp array. I have created a global array called tempArr. 
+
+          Use this format. 
+
+          tempArr = dataFromDb
+          this.state.cards = tempArr
+          this.setState(function(prevState, props){
+            return { cards: prevState.cards }
+          })
+
+          Also everytime you setState, set it like I did above. State has a tendency to remain one step behind since it manages new state
+          requests synchronously. Dont do this: 
+          
+          this.setState(cards: tempArr)
+
+          This is doing two things in one statement. 
+
+          */
+
         cards: [
-          {projectOwner: 'Alan Andrade', bookmark: true, brokoliCounter: 2, totalBrokolis: 17, applicants: 34, title: 'Brokoli1', abstract: 'someAbstract', header: 'Tinder for Project. Bringing people and projects together in a virtual environment.'},
-          {projectOwner: 'Brigel Pineti', bookmark: false, brokoliCounter: 4, totalBrokolis: 99, applicants: 8, title: 'Finding Dory1', abstract: 'someAbstract2', header: 'I like purple shells.'},
-          {projectOwner: 'Alan Andrade', bookmark: true, brokoliCounter: 2, totalBrokolis: 17, applicants: 35, title: 'Brokoli2', abstract: 'someAbstract', header: 'Tinder for Project. Bringing people and projects together in a virtual environment.'},
-          {projectOwner: 'Brigel Pineti', bookmark: false, brokoliCounter: 4, totalBrokolis: 99, applicants: 9, title: 'Finding Dory2', abstract: 'someAbstract2', header: 'I like purple shells.'},
+          {projectOwner: 'Alan Andrade', bookmark: true, brokoliCounter: 2, totalBrokolis: 17, applicants: 34, title: 'Brokoli1',
+           abstract: 'someAbstract', header: 'Tinder for Project. Bringing people and projects together in a virtual environment.',
+           posData: [
+            {pos: 'Java Developer', exp: 4, posNr: 2},
+            {pos: 'React Native Architect', exp: 2, posNr: 2},
+            {pos: 'Financial Analyst', exp: 3, posNr: 1},
+            {pos: 'Managerial Accountant', exp: 5, posNr: 1},
+            {pos: 'C# Software Engineer', exp: 4, posNr: 1}]},
+
+          {projectOwner: 'Brigel Pineti', bookmark: false, brokoliCounter: 4, totalBrokolis: 99, applicants: 8, title: 'Finding Dory1',
+           abstract: 'someAbstract2', header: 'I like purple shells.',
+           posData: [
+            {pos: 'Java Developer1', exp: 4, posNr: 2},
+            {pos: 'React Native Architect', exp: 2, posNr: 2},
+            {pos: 'Financial Analyst', exp: 3, posNr: 1},
+            {pos: 'Managerial Accountant', exp: 5, posNr: 1},
+            {pos: 'C# Software Engineer', exp: 4, posNr: 1},
+            {pos: 'Unit Tester', exp: 1, posNr: 3}]},
+
+          {projectOwner: 'Alan Andrade', bookmark: true, brokoliCounter: 2, totalBrokolis: 17, applicants: 35, title: 'Brokoli2', 
+           abstract: 'someAbstract', header: 'Tinder for Project. Bringing people and projects together in a virtual environment.',
+           posData: [
+            {pos: 'Java Developer2', exp: 4, posNr: 2},
+            {pos: 'React Native Architect', exp: 2, posNr: 2},
+            {pos: 'Financial Analyst', exp: 3, posNr: 1}]},
+
+          {projectOwner: 'Brigel Pineti', bookmark: false, brokoliCounter: 4, totalBrokolis: 99, applicants: 9, title: 'Finding Dory2',
+           abstract: 'someAbstract2', header: 'I like purple shells.',
+           posData: [
+            {pos: 'Java Developer3', exp: 4, posNr: 2},
+            {pos: 'React Native Architect', exp: 2, posNr: 2},
+            {pos: 'Financial Analyst', exp: 3, posNr: 1},
+            {pos: 'Managerial Accountant', exp: 5, posNr: 1}]},
         ],
         cardIndex: 0,
         allCardsSwiped: false,
@@ -323,7 +367,7 @@ const width = window.width
 
                   <FlatList
           extraData={this.state}
-          data={this.state.posData}
+          data={card.posData}
           renderItem={({ item, index }) => (
 
                 <View style={{paddingTop: 10, paddingBottom: 10}}>
