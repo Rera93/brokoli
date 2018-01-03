@@ -73,6 +73,7 @@ export default class Bookmarks extends React.Component{
             data={this.state.bookmarkData}
             renderItem={({ item, index }) => (
               <TouchableOpacity style={styles.item}>
+                <View style={{flex: 5, alignItems: 'flex-start', justifyContent: 'center'}}>
                 <View style={styles.nameCont}>
                 {/*Name of project*/}
                 <Text style={styles.name}> {item.project} </Text>
@@ -81,14 +82,19 @@ export default class Bookmarks extends React.Component{
                 <View style={styles.reactions}>
                 {/*Number of applicants until now*/}
                 <Image style={styles.icon} source={require('../../../img/icons/applicants.png')} />
-                <Text> {item.applicants}  </Text>
+                <Text style={{fontSize: 17, fontWeight: '400', color: '#C7C7CD'}}> {item.applicants}  </Text>
                 </View>
-                <View  style={styles.reactions}>
+                <View style={styles.reactions}>
                  {/*Number of brokoli's until now*/}
                  <Image style={styles.icon} source={require('../../../img/icons/brokolis.png')} />
-                 <Text> {item.brokolis}  </Text>
+                 <Text style={{fontSize: 17, fontWeight: '400', color: '#C7C7CD'}}> {item.brokolis}  </Text>
                  </View>
                 </View>
+                </View>
+                <View style={{flex: 1, alignItems: 'flex-end', justifyContent: 'center'}}>
+                    <Image source={require('../../../img/icons/right-arrow.png')}
+                           style={{width: 25, height: 25, resizeMode: 'center', tintColor: '#42D260'}} />
+                    </View>
               </TouchableOpacity>
             )}
             keyExtractor={item => item.project}
@@ -108,8 +114,8 @@ export default class Bookmarks extends React.Component{
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#C7C7CD',
-        width: width
+        width: width,
+        paddingTop: 5,
     },
     name: {
         fontSize: 20,
@@ -117,6 +123,7 @@ const styles = StyleSheet.create({
         color: '#C7C7CD'
     },
     item:{
+        flexDirection: 'row',
         backgroundColor: 'white',
         marginBottom: 5,
         marginLeft: 5,
@@ -127,7 +134,8 @@ const styles = StyleSheet.create({
         paddingTop: 20
       },
       reactionsCont: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        paddingTop: 5,
       },
       reactions: {
         flexDirection: 'row'
