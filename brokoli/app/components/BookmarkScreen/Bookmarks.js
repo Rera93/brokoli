@@ -7,6 +7,8 @@ import { StyleSheet,
          TouchableOpacity,
          Dimensions } from 'react-native';
 
+import Modal from 'react-native-modal'
+
 
 var tempArr = []
 
@@ -31,10 +33,9 @@ export default class Bookmarks extends React.Component{
                 {project: 'Brokoli2', applicants: 145, brokolis: 65},
                 {project: 'Brokoli3', applicants: 137, brokolis: 32},
                 {project: 'Brokoli4', applicants: 4, brokolis: 23},
-                
-
-        
         ],
+        activeRowKey: null,
+        isModalDeleteVisible: false
         }
     }
 
@@ -63,6 +64,65 @@ export default class Bookmarks extends React.Component{
        
     }
 
+    _toggleDeleteModal(){
+
+        this.state.isModalDeleteVisible = !this.state.isModalDeleteVisible
+        this.setState(function(prevState, props){
+            return { isModalDeleteVisible: prevState.isModalDeleteVisible }
+        })
+        console.log('isModalDeleteVisible', this.state.isModalDeleteVisible)
+    }
+
+    _renderDeleteModalContent = () => (
+
+        <View style={[styles.modalContent, {backgroundColor: '#254D32'}]}>
+        
+            <Text style={[styles.title, {color: 'white'}]}>Are you sure you want to unbookmark the selected project?</Text>
+        
+            <View style={{flexDirection: 'row'}}>
+        
+                                <TouchableOpacity 
+                                                style={[styles.button,{backgroundColor: 'white'}]} 
+                                                onPress={() => this._unBookmark() }>
+                                <Text style={[styles.btnTxt, {color: '#254D32'}]}>Ok</Text>
+                
+                                </TouchableOpacity>
+        
+                                <TouchableOpacity style={[styles.button, {backgroundColor: '#A7333F'}]} 
+                                                onPress={() => this._toggleDeleteModal()}>
+                                <Text style={[styles.btnTxt, {color: 'white'}]}>Cancel</Text>
+                
+                                </TouchableOpacity>
+        
+                            </View>
+        
+                        </View>
+    )
+
+    _unBookmark() {
+
+        this.state.activeRowKey = this.props.item
+        this.setState(function(prevState, props){
+            return {activeRowKey: prevState.activeRowKey}
+        })
+        console.log('ActiveRowKey', this.state.activeRowKey)
+
+        const deletingRow = this.state.activeRowKey            
+        this.state.bookmarkData.splice(this.props.index, 1)
+        //Refresh FlatList
+        this.refreshFlatList(deletingRow)
+        this._toggleDeleteModal()
+    }
+
+    refreshFlatList = (deletedKey) => {
+        this.state.deleteRowKey = deletedKey
+        this.setState(function(prevState, props){
+            return {
+                deleteRowKey: prevState.deleteRowKey
+            }
+    })
+  }
+
     render(){
         return(
 
@@ -72,7 +132,8 @@ export default class Bookmarks extends React.Component{
             <FlatList
             data={this.state.bookmarkData}
             renderItem={({ item, index }) => (
-              <TouchableOpacity style={styles.item}>
+              <TouchableOpacity style={styles.item} item={item} index={index}
+                                onLongPress = {() => this._toggleDeleteModal()}>
                 <View style={{flex: 5, alignItems: 'flex-start', justifyContent: 'center'}}>
                 <View style={styles.nameCont}>
                 {/*Name of project*/}
@@ -99,10 +160,14 @@ export default class Bookmarks extends React.Component{
             )}
             keyExtractor={item => item.project}
           />
-                
 
+          <Modal isVisible = {this.state.isModalDeleteVisible}
+                          animationIn={'slideInLeft'}
+                          animationOut={'slideOutRight'}>
 
+                         {this._renderDeleteModalContent()}
 
+                    </Modal> 
                 </View>
 
         )
@@ -146,5 +211,30 @@ const styles = StyleSheet.create({
         height: 25,
         tintColor: '#42D260'
       },
+      button: {
+        padding: 12,
+        margin: 16,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 4,
+        borderColor: 'rgba(0, 0, 0, 0.1)',
+      },
+      modalContent: {
+        backgroundColor: 'white',
+        padding: 22,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 4,
+        borderColor: 'rgba(0, 0, 0, 0.1)',
+      },
+      btnTxt: {
+        fontSize: 16,
+        fontWeight: '400'
+    },
+    title: {
+        color: '#254D32',
+        fontSize: 20,
+        fontWeight: '400'
+    },
 
 })
