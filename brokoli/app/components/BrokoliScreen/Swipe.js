@@ -28,6 +28,7 @@ var tempArr = []
         isExceedBrokolisVisible: false,
         brokolis: [true,false,false,false,false],
         isApplyModalVisible: false,
+        tempPosDescription: '',
 
         /*The format of the cards is shown below. The info is hardcoded and need to be replaced with real data from db. 
           The db fields need to match the format below. Once fetching data from db, setState of the `cards`. 
@@ -55,36 +56,36 @@ var tempArr = []
           {projectOwner: 'Alan Andrade', bookmark: true, brokoliCounter: 2, totalBrokolis: 17, applicants: 34, title: 'Brokoli1',
            abstract: 'someAbstract', header: 'Tinder for Project. Bringing people and projects together in a virtual environment.',
            posData: [
-            {pos: 'Java Developer', exp: 4, posNr: 2},
-            {pos: 'React Native Architect', exp: 2, posNr: 2},
-            {pos: 'Financial Analyst', exp: 3, posNr: 1},
-            {pos: 'Managerial Accountant', exp: 5, posNr: 1},
-            {pos: 'C# Software Engineer', exp: 4, posNr: 1}]},
+            {pos: 'Java Developer', exp: 4, posNr: 2, posDescription: 'Dicant gloriatur sea te, ad veniam essent sadipscing eum. In has appareat sadipscing, sit impedit necessitatibus id. Sea no erat debet antiopam, quo ex ridens dolorem erroribus, ne sit alia harum nusquam. Nibh soleat perfecto an eam, prima nonumy accusam ea vel. Nec tempor oportere et, doctus alienum detracto ad his.'},
+            {pos: 'React Native Architect', exp: 2, posNr: 2, posDescription: 'Te erat facer eum, te nisl referrentur ius. Eos tollit doming conceptam te, quis oporteat et eos. Vis ei tritani aperiri platonem, mei option alterum ea. Inimicus prodesset mediocritatem mei at, eam ullum essent detraxit no. Ius cu mucius efficiendi suscipiantur, tamquam suscipit dissentiet ne vel, ad illud mucius contentiones sed. Qui at essent dolores.'},
+            {pos: 'Financial Analyst', exp: 3, posNr: 1, posDescription: 'Est tibique commune in, et mei erant paulo ullamcorper. Adhuc ubique oportere eum ex, mei no tibique adversarium. Mazim persius ut eum, ei putent oblique mel, ludus equidem ea usu. Quo viderer hendrerit ei, ea nam lorem ullum albucius.'},
+            {pos: 'Managerial Accountant', exp: 5, posNr: 1, posDescription: 'Ne eros soluta disputando cum, assum mundi disputando his ex, ad elitr mediocrem elaboraret his. Esse explicari ne mel, ne nibh accumsan scaevola duo, dicam scripta molestiae eum cu. Adipiscing scriptorem no pri. Elit intellegat consequuntur ea sit.'},
+            {pos: 'C# Software Engineer', exp: 4, posNr: 1, posDescription: 'Quo te tale complectitur. At duo hinc vocent ullamcorper, pri dolorem persequeris in, te quot albucius luptatum sed. Et sea aliquid commune. Cum omnes dolore vocent ei. Sea mollis aeterno at.' }]},
 
           {projectOwner: 'Brigel Pineti', bookmark: false, brokoliCounter: 4, totalBrokolis: 99, applicants: 8, title: 'Finding Dory1',
            abstract: 'someAbstract2', header: 'I like purple shells.',
            posData: [
-            {pos: 'Java Developer1', exp: 4, posNr: 2},
-            {pos: 'React Native Architect', exp: 2, posNr: 2},
-            {pos: 'Financial Analyst', exp: 3, posNr: 1},
-            {pos: 'Managerial Accountant', exp: 5, posNr: 1},
-            {pos: 'C# Software Engineer', exp: 4, posNr: 1},
-            {pos: 'Unit Tester', exp: 1, posNr: 3}]},
+            {pos: 'Java Developer1', exp: 4, posNr: 2, posDescription: 'Ne eros soluta disputando cum, assum mundi disputando his ex, ad elitr mediocrem elaboraret his. Esse explicari ne mel, ne nibh accumsan scaevola duo, dicam scripta molestiae eum cu. Adipiscing scriptorem no pri. Elit intellegat consequuntur ea sit.'},
+            {pos: 'React Native Architect', exp: 2, posNr: 2, posDescription: 'Quo te tale complectitur. At duo hinc vocent ullamcorper, pri dolorem persequeris in, te quot albucius luptatum sed. Et sea aliquid commune. Cum omnes dolore vocent ei. Sea mollis aeterno at.' },
+            {pos: 'Financial Analyst', exp: 3, posNr: 1, posDescription: 'Dicant gloriatur sea te, ad veniam essent sadipscing eum. In has appareat sadipscing, sit impedit necessitatibus id. Sea no erat debet antiopam, quo ex ridens dolorem erroribus, ne sit alia harum nusquam. Nibh soleat perfecto an eam, prima nonumy accusam ea vel. Nec tempor oportere et, doctus alienum detracto ad his.'},
+            {pos: 'Managerial Accountant', exp: 5, posNr: 1, posDescription: 'Te erat facer eum, te nisl referrentur ius. Eos tollit doming conceptam te, quis oporteat et eos. Vis ei tritani aperiri platonem, mei option alterum ea. Inimicus prodesset mediocritatem mei at, eam ullum essent detraxit no. Ius cu mucius efficiendi suscipiantur, tamquam suscipit dissentiet ne vel, ad illud mucius contentiones sed. Qui at essent dolores.'},
+            {pos: 'C# Software Engineer', exp: 4, posNr: 1, posDescription: 'Est tibique commune in, et mei erant paulo ullamcorper. Adhuc ubique oportere eum ex, mei no tibique adversarium. Mazim persius ut eum, ei putent oblique mel, ludus equidem ea usu. Quo viderer hendrerit ei, ea nam lorem ullum albucius.'},
+            {pos: 'Unit Tester', exp: 1, posNr: 3, posDescription: 'Quo te tale complectitur. At duo hinc vocent ullamcorper, pri dolorem persequeris in, te quot albucius luptatum sed. Et sea aliquid commune. Cum omnes dolore vocent ei. Sea mollis aeterno at.' }]},
 
           {projectOwner: 'Alan Andrade', bookmark: true, brokoliCounter: 2, totalBrokolis: 17, applicants: 35, title: 'Brokoli2', 
            abstract: 'someAbstract', header: 'Tinder for Project. Bringing people and projects together in a virtual environment.',
            posData: [
-            {pos: 'Java Developer2', exp: 4, posNr: 2},
-            {pos: 'React Native Architect', exp: 2, posNr: 2},
-            {pos: 'Financial Analyst', exp: 3, posNr: 1}]},
+            {pos: 'Java Developer2', exp: 4, posNr: 2, posDescription: 'Est tibique commune in, et mei erant paulo ullamcorper. Adhuc ubique oportere eum ex, mei no tibique adversarium. Mazim persius ut eum, ei putent oblique mel, ludus equidem ea usu. Quo viderer hendrerit ei, ea nam lorem ullum albucius.'},
+            {pos: 'React Native Architect', exp: 2, posNr: 2, posDescription: 'Quo te tale complectitur. At duo hinc vocent ullamcorper, pri dolorem persequeris in, te quot albucius luptatum sed. Et sea aliquid commune. Cum omnes dolore vocent ei. Sea mollis aeterno at.'},
+            {pos: 'Financial Analyst', exp: 3, posNr: 1, posDescription: 'Te erat facer eum, te nisl referrentur ius. Eos tollit doming conceptam te, quis oporteat et eos. Vis ei tritani aperiri platonem, mei option alterum ea. Inimicus prodesset mediocritatem mei at, eam ullum essent detraxit no. Ius cu mucius efficiendi suscipiantur, tamquam suscipit dissentiet ne vel, ad illud mucius contentiones sed. Qui at essent dolores.'}]},
 
           {projectOwner: 'Brigel Pineti', bookmark: false, brokoliCounter: 4, totalBrokolis: 99, applicants: 9, title: 'Finding Dory2',
            abstract: 'someAbstract2', header: 'I like purple shells.',
            posData: [
-            {pos: 'Java Developer3', exp: 4, posNr: 2},
-            {pos: 'React Native Architect', exp: 2, posNr: 2},
-            {pos: 'Financial Analyst', exp: 3, posNr: 1},
-            {pos: 'Managerial Accountant', exp: 5, posNr: 1}]},
+            {pos: 'Java Developer3', exp: 4, posNr: 2, posDescription: 'Quo te tale complectitur. At duo hinc vocent ullamcorper, pri dolorem persequeris in, te quot albucius luptatum sed. Et sea aliquid commune. Cum omnes dolore vocent ei. Sea mollis aeterno at.'},
+            {pos: 'React Native Architect', exp: 2, posNr: 2, posDescription: 'Est tibique commune in, et mei erant paulo ullamcorper. Adhuc ubique oportere eum ex, mei no tibique adversarium. Mazim persius ut eum, ei putent oblique mel, ludus equidem ea usu. Quo viderer hendrerit ei, ea nam lorem ullum albucius.'},
+            {pos: 'Financial Analyst', exp: 3, posNr: 1, posDescription: 'Quo te tale complectitur. At duo hinc vocent ullamcorper, pri dolorem persequeris in, te quot albucius luptatum sed. Et sea aliquid commune. Cum omnes dolore vocent ei. Sea mollis aeterno at'},
+            {pos: 'Managerial Accountant', exp: 5, posNr: 1, posDescription: 'Te erat facer eum, te nisl referrentur ius. Eos tollit doming conceptam te, quis oporteat et eos. Vis ei tritani aperiri platonem, mei option alterum ea. Inimicus prodesset mediocritatem mei at, eam ullum essent detraxit no. Ius cu mucius efficiendi suscipiantur, tamquam suscipit dissentiet ne vel, ad illud mucius contentiones sed. Qui at essent dolores.'}]},
         ],
         cardIndex: 0,
         allCardsSwiped: false,
@@ -321,13 +322,38 @@ var tempArr = []
     console.log("All cards have been swiped. Deck is empty")
   }
 
-  _toggleApplyModal(){
+  _toggleApplyModal({item}){
 
-    this.state.isApplyModalVisible = !this.state.isApplyModalVisible
+    this.state.isApplyModalVisible = true
     this.setState(function(prevState, props){
       return { isApplyModalVisible: prevState.isApplyModalVisible}
     })
     console.log('isApplyModalVisible: ', this.state.isApplyModalVisible)
+
+    this.state.tempPosDescription = item.posDescription
+    this.setState(function(prevState, props){
+      return { tempPosDescription: prevState.tempPosDescription }
+    })
+
+    console.log('Teporary PosDescription: ', this.state.tempPosDescription)
+    
+    
+  }
+
+  _untoggleApplyModal(){
+
+    this.state.isApplyModalVisible = false
+    this.setState(function(prevState, props){
+      return { isApplyModalVisible: prevState.isApplyModalVisible}
+    })
+    console.log('isApplyModalVisible: ', this.state.isApplyModalVisible)
+
+    this.state.tempPosDescription = ''
+    this.setState(function(prevState, props){
+      return { tempPosDescription: prevState.tempPosDescription }
+    })
+
+    console.log('Teporary PosDescription: ', this.state.tempPosDescription)
   }
 
   _renderApplyModal = () => (
@@ -347,7 +373,7 @@ var tempArr = []
                     </View>
           
                   <TouchableOpacity style={{alignItems: 'center', backgroundColor: '#A7333F', justifyContent: 'center', paddingRight: 10,paddingLeft: 10, borderTopRightRadius: 4,}}
-                                    onPress={()=> this._toggleApplyModal()}>
+                                    onPress={()=> this._untoggleApplyModal()}>
           
                             <Text style={[styles.btnTxt, {color: 'white'}]}>Close</Text>
     
@@ -446,15 +472,20 @@ var tempArr = []
                   </View>
 
                   <TouchableOpacity style={{alignContent: 'flex-end', alignItems: 'center', justifyContent: 'center', marginRight: 5, backgroundColor: '#42D260', borderRadius: 5}}
-                                    onPress={() => this._toggleApplyModal() }> 
+                                    onPress={() => this._toggleApplyModal({item}) }> 
 
                   <Text style={[styles.itemText, {color: 'white', padding: 5}]}>Apply</Text>
+
+                 
 
                     </TouchableOpacity>
                   
                   </View> 
+                  
 
               </View>
+
+              
 
 
               
