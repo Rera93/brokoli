@@ -317,9 +317,9 @@ var tempArr = []
 
   _allCardsSwiped(){
 
-    this.state.allCardsSwiped = true
+    this.state.swipedAllCards = true
     this.setState(function(prevState, props){
-      return { allCardsSwiped: prevState.allCardsSwiped}
+      return { swipedAllCards: prevState.swipedAllCards}
     })
     console.log("All cards have been swiped. Deck is empty")
   }
@@ -451,17 +451,18 @@ var tempArr = []
     console.log('Apply', this.state.cards[this.state.cardIndex].posData[this.state.tempPosIndex].apply)
 
     this._untoggleApplyModal()
-
-
-
   }
+
   
     
     render() {
       return (
         <Swiper
+            onSwipedAll={() => this._allCardsSwiped()}
             cards={this.state.cards}
             renderCard={(card) => {
+                if(this.state.cardIndex < this.state.cards.length )
+                {
                 return (
                   <View style={styles.card} card={card}>
                   <View style = {styles.header}>
@@ -646,7 +647,7 @@ var tempArr = []
                   </Modal> 
 
                   </View>
-                )
+                )}
             }}
              overlayLabels={{
             bottom: {
@@ -716,9 +717,6 @@ var tempArr = []
               }
             }
           }}
-            onSwipedAll={() => {this.setState({
-      swipedAllCards: true
-    })}}
             cardIndex={this.state.cardIndex}
             backgroundColor={'#42D260'}
             onSwiped={(cardIndex) => this._incrementCardIndex(cardIndex)}
