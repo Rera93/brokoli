@@ -57,7 +57,7 @@ var tempArr = []
           {projectOwner: 'Alan Andrade', bookmark: true, brokoliCounter: 2, totalBrokolis: 17, applicants: 34, title: 'Brokoli1',
            abstract: 'someAbstract', header: 'Tinder for Project. Bringing people and projects together in a virtual environment.',
            posData: [
-            {pos: 'Java Developer', exp: 4, posNr: 2, apply: false, posDescription: 'Dicant gloriatur sea te, ad veniam essent sadipscing eum. In has appareat sadipscing, sit impedit necessitatibus id. Sea no erat debet antiopam, quo ex ridens dolorem erroribus, ne sit alia harum nusquam. Nibh soleat perfecto an eam, prima nonumy accusam ea vel. Nec tempor oportere et, doctus alienum detracto ad his.'},
+            {pos: 'Java Developer', exp: 4, posNr: 2, apply: true, posDescription: 'Dicant gloriatur sea te, ad veniam essent sadipscing eum. In has appareat sadipscing, sit impedit necessitatibus id. Sea no erat debet antiopam, quo ex ridens dolorem erroribus, ne sit alia harum nusquam. Nibh soleat perfecto an eam, prima nonumy accusam ea vel. Nec tempor oportere et, doctus alienum detracto ad his.'},
             {pos: 'React Native Architect', exp: 2, apply: false, posNr: 2, posDescription: 'Te erat facer eum, te nisl referrentur ius. Eos tollit doming conceptam te, quis oporteat et eos. Vis ei tritani aperiri platonem, mei option alterum ea. Inimicus prodesset mediocritatem mei at, eam ullum essent detraxit no. Ius cu mucius efficiendi suscipiantur, tamquam suscipit dissentiet ne vel, ad illud mucius contentiones sed. Qui at essent dolores.'},
             {pos: 'Financial Analyst', exp: 3, posNr: 1, apply: false, posDescription: 'Est tibique commune in, et mei erant paulo ullamcorper. Adhuc ubique oportere eum ex, mei no tibique adversarium. Mazim persius ut eum, ei putent oblique mel, ludus equidem ea usu. Quo viderer hendrerit ei, ea nam lorem ullum albucius.'},
             {pos: 'Managerial Accountant', exp: 5, posNr: 1, apply: false, posDescription: 'Ne eros soluta disputando cum, assum mundi disputando his ex, ad elitr mediocrem elaboraret his. Esse explicari ne mel, ne nibh accumsan scaevola duo, dicam scripta molestiae eum cu. Adipiscing scriptorem no pri. Elit intellegat consequuntur ea sit.'},
@@ -504,10 +504,12 @@ var tempArr = []
                   <Text style={[styles.itemText, {color: '#A7333F', padding: 5}]}>{item.posNr} left</Text>
                   </View>
 
-                  <TouchableOpacity style={{alignContent: 'flex-end', alignItems: 'center', justifyContent: 'center', marginRight: 5, backgroundColor: '#42D260', borderRadius: 5}}
+                  <TouchableOpacity disabled={item.apply}
+                                    style={{alignContent: 'flex-end', alignItems: 'center', justifyContent: 'center', marginRight: 5, borderWidth: 1, borderRadius: 5, borderColor: '#42D260',
+                                           backgroundColor: item.apply ? 'white' : '#42D260'}}
                                     onPress={() => this._toggleApplyModal({item}) }> 
 
-                  <Text style={[styles.itemText, {color: 'white', padding: 5}]}>Apply</Text>
+                  <Text style={[styles.itemText, {color: item.apply ? '#42D260' : 'white', padding: 5}]}>{item.apply ? 'Applied' : 'Apply' } </Text>
 
                  
 
