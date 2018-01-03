@@ -16,6 +16,28 @@ import Swiper from 'react-native-deck-swiper'
 
 const window = Dimensions.get('window');
 const width = window.width
+var tempExampleArr = [
+  {projectOwner: 'Alan Andrade', bookmark: false, brokoliCounter: 2, totalBrokolis: 17, applicants: 34, title: 'Brokoli1',
+  abstract: 'someAbstract', header: 'Tinder for Project. Bringing people and projects together in a virtual environment.',
+  posData: [
+   {pos: 'Java Developer', exp: 4, posNr: 2, open: true, apply: false, posDescription: 'Dicant gloriatur sea te, ad veniam essent sadipscing eum. In has appareat sadipscing, sit impedit necessitatibus id. Sea no erat debet antiopam, quo ex ridens dolorem erroribus, ne sit alia harum nusquam. Nibh soleat perfecto an eam, prima nonumy accusam ea vel. Nec tempor oportere et, doctus alienum detracto ad his.'},
+   {pos: 'React Native Architect', exp: 2,  open: true, apply: false, posNr: 2, posDescription: 'Te erat facer eum, te nisl referrentur ius. Eos tollit doming conceptam te, quis oporteat et eos. Vis ei tritani aperiri platonem, mei option alterum ea. Inimicus prodesset mediocritatem mei at, eam ullum essent detraxit no. Ius cu mucius efficiendi suscipiantur, tamquam suscipit dissentiet ne vel, ad illud mucius contentiones sed. Qui at essent dolores.'},
+   {pos: 'Financial Analyst', exp: 3, posNr: 1,  open: true, apply: false, posDescription: 'Est tibique commune in, et mei erant paulo ullamcorper. Adhuc ubique oportere eum ex, mei no tibique adversarium. Mazim persius ut eum, ei putent oblique mel, ludus equidem ea usu. Quo viderer hendrerit ei, ea nam lorem ullum albucius.'},
+   {pos: 'Managerial Accountant', exp: 5, posNr: 1,  open: true, apply: false, posDescription: 'Ne eros soluta disputando cum, assum mundi disputando his ex, ad elitr mediocrem elaboraret his. Esse explicari ne mel, ne nibh accumsan scaevola duo, dicam scripta molestiae eum cu. Adipiscing scriptorem no pri. Elit intellegat consequuntur ea sit.'},
+   {pos: 'C# Software Engineer', exp: 4, posNr: 1,  open: true, apply: false, posDescription: 'Quo te tale complectitur. At duo hinc vocent ullamcorper, pri dolorem persequeris in, te quot albucius luptatum sed. Et sea aliquid commune. Cum omnes dolore vocent ei. Sea mollis aeterno at.' }]},
+
+ {projectOwner: 'Brigel Pineti', bookmark: false, brokoliCounter: 4, totalBrokolis: 99, applicants: 8, title: 'Finding Dory1',
+  abstract: 'someAbstract2', header: 'I like purple shells.',
+  posData: [
+   {pos: 'Java Developer1', exp: 4, posNr: 2, open: true, apply: false, posDescription: 'Ne eros soluta disputando cum, assum mundi disputando his ex, ad elitr mediocrem elaboraret his. Esse explicari ne mel, ne nibh accumsan scaevola duo, dicam scripta molestiae eum cu. Adipiscing scriptorem no pri. Elit intellegat consequuntur ea sit.'},
+   {pos: 'React Native Architect', exp: 2, open: true, posNr: 2, apply: false, posDescription: 'Quo te tale complectitur. At duo hinc vocent ullamcorper, pri dolorem persequeris in, te quot albucius luptatum sed. Et sea aliquid commune. Cum omnes dolore vocent ei. Sea mollis aeterno at.' },
+   {pos: 'Financial Analyst', exp: 3, posNr: 1, open: true, apply: false, posDescription: 'Dicant gloriatur sea te, ad veniam essent sadipscing eum. In has appareat sadipscing, sit impedit necessitatibus id. Sea no erat debet antiopam, quo ex ridens dolorem erroribus, ne sit alia harum nusquam. Nibh soleat perfecto an eam, prima nonumy accusam ea vel. Nec tempor oportere et, doctus alienum detracto ad his.'},
+   {pos: 'Managerial Accountant', exp: 5, posNr: 1, open: true, apply: false, posDescription: 'Te erat facer eum, te nisl referrentur ius. Eos tollit doming conceptam te, quis oporteat et eos. Vis ei tritani aperiri platonem, mei option alterum ea. Inimicus prodesset mediocritatem mei at, eam ullum essent detraxit no. Ius cu mucius efficiendi suscipiantur, tamquam suscipit dissentiet ne vel, ad illud mucius contentiones sed. Qui at essent dolores.'},
+   {pos: 'C# Software Engineer', exp: 4, posNr: 1, open: true, apply: false, posDescription: 'Est tibique commune in, et mei erant paulo ullamcorper. Adhuc ubique oportere eum ex, mei no tibique adversarium. Mazim persius ut eum, ei putent oblique mel, ludus equidem ea usu. Quo viderer hendrerit ei, ea nam lorem ullum albucius.'},
+   {pos: 'Unit Tester', exp: 1, posNr: 3, open: true, apply: false, posDescription: 'Quo te tale complectitur. At duo hinc vocent ullamcorper, pri dolorem persequeris in, te quot albucius luptatum sed. Et sea aliquid commune. Cum omnes dolore vocent ei. Sea mollis aeterno at.' }]},
+
+]
+
 var tempArr = []
 
   export default class Swipe extends React.Component {
@@ -453,6 +475,25 @@ var tempArr = []
     this._untoggleApplyModal()
   }
 
+  _fetchCards(){
+
+    this.state.cards = tempExampleArr
+    this.setState(function(prevState, props){
+      return { cards: prevState.cards}
+    })
+
+    console.log('New cards: ', this.state.cards)
+
+  }
+
+  _setIndexToZero(){
+
+    this.state.cardIndex = 0
+    this.setState(function(prevState, props){
+      return { cardIndex: prevState.cardIndex}
+    })
+  }
+
   
     
     render() {
@@ -718,7 +759,9 @@ var tempArr = []
             }
           }}
             cardIndex={this.state.cardIndex}
+            
             backgroundColor={'#42D260'}
+            onSwipedAll = { () => this._setIndexToZero() }
             onSwiped={(cardIndex) => this._incrementCardIndex(cardIndex)}
             cardVerticalMargin={40}
             animateOverlayLabelsOpacity
@@ -726,7 +769,7 @@ var tempArr = []
 
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
 
-                    <TouchableOpacity>  
+                    <TouchableOpacity onPress = { () => this._fetchCards()}>  
 
                       <Image source={require('../../../img/icons/brokoli.png')}
                              style={{resizeMode: 'center', width: 200, height: 200, tintColor: 'white'}}/>
