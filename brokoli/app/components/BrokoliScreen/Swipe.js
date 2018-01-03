@@ -458,7 +458,6 @@ var tempArr = []
     render() {
       return (
         <Swiper
-            onSwipedAll={() => this._allCardsSwiped()}
             cards={this.state.cards}
             renderCard={(card) => {
                 if(this.state.cardIndex < this.state.cards.length )
@@ -647,7 +646,8 @@ var tempArr = []
                   </Modal> 
 
                   </View>
-                )}
+                )
+          }
             }}
              overlayLabels={{
             bottom: {
@@ -722,7 +722,22 @@ var tempArr = []
             onSwiped={(cardIndex) => this._incrementCardIndex(cardIndex)}
             cardVerticalMargin={40}
             animateOverlayLabelsOpacity
-            animateCardOpacity/>
+            animateCardOpacity>
+
+            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+
+                    <TouchableOpacity>  
+
+                      <Image source={require('../../../img/icons/brokoli.png')}
+                             style={{resizeMode: 'center', width: 200, height: 200, tintColor: 'white'}}/>
+
+                      </TouchableOpacity> 
+
+
+
+                      </View>
+
+            </Swiper>
         
       )
     }
