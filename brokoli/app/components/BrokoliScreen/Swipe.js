@@ -489,7 +489,6 @@ var tempArr = []
            
           </View>
 
-          <TouchableWithoutFeedback>
 
           <View style={styles.body}>
 
@@ -497,7 +496,6 @@ var tempArr = []
               <Text style={styles.headerTitle}>{card.header}</Text>
             </View>
 
-            <TouchableWithoutFeedback>
 
             <View style={[styles.posiCont, {paddingTop: 5}]}>
             
@@ -546,6 +544,7 @@ var tempArr = []
                          style={{resizeMode: 'center', width: 35, height: 35, tintColor: '#A7333F'}}/>
                          
                   </View>
+                  
 
                   <TouchableWithoutFeedback disabled={item.apply}
                                     onPress={() => this._toggleApplyModal({item, index}) }>
@@ -572,9 +571,7 @@ var tempArr = []
           
                    
             </View>
-            </TouchableWithoutFeedback>
           </View>
-          </TouchableWithoutFeedback>
 
           <View style={styles.footer}> 
 
