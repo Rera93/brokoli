@@ -497,16 +497,16 @@ var tempArr = []
 
             <TouchableWithoutFeedback>
 
-            <View style={styles.posiCont}>
+            <View style={[styles.posiCont, {paddingTop: 5}]}>
             
             
 
                   <FlatList
-          extraData={this.state}
-          data={card.posData}
-          renderItem={({ item, index }) => (
+                    extraData={this.state}
+                    data={card.posData}
+                    renderItem={({ item, index }) => (
 
-                <View style={{paddingTop: 10, paddingBottom: 10}}>
+                <View style={{paddingTop: 5, paddingBottom: 5}}>
        
 
                   <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
@@ -526,8 +526,10 @@ var tempArr = []
 
                     </View>
 
-                  <View style={{flex: 1, justifyContent: 'center', alignItems: 'flex-start', paddingLeft: 5}}>
-                  <Text style={[styles.itemText, {color: '#A7333F', padding: 5}]}>{item.posNr} left</Text>
+                  <View style={{flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start', paddingLeft: 5}}>
+                  <Text style={[styles.itemText, {color: '#A7333F', padding: 5, fontWeight: '600'}]}>{item.posNr}</Text>
+                  <Image source={require('../../../img/icons/pos-applicant.png')} 
+                         style={{resizeMode: 'center', width: 35, height: 35, tintColor: '#A7333F'}}/>
                   </View>
 
                  
