@@ -16,6 +16,7 @@ import Swiper from 'react-native-deck-swiper'
 
 const window = Dimensions.get('window');
 const width = window.width
+var tempArr = []
 
   export default class Swipe extends React.Component {
     constructor(props) {
@@ -25,24 +26,71 @@ const width = window.width
         isInfoVisible: false,
         applicants: 17,
         isExceedBrokolisVisible: false,
-        posData: [
-                    {pos: 'Java Developer', exp: 4, posNr: 2},
-                    {pos: 'React Native Architect', exp: 2, posNr: 2},
-                    {pos: 'Financial Analyst', exp: 3, posNr: 1},
-                    {pos: 'Managerial Accountant', exp: 5, posNr: 1},
-                    {pos: 'C# Software Engineer', exp: 4, posNr: 1},
-                    {pos: 'Unit Tester', exp: 1, posNr: 3},
-
-        ],
         brokolis: [true,false,false,false,false],
+        isApplyModalVisible: false,
+        tempPosDescription: '',
+        tempPos: '',
+        tempPosIndex: null,
+
+        /*The format of the cards is shown below. The info is hardcoded and need to be replaced with real data from db. 
+          The db fields need to match the format below. Once fetching data from db, setState of the `cards`. 
+          I believe setState will not work if you save data to cards directly. What you must do is to assign it to a temporary array 
+          and then setState of cards grabbing value of temp array. I have created a global array called tempArr. 
+
+          Use this format. 
+
+          tempArr = dataFromDb
+          this.state.cards = tempArr
+          this.setState(function(prevState, props){
+            return { cards: prevState.cards }
+          })
+
+          Also everytime you setState, set it like I did above. State has a tendency to remain one step behind since it manages new state
+          requests synchronously. Dont do this: 
+          
+          this.setState(cards: tempArr)
+
+          This is doing two things in one statement. 
+
+          */
+
         cards: [
-          {projectOwner: 'Alan Andrade', bookmark: true, brokoliCounter: 2, totalBrokolis: 17, applicants: 34, title: 'Brokoli1', abstract: 'someAbstract', header: 'Tinder for Project. Bringing people and projects together in a virtual environment.'},
-          {projectOwner: 'Brigel Pineti', bookmark: false, brokoliCounter: 4, totalBrokolis: 99, applicants: 8, title: 'Finding Dory1', abstract: 'someAbstract2', header: 'I like purple shells.'},
-          {projectOwner: 'Alan Andrade', bookmark: true, brokoliCounter: 2, totalBrokolis: 17, applicants: 35, title: 'Brokoli2', abstract: 'someAbstract', header: 'Tinder for Project. Bringing people and projects together in a virtual environment.'},
-          {projectOwner: 'Brigel Pineti', bookmark: false, brokoliCounter: 4, totalBrokolis: 99, applicants: 9, title: 'Finding Dory2', abstract: 'someAbstract2', header: 'I like purple shells.'},
+          {projectOwner: 'Alan Andrade', bookmark: false, brokoliCounter: 2, totalBrokolis: 17, applicants: 34, title: 'Brokoli1',
+           abstract: 'someAbstract', header: 'Tinder for Project. Bringing people and projects together in a virtual environment.',
+           posData: [
+            {pos: 'Java Developer', exp: 4, posNr: 2, open: true, apply: false, posDescription: 'Dicant gloriatur sea te, ad veniam essent sadipscing eum. In has appareat sadipscing, sit impedit necessitatibus id. Sea no erat debet antiopam, quo ex ridens dolorem erroribus, ne sit alia harum nusquam. Nibh soleat perfecto an eam, prima nonumy accusam ea vel. Nec tempor oportere et, doctus alienum detracto ad his.'},
+            {pos: 'React Native Architect', exp: 2,  open: true, apply: false, posNr: 2, posDescription: 'Te erat facer eum, te nisl referrentur ius. Eos tollit doming conceptam te, quis oporteat et eos. Vis ei tritani aperiri platonem, mei option alterum ea. Inimicus prodesset mediocritatem mei at, eam ullum essent detraxit no. Ius cu mucius efficiendi suscipiantur, tamquam suscipit dissentiet ne vel, ad illud mucius contentiones sed. Qui at essent dolores.'},
+            {pos: 'Financial Analyst', exp: 3, posNr: 1,  open: true, apply: false, posDescription: 'Est tibique commune in, et mei erant paulo ullamcorper. Adhuc ubique oportere eum ex, mei no tibique adversarium. Mazim persius ut eum, ei putent oblique mel, ludus equidem ea usu. Quo viderer hendrerit ei, ea nam lorem ullum albucius.'},
+            {pos: 'Managerial Accountant', exp: 5, posNr: 1,  open: true, apply: false, posDescription: 'Ne eros soluta disputando cum, assum mundi disputando his ex, ad elitr mediocrem elaboraret his. Esse explicari ne mel, ne nibh accumsan scaevola duo, dicam scripta molestiae eum cu. Adipiscing scriptorem no pri. Elit intellegat consequuntur ea sit.'},
+            {pos: 'C# Software Engineer', exp: 4, posNr: 1,  open: true, apply: false, posDescription: 'Quo te tale complectitur. At duo hinc vocent ullamcorper, pri dolorem persequeris in, te quot albucius luptatum sed. Et sea aliquid commune. Cum omnes dolore vocent ei. Sea mollis aeterno at.' }]},
+
+          {projectOwner: 'Brigel Pineti', bookmark: false, brokoliCounter: 4, totalBrokolis: 99, applicants: 8, title: 'Finding Dory1',
+           abstract: 'someAbstract2', header: 'I like purple shells.',
+           posData: [
+            {pos: 'Java Developer1', exp: 4, posNr: 2, open: true, apply: false, posDescription: 'Ne eros soluta disputando cum, assum mundi disputando his ex, ad elitr mediocrem elaboraret his. Esse explicari ne mel, ne nibh accumsan scaevola duo, dicam scripta molestiae eum cu. Adipiscing scriptorem no pri. Elit intellegat consequuntur ea sit.'},
+            {pos: 'React Native Architect', exp: 2, open: true, posNr: 2, apply: false, posDescription: 'Quo te tale complectitur. At duo hinc vocent ullamcorper, pri dolorem persequeris in, te quot albucius luptatum sed. Et sea aliquid commune. Cum omnes dolore vocent ei. Sea mollis aeterno at.' },
+            {pos: 'Financial Analyst', exp: 3, posNr: 1, open: true, apply: false, posDescription: 'Dicant gloriatur sea te, ad veniam essent sadipscing eum. In has appareat sadipscing, sit impedit necessitatibus id. Sea no erat debet antiopam, quo ex ridens dolorem erroribus, ne sit alia harum nusquam. Nibh soleat perfecto an eam, prima nonumy accusam ea vel. Nec tempor oportere et, doctus alienum detracto ad his.'},
+            {pos: 'Managerial Accountant', exp: 5, posNr: 1, open: true, apply: false, posDescription: 'Te erat facer eum, te nisl referrentur ius. Eos tollit doming conceptam te, quis oporteat et eos. Vis ei tritani aperiri platonem, mei option alterum ea. Inimicus prodesset mediocritatem mei at, eam ullum essent detraxit no. Ius cu mucius efficiendi suscipiantur, tamquam suscipit dissentiet ne vel, ad illud mucius contentiones sed. Qui at essent dolores.'},
+            {pos: 'C# Software Engineer', exp: 4, posNr: 1, open: true, apply: false, posDescription: 'Est tibique commune in, et mei erant paulo ullamcorper. Adhuc ubique oportere eum ex, mei no tibique adversarium. Mazim persius ut eum, ei putent oblique mel, ludus equidem ea usu. Quo viderer hendrerit ei, ea nam lorem ullum albucius.'},
+            {pos: 'Unit Tester', exp: 1, posNr: 3, open: true, apply: false, posDescription: 'Quo te tale complectitur. At duo hinc vocent ullamcorper, pri dolorem persequeris in, te quot albucius luptatum sed. Et sea aliquid commune. Cum omnes dolore vocent ei. Sea mollis aeterno at.' }]},
+
+          {projectOwner: 'Alan Andrade', bookmark: false, brokoliCounter: 2, totalBrokolis: 17, applicants: 35, title: 'Brokoli2', 
+           abstract: 'someAbstract', header: 'Tinder for Project. Bringing people and projects together in a virtual environment.',
+           posData: [
+            {pos: 'Java Developer2', exp: 4, posNr: 2, open: true, apply: false, posDescription: 'Est tibique commune in, et mei erant paulo ullamcorper. Adhuc ubique oportere eum ex, mei no tibique adversarium. Mazim persius ut eum, ei putent oblique mel, ludus equidem ea usu. Quo viderer hendrerit ei, ea nam lorem ullum albucius.'},
+            {pos: 'React Native Architect', exp: 2, posNr: 2, open: true, apply: false, posDescription: 'Quo te tale complectitur. At duo hinc vocent ullamcorper, pri dolorem persequeris in, te quot albucius luptatum sed. Et sea aliquid commune. Cum omnes dolore vocent ei. Sea mollis aeterno at.'},
+            {pos: 'Financial Analyst', exp: 3, posNr: 1, open: true, apply: false, posDescription: 'Te erat facer eum, te nisl referrentur ius. Eos tollit doming conceptam te, quis oporteat et eos. Vis ei tritani aperiri platonem, mei option alterum ea. Inimicus prodesset mediocritatem mei at, eam ullum essent detraxit no. Ius cu mucius efficiendi suscipiantur, tamquam suscipit dissentiet ne vel, ad illud mucius contentiones sed. Qui at essent dolores.'}]},
+
+          {projectOwner: 'Brigel Pineti', bookmark: false, brokoliCounter: 4, totalBrokolis: 99, applicants: 9, title: 'Finding Dory2',
+           abstract: 'someAbstract2', header: 'I like purple shells.',
+           posData: [
+            {pos: 'Java Developer3', exp: 4, posNr: 2, open: true, apply: false, posDescription: 'Quo te tale complectitur. At duo hinc vocent ullamcorper, pri dolorem persequeris in, te quot albucius luptatum sed. Et sea aliquid commune. Cum omnes dolore vocent ei. Sea mollis aeterno at.'},
+            {pos: 'React Native Architect', exp: 2, posNr: 2, open: true, apply: false, posDescription: 'Est tibique commune in, et mei erant paulo ullamcorper. Adhuc ubique oportere eum ex, mei no tibique adversarium. Mazim persius ut eum, ei putent oblique mel, ludus equidem ea usu. Quo viderer hendrerit ei, ea nam lorem ullum albucius.'},
+            {pos: 'Financial Analyst', exp: 3, posNr: 1, open: true, apply: false, posDescription: 'Quo te tale complectitur. At duo hinc vocent ullamcorper, pri dolorem persequeris in, te quot albucius luptatum sed. Et sea aliquid commune. Cum omnes dolore vocent ei. Sea mollis aeterno at'},
+            {pos: 'Managerial Accountant', exp: 5, posNr: 1, open: true, apply: false, posDescription: 'Te erat facer eum, te nisl referrentur ius. Eos tollit doming conceptam te, quis oporteat et eos. Vis ei tritani aperiri platonem, mei option alterum ea. Inimicus prodesset mediocritatem mei at, eam ullum essent detraxit no. Ius cu mucius efficiendi suscipiantur, tamquam suscipit dissentiet ne vel, ad illud mucius contentiones sed. Qui at essent dolores.'}]},
         ],
         cardIndex: 0,
-        allCardsSwiped: false,
+        swipedAllCards: false,
       }
     }
 
@@ -107,7 +155,7 @@ const width = window.width
       console.log('isInfoVisible: ', this.state.isInfoVisible)
     }
 
-    _renderModalInfo = ({card}) =>
+    _renderModalInfo = () =>
     (
 
       <View style={{flex: 1}}>
@@ -269,12 +317,142 @@ const width = window.width
 
   _allCardsSwiped(){
 
-    this.state.allCardsSwiped = true
+    this.state.swipedAllCards = true
     this.setState(function(prevState, props){
-      return { allCardsSwiped: prevState.allCardsSwiped}
+      return { swipedAllCards: prevState.swipedAllCards}
     })
     console.log("All cards have been swiped. Deck is empty")
   }
+
+  _toggleApplyModal({item, index}){
+
+    this.state.isApplyModalVisible = true
+    this.setState(function(prevState, props){
+      return { isApplyModalVisible: prevState.isApplyModalVisible}
+    })
+    console.log('isApplyModalVisible: ', this.state.isApplyModalVisible)
+
+    this.state.tempPosDescription = item.posDescription
+    this.setState(function(prevState, props){
+      return { tempPosDescription: prevState.tempPosDescription }
+    })
+
+    console.log('Teporary PosDescription: ', this.state.tempPosDescription)
+
+    this.state.tempPos = item.pos
+    this.setState(function(prevState, props){
+      return { tempPos: prevState.tempPos }
+    })
+
+    console.log('Teporary Position: ', this.state.tempPos)
+
+    this.state.tempPosIndex = index
+    this.setState(function(prevState, props){
+      return { tempPosIndex: prevState.tempPosIndex }
+    })
+
+    console.log('Teporary Position Index: ', this.state.tempPosIndex)
+    
+  }
+
+  _untoggleApplyModal(){
+
+    this.state.isApplyModalVisible = false
+    this.setState(function(prevState, props){
+      return { isApplyModalVisible: prevState.isApplyModalVisible}
+    })
+    console.log('isApplyModalVisible: ', this.state.isApplyModalVisible)
+
+    this.state.tempPosDescription = ''
+    this.setState(function(prevState, props){
+      return { tempPosDescription: prevState.tempPosDescription }
+    })
+
+    console.log('Teporary PosDescription: ', this.state.tempPosDescription)
+
+    this.state.tempPos = ''
+    this.setState(function(prevState, props){
+      return { tempPos: prevState.tempPos }
+    })
+
+    console.log('Teporary Position: ', this.state.tempPos)
+    
+  }
+
+  _renderApplyModal = () => (
+
+    
+    <View style={{flex: 1}}>
+    
+          <View style={[styles.infoHeader, {justifyContent: 'flex-end'}]}>
+          
+                  <TouchableOpacity style={{alignItems: 'center', backgroundColor: '#A7333F', justifyContent: 'center', paddingRight: 10,paddingLeft: 10, borderTopRightRadius: 4,}}
+                                    onPress={()=> this._untoggleApplyModal()}>
+          
+                            <Text style={[styles.btnTxt, {color: 'white', fontSize: 20}]}>Close</Text>
+    
+                            </TouchableOpacity>
+    
+    
+    
+                            </View>
+
+                            <View style={{flex: 8}}>
+          
+          <ScrollView contentContainerStyle ={[styles.infoModalContent, {borderBottomRightRadius: 0,borderBottomLeftRadius: 0}]}>
+
+              <View style={{paddingBottom: 10}}>
+    
+              <Text style={[styles.title, {fontWeight: '600', color: '#254D32'}]}>Position</Text>
+    
+              </View>
+    
+              <View style={{paddingTop: 10}}>
+          
+              <Text style={[styles.title, {color: 'grey'}]}>{this.state.tempPos}</Text>
+    
+              </View>
+    
+              <View style={{paddingBottom: 10, paddingTop: 20}}>
+    
+              <Text style={[styles.title, {fontWeight: '600', color: '#254D32'}]}>Description</Text>
+    
+              </View>
+    
+              <View style={{paddingTop: 10}}>
+          
+              <Text style={[styles.title, {color: 'grey'}]}>{this.state.tempPosDescription}</Text>
+    
+              </View>
+          
+                  
+          </ScrollView>
+
+          </View>
+
+          <View style={{flex: 1}}> 
+            <TouchableOpacity style={{backgroundColor: '#254D32', alignItems:'center', borderBottomRightRadius: 4, borderBottomLeftRadius: 4}}
+                              onPress={()=> this._onApply()}>
+               <Text style={{fontSize: 20, fontWeight: '600', color: 'white', padding: 10}}> Apply </Text>
+            </TouchableOpacity>
+            </View>
+          </View>
+
+
+  )
+
+  _onApply(){
+
+    this.state.cards[this.state.cardIndex].posData[this.state.tempPosIndex].apply = true
+    this.setState(function(prevState, props){
+      return { cards: prevState.cards }
+    })
+
+    console.log('Apply', this.state.cards[this.state.cardIndex].posData[this.state.tempPosIndex].apply)
+
+    this._untoggleApplyModal()
+  }
+
   
     
     render() {
@@ -282,6 +460,8 @@ const width = window.width
         <Swiper
             cards={this.state.cards}
             renderCard={(card) => {
+                if(this.state.cardIndex < this.state.cards.length )
+                {
                 return (
                   <View style={styles.card} card={card}>
                   <View style = {styles.header}>
@@ -309,26 +489,27 @@ const width = window.width
            
           </View>
 
+
           <View style={styles.body}>
 
             <View style={styles.headerCont}>
               <Text style={styles.headerTitle}>{card.header}</Text>
             </View>
 
+
+            <View style={[styles.posiCont, {paddingTop: 5}]}>
+            
             <TouchableWithoutFeedback>
 
-            <View style={styles.posiCont}>
-            
-            
-
                   <FlatList
-          extraData={this.state}
-          data={this.state.posData}
-          renderItem={({ item, index }) => (
+                    extraData={this.state}
+                    data={card.posData}
+                    renderItem={({ item, index }) => (
 
-                <View style={{paddingTop: 10, paddingBottom: 10}}>
-       
+               
 
+                <View style={{paddingTop: 5, paddingBottom: 5}}>
+ 
                   <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
 
                   <View style={{flex: 3, justifyContent: 'center', alignItems: 'flex-start', paddingLeft: 5}}>
@@ -339,31 +520,57 @@ const width = window.width
 
                   <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
 
-                  <View style={{flex: 1, justifyContent: 'center', alignItems: 'flex-start', paddingLeft: 5}}>
-                  <Text style={[styles.itemText, {color: '#A7333F', padding: 5}]}>{item.posNr} left</Text>
-                  </View>
+                 
 
-                  <View style={{alignContent: 'flex-end', alignItems: 'center', justifyContent: 'center', marginRight: 5, backgroundColor: '#42D260', borderRadius: 5}}> 
+                  <View style={{paddingLeft: 10,}}>
 
-                  <Text style={[styles.itemText, {color: 'white', padding: 5}]}>Apply</Text>
+                  
+
+                    <Image source={require('../../../img/icons/open.png')} 
+                           style={{resizeMode: 'center', width: 35, height: 35, tintColor: '#42D260'}}/>
+
+                            
 
                     </View>
+
+                    
+
+                    
+
+                  <View style={{flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start', paddingLeft: 5}}>
+                  <Text style={[styles.itemText, {color: '#A7333F', padding: 5, fontWeight: '600'}]}>{item.posNr}</Text>
+                 
+                  <Image source={require('../../../img/icons/pos-applicant.png')} 
+                         style={{resizeMode: 'center', width: 35, height: 35, tintColor: '#A7333F'}}/>
+                         
+                  </View>
                   
+
+                  <TouchableWithoutFeedback disabled={item.apply}
+                                    onPress={() => this._toggleApplyModal({item, index}) }>
+
+                    <View style={{alignContent: 'flex-end', alignItems: 'center', justifyContent: 'center',marginTop: 5, marginRight: 5, borderWidth: 1, borderRadius: 5, borderColor: '#42D260',
+                                           backgroundColor: item.apply ? 'white' : '#42D260'}}>
+
+                         <Text style={[styles.itemText, {color: item.apply ? '#42D260' : 'white', padding: 5}]}>{item.apply ? 'Applied' : 'Apply' } </Text>
+
+                  </View>
+
+                  </TouchableWithoutFeedback>
+     
                   </View> 
+                  
 
               </View>
-
-
-              
-      
           )}
           keyExtractor={item => item.pos}
         />
 
+        </TouchableWithoutFeedback>
+
           
                    
             </View>
-            </TouchableWithoutFeedback>
           </View>
 
           <View style={styles.footer}> 
@@ -416,7 +623,7 @@ const width = window.width
                          onBackdropPress={() => this.setState({ isInfoVisible: false })}
                          avoidKeyboard={true}>
 
-                         {this._renderModalInfo({card})}
+                         {this._renderModalInfo()}
 
                   </Modal>  
 
@@ -428,8 +635,19 @@ const width = window.width
                          {this._renderExceedBrokolis()}
 
                   </Modal> 
+
+                  <Modal isVisible = {this.state.isApplyModalVisible}
+                   animationIn={'slideInLeft'}
+                   animationOut={'slideOutRight'}
+                   onBackdropPress={() => this.setState({ isApplyModalVisible: false })}>
+
+                         {this._renderApplyModal()}
+
+                  </Modal> 
+
                   </View>
                 )
+          }
             }}
              overlayLabels={{
             bottom: {
@@ -483,13 +701,13 @@ const width = window.width
               }
             },
             top: {
-              title: 'Nice',
+              title: 'Nice Idea',
               style: {
                 label: {
                   backgroundColor: 'white',
                   borderColor: '#42D260',
                   color: '#42D260',
-                  borderWidth: 1
+                  borderWidth: 2
                 },
                 wrapper: {
                   flexDirection: 'column',
@@ -499,15 +717,27 @@ const width = window.width
               }
             }
           }}
-            onSwipedAll={() => this._allCardsSwiped() }
             cardIndex={this.state.cardIndex}
             backgroundColor={'#42D260'}
             onSwiped={(cardIndex) => this._incrementCardIndex(cardIndex)}
             cardVerticalMargin={40}
             animateOverlayLabelsOpacity
             animateCardOpacity>
-        </Swiper>
 
+            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+
+                    <TouchableOpacity>  
+
+                      <Image source={require('../../../img/icons/brokoli.png')}
+                             style={{resizeMode: 'center', width: 200, height: 200, tintColor: 'white'}}/>
+
+                      </TouchableOpacity> 
+
+
+
+                      </View>
+
+            </Swiper>
         
       )
     }
