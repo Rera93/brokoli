@@ -489,6 +489,8 @@ var tempArr = []
            
           </View>
 
+          <TouchableWithoutFeedback>
+
           <View style={styles.body}>
 
             <View style={styles.headerCont}>
@@ -499,16 +501,17 @@ var tempArr = []
 
             <View style={[styles.posiCont, {paddingTop: 5}]}>
             
-            
+            <TouchableWithoutFeedback>
 
                   <FlatList
                     extraData={this.state}
                     data={card.posData}
                     renderItem={({ item, index }) => (
 
-                <View style={{paddingTop: 5, paddingBottom: 5}}>
-       
+               
 
+                <View style={{paddingTop: 5, paddingBottom: 5}}>
+ 
                   <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
 
                   <View style={{flex: 3, justifyContent: 'center', alignItems: 'flex-start', paddingLeft: 5}}>
@@ -519,23 +522,33 @@ var tempArr = []
 
                   <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
 
+                 
+
                   <View style={{paddingLeft: 10,}}>
+
+                  
 
                     <Image source={require('../../../img/icons/open.png')} 
                            style={{resizeMode: 'center', width: 35, height: 35, tintColor: '#42D260'}}/>
 
+                            
+
                     </View>
+
+                    
+
+                    
 
                   <View style={{flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start', paddingLeft: 5}}>
                   <Text style={[styles.itemText, {color: '#A7333F', padding: 5, fontWeight: '600'}]}>{item.posNr}</Text>
+                 
                   <Image source={require('../../../img/icons/pos-applicant.png')} 
                          style={{resizeMode: 'center', width: 35, height: 35, tintColor: '#A7333F'}}/>
+                         
                   </View>
 
-                 
-
                   <TouchableWithoutFeedback disabled={item.apply}
-                                    onPress={() => this._toggleApplyModal({item, index}) }> 
+                                    onPress={() => this._toggleApplyModal({item, index}) }>
 
                     <View style={{alignContent: 'flex-end', alignItems: 'center', justifyContent: 'center',marginTop: 5, marginRight: 5, borderWidth: 1, borderRadius: 5, borderColor: '#42D260',
                                            backgroundColor: item.apply ? 'white' : '#42D260'}}>
@@ -544,29 +557,24 @@ var tempArr = []
 
                   </View>
 
-                    </TouchableWithoutFeedback>
-
-                   
-                  
+                  </TouchableWithoutFeedback>
+     
                   </View> 
                   
 
               </View>
-
-              
-
-
-              
-      
           )}
           keyExtractor={item => item.pos}
         />
+
+        </TouchableWithoutFeedback>
 
           
                    
             </View>
             </TouchableWithoutFeedback>
           </View>
+          </TouchableWithoutFeedback>
 
           <View style={styles.footer}> 
 
