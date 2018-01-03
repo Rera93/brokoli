@@ -90,7 +90,7 @@ var tempArr = []
             {pos: 'Managerial Accountant', exp: 5, posNr: 1, open: true, apply: false, posDescription: 'Te erat facer eum, te nisl referrentur ius. Eos tollit doming conceptam te, quis oporteat et eos. Vis ei tritani aperiri platonem, mei option alterum ea. Inimicus prodesset mediocritatem mei at, eam ullum essent detraxit no. Ius cu mucius efficiendi suscipiantur, tamquam suscipit dissentiet ne vel, ad illud mucius contentiones sed. Qui at essent dolores.'}]},
         ],
         cardIndex: 0,
-        allCardsSwiped: false,
+        swipedAllCards: false,
       }
     }
 
@@ -716,15 +716,15 @@ var tempArr = []
               }
             }
           }}
-            onSwipedAll={() => this._allCardsSwiped() }
+            onSwipedAll={() => {this.setState({
+      swipedAllCards: true
+    })}}
             cardIndex={this.state.cardIndex}
             backgroundColor={'#42D260'}
             onSwiped={(cardIndex) => this._incrementCardIndex(cardIndex)}
             cardVerticalMargin={40}
             animateOverlayLabelsOpacity
-            animateCardOpacity>
-        </Swiper>
-
+            animateCardOpacity/>
         
       )
     }
