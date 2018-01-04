@@ -10,7 +10,7 @@ import { StyleSheet,
 import Modal from 'react-native-modal'
 
 
-var tempArr = []
+var tempBookmarkArr = []
 
 const width = Dimensions.get('window').width
 const height = Dimensions.get('window').height
@@ -53,11 +53,11 @@ export default class Bookmarks extends React.Component{
             DB request happens here. 
             Need to be called everytime a bookmark is set on the brokoli tab,  
 
-            tempArr = dataFetchedFromDb
+            tempBookmarkArr = dataFetchedFromDb
 
             Update state of bookmarkData like the following
 
-            this.state.bookmarkData = tempArr
+            this.state.bookmarkData = tempBookmarkArr
             this.setState(function(prevState, props){
                 return { boormarkData: prevState.bookmarkData}
             })
