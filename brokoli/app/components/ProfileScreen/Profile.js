@@ -334,15 +334,15 @@ export default class Profile extends React.Component {
             this._flipAccount()
           }
         
-           _updateDB(args){
-            fetch('https://brokoli.eu-gb.mybluemix.net/api/update', {  
+           _updateDB(body, urlParam){
+            return fetch('https://brokoli.eu-gb.mybluemix.net/api/'+urlParam, {  
                  method: 'POST',
                  headers: {
                    'Accept': 'application/json',
                    'Content-Type': 'application/json',
                  }
                ,
-                  body: JSON.stringify(args),
+                  body: JSON.stringify(body),
 
                 
                 })
@@ -351,22 +351,124 @@ export default class Profile extends React.Component {
                  //   this.setState({ data : responseData})});
          
                  .then((response) => response.json())
-                 .then((responseData) => {
-                    var str = JSON.stringify(responseData.old_doc, null, 4);
-                    var str1 = JSON.stringify(responseData.doc, null, 4);
-                    var str2 = JSON.stringify(responseData.data, null, 4);
-                    console.log(str);
-                    console.log(str1);
-                    console.log(str2);
+                 // .then((responseData) => {
+                 //    var str = JSON.stringify(responseData.old_doc, null, 4);
+                 //    var str1 = JSON.stringify(responseData.doc, null, 4);
+                 //    var str2 = JSON.stringify(responseData.data, null, 4);
+                 //    console.log(str);
+                 //    console.log(str1);
+                 //    console.log(str2);
                    
-                 });
+                 // })
+                 ;
+        }
+
+        checkOldPassword(oldPass){
+            
+            var obj = {user:this.state.userData.username, pass:oldPass};
+            return this._updateDB(obj, 'auth').then((res) => {
+              console.log("validation " + res.validation + " " + res.id);
+              if(res.validation == 'true'){
+                  
+                  console.log(">>>>>>>>>>>>>>>>Valid user!", res.id);
+                  return true;
+              }else{
+
+                    return false;
+                    //this.props._callbackLogin(res.validation, 0);
+              }
+            
+            });
         }
 
         _updateAccountSettings() {
             //This is your part Alan. Need to update db for email and password.
             //I have created the interface so that the user may either update email or password or both. 
             
+            //TODO add all checks for password and email.
+            var wait = 0;
             console.log('Update Account')
+
+                var obj = {};
+                //Update name
+                if(this.state.oldEmail != '') 
+                {
+                    if(this.state.oldEmail == this.state.userData.email) 
+                    {
+                        if(this.state.newEmail != ''){
+                            this.state.userData.email = this.state.newEmail
+                            var aux = this.state.userData;
+                            aux.email = this.state.newEmail
+                            this.setState(function(prevState, props){
+                                return {userData: prevState.userData}
+                            })
+                            obj.email = this.state.newEmail;
+                        }
+                        else{
+                            Alert.alert('Error', 'Enter new e-mail');
+                        }
+                    }
+                    else{
+                        Alert.alert('Error', 'Old e-mail does not match.');
+                    }
+                }
+                //Update password
+                if(this.state.oldPassword != '')
+                {
+                    wait = 1;
+                    //console.log('>>>result '+ ''+this.checkOldPassword(this.state.oldPassword));
+                    this.checkOldPassword(this.state.oldPassword).then(bool => {
+                        if(bool){
+                            if(this.state.newPassword != ''){
+                                if(this.state.newPassword == this.state.newPasswordConfirm){
+                                    obj.password = this.state.newPassword;
+                                    var str = JSON.stringify(obj, null, 4);
+                                    console.log('====newpass ' + str);
+                                    this._updateDB(obj, 'update');
+                                }
+                                else{
+                                    Alert.alert('Invalid input', 'Passwords do not match');
+                                }
+                            }
+                            else{
+                                Alert.alert('Invalid input', 'Enter new password');
+                            }
+                        }
+                        else{
+                            Alert.alert('Invalid input', 'Enter correct password');
+                        }
+                    });
+                    
+                }
+
+                //Update city
+                if(this.state.newCity != '')
+                {
+                    this.state.city = this.state.newCity
+                    this.setState(function(prevState, props){
+                        return {city: prevState.city}
+                    })
+                    obj.city = this.state.city;
+                }
+
+                //Update country
+                if(this.state.newCountry != '')
+                {
+                    this.state.country = this.state.newCountry
+                    this.setState(function(prevState, props){
+                        return {country: prevState.country}
+                    })
+                    obj.country = this.state.country;
+                }
+
+                this._toggleProfileModal()
+                obj.id = this.props.screenProps;
+
+                var str = JSON.stringify(obj, null, 4);
+                console.log('Object to be updated: '+ str);
+                if(wait ==0)
+                    this._updateDB(obj, 'update');
+                
         }
 
 
