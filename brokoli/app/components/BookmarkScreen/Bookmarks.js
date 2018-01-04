@@ -140,7 +140,7 @@ export default class Bookmarks extends React.Component{
 
         //Returns the part of array we want to remove
         tempArr.splice(this.state.index, 1)
-        
+
         //Assign the tempArr with the removed element to bookmarkData
         this.state.bookmarkData = tempArr
         this.setState(function(prevState, props){
@@ -197,6 +197,7 @@ export default class Bookmarks extends React.Component{
               </TouchableOpacity>
             )}
             keyExtractor={item => item.project}
+            ListHeaderComponent={() => (!this.state.bookmarkData.length ? <Text>The list is empty</Text> : null)}
           />
 
           <Modal isVisible = {this.state.isModalDeleteVisible}
