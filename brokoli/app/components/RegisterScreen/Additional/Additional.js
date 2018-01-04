@@ -23,6 +23,7 @@ export default class Additional extends React.Component {
 
         this.state={
             jobsObj : [],
+            projectArrObj : [],
             passSkillsToDb : [],
             passHeadertoDb : '',
             skills: false,
@@ -44,6 +45,7 @@ export default class Additional extends React.Component {
         //Alert.alert("Props", this.props.navigation.state.params.date + this.props.navigation.state.params.gender) ;
        this.setState({finalObj : this.props.navigation.state.params.finalObj})
        this._organizeJobsObject();
+       this._organizeProjectsObject();
     }
 
     _organizeJobsObject(){
@@ -100,6 +102,53 @@ export default class Additional extends React.Component {
         delete update.companies;
         delete update.jobCities;
         delete update.jobCountries;   
+
+    }
+
+    _organizeProjectsObject(){
+        //organizing job attributes into elements 
+           //TODO move this to register.
+           const {finalObj} = this.props.navigation.state.params;
+           var element = {};
+           var arrObj=[];
+           var str = '';
+            var arrayLength = finalObj.projectNames.length;
+            for (var i = 0; i < arrayLength; i++) {
+                
+                console.log('element ' + finalObj.projectNames.length+ finalObj.projectNames[i]);
+                
+                //this.setState(prevState => ({
+                    element = {project : finalObj.projectNames[i],
+                                                    position : finalObj.projectPositions[i],
+                                                    course : finalObj.courses[i]};
+                str = JSON.stringify(element, null, 4);
+                console.log('objelem '+ str);
+                if(finalObj.projectNames[i].length > 0)
+                    arrObj.push(element);
+                str = JSON.stringify(arrObj, null, 4);
+                console.log('Arrayofobj '+ str);
+                  
+                
+            }
+            //this.setState({jobsObj: arrObj});
+            
+            let update = finalObj;
+            update.projectArrObj = arrObj;
+
+            this._deleteProjectRepetition();
+            
+
+
+            //console.log('jobsObj: '+ this.state.jobsObj[0]);
+            
+    }
+
+    _deleteProjectRepetition(){
+        const {finalObj} = this.props.navigation.state.params;
+        let update = finalObj;
+        delete update.projectNames;
+        delete update.projectPositions;
+        delete update.courses; 
 
     }
 
