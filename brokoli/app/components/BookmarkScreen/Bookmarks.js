@@ -30,10 +30,10 @@ export default class Bookmarks extends React.Component{
         this.state = {
 
             bookmarkData: [
-                {project: 'Brokoli1', applicants: 17, brokolis: 15},
-                {project: 'Brokoli2', applicants: 145, brokolis: 65},
-                {project: 'Brokoli3', applicants: 137, brokolis: 32},
-                {project: 'Brokoli4', applicants: 4, brokolis: 23},
+                {project: 'Brokoli1', applicants: 17, brokolis: 15, id: 100},
+                {project: 'Brokoli2', applicants: 145, brokolis: 65, id: 101},
+                {project: 'Brokoli3', applicants: 137, brokolis: 32, id: 102},
+                {project: 'Brokoli4', applicants: 4, brokolis: 23, id: 103},
         ],
         activeRowKey: null,
         isModalDeleteVisible: false,
@@ -162,6 +162,13 @@ export default class Bookmarks extends React.Component{
     })
   }
 
+  _openBookmark({item, index})
+  {
+    const {navigate} = this.props.navigation
+    navigate('Project', {selectedItem: item })
+
+  }
+
     render(){
         return(
 
@@ -172,6 +179,7 @@ export default class Bookmarks extends React.Component{
             data={this.state.bookmarkData}
             renderItem={({ item, index }) => (
               <TouchableOpacity style={styles.item} item={item} index={index}
+                                onPress = {() => this._openBookmark({item, index}) }
                                 onLongPress = {() => this._toggleDeleteModal({item, index})}>
                 <View style={{flex: 5, alignItems: 'flex-start', justifyContent: 'center'}}>
                 <View style={styles.nameCont}>

@@ -11,14 +11,20 @@ const width = Dimensions.get('window').width
 
 export default class Project extends React.Component{
 
-    render(){
+    static navigationOptions = ({ navigation }) => ({
+        title: `${navigation.state.params.selectedItem.project}`,
+        headerStyle: { backgroundColor: '#42D260', marginTop: 24 },
+        headerTitleStyle: { color: 'white' },
+      })
 
+    render(){
+        const { params } = this.props.navigation.state;
 
         return (
 
             <View style={styles.container}> 
 
-                    <Text> Hello </Text>
+                    <Text> {params.selectedItem.project} </Text>
 
                 </View>
 
