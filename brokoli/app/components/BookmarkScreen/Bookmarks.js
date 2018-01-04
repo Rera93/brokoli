@@ -35,7 +35,9 @@ export default class Bookmarks extends React.Component{
                 {project: 'Brokoli4', applicants: 4, brokolis: 23},
         ],
         activeRowKey: null,
-        isModalDeleteVisible: false
+        isModalDeleteVisible: false,
+        index: 0,
+        itemToDelete: []
         }
     }
 
@@ -64,13 +66,43 @@ export default class Bookmarks extends React.Component{
        
     }
 
-    _toggleDeleteModal(){
+    _toggleDeleteModal({item, index}){
 
-        this.state.isModalDeleteVisible = !this.state.isModalDeleteVisible
+        this.state.index = index 
+        this.setState(function(prevState, props){
+            return { index: prevState.index }
+        })
+
+        console.log('Selected Index: ', this.state.index)
+
+        this.state.itemToDelete = item
+        this.setState(function(prevState, props){
+            return { itemToDelete: prevState.itemToDelete }
+        })
+        console.log('Select Item: ', item)
+
+        this.state.isModalDeleteVisible = true
         this.setState(function(prevState, props){
             return { isModalDeleteVisible: prevState.isModalDeleteVisible }
         })
         console.log('isModalDeleteVisible', this.state.isModalDeleteVisible)
+    }
+
+    _untoggleDeleteModal(){
+
+        this.state.index = null
+        this.setState(function(prevState, props){
+            return { index: prevState.index }
+        })
+
+        console.log('Selected Index: ', this.state.index)
+
+        this.state.isModalDeleteVisible = false
+        this.setState(function(prevState, props){
+            return { isModalDeleteVisible: prevState.isModalDeleteVisible }
+        })
+        console.log('isModalDeleteVisible', this.state.isModalDeleteVisible)
+
     }
 
     _renderDeleteModalContent = () => (
@@ -89,7 +121,7 @@ export default class Bookmarks extends React.Component{
                                 </TouchableOpacity>
         
                                 <TouchableOpacity style={[styles.button, {backgroundColor: '#A7333F'}]} 
-                                                onPress={() => this._toggleDeleteModal()}>
+                                                onPress={() => this._untoggleDeleteModal()}>
                                 <Text style={[styles.btnTxt, {color: 'white'}]}>Cancel</Text>
                 
                                 </TouchableOpacity>
@@ -101,17 +133,23 @@ export default class Bookmarks extends React.Component{
 
     _unBookmark() {
 
-        this.state.activeRowKey = this.props.item
-        this.setState(function(prevState, props){
-            return {activeRowKey: prevState.activeRowKey}
-        })
-        console.log('ActiveRowKey', this.state.activeRowKey)
+        //Use temp array(object) instead to state.someArr to apply javascript functionalities on arrays. 
+        var tempArr = []
+        tempArr = this.state.bookmarkData
+        console.log('tempArr: ', tempArr)
 
-        const deletingRow = this.state.activeRowKey            
-        this.state.bookmarkData.splice(this.props.index, 1)
-        //Refresh FlatList
-        this.refreshFlatList(deletingRow)
-        this._toggleDeleteModal()
+        //Returns the part of array we want to remove
+        tempArr.splice(this.state.index, 1)
+        
+        //Assign the tempArr with the removed element to bookmarkData
+        this.state.bookmarkData = tempArr
+        this.setState(function(prevState, props){
+            return { bookmarkData : prevState.bookmarkData }
+        })
+        console.log('Update BookmarkData: ', this.state.bookmarkData)
+        
+        //Close modal
+        this._untoggleDeleteModal()
     }
 
     refreshFlatList = (deletedKey) => {
@@ -133,7 +171,7 @@ export default class Bookmarks extends React.Component{
             data={this.state.bookmarkData}
             renderItem={({ item, index }) => (
               <TouchableOpacity style={styles.item} item={item} index={index}
-                                onLongPress = {() => this._toggleDeleteModal()}>
+                                onLongPress = {() => this._toggleDeleteModal({item, index})}>
                 <View style={{flex: 5, alignItems: 'flex-start', justifyContent: 'center'}}>
                 <View style={styles.nameCont}>
                 {/*Name of project*/}
