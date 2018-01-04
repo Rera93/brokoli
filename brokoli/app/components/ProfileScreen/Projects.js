@@ -46,12 +46,13 @@ export default class Projects extends React.Component
     }
 
 
-    componentDidMount() {
+    componentWillMount() {
         //When compoment is first loaded the temp array is used as a placeholder for the skils key value pair array 
-        let copy = this.state.data; //creates the clone of the state
-        copy = this.props.projects;
-        this.setState({data: copy});
-        tempArr = this.state.data;
+        this.state.data = this.props.projects;
+        this.setState(function(prevState,props){
+            return {data: prevState.data}
+        })
+        tempArr = this.props.projects;
     }
 
       _renderSeparator = () => {
@@ -235,6 +236,7 @@ export default class Projects extends React.Component
             })
             console.log('updatedDataArr: ', this.state.data)
             this._toggleModalAdd()
+
           }
 
           _releaseNewData(){
