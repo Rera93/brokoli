@@ -166,7 +166,6 @@ export default class Bookmarks extends React.Component{
   {
     const {navigate} = this.props.navigation
     navigate('Project', {selectedItem: item })
-
   }
 
     render(){
