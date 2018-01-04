@@ -425,6 +425,7 @@ export default class Profile extends React.Component {
                                     var str = JSON.stringify(obj, null, 4);
                                     console.log('====newpass ' + str);
                                     this._updateDB(obj, 'update');
+                                    this._toggleAccountModal();
                                 }
                                 else{
                                     Alert.alert('Invalid input', 'Passwords do not match');
@@ -461,13 +462,15 @@ export default class Profile extends React.Component {
                     obj.country = this.state.country;
                 }
 
-                this._toggleProfileModal()
+                
                 obj.id = this.props.screenProps;
 
                 var str = JSON.stringify(obj, null, 4);
                 console.log('Object to be updated: '+ str);
-                if(wait ==0)
+                if(wait ==0){
                     this._updateDB(obj, 'update');
+                    this._toggleAccountModal();
+                }
                 
         }
 
