@@ -58,15 +58,26 @@ export default class Jobs extends React.Component
         var str = JSON.stringify(this.props.jobs, null, 4);
         console.log('ArrayofJOBS '+ str);
         
+        /*Alan's
+
         let a = this.state.data; //creates the clone of the state
         a = this.props.jobs;
         this.setState({data: a})
+        
         // for(var i = 0; i < len; i++){
         //   this.setState(prevState => ({
         //     data: [...prevState.data, this.props.jobs[i]]
         //   }))
 
-        // }
+        }
+        */
+        this.state.data = this.props.jobs
+        this.setState(function(prevState, props){
+            return { data: prevState.data }
+        })
+
+        console.log('StateData: ', this.state.data)
+
         tempArr = this.state.data
     }
 
