@@ -609,7 +609,7 @@ export default class Profile extends React.Component {
 
                     <Overview title='OVERVIEW'/>
                     <Skills title='SKILLS' />
-                    <Jobs title='JOBS' jobs={this.state.userData.jobsObj} />
+                    <Jobs title='JOBS' jobs={this.state.userData.jobsObj} id={this.props.screenProps} />
                     <Projects title='PROJECTS' projects={this.state.userData.projectArrObj}/>
 
                 </Tabs>

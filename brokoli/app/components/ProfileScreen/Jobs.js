@@ -57,6 +57,7 @@ export default class Jobs extends React.Component
         //var len = this.props.jobs.length;
         var str = JSON.stringify(this.props.jobs, null, 4);
         console.log('ArrayofJOBS '+ str);
+        console.log(this.props.id);
         
         // let copy = this.state.data; //creates the clone of the state
         // copy = this.props.jobs;
@@ -73,6 +74,36 @@ export default class Jobs extends React.Component
 
         // }
         tempArr = this.props.jobs;
+    }
+
+    _updateDB(){
+        fetch('https://brokoli.eu-gb.mybluemix.net/api/update', {  
+             method: 'POST',
+             headers: {
+               'Accept': 'application/json',
+               'Content-Type': 'application/json',
+             }
+           ,
+              body: JSON.stringify({
+              id: this.props.id,
+              jobsObj: this.state.data,
+
+            })
+            })
+             // .then(function(response) { return response.json(); })
+             // .then(function(responseData) {
+             //   this.setState({ data : responseData})});
+     
+             .then((response) => response.json())
+             .then((responseData) => {
+                var str = JSON.stringify(responseData.old_doc, null, 4);
+                var str1 = JSON.stringify(responseData.doc, null, 4);
+                var str2 = JSON.stringify(responseData.data, null, 4);
+                console.log(str);
+                console.log(str1);
+                console.log(str2);
+               
+             });
     }
 
       _renderSeparator = () => {
@@ -495,6 +526,7 @@ export default class Jobs extends React.Component
                 return {data: prevState.data}
             })
             console.log('updatedDataArr: ', this.state.data)
+            this._updateDB();
             this._toggleModalAdd()
           }
 
