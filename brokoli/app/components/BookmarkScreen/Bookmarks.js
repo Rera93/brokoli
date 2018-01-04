@@ -13,6 +13,7 @@ import Modal from 'react-native-modal'
 var tempArr = []
 
 const width = Dimensions.get('window').width
+const height = Dimensions.get('window').height
 
 export default class Bookmarks extends React.Component{
 
@@ -197,7 +198,8 @@ export default class Bookmarks extends React.Component{
               </TouchableOpacity>
             )}
             keyExtractor={item => item.project}
-            ListHeaderComponent={() => (!this.state.bookmarkData.length ? <Text>The list is empty</Text> : null)}
+            ListHeaderComponent={() => (!this.state.bookmarkData.length ? 
+            <Text style={{marginTop: height / 3, textAlign: 'center', fontSize: 20, fontWeight: '500', color: '#42D260'}}>Out of bookmarks</Text> : null)}
           />
 
           <Modal isVisible = {this.state.isModalDeleteVisible}
