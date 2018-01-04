@@ -17,8 +17,8 @@ export default class Project extends React.Component{
 
     static navigationOptions = ({ navigation }) => ({
         title: `${navigation.state.params.selectedItem.project}`,
-        headerStyle: { backgroundColor: '#42D260', marginTop: 24 },
-        headerTitleStyle: { color: 'white' },
+        headerStyle: { backgroundColor: 'white', marginTop: 24 },
+        headerTitleStyle: { color: '#42D260' },
       })
 
       constructor(props){
@@ -515,7 +515,7 @@ export default class Project extends React.Component{
               <View style={{flex:1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', paddingLeft: 5}}>
              
                 <Image source={require('../../../img/icons/profile_pic.png')} style={{resizeMode: 'center', width: 40, height: 40}}  />
-                <Text style={{fontSize: 20, fontWeight: '100', color: '#C7C7CD', paddingLeft: 5}}> {this.state.projectOwner} </Text>
+                <Text style={{fontSize: 20, fontWeight: '100', color: '#C7C7CD', paddingLeft: 5}}> {this.state.projectData.projectOwner} </Text>
                      
               </View>
 
@@ -595,6 +595,9 @@ const styles = StyleSheet.create({
 
     container: {
         flex: 1,
+        backgroundColor: '#42D260',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     card: {
         flex: 1,
@@ -603,7 +606,8 @@ const styles = StyleSheet.create({
         borderColor: '#E8E8E8',
         justifyContent: 'center',
         backgroundColor: 'white',
-        marginBottom: 40,
+        marginTop: 10,
+        marginBottom: 10,
       },
       header: {
         flexDirection: 'row',
