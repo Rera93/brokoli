@@ -334,12 +334,44 @@ export default class Profile extends React.Component {
             this._flipAccount()
           }
         
-       
+           _updateDB(args){
+            fetch('https://brokoli.eu-gb.mybluemix.net/api/update', {  
+                 method: 'POST',
+                 headers: {
+                   'Accept': 'application/json',
+                   'Content-Type': 'application/json',
+                 }
+               ,
+                  body: JSON.stringify(args),
+
+                
+                })
+                 // .then(function(response) { return response.json(); })
+                 // .then(function(responseData) {
+                 //   this.setState({ data : responseData})});
+         
+                 .then((response) => response.json())
+                 .then((responseData) => {
+                    var str = JSON.stringify(responseData.old_doc, null, 4);
+                    var str1 = JSON.stringify(responseData.doc, null, 4);
+                    var str2 = JSON.stringify(responseData.data, null, 4);
+                    console.log(str);
+                    console.log(str1);
+                    console.log(str2);
+                   
+                 });
+        }
 
         _updateAccountSettings() {
             //This is your part Alan. Need to update db for email and password.
             //I have created the interface so that the user may either update email or password or both. 
+            
             console.log('Update Account')
+        }
+
+
+        _resetPersonalInfoState(){
+
         }
 
         _toggleProfileModal = () => {
@@ -509,25 +541,54 @@ export default class Profile extends React.Component {
                 }
 
                 _updateProfileSettings(){
+                    var obj = {};
                     console.log('update profile settings')
                     //Update name
                     if(this.state.newFullName != '') 
                     {
-                    this.state.name = this.state.newFullName
-                    this.setState(function(prevState, props){
-                        return {name: prevState.name}
-                    })
+                        this.state.name = this.state.newFullName
+                        this.setState(function(prevState, props){
+                            return {name: prevState.name}
+                        })
+                        obj.firstName = this.state.name.substr(0,this.state.name.indexOf(' '));
+                        obj.lastName = this.state.name.substr(this.state.name.indexOf(' ')+1);
                     }
                     //Update header
                     if(this.state.newHeader != '')
                     {
-                    this.state.header = this.state.newHeader
-                    this.setState(function(prevState, props){
-                        return {header: prevState.header}
-                    })
+                        this.state.header = this.state.newHeader
+                        this.setState(function(prevState, props){
+                            return {header: prevState.header}
+                        })
+                        obj.passHeadertoDb = this.state.header;
+                    }
+
+                    //Update city
+                    if(this.state.newCity != '')
+                    {
+                        this.state.city = this.state.newCity
+                        this.setState(function(prevState, props){
+                            return {city: prevState.city}
+                        })
+                        obj.city = this.state.city;
+                    }
+
+                    //Update country
+                    if(this.state.newCountry != '')
+                    {
+                        this.state.country = this.state.newCountry
+                        this.setState(function(prevState, props){
+                            return {country: prevState.country}
+                        })
+                        obj.country = this.state.country;
                     }
 
                     this._toggleProfileModal()
+                    obj.id = this.props.screenProps;
+
+                    var str = JSON.stringify(obj, null, 4);
+                    console.log('Object to be updated: '+ str);
+                    this._updateDB(obj);
                 }
 
                 _autoExpand = (event) => {
