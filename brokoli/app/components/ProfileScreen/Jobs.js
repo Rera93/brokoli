@@ -29,10 +29,10 @@ export default class Jobs extends React.Component
 
         this.state = {
             data: [
-                {startMonth: 'Mar', startYear: '2007', endMonth: 'Jun', endYear: '2007', position: 'Java Developer', company: 'Google', city: 'Boston', country: 'MA'},
-                {startMonth: 'Jan', startYear: '2015', endMonth: 'Mar', endYear: '2015', position: 'Financial Analyst', company: 'ING', city: 'Utrecht', country: 'The Netherlands'},
-                {startMonth: 'Oct', startYear: '2017', endMonth: 'Dec', endYear: '2017', position: 'Managerial Accountant', company: 'Deloitte', city: 'Rotterdam', country: 'The Netherlands'},
-                {startMonth: 'Jun', startYear: '2016', endMonth: 'Aug', endYear: '2016', position: 'IT, Development Engineer', company: 'KPN', city: 'Den Haag', country: 'The Netherlands'},
+                // {startMonth: 'Mar', startYear: '2007', endMonth: 'Jun', endYear: '2007', position: 'Java Developer', company: 'Google', city: 'Boston', country: 'MA'},
+                // {startMonth: 'Jan', startYear: '2015', endMonth: 'Mar', endYear: '2015', position: 'Financial Analyst', company: 'ING', city: 'Utrecht', country: 'The Netherlands'},
+                // {startMonth: 'Oct', startYear: '2017', endMonth: 'Dec', endYear: '2017', position: 'Managerial Accountant', company: 'Deloitte', city: 'Rotterdam', country: 'The Netherlands'},
+                // {startMonth: 'Jun', startYear: '2016', endMonth: 'Aug', endYear: '2016', position: 'IT, Development Engineer', company: 'KPN', city: 'Den Haag', country: 'The Netherlands'},
         ],
             actionButtonVisible: true,
             isModalAddVisible: false,
@@ -54,6 +54,19 @@ export default class Jobs extends React.Component
 
     componentDidMount() {
         //When compoment is first loaded the temp array is used as a placeholder for the skils key value pair array 
+        //var len = this.props.jobs.length;
+        var str = JSON.stringify(this.props.jobs, null, 4);
+        console.log('ArrayofJOBS '+ str);
+        
+        let a = this.state.data; //creates the clone of the state
+        a = this.props.jobs;
+        this.setState({data: a})
+        // for(var i = 0; i < len; i++){
+        //   this.setState(prevState => ({
+        //     data: [...prevState.data, this.props.jobs[i]]
+        //   }))
+
+        // }
         tempArr = this.state.data
     }
 
@@ -632,7 +645,7 @@ export default class Jobs extends React.Component
                           </Swipeout>   
                     
                      )}
-                     keyExtractor={item => item.position}
+                     keyExtractor={item => item.position+item.startMonth+item.startYear}
                      ItemSeparatorComponent={this._renderSeparator}
                  />
 

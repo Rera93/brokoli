@@ -22,6 +22,7 @@ export default class Additional extends React.Component {
         super(props)
 
         this.state={
+            jobsObj : [],
             passSkillsToDb : [],
             passHeadertoDb : '',
             skills: false,
@@ -35,9 +36,53 @@ export default class Additional extends React.Component {
        Alan TODO: passHeaderToDb and passSkillsToDb have to be sent to db. 
     */
     
+    //componentWillMount() {
+        //this._organizeJobsObject();
+    //}
+
     componentDidMount() {
         //Alert.alert("Props", this.props.navigation.state.params.date + this.props.navigation.state.params.gender) ;
        this.setState({finalObj : this.props.navigation.state.params.finalObj})
+       this._organizeJobsObject();
+    }
+
+    _organizeJobsObject(){
+        //organizing job attributes into elements 
+           //TODO move this to register.
+           const {finalObj} = this.props.navigation.state.params;
+           var element = {};
+           var arrObj=[];
+           var str = '';
+            var arrayLength = finalObj.companies.length;
+            for (var i = 0; i < arrayLength; i++) {
+                
+                console.log('element ' + finalObj.companies.length+ finalObj.jobPositions[i]);
+                
+                //this.setState(prevState => ({
+                    element = {startMonth : finalObj.jobStartMonths[i],
+                                                    startYear : finalObj.jobStartYears[i],
+                                                    endMonth : finalObj.jobEndMonths[i],
+                                                    endYear : finalObj.jobEndYears[i],
+                                                    position : finalObj.jobPositions[i],
+                                                    company : finalObj.companies[i],
+                                                    city : finalObj.jobCities[i],
+                                                    country : finalObj.jobCountries[i]};
+                str = JSON.stringify(element, null, 4);
+                console.log('objelem '+ str);
+                if(finalObj.jobPositions[i].length > 0)
+                    arrObj.push(element);
+                str = JSON.stringify(arrObj, null, 4);
+                console.log('Arrayofobj '+ str);
+                  
+                
+            }
+            //this.setState({jobsObj: arrObj});
+            
+            let update = finalObj;
+            update.jobsObj = arrObj;
+
+            //console.log('jobsObj: '+ this.state.jobsObj[0]);
+            
     }
 
     callbackHeader = (dataFromChild) => {

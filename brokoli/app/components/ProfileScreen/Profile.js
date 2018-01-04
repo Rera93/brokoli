@@ -27,6 +27,7 @@ export default class Profile extends React.Component {
 
         this.state = {
             userData: '',
+            jobsInfo: [],
             name: '',
             header: '',
             projectNr: 0,
@@ -54,7 +55,9 @@ export default class Profile extends React.Component {
     componentWillMount(){
         //const { params } = this.props.navigation.state;console.log(this.navigation.state.params.userID);
            this.getData();
-    
+
+
+
            //const { params } = this.props.navigation.state;
          }
          
@@ -105,7 +108,7 @@ export default class Profile extends React.Component {
      
              .then((response) => response.json())
              .then((responseData) => {
-                this.setState({ data : responseData.data,
+                this.setState({ userData : responseData.data,
                                 name: responseData.data.firstName + " " + responseData.data.lastName,
                                 header: responseData.data.passHeadertoDb});
                
@@ -606,7 +609,7 @@ export default class Profile extends React.Component {
 
                     <Overview title='OVERVIEW'/>
                     <Skills title='SKILLS' />
-                    <Jobs title='JOBS' />
+                    <Jobs title='JOBS' jobs={this.state.userData.jobsObj} />
                     <Projects title='PROJECTS' />
 
                 </Tabs>
