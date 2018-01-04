@@ -29,9 +29,9 @@ export default class Projects extends React.Component
 
         this.state = {
             data: [
-                {project: 'Brokoli', position: 'React Native Developer', course: 'Software Development Entrepreneurship'},
-                {project: 'Mars Rover Robot', position: 'DSL Developer', course: 'Design of Embedded Systems'},
-                {project: 'Calculator', position: 'JUnit Tester', course: 'Testing Techniques'},
+                // {project: 'Brokoli', position: 'React Native Developer', course: 'Software Development Entrepreneurship'},
+                // {project: 'Mars Rover Robot', position: 'DSL Developer', course: 'Design of Embedded Systems'},
+                // {project: 'Calculator', position: 'JUnit Tester', course: 'Testing Techniques'},
         ],
             actionButtonVisible: true,
             isModalAddVisible: false,
@@ -48,7 +48,10 @@ export default class Projects extends React.Component
 
     componentDidMount() {
         //When compoment is first loaded the temp array is used as a placeholder for the skils key value pair array 
-        tempArr = this.state.data
+        let copy = this.state.data; //creates the clone of the state
+        copy = this.props.projects;
+        this.setState({data: copy});
+        tempArr = this.state.data;
     }
 
       _renderSeparator = () => {
