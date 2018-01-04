@@ -21,7 +21,8 @@ export default class Project extends React.Component{
           super(props)
 
           this.state = {
-              projectId : null
+              projectId : null,
+              projectData: []
           }
       }
 
@@ -34,6 +35,13 @@ export default class Project extends React.Component{
 
         console.log('Passed projectId: ', this.state.projectId)
 
+        // Use projectId to sent request to db and fetch the correct project. 
+        this._fetchCorrenspondingProject()
+      }
+
+      _fetchCorrenspondingProject(){
+
+        //Store the array as the state of projectData define above.
       }
 
     render(){
