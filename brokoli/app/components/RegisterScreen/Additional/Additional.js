@@ -81,8 +81,26 @@ export default class Additional extends React.Component {
             let update = finalObj;
             update.jobsObj = arrObj;
 
+            this._deleteJobRepetition();
+            
+
+
             //console.log('jobsObj: '+ this.state.jobsObj[0]);
             
+    }
+
+    _deleteJobRepetition(){
+        const {finalObj} = this.props.navigation.state.params;
+        let update = finalObj;
+        delete update.jobStartMonths;
+        delete update.jobStartYears;
+        delete update.jobEndMonths;
+        delete update.jobEndYears;
+        delete update.jobPositions;
+        delete update.companies;
+        delete update.jobCities;
+        delete update.jobCountries;   
+
     }
 
     callbackHeader = (dataFromChild) => {
