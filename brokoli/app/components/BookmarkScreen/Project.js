@@ -17,6 +17,25 @@ export default class Project extends React.Component{
         headerTitleStyle: { color: 'white' },
       })
 
+      constructor(props){
+          super(props)
+
+          this.state = {
+              projectId : null
+          }
+      }
+
+      componentDidMount(){
+
+        this.state.projectId = this.props.navigation.state.params.selectedItem.id
+        this.setState(function(prevState, props){
+            return { projectId: prevState.projectId }
+        })
+
+        console.log('Passed projectId: ', this.state.projectId)
+
+      }
+
     render(){
         const { params } = this.props.navigation.state;
 
