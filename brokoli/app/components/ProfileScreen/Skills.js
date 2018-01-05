@@ -39,7 +39,9 @@ export default class Skills extends React.Component
             newExperience: "1",
             flip: false,
             activeRowKey : null,
-            deleteRowKey : null
+            deleteRowKey : null,
+            index: null,
+            itemToDelete: [],
         }
     }
 
@@ -118,7 +120,21 @@ export default class Skills extends React.Component
           this._releaseNewData()
         }
 
-        _toggleModalDelete = () => {
+        _toggleModalDelete = (item, index) => {
+
+            this.state.index = index 
+            this.setState(function(prevState, props){
+                return { index: prevState.index }
+            })
+    
+            console.log('Selected Index: ', this.state.index)
+    
+            this.state.itemToDelete = item
+            this.setState(function(prevState, props){
+                return { itemToDelete: prevState.itemToDelete }
+            })
+            console.log('Select Item: ', item)
+
             this.state.isModalDeleteVisible = !this.state.isModalDeleteVisible
             this.setState(function(prevState, props){
                 return {isModalDeleteVisible: prevState.isModalDeleteVisible}
@@ -304,39 +320,39 @@ export default class Skills extends React.Component
                 position: 1
         }];
 
-        const swipeSettings = {
-            autoClose: true,
-            onClose: (secId, rowId, direction) => {
-                if(this.state.activeRowKey != null)
-                {
-                    this.state.activeRowKey = null 
-                    this.setState(function(prevState, props){
-                        return {activeRowKey: prevState.activeRowKey}
-                    })
-                }
-            },
-            onOpen: (secId, rowId, direction) => {
-                console.log(this.props.item)
-                this.state.activeRowKey = this.props.item
-                this.setState(function(prevState, props){
-                    return {activeRowKey: prevState.activeRowKey}
-                })
+        // const swipeSettings = {
+        //     autoClose: true,
+        //     onClose: (rowId, direction) => {
+        //         if(this.state.activeRowKey != null)
+        //         {
+        //             this.state.activeRowKey = null 
+        //             this.setState(function(prevState, props){
+        //                 return {activeRowKey: prevState.activeRowKey}
+        //             })
+        //         }
+        //     },
+        //     onOpen: (secId, rowId, direction) => {
+        //         this.state.activeRowKey = this.props.index
+        //         this.setState(function(prevState, props){
+        //             return {activeRowKey: prevState.activeRowKey}
+        //             console.log('Selected Item: ', this.state.activeRowKey)
+        //         })
 
-            },
-            left: [
-                {
-                    onPress: () => {
+        //     },
+        //     left: [
+        //         {
+        //             onPress: () => {
 
-                        this._toggleModalDelete()
+        //                 this._toggleModalDelete(this.props.item, this.props.index)
                         
-                    },
-                    text: 'Delete', type: 'delete'
-                }
-            ],
-            rowId: this.props.index,
-            secId: 1,
+        //             },
+        //             text: 'Delete', type: 'delete'
+        //         }
+        //     ],
+        //     rowId: this.props.index,
+        //     secId: 1
 
-        }
+        // }
         return(
 
             <View style={styles.container}> 
@@ -346,10 +362,16 @@ export default class Skills extends React.Component
                      extraData={this.state}
                      data={this.state.data}
                      renderItem={({ item, index }) => (
-                         <Swipeout {...swipeSettings} item={item} index={index} style={styles.skillContainer}>
+                         <View style={styles.skillContainer}>
+                            <View style={{flex: 5, alignItems: 'flex-start', justifyContent: 'center'}}>
                             <Text style={styles.item}>{item.skill}</Text>
                             {this._renderBrokolis({item})}  
-                          </Swipeout>   
+                            </View>
+                            <TouchableOpacity style={{flex: 1, alignItems: 'flex-end', justifyContent: 'center'}}>
+                                <Image source={require('../../../img/icons/delete.png')}
+                                       style = {{resizeMode: 'center', width: 25, height: 25, tintColor: '#A7333F'}} />
+                            </TouchableOpacity>
+                          </View>   
                     
                      )}
                      keyExtractor={item => item.skill}
@@ -393,6 +415,7 @@ const styles = StyleSheet.create({
     },
     skillContainer:{
         flex: 1,
+        flexDirection: 'row',
             width: width - 20,
             backgroundColor: 'white',
             marginBottom: 5,

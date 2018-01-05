@@ -17,8 +17,9 @@ export default class Project extends React.Component{
 
     static navigationOptions = ({ navigation }) => ({
         title: `${navigation.state.params.selectedItem.project}`,
-        headerStyle: { backgroundColor: 'white', marginTop: 24 },
+        headerStyle: { backgroundColor: 'white', marginTop: 24},
         headerTitleStyle: { color: '#42D260' },
+        
       })
 
       constructor(props){
@@ -68,7 +69,11 @@ export default class Project extends React.Component{
 
       _fetchCorrenspondingProject(){
 
-        //Store the array as the state of projectData define above.
+        /*
+            Store the array as the state of projectData define above.
+            The code will generate the right data in the right position 
+            if you keep the format of key-value pairs the same.
+        */
       }
 
       _toogleBookmark()
