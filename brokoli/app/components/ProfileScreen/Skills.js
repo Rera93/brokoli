@@ -39,10 +39,7 @@ export default class Skills extends React.Component
             newSkill : '',
             newExperience: "1",
             flip: false,
-            activeRowKey : null,
-            deleteRowKey : null,
             index: null,
-            itemToDelete: [],
         }
     }
 
@@ -129,12 +126,6 @@ export default class Skills extends React.Component
             })
     
             console.log('Selected Index: ', this.state.index)
-    
-            this.state.itemToDelete = item
-            this.setState(function(prevState, props){
-                return { itemToDelete: prevState.itemToDelete }
-            })
-            console.log('Select Item: ', item)
 
             this.state.isModalDeleteVisible = true
             this.setState(function(prevState, props){
