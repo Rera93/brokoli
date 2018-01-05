@@ -15,6 +15,7 @@ import { Picker } from 'react-native-picker-dropdown'
 import Swipeout from 'react-native-swipeout'
 
 const width = Dimensions.get('window').width
+const height = Dimensions.get('window').height
 
 var tempArr = []
 
@@ -39,7 +40,9 @@ export default class Skills extends React.Component
             newExperience: "1",
             flip: false,
             activeRowKey : null,
-            deleteRowKey : null
+            deleteRowKey : null,
+            index: null,
+            itemToDelete: [],
         }
     }
 
@@ -118,12 +121,36 @@ export default class Skills extends React.Component
           this._releaseNewData()
         }
 
-        _toggleModalDelete = () => {
-            this.state.isModalDeleteVisible = !this.state.isModalDeleteVisible
+        _toggleModalDelete = ({item, index}) => {
+
+            this.state.index = index 
+            this.setState(function(prevState, props){
+                return { index: prevState.index }
+            })
+    
+            console.log('Selected Index: ', this.state.index)
+    
+            this.state.itemToDelete = item
+            this.setState(function(prevState, props){
+                return { itemToDelete: prevState.itemToDelete }
+            })
+            console.log('Select Item: ', item)
+
+            this.state.isModalDeleteVisible = true
             this.setState(function(prevState, props){
                 return {isModalDeleteVisible: prevState.isModalDeleteVisible}
             })
             console.log('deleteModal: ', this.state.isModalDeleteVisible)
+          }
+
+          _untoggleModalDelete(){
+
+            this.state.isModalDeleteVisible = false
+            this.setState(function(prevState, props){
+                return { isModalDeleteVisible: prevState.isModalDeleteVisible }
+            })
+            console.log('isModalDeleteVisible', this.state.isModalDeleteVisible)
+
           }
 
         _grabNewSkill = (skill) => {
@@ -274,7 +301,7 @@ export default class Skills extends React.Component
                                     </TouchableOpacity>
             
                                     <TouchableOpacity style={[styles.button, {backgroundColor: '#A7333F'}]} 
-                                                    onPress={() => this._toggleModalDelete()}>
+                                                    onPress={() => this._untoggleModalDelete()}>
                                     <Text style={[styles.btnTxt, {color: 'white'}]}>Cancel</Text>
                     
                                     </TouchableOpacity>
@@ -285,11 +312,23 @@ export default class Skills extends React.Component
             
           )
           _deleteItem(){
-            const deletingRow = this.state.activeRowKey            
-            this.state.data.splice(this.props.index, 1)
-            //Refresh FlatList
-            this.refreshFlatList(deletingRow)
-            this._toggleModalDelete()
+           //Use temp array(object) instead to state.someArr to apply javascript functionalities on arrays. 
+            var tempSkillArr = []
+            tempSkillArr = this.state.data
+            console.log('tempArr: ', tempSkillArr)
+
+            //Returns the part of array we want to remove
+            tempSkillArr.splice(this.state.index, 1)
+
+            //Assign the tempArr with the removed element to bookmarkData
+            this.state.data = tempSkillArr
+            this.setState(function(prevState, props){
+                return { bookmarkData : prevState.data }
+            })
+            console.log('Update SkillsData: ', this.state.data)
+            
+            //Close modal
+            this._untoggleModalDelete()
           }
 
 
@@ -303,40 +342,6 @@ export default class Skills extends React.Component
                 name: 'bt_add',
                 position: 1
         }];
-
-        const swipeSettings = {
-            autoClose: true,
-            onClose: (secId, rowId, direction) => {
-                if(this.state.activeRowKey != null)
-                {
-                    this.state.activeRowKey = null 
-                    this.setState(function(prevState, props){
-                        return {activeRowKey: prevState.activeRowKey}
-                    })
-                }
-            },
-            onOpen: (secId, rowId, direction) => {
-                console.log(this.props.item)
-                this.state.activeRowKey = this.props.item
-                this.setState(function(prevState, props){
-                    return {activeRowKey: prevState.activeRowKey}
-                })
-
-            },
-            left: [
-                {
-                    onPress: () => {
-
-                        this._toggleModalDelete()
-                        
-                    },
-                    text: 'Delete', type: 'delete'
-                }
-            ],
-            rowId: this.props.index,
-            secId: 1,
-
-        }
         return(
 
             <View style={styles.container}> 
@@ -346,14 +351,23 @@ export default class Skills extends React.Component
                      extraData={this.state}
                      data={this.state.data}
                      renderItem={({ item, index }) => (
-                         <Swipeout {...swipeSettings} item={item} index={index} style={styles.skillContainer}>
+                         <View style={styles.skillContainer}>
+                            <View style={{flex: 5, alignItems: 'flex-start', justifyContent: 'center'}}>
                             <Text style={styles.item}>{item.skill}</Text>
                             {this._renderBrokolis({item})}  
-                          </Swipeout>   
+                            </View>
+                            <TouchableOpacity style={{flex: 1, alignItems: 'flex-end', justifyContent: 'center'}}
+                                              onPress = {() => this._toggleModalDelete({item, index})}>
+                                <Image source={require('../../../img/icons/delete.png')}
+                                       style = {{resizeMode: 'center', width: 25, height: 25, tintColor: '#A7333F'}} />
+                            </TouchableOpacity>
+                          </View>   
                     
                      )}
                      keyExtractor={item => item.skill}
                      ItemSeparatorComponent={this._renderSeparator}
+                     ListHeaderComponent={() => (!this.state.data.length ? 
+                    <Text style={{marginTop: height / 4, textAlign: 'center', fontSize: 20, fontWeight: '500', color: '#42D260'}}>Out of skills</Text> : null)}
                  />
 
                  <FloatingAction 
@@ -393,6 +407,7 @@ const styles = StyleSheet.create({
     },
     skillContainer:{
         flex: 1,
+        flexDirection: 'row',
             width: width - 20,
             backgroundColor: 'white',
             marginBottom: 5,
