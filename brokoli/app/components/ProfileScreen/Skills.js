@@ -16,7 +16,7 @@ import Swipeout from 'react-native-swipeout'
 
 const width = Dimensions.get('window').width
 
-var tempArr = []
+var tempSkillsArr = []
 
 export default class Skills extends React.Component
 {
@@ -52,7 +52,7 @@ export default class Skills extends React.Component
 
     componentDidMount() {
         //When compoment is first loaded the temp array is used as a placeholder for the skills key value pair array 
-        tempArr = this.state.data
+        tempSkillsArr = this.state.data
     }
 
     _renderBrokolis = ({item}) =>{
@@ -120,7 +120,7 @@ export default class Skills extends React.Component
           this._releaseNewData()
         }
 
-        _toggleModalDelete = (item, index) => {
+        _toggleModalDelete = ({item, index}) => {
 
             this.state.index = index 
             this.setState(function(prevState, props){
@@ -135,11 +135,34 @@ export default class Skills extends React.Component
             })
             console.log('Select Item: ', item)
 
-            this.state.isModalDeleteVisible = !this.state.isModalDeleteVisible
+            this.state.isModalDeleteVisible = true
             this.setState(function(prevState, props){
                 return {isModalDeleteVisible: prevState.isModalDeleteVisible}
             })
             console.log('deleteModal: ', this.state.isModalDeleteVisible)
+          }
+
+          _untoggleModalDelete(){
+
+            this.state.index = null
+            this.setState(function(prevState, props){
+                return { index: prevState.index }
+            })
+    
+            console.log('Index: ', this.state.index)
+
+            this.state.itemToDelete = []
+            this.setState(function(prevState, props){
+                return { itemToDelete: prevState.itemToDelete }
+            })
+            console.log('ItemToDelete: ', this.state.itemToDelete)
+    
+            this.state.isModalDeleteVisible = false
+            this.setState(function(prevState, props){
+                return { isModalDeleteVisible: prevState.isModalDeleteVisible }
+            })
+            console.log('isModalDeleteVisible', this.state.isModalDeleteVisible)
+
           }
 
         _grabNewSkill = (skill) => {
@@ -290,7 +313,7 @@ export default class Skills extends React.Component
                                     </TouchableOpacity>
             
                                     <TouchableOpacity style={[styles.button, {backgroundColor: '#A7333F'}]} 
-                                                    onPress={() => this._toggleModalDelete()}>
+                                                    onPress={() => this._untoggleModalDelete()}>
                                     <Text style={[styles.btnTxt, {color: 'white'}]}>Cancel</Text>
                     
                                     </TouchableOpacity>
@@ -301,11 +324,23 @@ export default class Skills extends React.Component
             
           )
           _deleteItem(){
-            const deletingRow = this.state.activeRowKey            
-            this.state.data.splice(this.props.index, 1)
-            //Refresh FlatList
-            this.refreshFlatList(deletingRow)
-            this._toggleModalDelete()
+           //Use temp array(object) instead to state.someArr to apply javascript functionalities on arrays. 
+            var tempArr = []
+            tempArr = this.state.data
+            console.log('tempArr: ', tempArr)
+
+            //Returns the part of array we want to remove
+            tempArr.splice(this.state.index, 1)
+
+            //Assign the tempArr with the removed element to bookmarkData
+            this.state.data = tempArr
+            this.setState(function(prevState, props){
+                return { bookmarkData : prevState.data }
+            })
+            console.log('Update SkillsData: ', this.state.data)
+            
+            //Close modal
+            this._untoggleModalDelete()
           }
 
 
@@ -319,40 +354,6 @@ export default class Skills extends React.Component
                 name: 'bt_add',
                 position: 1
         }];
-
-        // const swipeSettings = {
-        //     autoClose: true,
-        //     onClose: (rowId, direction) => {
-        //         if(this.state.activeRowKey != null)
-        //         {
-        //             this.state.activeRowKey = null 
-        //             this.setState(function(prevState, props){
-        //                 return {activeRowKey: prevState.activeRowKey}
-        //             })
-        //         }
-        //     },
-        //     onOpen: (secId, rowId, direction) => {
-        //         this.state.activeRowKey = this.props.index
-        //         this.setState(function(prevState, props){
-        //             return {activeRowKey: prevState.activeRowKey}
-        //             console.log('Selected Item: ', this.state.activeRowKey)
-        //         })
-
-        //     },
-        //     left: [
-        //         {
-        //             onPress: () => {
-
-        //                 this._toggleModalDelete(this.props.item, this.props.index)
-                        
-        //             },
-        //             text: 'Delete', type: 'delete'
-        //         }
-        //     ],
-        //     rowId: this.props.index,
-        //     secId: 1
-
-        // }
         return(
 
             <View style={styles.container}> 
@@ -367,7 +368,8 @@ export default class Skills extends React.Component
                             <Text style={styles.item}>{item.skill}</Text>
                             {this._renderBrokolis({item})}  
                             </View>
-                            <TouchableOpacity style={{flex: 1, alignItems: 'flex-end', justifyContent: 'center'}}>
+                            <TouchableOpacity style={{flex: 1, alignItems: 'flex-end', justifyContent: 'center'}}
+                                              onPress = {() => this._toggleModalDelete({item, index})}>
                                 <Image source={require('../../../img/icons/delete.png')}
                                        style = {{resizeMode: 'center', width: 25, height: 25, tintColor: '#A7333F'}} />
                             </TouchableOpacity>
