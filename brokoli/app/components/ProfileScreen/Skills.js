@@ -359,7 +359,7 @@ export default class Skills extends React.Component
                             <TouchableOpacity style={{flex: 1, alignItems: 'flex-end', justifyContent: 'center'}}
                                               onPress = {() => this._toggleModalDelete({item, index})}>
                                 <Image source={require('../../../img/icons/delete.png')}
-                                       style = {{resizeMode: 'center', width: 25, height: 25, tintColor: '#A7333F'}} />
+                                       style = {{resizeMode: 'center', width: 35, height: 35, tintColor: '#A7333F'}} />
                             </TouchableOpacity>
                           </View>   
                     
