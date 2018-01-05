@@ -10,9 +10,10 @@ import { StyleSheet,
 import Modal from 'react-native-modal'
 
 
-var tempArr = []
+var tempBookmarkArr = []
 
 const width = Dimensions.get('window').width
+const height = Dimensions.get('window').height
 
 export default class Bookmarks extends React.Component{
 
@@ -29,13 +30,15 @@ export default class Bookmarks extends React.Component{
         this.state = {
 
             bookmarkData: [
-                {project: 'Brokoli1', applicants: 17, brokolis: 15},
-                {project: 'Brokoli2', applicants: 145, brokolis: 65},
-                {project: 'Brokoli3', applicants: 137, brokolis: 32},
-                {project: 'Brokoli4', applicants: 4, brokolis: 23},
+                {project: 'Brokoli1', applicants: 17, brokolis: 15, id: 100},
+                {project: 'Brokoli2', applicants: 145, brokolis: 65, id: 101},
+                {project: 'Brokoli3', applicants: 137, brokolis: 32, id: 102},
+                {project: 'Brokoli4', applicants: 4, brokolis: 23, id: 103},
         ],
         activeRowKey: null,
-        isModalDeleteVisible: false
+        isModalDeleteVisible: false,
+        index: 0,
+        itemToDelete: []
         }
     }
 
@@ -50,11 +53,11 @@ export default class Bookmarks extends React.Component{
             DB request happens here. 
             Need to be called everytime a bookmark is set on the brokoli tab,  
 
-            tempArr = dataFetchedFromDb
+            tempBookmarkArr = dataFetchedFromDb
 
             Update state of bookmarkData like the following
 
-            this.state.bookmarkData = tempArr
+            this.state.bookmarkData = tempBookmarkArr
             this.setState(function(prevState, props){
                 return { boormarkData: prevState.bookmarkData}
             })
@@ -64,13 +67,43 @@ export default class Bookmarks extends React.Component{
        
     }
 
-    _toggleDeleteModal(){
+    _toggleDeleteModal({item, index}){
 
-        this.state.isModalDeleteVisible = !this.state.isModalDeleteVisible
+        this.state.index = index 
+        this.setState(function(prevState, props){
+            return { index: prevState.index }
+        })
+
+        console.log('Selected Index: ', this.state.index)
+
+        this.state.itemToDelete = item
+        this.setState(function(prevState, props){
+            return { itemToDelete: prevState.itemToDelete }
+        })
+        console.log('Select Item: ', item)
+
+        this.state.isModalDeleteVisible = true
         this.setState(function(prevState, props){
             return { isModalDeleteVisible: prevState.isModalDeleteVisible }
         })
         console.log('isModalDeleteVisible', this.state.isModalDeleteVisible)
+    }
+
+    _untoggleDeleteModal(){
+
+        this.state.index = null
+        this.setState(function(prevState, props){
+            return { index: prevState.index }
+        })
+
+        console.log('Selected Index: ', this.state.index)
+
+        this.state.isModalDeleteVisible = false
+        this.setState(function(prevState, props){
+            return { isModalDeleteVisible: prevState.isModalDeleteVisible }
+        })
+        console.log('isModalDeleteVisible', this.state.isModalDeleteVisible)
+
     }
 
     _renderDeleteModalContent = () => (
@@ -89,7 +122,7 @@ export default class Bookmarks extends React.Component{
                                 </TouchableOpacity>
         
                                 <TouchableOpacity style={[styles.button, {backgroundColor: '#A7333F'}]} 
-                                                onPress={() => this._toggleDeleteModal()}>
+                                                onPress={() => this._untoggleDeleteModal()}>
                                 <Text style={[styles.btnTxt, {color: 'white'}]}>Cancel</Text>
                 
                                 </TouchableOpacity>
@@ -101,17 +134,23 @@ export default class Bookmarks extends React.Component{
 
     _unBookmark() {
 
-        this.state.activeRowKey = this.props.item
-        this.setState(function(prevState, props){
-            return {activeRowKey: prevState.activeRowKey}
-        })
-        console.log('ActiveRowKey', this.state.activeRowKey)
+        //Use temp array(object) instead to state.someArr to apply javascript functionalities on arrays. 
+        var tempArr = []
+        tempArr = this.state.bookmarkData
+        console.log('tempArr: ', tempArr)
 
-        const deletingRow = this.state.activeRowKey            
-        this.state.bookmarkData.splice(this.props.index, 1)
-        //Refresh FlatList
-        this.refreshFlatList(deletingRow)
-        this._toggleDeleteModal()
+        //Returns the part of array we want to remove
+        tempArr.splice(this.state.index, 1)
+
+        //Assign the tempArr with the removed element to bookmarkData
+        this.state.bookmarkData = tempArr
+        this.setState(function(prevState, props){
+            return { bookmarkData : prevState.bookmarkData }
+        })
+        console.log('Update BookmarkData: ', this.state.bookmarkData)
+        
+        //Close modal
+        this._untoggleDeleteModal()
     }
 
     refreshFlatList = (deletedKey) => {
@@ -121,6 +160,12 @@ export default class Bookmarks extends React.Component{
                 deleteRowKey: prevState.deleteRowKey
             }
     })
+  }
+
+  _openBookmark({item, index})
+  {
+    const {navigate} = this.props.navigation
+    navigate('Project', {selectedItem: item })
   }
 
     render(){
@@ -133,7 +178,8 @@ export default class Bookmarks extends React.Component{
             data={this.state.bookmarkData}
             renderItem={({ item, index }) => (
               <TouchableOpacity style={styles.item} item={item} index={index}
-                                onLongPress = {() => this._toggleDeleteModal()}>
+                                onPress = {() => this._openBookmark({item, index}) }
+                                onLongPress = {() => this._toggleDeleteModal({item, index})}>
                 <View style={{flex: 5, alignItems: 'flex-start', justifyContent: 'center'}}>
                 <View style={styles.nameCont}>
                 {/*Name of project*/}
@@ -159,6 +205,8 @@ export default class Bookmarks extends React.Component{
               </TouchableOpacity>
             )}
             keyExtractor={item => item.project}
+            ListHeaderComponent={() => (!this.state.bookmarkData.length ? 
+            <Text style={{marginTop: height / 3, textAlign: 'center', fontSize: 20, fontWeight: '500', color: '#42D260'}}>Out of bookmarks</Text> : null)}
           />
 
           <Modal isVisible = {this.state.isModalDeleteVisible}
