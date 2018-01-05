@@ -34,17 +34,19 @@ export default class BirthDate extends React.Component {
 
         return(
 
-            <ViewContainer style={styles.container}>
+            <View style={styles.container}>
 
-                <View style={[styles.condCont, {backgroundColor: '#BE2625'}]}> 
+               
+              <TouchableOpacity style={styles.dateBirthCont} onPress={this._showDatePicker}>
+              <Text style={styles.dateBirth}> {this.state.text} </Text>
+              </TouchableOpacity> 
+
+              <View style={styles.condCont}> 
 
                 <Text style={styles.cond}> R </Text>
 
                 </View>
                 
-              <TouchableOpacity style={styles.dateBirthCont} onPress={this._showDatePicker}>
-              <Text style={styles.dateBirth}> {this.state.text} </Text>
-              </TouchableOpacity> 
 
               <DatePicker 
                 isVisible = {this.state.isDateTimePickerVisible}
@@ -52,7 +54,7 @@ export default class BirthDate extends React.Component {
                 onCancel = {this._hideDatePicker}
                 maximumDate = {today}/>
         
-                </ViewContainer>
+                </View>
 
         )
     }
@@ -60,34 +62,39 @@ export default class BirthDate extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'row',
+        marginLeft: 20,
+        padding: 10,
+        borderRadius: 5,
         marginTop: 15,
         marginBottom: 15,
-        flexDirection: 'row'
+        marginRight: 20,
+        borderWidth: 3,
+        borderColor: 'white'
     },
     dateBirthCont: {
-        alignItems: 'center',
-        borderWidth: 1,
-        padding: 10,
-        width: width - 60,
-        marginRight: 15,
-        borderRadius: 5,
-        borderColor: 'grey'
+        flex: 1,
     },
     dateBirth:{
-        color: '#42D260'
+        color: 'white',
+        fontSize: 17
     },
     cond: {
         fontSize: 17,
         textAlign: 'center',
         fontWeight: '600',
-        color: 'white'
+        color: '#42D260'
     },
     condCont: {
+        backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center',
-        width: 25,
-        height: 25,
-        borderRadius: 25/2,
+        width: 22,
+        height: 22,
+        borderRadius: 11,
         marginRight: 5,
     },
     });

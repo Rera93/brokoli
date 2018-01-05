@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, Dimensions } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, Dimensions, View } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 import Categories from './Categories'
@@ -7,6 +7,8 @@ import ViewContainer from '../../ViewContainer'
 import categories from '../categories.js'
 
 const width = Dimensions.get('window').width
+
+var tempCatArr = []
 
 export default class Professional extends React.Component {
 
@@ -61,10 +63,14 @@ export default class Professional extends React.Component {
             if(this.state.isSelectedFromCategories[i] == true)
             {
         
-                this.setState({passToDb: this.state.passToDb.push(categories[i].name)})   
-                //TODO: Fix bug when user goes back to category screen. 
+                tempCatArr.push(categories[i].name)    
             }
          }
+
+         this.state.passToDb = tempCatArr
+         this.setState(function(prevState,props){
+             return {passToDb: prevState.passToDb}
+         })
          console.log("passToBd: ", this.state.passToDb) 
          this.props.navigation.navigate('Career',{firstName: this.state.firstName, lastName: this.state.lastName, dateOfBirth: this.state.dateOfBirth, gender: this.state.gender, city: this.state.city,  country: this.state.country, username: this.state.username, email: this.state.email, password: this.state.password, categories: this.state.passToDb})
 
@@ -73,8 +79,8 @@ export default class Professional extends React.Component {
 
     static navigationOptions = {
         title: 'Categories',
-        headerStyle: { backgroundColor: '#42D260', marginTop: 24 },
-        headerTitleStyle: { color: 'white' },
+        headerStyle: { backgroundColor: 'white', marginTop: 24 },
+        headerTitleStyle: { color: '#42D260' },
       };
 
       componentDidMount() {
@@ -97,13 +103,19 @@ export default class Professional extends React.Component {
 
             <ViewContainer style={styles.professional}>
 
+            <View style={styles.headerCont} > 
+
+            <Text style={styles.header}>What categories are of interest to you? Pick at least two.</Text>
+
+                </View>
+
              <Categories callbackFromParent = {this.myCallback} />
 
              <TouchableOpacity disabled={this.state.flip ? false : true} 
-                               style={[styles.button, {backgroundColor: this.state.flip ? '#42D260' : 'white'}]} 
+                               style={[styles.button, {backgroundColor: this.state.flip ? 'white' : '#42D260'}]} 
                                onPress={this._onSubmit.bind(this)}>
 
-                <Text style={[styles.btnText, {color: this.state.flip ? 'white' : '#42D260'}]}> NEXT </Text>
+                <Text style={[styles.btnText, {color: this.state.flip ? '#42D260' : 'white'}]}> NEXT </Text>
 
                 </TouchableOpacity>
 
@@ -115,7 +127,7 @@ export default class Professional extends React.Component {
 
 const styles = StyleSheet.create({
     professional: {
-        backgroundColor: 'white'
+        backgroundColor: '#42D260'
     },
     button: {
     marginBottom: 20,
@@ -123,11 +135,25 @@ const styles = StyleSheet.create({
     width: width -300,
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: '#42D260'
+    borderColor: 'white'
     },
     btnText: {
     padding: 10,
     fontWeight: 'bold'
-}
+},
+headerCont: {
+    marginTop: 20,
+    marginBottom: 20,
+    marginLeft: 15, 
+    marginRight: 15,
+    borderColor: 'white',
+    alignItems: 'center'
+},
+header:{
+    fontWeight: '500',
+    color: 'white',
+    fontSize: 17,
+},
+
 })
 
