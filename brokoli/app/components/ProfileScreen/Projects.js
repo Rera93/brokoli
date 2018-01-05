@@ -274,6 +274,7 @@ export default class Projects extends React.Component
           );
 
           _addProject(){
+            var projects = {}
             tempArr.unshift({project: this.state.newProject, 
                              position: this.state.newPosition,
                              course: this.state.newCourse})
@@ -283,8 +284,10 @@ export default class Projects extends React.Component
                 return {data: prevState.data}
             })
             console.log('updatedDataArr: ', this.state.data)
+            projects.id = this.props.id,
+            projects.projectArrObj= this.state.data,
             this._toggleModalAdd()
-            this._updateDB();
+            this.props.callbackUpdateDB(projects, 'update');
 
           }
 
@@ -332,6 +335,7 @@ export default class Projects extends React.Component
             
           )
           _deleteItem(){
+              var projects = {}
              //Use temp array(object) instead to state.someArr to apply javascript functionalities on arrays. 
              var tempProjectArr = []
              tempProjectArr = this.state.data
@@ -345,8 +349,10 @@ export default class Projects extends React.Component
              this.setState(function(prevState, props){
                  return { bookmarkData : prevState.data }
              })
-             console.log('Update SkillsData: ', this.state.data)
-             
+             console.log('Update ProjectsData: ', this.state.data)
+             projects.id = this.props.id,
+              projects.projectArrObj = this.state.data,
+              this.props.callbackUpdateDB(projects, 'update');
              //Close modal
              this._untoggleModalDelete()
           }

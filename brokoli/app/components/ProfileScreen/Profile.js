@@ -334,6 +334,9 @@ export default class Profile extends React.Component {
             this._flipAccount()
           }
         
+        callbackUpdateDB = (body, urlParam) => {
+            this._updateDB(body, urlParam);
+        }
            _updateDB(body, urlParam){
             return fetch('https://brokoli.eu-gb.mybluemix.net/api/'+urlParam, {  
                  method: 'POST',
@@ -693,7 +696,7 @@ export default class Profile extends React.Component {
 
                     var str = JSON.stringify(obj, null, 4);
                     console.log('Object to be updated: '+ str);
-                    this._updateDB(obj);
+                    this._updateDB(obj, 'update');
                 }
 
                 _autoExpand = (event) => {
@@ -775,8 +778,8 @@ export default class Profile extends React.Component {
 
                     <Overview title='OVERVIEW'/>
                     <Skills title='SKILLS' />
-                    <Jobs title='JOBS' jobs={this.state.userData.jobsObj} id={this.props.screenProps} />
-                    <Projects title='PROJECTS' projects={this.state.userData.projectArrObj} id={this.props.screenProps}/>
+                    <Jobs title='JOBS' jobs={this.state.userData.jobsObj} id={this.props.screenProps} callbackUpdateDB={this.callbackUpdateDB}/>
+                    <Projects title='PROJECTS' projects={this.state.userData.projectArrObj} id={this.props.screenProps} callbackUpdateDB={this.callbackUpdateDB}/>
 
                 </Tabs>
 

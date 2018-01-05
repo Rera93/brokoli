@@ -84,38 +84,7 @@ export default class Jobs extends React.Component
         tempArr = this.state.data
     }
 
-    _updateDB(){
-        fetch('https://brokoli.eu-gb.mybluemix.net/api/update', {  
-             method: 'POST',
-             headers: {
-               'Accept': 'application/json',
-               'Content-Type': 'application/json',
-             }
-           ,
-              body: JSON.stringify({
-              id: this.props.id,
-              jobsObj: this.state.data,
-
-            })
-            })
-             // .then(function(response) { return response.json(); })
-             // .then(function(responseData) {
-             //   this.setState({ data : responseData})});
-     
-             .then((response) => response.json())
-             .then((responseData) => {
-                var str = JSON.stringify(responseData.old_doc, null, 4);
-                var str1 = JSON.stringify(responseData.doc, null, 4);
-                var str2 = JSON.stringify(responseData.data, null, 4);
-                console.log(str);
-                console.log(str1);
-                console.log(str2);
-               
-             });
-
-    }
-
-      _renderSeparator = () => {
+          _renderSeparator = () => {
         return (
           <View
             style={{
@@ -538,6 +507,7 @@ export default class Jobs extends React.Component
         }
 
           _addJob(){
+            var jobs = {}
             tempArr.unshift({startMonth: this.state.newStartMonth, 
                              startYear: this.state.newStartYear,
                              endMonth: this.state.newEndMonth, 
@@ -552,7 +522,9 @@ export default class Jobs extends React.Component
                 return {data: prevState.data}
             })
             console.log('updatedDataArr: ', this.state.data)
-            this._updateDB();
+            jobs.id = this.props.id;
+            jobs.jobsObj = this.state.data;
+            this.props.callbackUpdateDB(jobs, 'update');
             this._toggleModalAdd()
           }
 
@@ -621,6 +593,7 @@ export default class Jobs extends React.Component
             
           )
           _deleteItem(){
+            var jobs = {}
             //Use temp array(object) instead to state.someArr to apply javascript functionalities on arrays. 
             var tempJobArr = []
             tempJobArr = this.state.data
@@ -635,7 +608,9 @@ export default class Jobs extends React.Component
                 return { bookmarkData : prevState.data }
             })
             console.log('Update SkillsData: ', this.state.data)
-            
+            jobs.id = this.props.id;
+            jobs.jobsObj = this.state.data;
+            this.props.callbackUpdateDB(jobs, 'update');
             //Close modal
             this._untoggleModalDelete()
           }
