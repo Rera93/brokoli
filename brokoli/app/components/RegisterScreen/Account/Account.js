@@ -213,7 +213,7 @@ export default class Account extends React.Component {
 }
 
 const styles = StyleSheet.create({
-	account: { borderWidth: 1,
+	account: {
             alignItems: 'center',
             justifyContent: 'center',
             backgroundColor: '#42D260',
@@ -225,13 +225,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginBottom: 15,
         marginTop: 15,
+        marginLeft: 20,
+        marginRight: 20
     },
     title: {
       color: 'white',
       fontWeight: '900',
-      padding: 10,
-      width: width - 100,
-      fontSize: 20,
+      fontSize: 18,
     },
     inputContainer: {
         flex: 1,
@@ -252,7 +252,7 @@ const styles = StyleSheet.create({
       fontSize: 17,
     },
     cond: {
-        fontSize: 18.5,
+        fontSize: 17,
         textAlign: 'center',
         fontWeight: '600',
         color: '#42D260'

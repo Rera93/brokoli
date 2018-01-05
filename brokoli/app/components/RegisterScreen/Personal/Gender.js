@@ -2,10 +2,6 @@ import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 
-import ViewContainer from '../../ViewContainer'
-
-    
-
 export default class Gender extends React.Component {
 
     constructor(props){
@@ -25,11 +21,11 @@ export default class Gender extends React.Component {
 
         
                 return(
-                    <ViewContainer style={styles.container}>
-                     <View style={[styles.condCont, {backgroundColor: '#BE2625'}]}> 
-                    <Text style={styles.cond}> R </Text>
-                    </View>
-                    <RadioForm formHorizontal={true} animation={true}>
+                    <View style={styles.container}>
+
+                    <View style={{flex: 1, alignItems: 'flex-start', justifyContent: 'center'}}>
+                    
+                    <RadioForm formHorizontal={true} animation={true} style={{alignItems: 'center',justifyContent: 'center'}}>
                     {/* To create radio buttons, loop through your array of options */}
                     {this.state.radio_props.map((obj, i) => {
                          var onPress = (value, index) => {
@@ -46,38 +42,41 @@ export default class Gender extends React.Component {
 
                           }
                           return (
-                      <RadioButton labelHorizontal={true} key={i} >
+                      <RadioButton labelHorizontal={true} key={i} style = {{justifyContent:'center', alignItems:'center'}} >
                         {/*  You can set RadioButtonLabel before RadioButtonInput */}
                         <RadioButtonInput
                           obj={obj}
                           index={i}
                           isSelected={this.state.selectedValueIndex === i}
                           onPress={onPress}
-                          borderWidth={1}
-                          buttonInnerColor={'#1ED760'}grey
-                          buttonOuterColor={this.state.selectedValueIndex === i ? '#1ED760' : '#1ED760'}
+                          borderWidth={3}
+                          buttonInnerColor={'white'}
+                          buttonOuterColor={this.state.selectedValueIndex === i ? 'white' : 'white'}
                           buttonSize={10}
-                          buttonOuterSize={20}
+                          buttonOuterSize={22}
                           buttonStyle={{}}
-                          buttonWrapStyle={{marginLeft: 10}}
+                          buttonWrapStyle={{marginLeft: 10, marginTop: 5}}
                         />
                         <RadioButtonLabel
                           obj={obj}
                           index={i}
                           labelHorizontal={true}
                           onPress={onPress}
-                          labelStyle={{fontSize: 15, color: 'grey'}}
-                          labelWrapStyle={{}}
+                          labelStyle={{fontSize: 17, color: 'white'}}
+                          labelWrapStyle={{marginTop: 5}}
                         />
                         </RadioButton>
                         )
                     })}
                     
                 </RadioForm>
-               { /* TODO: Pass to database.
-                    <Text>selected: {this.state.radio_props[this.state.selectedValueIndex].label}</Text> 
-               */} 
-                </ViewContainer>
+
+                </View>
+                
+                <View style={styles.condCont}> 
+                    <Text style={styles.cond}> R </Text>
+                    </View>
+                </View>
 
                 )
     }
@@ -85,25 +84,30 @@ export default class Gender extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    justifyContent: 'center',
     marginTop: 15,
     marginBottom: 15,
-    paddingRight: 70,
     flexDirection: 'row',
-    alignItems: 'flex-start'
+    alignItems: 'center',
+    marginRight: 20,
+    marginLeft: 20,
+    padding: 10,
   },
   cond: {
     fontSize: 17,
     textAlign: 'center',
     fontWeight: '600',
-    color: 'white'
+    color: '#42D260'
 },
 condCont: {
+    backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
-    width: 25,
-    height: 25,
-    borderRadius: 25/2,
-    marginRight: 60,
+    width: 22,
+    height: 22,
+    borderRadius: 11,
+    marginRight: 7.5,
 },
 })
 
