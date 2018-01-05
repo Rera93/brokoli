@@ -107,6 +107,7 @@ export default class Projects extends React.Component {
             data={this.state.data}
             renderItem={({ item }) => (
               <TouchableOpacity style={styles.item}>
+               <View style={{flex: 5, alignItems: 'flex-start', justifyContent: 'center'}}>
                 <View style={styles.nameCont}>
                 {/*Name of project*/}
                 <Text style={styles.name}> {item.email} </Text>
@@ -115,14 +116,20 @@ export default class Projects extends React.Component {
                 <View style={styles.reactions}>
                 {/*Number of applicants until now*/}
                 <Image style={styles.icon} source={require('../../../img/icons/applicants.png')} />
-                <Text> {item.name.first}  </Text>
+                <Text style={{fontSize: 17, fontWeight: '400', color: '#C7C7CD'}}> {item.name.first}  </Text>
                 </View>
                 <View  style={styles.reactions}>
                  {/*Number of brokoli's until now*/}
                  <Image style={styles.icon} source={require('../../../img/icons/brokolis.png')} />
-                 <Text> {item.name.last}  </Text>
+                 <Text style={{fontSize: 17, fontWeight: '400', color: '#C7C7CD'}}> {item.name.last}  </Text>
                  </View>
                 </View>
+                </View>
+                <View style={{flex: 1, alignItems: 'flex-end', justifyContent: 'center'}}>
+                    <Image source={require('../../../img/icons/right-arrow.png')}
+                           style={{width: 25, height: 25, resizeMode: 'center', tintColor: '#42D260'}} />
+                    </View>
+
               </TouchableOpacity>
             )}
             keyExtractor={item => item.email}
@@ -143,6 +150,7 @@ export default class Projects extends React.Component {
 const styles = StyleSheet.create({
   item:{
     backgroundColor: 'white',
+    flexDirection: 'row',
     marginBottom: 5,
     marginLeft: 5,
     marginRight: 5,
@@ -152,10 +160,12 @@ const styles = StyleSheet.create({
     paddingTop: 20
   },
   reactionsCont: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    paddingTop: 5,
   },
   reactions: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+   
   },
   icon: {
     resizeMode: 'contain',
@@ -170,7 +180,12 @@ const styles = StyleSheet.create({
   },
   createBtn: {
     fontSize: 25
-  }
+  },
+  name: {
+    fontSize: 20,
+    fontWeight: '400',
+    color: '#C7C7CD'
+},
 
 });
               
