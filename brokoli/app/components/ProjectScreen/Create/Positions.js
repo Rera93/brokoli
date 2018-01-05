@@ -17,7 +17,7 @@ const height = Dimensions.get('window').height
 
 import FloatingAction from '../../FloatingComponents/FloatingAction';
 import { Picker } from 'react-native-picker-dropdown'
-import Swipeout from 'react-native-swipeout'
+import Modal from 'react-native-modal'
 
 var tempArr = []
 var valueToPush = new Array ()
@@ -43,11 +43,67 @@ export default class Positions extends React.Component {
             brokolis: [true,false,false,false,false],
             tempExp: "1",
             nrOfPos: '1',
-            activeRowKey : null,
-            deleteRowKey : null
+            index: null,
+            isModalDeleteVisible: false
         }
 
     }
+
+
+    _renderDeleteModalContent = () => (
+        
+                    <View style={[styles.modalContent, {backgroundColor: '#254D32'}]}>
+                    
+                        <Text style={[styles.title, {color: 'white'}]}>Are you sure you want to delete the selected position from your project requirements?</Text>
+                    
+                        <View style={{flexDirection: 'row'}}>
+                    
+                                            <TouchableOpacity 
+                                                            style={[styles.button,{backgroundColor: 'white'}]} 
+                                                            onPress={() => this._deleteItem() }>
+                                            <Text style={[styles.btnTxt, {color: '#254D32'}]}>Ok</Text>
+                            
+                                            </TouchableOpacity>
+                    
+                                            <TouchableOpacity style={[styles.button, {backgroundColor: '#A7333F'}]} 
+                                                            onPress={() => this._untoggleModalDelete()}>
+                                            <Text style={[styles.btnTxt, {color: 'white'}]}>Cancel</Text>
+                            
+                                            </TouchableOpacity>
+                    
+                                        </View>
+                    
+                                    </View>
+                    
+                  )
+
+    _toggleModalDelete = ({item, index}) => {
+        
+                    this.state.index = index 
+                    this.setState(function(prevState, props){
+                        return { index: prevState.index }
+                    })
+            
+                    console.log('Selected Index: ', this.state.index)
+            
+                    this.state.isModalDeleteVisible = true
+                    this.setState(function(prevState, props){
+                        return {isModalDeleteVisible: prevState.isModalDeleteVisible}
+                    })
+                    console.log('deleteModal: ', this.state.isModalDeleteVisible)
+                  }
+        
+                  _untoggleModalDelete(){
+        
+                    this.state.isModalDeleteVisible = false
+                    this.setState(function(prevState, props){
+                        return { isModalDeleteVisible: prevState.isModalDeleteVisible }
+                    })
+                    console.log('isModalDeleteVisible', this.state.isModalDeleteVisible)
+        
+                  }
+
+                  
 
 
     
@@ -177,14 +233,26 @@ export default class Positions extends React.Component {
         console.log("Positions Number: ", this.state.nrOfPos)
       }
 
-      refreshFlatList = (deletedKey) => {
-            this.state.deleteRowKey = deletedKey
-            this.setState(function(prevState, props){
-                return {
-                    deleteRowKey: prevState.deleteRowKey
-                }
-        })
-      }
+      _deleteItem(){
+        //Use temp array(object) instead to state.someArr to apply javascript functionalities on arrays. 
+         var tempPosArr = []
+         tempPosArr = this.state.positions
+         console.log('tempArr: ', tempPosArr)
+
+         //Returns the part of array we want to remove
+         tempPosArr.splice(this.state.index, 1)
+
+         //Assign the tempArr with the removed element to bookmarkData
+         this.state.positions = tempPosArr
+         this.setState(function(prevState, props){
+             return { bookmarkData : prevState.positions }
+         })
+         console.log('Update PosData: ', this.state.positions)
+         
+         //Close modal
+         this._untoggleModalDelete()
+       }
+
       
 
     render(){
@@ -199,56 +267,7 @@ export default class Positions extends React.Component {
             position: 1
           }];
 
-        const swipeSettings = {
-            autoClose: true,
-            onClose: (secId, rowId, direction) => {
-                if(this.state.activeRowKey != null)
-                {
-                    this.state.activeRowKey = null 
-                    this.setState(function(prevState, props){
-                        return {activeRowKey: prevState.activeRowKey}
-                    })
-                }
-            },
-            onOpen: (secId, rowId, direction) => {
-                console.log(this.props.item)
-                this.state.activeRowKey = this.props.item
-                this.setState(function(prevState, props){
-                    return {activeRowKey: prevState.activeRowKey}
-                })
-
-            },
-            right: [
-                {
-                    onPress: () => {
-
-                        const deletingRow = this.state.activeRowKey
-
-                        Alert.alert(
-                            'Alert',
-                            'Are you sure you want to delete?',
-                            [
-                                {text: 'No', onPress: () => console.log('Cancel Pressed'), style:'cancel'},
-                                {text: 'Yes', onPress: () => {
-
-                                    this.state.positions.splice(this.props.index, 1);
-                                    //Refresh FlatList
-                                    this.refreshFlatList(deletingRow)
-
-                                }},
-                            ],
-                            {cancelable: true}
-                        );
-
-                    },
-                    text: 'Delete', type: 'delete'
-                }
-            ],
-            rowId: this.props.index,
-            secId: 1,
-
-        }
-
+        
         return(
             <View style={styles.container}>
 
@@ -326,17 +345,32 @@ export default class Positions extends React.Component {
             extraData={this.state}
             data={this.state.positions}
             renderItem={({ item, index }) => (
-                <Swipeout {...swipeSettings} item={item} index={index}>
+                <View style={styles.skillContainer}>
+                 <View style={{flex: 5, alignItems: 'flex-start', justifyContent: 'center'}}>
                 <View style={styles.posContainer}>
                 <Text style={styles.pos}>Position: {item.pos} </Text>
                 {this._renderBrokolis({item})} 
                 <Text style={styles.pos}>Number of Positions: {item.posNr} </Text>    
                 </View>
-                </Swipeout>
+                </View>
+                <TouchableOpacity style={{flex: 1, alignItems: 'flex-end', justifyContent: 'center'}}
+                                              onPress = {() => this._toggleModalDelete({item, index})}>
+                                <Image source={require('../../../../img/icons/delete.png')}
+                                       style = {{resizeMode: 'center', width: 35, height: 35, tintColor: '#A7333F'}} />
+                            </TouchableOpacity>
+                </View>
             )}
             keyExtractor={item => item.pos}
             style={styles.posList}
           />
+
+          <Modal isVisible = {this.state.isModalDeleteVisible}
+                          animationIn={'slideInLeft'}
+                          animationOut={'slideOutRight'}>
+
+                         {this._renderDeleteModalContent()}
+
+                    </Modal> 
                
 
                 <FloatingAction  actions={actions}
@@ -444,7 +478,43 @@ const styles = StyleSheet.create({
         fontSize: 17,
         color: 'grey',
         fontWeight: '400'
-    }
+    },
+    button: {
+        padding: 12,
+        margin: 16,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 4,
+        borderColor: 'rgba(0, 0, 0, 0.1)',
+      },
+      modalContent: {
+        backgroundColor: 'white',
+        padding: 22,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 4,
+        borderColor: 'rgba(0, 0, 0, 0.1)',
+      },
+      btnTxt: {
+        fontSize: 16,
+        fontWeight: '400'
+    },
+    skillContainer:{
+        flex: 1,
+        flexDirection: 'row',
+            width: width - 20,
+            backgroundColor: 'white',
+            marginBottom: 5,
+            marginLeft: 5,
+            marginRight: 5,
+            paddingLeft: 10,
+            paddingRight: 10,
+    },
+    title: {
+        color: '#254D32',
+        fontSize: 20,
+        fontWeight: '400'
+    },
 
 
 
