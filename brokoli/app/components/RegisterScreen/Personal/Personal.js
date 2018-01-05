@@ -8,6 +8,7 @@ import { StyleSheet,
          ScrollView,
          TextInput } from 'react-native';
 import { StackNavigator } from 'react-navigation';
+import SimpleStepper from 'react-native-simple-stepper'
 
 import ProfilePic from './ProfilePic'
 import BirthDate from './BirthDate'
@@ -37,7 +38,8 @@ export default class Personal extends React.Component {
               gender: 'Male',
               city: '',
               country: '',
-              flip: false
+              flip: false,
+              day: 0
           }
       }
 
@@ -185,6 +187,7 @@ export default class Personal extends React.Component {
                     </View>
                 </View>
                 <ProfilePic />
+
                 <BirthDate callbackFromParent = {this.callbackBirthDate}/>
                 <Gender callbackFromParent = {this.callbackGender}/>
 
