@@ -429,7 +429,7 @@ export default class Projects extends React.Component
                             <TouchableOpacity style={{flex: 1, alignItems: 'flex-end', justifyContent: 'center'}}
                                               onPress = {() => this._toggleModalDelete({item, index})}>
                                 <Image source={require('../../../img/icons/delete.png')}
-                                       style = {{resizeMode: 'center', width: 25, height: 25, tintColor: '#A7333F'}} />
+                                       style = {{resizeMode: 'center', width: 35, height: 35, tintColor: '#A7333F'}} />
                             </TouchableOpacity>
 
                           </View>   
@@ -438,7 +438,7 @@ export default class Projects extends React.Component
                      keyExtractor={item => item.position}
                      ItemSeparatorComponent={this._renderSeparator}
                      ListHeaderComponent={() => (!this.state.data.length ? 
-                    <Text style={{marginTop: height / 4, textAlign: 'center', fontSize: 20, fontWeight: '500', color: '#42D260'}}>Out of projects</Text> : null)}
+                    <Text style={{marginTop: height / 4, textAlign: 'center', fontSize: 20, fontWeight: '400', color: '#42D260'}}>Add Project</Text> : null)}
                  />
 
                  <FloatingAction 
