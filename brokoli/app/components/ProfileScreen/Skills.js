@@ -16,7 +16,7 @@ import Swipeout from 'react-native-swipeout'
 
 const width = Dimensions.get('window').width
 
-var tempSkillsArr = []
+var tempArr = []
 
 export default class Skills extends React.Component
 {
@@ -52,7 +52,7 @@ export default class Skills extends React.Component
 
     componentDidMount() {
         //When compoment is first loaded the temp array is used as a placeholder for the skills key value pair array 
-        tempSkillsArr = this.state.data
+        tempArr = this.state.data
     }
 
     _renderBrokolis = ({item}) =>{
@@ -144,19 +144,6 @@ export default class Skills extends React.Component
 
           _untoggleModalDelete(){
 
-            this.state.index = null
-            this.setState(function(prevState, props){
-                return { index: prevState.index }
-            })
-    
-            console.log('Index: ', this.state.index)
-
-            this.state.itemToDelete = []
-            this.setState(function(prevState, props){
-                return { itemToDelete: prevState.itemToDelete }
-            })
-            console.log('ItemToDelete: ', this.state.itemToDelete)
-    
             this.state.isModalDeleteVisible = false
             this.setState(function(prevState, props){
                 return { isModalDeleteVisible: prevState.isModalDeleteVisible }
@@ -325,15 +312,15 @@ export default class Skills extends React.Component
           )
           _deleteItem(){
            //Use temp array(object) instead to state.someArr to apply javascript functionalities on arrays. 
-            var tempArr = []
-            tempArr = this.state.data
-            console.log('tempArr: ', tempArr)
+            var tempSkillArr = []
+            tempSkillArr = this.state.data
+            console.log('tempArr: ', tempSkillArr)
 
             //Returns the part of array we want to remove
-            tempArr.splice(this.state.index, 1)
+            tempSkillArr.splice(this.state.index, 1)
 
             //Assign the tempArr with the removed element to bookmarkData
-            this.state.data = tempArr
+            this.state.data = tempSkillArr
             this.setState(function(prevState, props){
                 return { bookmarkData : prevState.data }
             })
