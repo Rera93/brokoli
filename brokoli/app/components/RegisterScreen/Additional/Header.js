@@ -12,7 +12,7 @@ export default class Header extends React.Component {
         super(props)
 
         this.state = {
-            headerContent : ' ',
+            headerContent : '',
         }
     }
     _grabHeader = (text) => {
@@ -32,7 +32,7 @@ export default class Header extends React.Component {
     render(){
         return(
 
-            <ViewContainer style={{marginTop: 10, marginBottom: 10}}>
+            <View style={{flex: 1, width: width}}>
 
               <View style={styles.titleCont}>
 
@@ -44,16 +44,17 @@ export default class Header extends React.Component {
 
               <TextInput style={styles.input} 
                          placeholderTextColor='grey'
-                         placeholder='header'
+                         placeholder='Header'
+                         underlineColorAndroid = 'transparent'
                          multiline = {true}
-                         numberOfLines = {3} 
+                         numberOfLines = {1} 
                          maxLength={120}
                          onChangeText={(text) => this._grabHeader(text)}
                          value={this.state.headerContent}/>
 
               </View>
 
-            </ViewContainer>
+            </View>
 
         )
     }
@@ -65,8 +66,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems:'center',
         justifyContent: 'center',
-        marginBottom: 10,
-        marginTop: 10,
+        marginTop: 5,
     },
     title: {
         color: 'grey',
@@ -79,18 +79,19 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems:'center',
         justifyContent: 'center',
-        width: width - 60,
         borderWidth: 1,
         borderColor: 'grey',
         borderRadius: 5,
-        marginTop: 10,
-        marginBottom: 10,
+        marginTop: 5,
+        marginBottom: 5,
+        marginLeft: 10,
+        marginRight: 10,
         
 
     },
     input:{
-        padding: 10,
-        width: width - 60,
+        fontSize: 17,
+        fontWeight: '500',
         color: '#42D260',
         
     }

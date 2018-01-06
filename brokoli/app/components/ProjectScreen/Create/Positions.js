@@ -242,10 +242,10 @@ export default class Positions extends React.Component {
          //Returns the part of array we want to remove
          tempPosArr.splice(this.state.index, 1)
 
-         //Assign the tempArr with the removed element to bookmarkData
+         //Assign the tempArr with the removed element to positions
          this.state.positions = tempPosArr
          this.setState(function(prevState, props){
-             return { bookmarkData : prevState.positions }
+             return { positions : prevState.positions }
          })
          console.log('Update PosData: ', this.state.positions)
          
