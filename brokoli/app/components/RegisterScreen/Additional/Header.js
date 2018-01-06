@@ -45,6 +45,7 @@ export default class Header extends React.Component {
               <TextInput style={styles.input} 
                          placeholderTextColor='grey'
                          placeholder='header'
+                         underlineColorAndroid = 'transparent'
                          multiline = {true}
                          numberOfLines = {3} 
                          maxLength={120}
