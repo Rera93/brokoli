@@ -37,6 +37,7 @@ export default class Skills extends React.Component {
             isModalDeleteVisible: false,
             countSkills: 0, //bound to 5 max
             flipReg: false,
+            isModalSkillVisible: false
         }
     }
 
@@ -115,6 +116,39 @@ export default class Skills extends React.Component {
                     console.log('isModalDeleteVisible', this.state.isModalDeleteVisible)
         
                   }
+
+     _toggleModalSkill(){
+
+        this.state.isModalSkillVisible = !this.state.isModalSkillVisible
+        this.setState(function(prevState, props){
+            return { isModalSkillVisible: prevState.isModalSkillVisible }
+        })
+
+        console.log('isModalSkillVisible: ', this.state.isModalSkillVisible)
+
+     }
+
+     _renderSkillModalContent = () => (
+
+        <View style={[styles.modalContent, {backgroundColor: '#254D32'}]}>
+        
+            <Text style={[styles.title, {color: 'white'}]}>Cannot proceed with registration. At least 5 skills are needed. {5 - this.state.countSkills} more are needed.</Text>
+        
+            <View>
+        
+                                <TouchableOpacity 
+                                                style={[styles.button,{backgroundColor: 'white'}]} 
+                                                onPress={() => this._toggleModalSkill() }>
+                                <Text style={[styles.btnTxt, {color: '#254D32'}]}>Ok</Text>
+                
+                                </TouchableOpacity>
+        
+                            </View>
+        
+                        </View>
+
+     )         
+     
 
                   
     _grabSkill = (text) => {
@@ -224,6 +258,18 @@ export default class Skills extends React.Component {
             {rows}
             </View>
     )
+  }
+
+  _onSubmit(){
+
+    if(this.state.flipReg){
+         Alert.alert('Registration Completed.')
+     }
+      else {
+
+        this._toggleModalSkill()
+
+     } 
   }
 
   _grabExperience = (experience) => {
@@ -356,11 +402,12 @@ export default class Skills extends React.Component {
           />
 
           
-          <FloatingAction  actions={actions}
+          <FloatingAction  disabled = {true}
+                           actions={actions}
                            visible={actionButtonVisible}
                            overrideWithAction
                            buttonColor={ this.state.flipReg ? '#42D260' : 'white'}
-                           onPressItem={() => Alert.alert('Registration Completed.')}/>
+                           onPressItem={() => this._onSubmit()}/>
                 
 
           <Modal isVisible = {this.state.isModalDeleteVisible}
@@ -368,6 +415,14 @@ export default class Skills extends React.Component {
                           animationOut={'slideOutRight'}>
 
                          {this._renderDeleteModalContent()}
+
+                    </Modal> 
+
+                    <Modal isVisible = {this.state.isModalSkillVisible}
+                          animationIn={'slideInLeft'}
+                          animationOut={'slideOutRight'}>
+
+                         {this._renderSkillModalContent()}
 
                     </Modal> 
 
