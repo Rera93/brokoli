@@ -6,7 +6,8 @@ import { StyleSheet,
          Dimensions, 
          TextInput,
          FlatList,
-         Image } from 'react-native';
+         Image,
+         Alert } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 import FloatingAction from '../../FloatingComponents/FloatingAction';
@@ -162,12 +163,13 @@ export default class Skills extends React.Component {
 
     _onAdd(){
         tempArr.unshift({skill: this.state.skill, exp: this.state.experience})
-        console.log('tempArr: ', tempArr)
+        console.log('tempArrChild: ', tempArr)
         this.state.skills = tempArr
         this.setState(function(prevState,props){
             return {skills: prevState.skills}
         })
-        console.log('skillsArr: ', this.state.skills)
+        console.log('skillsArrChild: ', this.state.skills)
+        this.props.callbackFromParent(this.state.skills);
         //Release text inputs value
         this.state.skill = ''
         this.setState(function(prevState,props){
@@ -218,7 +220,7 @@ export default class Skills extends React.Component {
     //Use temp array(object) instead to state.someArr to apply javascript functionalities on arrays. 
      var tempSkillArr = []
      tempSkillArr = this.state.skills
-     console.log('tempArr: ', tempSkillArr)
+     console.log('tempArrChild: ', tempSkillArr)
 
      //Returns the part of array we want to remove
      tempSkillArr.splice(this.state.index, 1)
@@ -228,7 +230,10 @@ export default class Skills extends React.Component {
      this.setState(function(prevState, props){
          return { skills : prevState.skills }
      })
-     console.log('Update Skills: ', this.state.skills)
+
+     
+     console.log('Update SkillsChild: ', this.state.skills)
+     this.props.callbackFromParent(this.state.skills);
      
      //Close modal
      this._untoggleModalDelete()
@@ -243,7 +248,7 @@ export default class Skills extends React.Component {
         
                 const actions = [{
                     text: 'Done',
-                    icon: require('../../../../img/icons/done.png'),
+                    icon: require('../../../../img/icons/register.png'),
                     name: 'bt_done',
                     position: 1
                   }];
