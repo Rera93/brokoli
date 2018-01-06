@@ -57,7 +57,7 @@ export default class Additional extends React.Component {
             return {passSkillsToDb: prevState.passSkillsToDb}
          });
         console.log("Skills: ", this.state.passSkillsToDb)
-        this._verifySkills();
+      //  this._verifySkills();
         this._updateFlip();
     }
 

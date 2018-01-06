@@ -36,6 +36,7 @@ export default class Skills extends React.Component {
             index: null,
             isModalDeleteVisible: false,
             countSkills: 0, //bound to 5 max
+            flipReg: false,
         }
     }
 
@@ -146,6 +147,7 @@ export default class Skills extends React.Component {
               console.log('Flip: ', this.state.flip)
         
             }
+
         
 
     _onAdd(){
@@ -181,6 +183,23 @@ export default class Skills extends React.Component {
         return { countSkills: prevState.countSkills }
     })
     console.log('Number of Skills: ', this.state.countSkills)
+
+    if(this.state.countSkills >=5)
+    {
+        this.state.flipReg = true
+        this.setState(function(prevState, props){
+            return { flipReg: prevState.flipReg }
+        })
+        console.log('FlipReg: ', this.state.flipReg )
+    }
+    else
+    {
+        this.state.flipReg = false
+        this.setState(function(prevState, props){
+            return { flipReg: prevState.flipReg }
+        })
+        console.log('FlipReg: ', this.state.flipReg )
+    }
 
   }
 
