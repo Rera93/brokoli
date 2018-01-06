@@ -34,7 +34,8 @@ export default class Skills extends React.Component {
             brokolis: [true,false,false,false,false],
             tempExp: "1",
             index: null,
-            isModalDeleteVisible: false
+            isModalDeleteVisible: false,
+            countSkills: 0, //bound to 5 max
         }
     }
 
@@ -61,20 +62,6 @@ export default class Skills extends React.Component {
         }
       }
 
-    // _grabSkill = (text, i) => {
-
-    //     this.state.skills[i] = text
-
-    //     this.setState(function(prevState, props){
-    //         return {skills: prevState.skills}
-    //      });
-         
-
-    //     //console.log('Child Skills Arr: ',this.state.skills)
-
-    //     this.props.callbackFromParent(this.state.skills);
-
-    // }
     _renderDeleteModalContent = () => (
         
                     <View style={[styles.modalContent, {backgroundColor: '#254D32'}]}>
@@ -170,6 +157,10 @@ export default class Skills extends React.Component {
         })
         console.log('skillsArrChild: ', this.state.skills)
         this.props.callbackFromParent(this.state.skills);
+
+        //The length of array this.state.skills
+        this._countSkills()
+
         //Release text inputs value
         this.state.skill = ''
         this.setState(function(prevState,props){
@@ -181,6 +172,16 @@ export default class Skills extends React.Component {
         this.setState(function(prevState,props){
             return {experience: prevState.experience}
         })
+  }
+
+  _countSkills(){
+
+    this.state.countSkills = this.state.skills.length
+    this.setState(function(prevState, props){
+        return { countSkills: prevState.countSkills }
+    })
+    console.log('Number of Skills: ', this.state.countSkills)
+
   }
 
   _renderBrokolis = ({item}) =>{
@@ -234,6 +235,9 @@ export default class Skills extends React.Component {
      
      console.log('Update SkillsChild: ', this.state.skills)
      this.props.callbackFromParent(this.state.skills);
+
+     //The length of array this.state.skills
+     this._countSkills()
      
      //Close modal
      this._untoggleModalDelete()
