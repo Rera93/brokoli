@@ -30,10 +30,21 @@ export default class Categories extends React.Component {
         this.state = {
             isSelectedFromCategories : Array(categories.length).fill(false),
             flip : false,
-            passCategoriesToDb : []
+            passCategoriesToDb : [],
+            projectObj: {},
+
         }
 
 
+    }
+
+    componentWillMount() {
+        //Alert.alert("Props", this.props.navigation.state.params.date + this.props.navigation.state.params.gender) ;
+        this.state.projectObj = this.props.navigation.state.params.project;
+        this.setState(function(prevState, props){
+            return {projectObj: prevState.projectObj}
+         });
+       
     }
 
     myCallback = (dataFromChild) => {
@@ -85,9 +96,15 @@ export default class Categories extends React.Component {
         this.setState(function(prevState,props){
             return {passCategoriesToDb: prevState.passCategoriesToDb}
         })
-        console.log("passToBd: ", this.state.passCategoriesToDb) 
+        console.log("passToBd: ", this.state.passCategoriesToDb)
 
-        this.props.navigation.navigate('Positions')
+        let projectObj = this.state.projectObj;
+        projectObj.categories = this.state.passCategoriesToDb;                        //updating value
+        this.setState({projectObj});
+
+        
+        console.log("projectObj: ", this.state.projectObj);
+        this.props.navigation.navigate('Positions', {project:this.state.projectObj})
     }
 
 

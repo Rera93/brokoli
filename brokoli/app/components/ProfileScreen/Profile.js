@@ -88,33 +88,7 @@ export default class Profile extends React.Component {
     }
     
 
-     getData(){
      
-           fetch('https://brokoli.eu-gb.mybluemix.net/api/loadProfile', {  
-             method: 'POST',
-             headers: {
-               'Accept': 'application/json',
-               'Content-Type': 'application/json',
-             }
-           ,
-              body: JSON.stringify({
-              userID: this.props.screenProps,
-
-            })
-            })
-             // .then(function(response) { return response.json(); })
-             // .then(function(responseData) {
-             //   this.setState({ data : responseData})});
-     
-             .then((response) => response.json())
-             .then((responseData) => {
-                this.setState({ userData : responseData.data,
-                                name: responseData.data.firstName + " " + responseData.data.lastName,
-                                header: responseData.data.passHeadertoDb});
-               
-             });
-     
-         }
     _toggleLogoutModal = () => {
 
         this.state.isModalLogoutVisible = !this.state.isModalLogoutVisible
@@ -337,6 +311,45 @@ export default class Profile extends React.Component {
         callbackUpdateDB = (body, urlParam) => {
             this._updateDB(body, urlParam);
         }
+
+        getData(){
+            var idObj = {}
+            idObj.userID = this.props.screenProps;
+            
+            this._updateDB(idObj, 'loadProfile').then((result) => {
+                this.state.userData = result.data;
+                this.setState(function(prevState, props){
+                    return {userData: prevState.userData}
+                })
+
+                this.state.name = result.data.firstName + " " + result.data.lastName;
+                this.setState(function(prevState, props){
+                    return {name: prevState.name}
+                })
+
+                this.state.header = result.data.passHeadertoDb;
+                this.setState(function(prevState, props){
+                    return {name: prevState.name}
+                })
+
+            });
+
+
+
+
+
+            
+            
+
+            var str = JSON.stringify(this.state.userData, null, 4);
+                             //    var str1 = JSON.stringify(responseData.doc, null, 4);
+                             //    var str2 = JSON.stringify(responseData.data, null, 4);
+            console.log(str);
+           
+         }
+
+
+
            _updateDB(body, urlParam){
             return fetch('https://brokoli.eu-gb.mybluemix.net/api/'+urlParam, {  
                  method: 'POST',
@@ -354,15 +367,15 @@ export default class Profile extends React.Component {
                  //   this.setState({ data : responseData})});
          
                  .then((response) => response.json())
-                 // .then((responseData) => {
-                 //    var str = JSON.stringify(responseData.old_doc, null, 4);
+                 //.then((responseData) => {
+                     //var str = JSON.stringify(responseData, null, 4);
                  //    var str1 = JSON.stringify(responseData.doc, null, 4);
                  //    var str2 = JSON.stringify(responseData.data, null, 4);
-                 //    console.log(str);
+                     //console.log(str);
                  //    console.log(str1);
                  //    console.log(str2);
                    
-                 // })
+                  //})
                  ;
         }
 

@@ -102,6 +102,17 @@ export default class Detail extends React.Component {
     }
 
 
+      nextScreen(){
+        var projectObj = {}
+        projectObj.userID = this.props.screenProps;
+        projectObj.title = this.state.title;
+        projectObj.abstract =this.state.abstract;
+        projectObj.header = this.state.header;
+        this.props.navigation.navigate('Categories', {project : projectObj}) ;
+        
+    }
+
+
     render(){
        
         const { navigate } = this.props.navigation
@@ -167,7 +178,7 @@ export default class Detail extends React.Component {
 
                 <TouchableOpacity //disabled={!this.state.flip}
                                 style={[styles.btnContainer, {backgroundColor: this.state.flip ? '#42D260' : 'white' }]} 
-                                onPress={() => navigate('Categories') }>
+                                onPress={() => this.nextScreen()}>
                         <Text style={[styles.btnText,{color: this.state.flip ? 'white' : '#42D260'}]}> NEXT </Text>
                         <Image style={[styles.btnIcon, {tintColor: this.state.flip ? 'white' : '#42D260'}]} source={require('../../../../img/icons/greater.png')}/>
                 </TouchableOpacity>

@@ -38,16 +38,13 @@ class ProjectScreen extends React.Component {
         ),
       };
 
-      
-
-     
 
 
     render(){
         return(
 
               
-           <ProjectStackNav />
+           <ProjectStackNav screenProps={this.props.screenProps}/>
 
         )
     }

@@ -44,9 +44,19 @@ export default class Positions extends React.Component {
             tempExp: "1",
             nrOfPos: '1',
             index: null,
+            projectObj: {},
             isModalDeleteVisible: false
         }
 
+    }
+
+    componentWillMount() {
+        //Alert.alert("Props", this.props.navigation.state.params.date + this.props.navigation.state.params.gender) ;
+        this.state.projectObj = this.props.navigation.state.params.project;
+        this.setState(function(prevState, props){
+            return {projectObj: prevState.projectObj}
+         });
+       
     }
 
 
@@ -186,6 +196,10 @@ export default class Positions extends React.Component {
                 return {nrOfPos: prevState.nrOfPos}
             })
 
+            let projectObj = this.state.projectObj;
+           projectObj.positions = this.state.positions;                        //updating value
+           this.setState({projectObj});
+
             
 
 
@@ -249,11 +263,38 @@ export default class Positions extends React.Component {
          })
          console.log('Update PosData: ', this.state.positions)
          
+         let projectObj = this.state.projectObj;
+         projectObj.positions = this.state.positions;                        //updating value
+         this.setState({projectObj});
+         
          //Close modal
          this._untoggleModalDelete()
        }
 
+      _updateDB(body, urlParam){
+          return fetch('https://brokoli.eu-gb.mybluemix.net/api/'+urlParam, {  
+               method: 'POST',
+               headers: {
+                 'Accept': 'application/json',
+                 'Content-Type': 'application/json',
+               }
+             ,
+                body: JSON.stringify(body),
+
+              
+              });
+      }
+
+
+    sendToDb(){
       
+      var str2 = JSON.stringify(this.state.projectObj, null, 4);
+      console.log('to be inserted  <<<<<' +str2);
+
+      this._updateDB(this.state.projectObj, 'insertProjects');
+      Alert.alert('Your project has been successfully created.');
+
+    }
 
     render(){
         const { navigate } = this.props.navigation
@@ -376,7 +417,7 @@ export default class Positions extends React.Component {
                 <FloatingAction  actions={actions}
                            visible={actionButtonVisible}
                            overrideWithAction
-                           onPressItem={() => Alert.alert('Your project has been successfully created.')}/>
+                           onPressItem={() => this.sendToDb()}/>
             </View>
         )
     }
