@@ -271,9 +271,9 @@ export default class Skills extends React.Component {
         
                 const actions = [{
                     text: 'Done',
-                    icon: require('../../../../img/icons/register.png'),
+                    icon: this.state.flipReg ? require( '../../../../img/icons/move-to-next_yes.png') : require('../../../../img/icons/move-to-next_no.png'),
                     name: 'bt_done',
-                    position: 1
+                    position: 1,
                   }];
     
         return(
@@ -359,6 +359,7 @@ export default class Skills extends React.Component {
           <FloatingAction  actions={actions}
                            visible={actionButtonVisible}
                            overrideWithAction
+                           buttonColor={ this.state.flipReg ? '#42D260' : 'white'}
                            onPressItem={() => Alert.alert('Registration Completed.')}/>
                 
 
