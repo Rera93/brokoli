@@ -55,36 +55,7 @@ export default class Projects extends React.Component
         tempArr = this.props.projects;
     }
 
-    _updateDB(){
-        fetch('https://brokoli.eu-gb.mybluemix.net/api/update', {  
-             method: 'POST',
-             headers: {
-               'Accept': 'application/json',
-               'Content-Type': 'application/json',
-             }
-           ,
-              body: JSON.stringify({
-              id: this.props.id,
-              projectArrObj: this.state.data,
-
-            })
-            })
-             // .then(function(response) { return response.json(); })
-             // .then(function(responseData) {
-             //   this.setState({ data : responseData})});
-     
-             .then((response) => response.json())
-             .then((responseData) => {
-                var str = JSON.stringify(responseData.old_doc, null, 4);
-                var str1 = JSON.stringify(responseData.doc, null, 4);
-                var str2 = JSON.stringify(responseData.data, null, 4);
-                console.log(str);
-                console.log(str1);
-                console.log(str2);
-               
-             });
-    }
-
+    
       _renderSeparator = () => {
         return (
           <View
