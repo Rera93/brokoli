@@ -13,6 +13,7 @@ export default class Header extends React.Component {
 
         this.state = {
             headerContent : '',
+            height: 0
         }
     }
     _grabHeader = (text) => {
@@ -24,6 +25,14 @@ export default class Header extends React.Component {
          
         //console.log('Child Header: ', this.state.headerContent)
         this.props.callbackFromParent(this.state.headerContent);
+    }
+
+    _autoExpand = (event) => {
+        this.state.height = event.nativeEvent.contentSize.height
+        this.setState(function(prevState,props){
+            return {height: prevState.height}
+        })
+       
     }
 
        
@@ -42,15 +51,15 @@ export default class Header extends React.Component {
 
               <View style={styles.inputCont}>
 
-              <TextInput style={styles.input} 
-                         placeholderTextColor='grey'
+              <TextInput placeholderTextColor='#C7C7CD'
                          placeholder='Header'
                          underlineColorAndroid = 'transparent'
                          multiline = {true}
-                         numberOfLines = {1} 
                          maxLength={120}
                          onChangeText={(text) => this._grabHeader(text)}
-                         value={this.state.headerContent}/>
+                         value={this.state.headerContent}
+                         style = {[styles.input, {height: Math.max(40, this.state.height)}]}
+                         onContentSizeChange = {(event) => this._autoExpand(event)}/>
 
               </View>
 
@@ -76,23 +85,22 @@ const styles = StyleSheet.create({
 
     },
     inputCont:{
-        flex: 1,
         alignItems:'center',
         justifyContent: 'center',
-        borderWidth: 1,
+        borderWidth: 2,
         borderColor: 'grey',
+        backgroundColor: '#F8F9FB',
         borderRadius: 5,
-        marginTop: 5,
-        marginBottom: 5,
         marginLeft: 10,
         marginRight: 10,
         
 
     },
     input:{
+        width: width - 35,
         fontSize: 17,
         fontWeight: '500',
-        color: '#42D260',
+        color: '#C7C7CD',
         
     }
 
