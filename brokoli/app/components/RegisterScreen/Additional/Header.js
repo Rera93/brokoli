@@ -41,7 +41,7 @@ export default class Header extends React.Component {
     render(){
         return(
 
-            <View style={{flex: 1, width: width}}>
+            <View style={{flex: 1, width: width, backgroundColor: 'white', paddingBottom: 10}}>
 
               <View style={styles.titleCont}>
 
@@ -78,9 +78,9 @@ const styles = StyleSheet.create({
         marginTop: 5,
     },
     title: {
+        fontWeight: '600',
         color: 'grey',
         fontSize: 16,
-        fontWeight: '600',
         textAlign: 'left'
 
     },
@@ -98,8 +98,8 @@ const styles = StyleSheet.create({
     },
     input:{
         width: width - 35,
-        fontSize: 17,
-        fontWeight: '500',
+        fontSize: 16,
+        paddingLeft: 5,
         color: '#C7C7CD',
         
     }
