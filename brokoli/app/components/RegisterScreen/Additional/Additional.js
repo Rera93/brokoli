@@ -192,20 +192,6 @@ export default class Additional extends React.Component {
                 <Header callbackFromParent = {this.callbackHeader}/>
 
                 <Skills callbackFromParent = {this.callbackSkills} />
-<<<<<<< HEAD
-                
-                <TouchableOpacity onPress={()=>this._sendToDb()} //disabled={this.state.flip ? false : true} 
-                                  style={[styles.button, {backgroundColor: this.state.flip ? '#42D260' : 'white'}]}>
-
-                <Text style={[styles.btnText, {color: this.state.flip ? 'white' :  '#42D260'}]}> PROCEED </Text>
-
-                </TouchableOpacity>
-
-                </ScrollView>
-
-                <View style={{ height: 80 }} />
-=======
->>>>>>> swipe
 
 
                 </View>
