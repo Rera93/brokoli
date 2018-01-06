@@ -135,7 +135,8 @@ export default class Projects extends React.Component {
             keyExtractor={item => item.email}
           />
 
-          <FloatingAction  actions={actions}
+          <FloatingAction
+                           actions={actions}
                            visible={actionButtonVisible}
                            overrideWithAction
                            onPressItem={() => navigate('Detail')}/>

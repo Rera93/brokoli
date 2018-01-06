@@ -32,7 +32,7 @@ export default class Header extends React.Component {
     render(){
         return(
 
-            <ViewContainer style={{marginTop: 10, marginBottom: 10}}>
+            <View style={{flex: 1,borderWidth: 1,}}>
 
               <View style={styles.titleCont}>
 
@@ -54,7 +54,7 @@ export default class Header extends React.Component {
 
               </View>
 
-            </ViewContainer>
+            </View>
 
         )
     }

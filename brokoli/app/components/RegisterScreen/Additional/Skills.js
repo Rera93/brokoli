@@ -9,7 +9,7 @@ import { StyleSheet,
          Image } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
-import ViewContainer from '../../ViewContainer'
+import FloatingAction from '../../FloatingComponents/FloatingAction';
 
 import { Picker } from 'react-native-picker-dropdown'
 import Modal from 'react-native-modal'
@@ -36,6 +36,29 @@ export default class Skills extends React.Component {
             isModalDeleteVisible: false
         }
     }
+
+    offset = 0;
+    
+      handleScroll = (event) => {
+        const currentOffset = event.nativeEvent.contentOffset.y;
+    
+        if (currentOffset <= 0) {
+          this.setState({
+            actionButtonVisible: true
+          });
+    
+          return;
+        }
+    
+        const direction = currentOffset > this.offset ? 'down' : 'up';
+        this.offset = currentOffset;
+    
+        if (this.state.actionButtonVisible !== direction) {
+          this.setState({
+            actionButtonVisible: direction === 'up'
+          });
+        }
+      }
 
     // _grabSkill = (text, i) => {
 
@@ -215,10 +238,19 @@ export default class Skills extends React.Component {
 
     
     render(){
+
+        const { actionButtonVisible } = this.state;
+        
+                const actions = [{
+                    text: 'Done',
+                    icon: require('../../../../img/icons/done.png'),
+                    name: 'bt_done',
+                    position: 1
+                  }];
     
         return(
 
-            <ViewContainer>
+            <View style={styles.container}>
 
                 <View style={styles.titleCont}>
 
@@ -229,7 +261,7 @@ export default class Skills extends React.Component {
                 
                                 <View style={styles.inputContainer}>
                                    
-                                <View style={styles.posInputContainer}>
+                                <View style={{height: 50}}>
                 
                                     <TextInput placeholder='Skill'
                                                underlineColorAndroid = 'transparent'
@@ -248,7 +280,8 @@ export default class Skills extends React.Component {
                                         itemStyle = {{fontSize: 12}}
                                         style={{
                                         color: '#C7C7CD',
-                                        height: 40,
+                                        height: 20,
+                                        marginTop: 7.5,
                                         }}>
                                         <Picker.Item label="Beginner (basic knowledge)" value="1" />
                                         <Picker.Item label="Novice (limited experience)" value="2" />
@@ -272,6 +305,7 @@ export default class Skills extends React.Component {
                             </View>
 
                             <FlatList
+                            onScroll={this.handleScroll}
             extraData={this.state}
             data={this.state.skills}
             renderItem={({ item, index }) => (
@@ -290,8 +324,15 @@ export default class Skills extends React.Component {
                 </View>
             )}
             keyExtractor={item => item.skill}
-            style={styles.posList}
+            style={{flex: 1, marginTop: 5}}
           />
+
+          
+          <FloatingAction  actions={actions}
+                           visible={actionButtonVisible}
+                           overrideWithAction
+                           onPressItem={() => Alert.alert('Registration Completed.')}/>
+                
 
           <Modal isVisible = {this.state.isModalDeleteVisible}
                           animationIn={'slideInLeft'}
@@ -302,7 +343,7 @@ export default class Skills extends React.Component {
                     </Modal> 
 
 
-                </ViewContainer>
+                </View>
 
         )
     }
@@ -310,8 +351,12 @@ export default class Skills extends React.Component {
 
 
 const styles = StyleSheet.create({
+    container:{
+        flex: 3,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
 titleCont: {
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 10,
@@ -319,7 +364,7 @@ titleCont: {
 },
 title: {
     fontSize: 16,
-    color: 'grey',
+    color: '#42D260',
     textAlign: 'left',
     fontWeight: '600'
     
@@ -345,12 +390,12 @@ input: {
     color: '#C7C7CD',
 },
 expInput: {
-    flex: 1,
     borderWidth: 2,
     borderColor: 'grey',
     backgroundColor: '#F8F9FB',
     borderRadius: 5,
     marginRight: 5,
+    height: 40,
 },
 btnContainer: {
     flex: 1,
