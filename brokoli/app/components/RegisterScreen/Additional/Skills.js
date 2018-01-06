@@ -364,17 +364,20 @@ const styles = StyleSheet.create({
 titleCont: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 10,
-    marginBottom: 10
+    paddingTop: 10,
+    paddingBottom: 10,
+    width: width,
+    backgroundColor: 'white'
 },
 title: {
     fontSize: 16,
-    color: '#42D260',
+    color: 'grey',
     textAlign: 'left',
     fontWeight: '600'
     
 },
 posForm: {
+    backgroundColor: 'white',
     flexDirection: 'row',
     padding: 10,
 },

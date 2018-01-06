@@ -157,7 +157,6 @@ export default class Additional extends React.Component {
 
 const styles = StyleSheet.create({
     additional: {
-        borderWidth: 1,
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center'
