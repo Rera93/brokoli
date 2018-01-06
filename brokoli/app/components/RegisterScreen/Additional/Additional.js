@@ -4,7 +4,7 @@ import { StackNavigator } from 'react-navigation';
 
 import Header from './Header'
 import Skills from './Skills'
-import ViewContainer from '../../ViewContainer'
+import FloatingAction from '../../FloatingComponents/FloatingAction';
 
 const width = Dimensions.get('window').width
 const nrOfRequiredSkills = 5;
@@ -232,19 +232,34 @@ export default class Additional extends React.Component {
       })
     }
 
+//     <TouchableOpacity onPress={()=>this._sendToDb()} disabled={this.state.flip ? false : true} 
+//     style={[styles.button, {backgroundColor: this.state.flip ? '#42D260' : 'white'}]}>
+
+// <Text style={[styles.btnText, {color: this.state.flip ? 'white' :  '#42D260'}]}> PROCEED </Text>
+
+// </TouchableOpacity>
+
 
     
     render(){
+
+        const { actionButtonVisible } = this.state;
+        
+                const actions = [{
+                    text: 'Done',
+                    icon: require('../../../../img/icons/done.png'),
+                    name: 'bt_done',
+                    position: 1
+                  }];
+        
         return(
 
-            <KeyboardAvoidingView behavior="padding">
-
-            <ScrollView contentContainerStyle={styles.additional}
-                        showsVerticalScrollIndicator={false}>
+            <View style={styles.additional}>
 
                 <Header callbackFromParent = {this.callbackHeader}/>
 
                 <Skills callbackFromParent = {this.callbackSkills} />
+<<<<<<< HEAD
                 
                 <TouchableOpacity onPress={()=>this._sendToDb()} //disabled={this.state.flip ? false : true} 
                                   style={[styles.button, {backgroundColor: this.state.flip ? '#42D260' : 'white'}]}>
@@ -256,11 +271,11 @@ export default class Additional extends React.Component {
                 </ScrollView>
 
                 <View style={{ height: 80 }} />
+=======
+>>>>>>> swipe
 
-                
 
-                
-                </KeyboardAvoidingView>
+                </View>
 
         )
     }
@@ -268,7 +283,8 @@ export default class Additional extends React.Component {
 
 const styles = StyleSheet.create({
     additional: {
-        backgroundColor: 'white',
+        borderWidth: 1,
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'center'
     },
