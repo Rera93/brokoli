@@ -52,7 +52,7 @@ export default class Projects extends React.Component
         this.setState(function(prevState,props){
             return {data: prevState.data}
         })
-        tempArr = this.props.projects;
+        tempArr = this.state.data;
     }
 
     

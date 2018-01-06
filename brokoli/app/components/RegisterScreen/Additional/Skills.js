@@ -263,6 +263,7 @@ export default class Skills extends React.Component {
   _onSubmit(){
 
     if(this.state.flipReg){
+        this.props.callbackToDB();
          Alert.alert('Registration Completed.')
      }
       else {

@@ -327,7 +327,7 @@ export default class Profile extends React.Component {
                     return {name: prevState.name}
                 })
 
-                this.state.header = result.data.passHeadertoDb;
+                this.state.header = result.data.header;
                 this.setState(function(prevState, props){
                     return {name: prevState.name}
                 })
@@ -681,7 +681,7 @@ export default class Profile extends React.Component {
                         this.setState(function(prevState, props){
                             return {header: prevState.header}
                         })
-                        obj.passHeadertoDb = this.state.header;
+                        obj.header = this.state.header;
                     }
 
                     //Update city
@@ -790,7 +790,7 @@ export default class Profile extends React.Component {
                 <Tabs>
 
                     <Overview title='OVERVIEW'/>
-                    <Skills title='SKILLS' />
+                    <Skills title='SKILLS' skills={this.state.userData.skills}/>
                     <Jobs title='JOBS' jobs={this.state.userData.jobsObj} id={this.props.screenProps} callbackUpdateDB={this.callbackUpdateDB}/>
                     <Projects title='PROJECTS' projects={this.state.userData.projectArrObj} id={this.props.screenProps} callbackUpdateDB={this.callbackUpdateDB}/>
 

@@ -27,10 +27,10 @@ export default class Skills extends React.Component
 
         this.state = {
             data: [
-                {skill: 'Java', experience: 4},
-                {skill: 'C++', experience: 2},
-                {skill: 'IOS Development', experience: 1},
-                {skill: 'Front-End Development', experience: 5},
+                // {skill: 'Java', exp: 4},
+                // {skill: 'C++', exp: 2},
+                // {skill: 'IOS Development', exp: 1},
+                // {skill: 'Front-End Development', exp: 5},
         ],
             brokolis: [true,false,false,false,false],
             actionButtonVisible: true,
@@ -48,21 +48,30 @@ export default class Skills extends React.Component
     name is required and no exp yet. 
     */
 
-    componentDidMount() {
-        //When compoment is first loaded the temp array is used as a placeholder for the skills key value pair array 
-        tempArr = this.state.data
+    // componentDidMount() {
+    //     //When compoment is first loaded the temp array is used as a placeholder for the skills key value pair array 
+    //     tempArr = this.state.data
+    // }
+
+    componentWillMount() {
+        //When compoment is first loaded the temp array is used as a placeholder for the skils key value pair array 
+        this.state.data = this.props.skills;
+        this.setState(function(prevState,props){
+            return {data: prevState.data}
+        })
+        tempArr = this.state.data;
     }
 
     _renderBrokolis = ({item}) =>{
         var rows = []
-        console.log('Exp: ', item.experience)
+        console.log('Exp: ', item.exp)
         for(let i=1; i <= this.state.brokolis.length; i++)
         {
             rows.push(
 
                <View key = {i}>
 
-                   <Image  style = {[styles.icon,{tintColor: i<=item.experience ? '#42D260' : 'grey'}]} 
+                   <Image  style = {[styles.icon,{tintColor: i<=item.exp ? '#42D260' : 'grey'}]} 
                            source={require('../../../img/icons/broccoli.png')}  />
 
                    </View>
@@ -253,7 +262,7 @@ export default class Skills extends React.Component
           );
 
           _addSkill(){
-            tempArr.unshift({skill: this.state.newSkill, experience: this.state.newExperience})
+            tempArr.unshift({skill: this.state.newSkill, exp: this.state.newExperience})
             console.log('tempArr: ', tempArr)
             this.state.data = tempArr
             this.setState(function(prevState,props){

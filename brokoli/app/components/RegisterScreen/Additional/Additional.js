@@ -212,10 +212,14 @@ export default class Additional extends React.Component {
         }
     }  */
 
+    callbackToDB = () => {
+        this._sendToDb();
+    }
+
     _sendToDb(){
         let update_final = this.state.finalObj;
-        update_final.passSkillsToDb = this.state.passSkillsToDb;
-        update_final.passHeadertoDb = this.state.passHeadertoDb; 
+        update_final.skills = this.state.passSkillsToDb;
+        update_final.header = this.state.passHeadertoDb; 
         
 
       //Alert.alert("Gonna send", this.state.firstName + " "+ this.state.lastName + " "+ this.state.gender +" "+ this.state.dateOfBirth);
@@ -258,7 +262,7 @@ export default class Additional extends React.Component {
 
                 <Header callbackFromParent = {this.callbackHeader}/>
 
-                <Skills callbackFromParent = {this.callbackSkills} />
+                <Skills callbackFromParent = {this.callbackSkills} callbackToDB={this.callbackToDB} />
 
 
                 </View>
