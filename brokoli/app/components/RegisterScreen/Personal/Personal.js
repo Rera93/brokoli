@@ -8,6 +8,7 @@ import { StyleSheet,
          ScrollView,
          TextInput } from 'react-native';
 import { StackNavigator } from 'react-navigation';
+import SimpleStepper from 'react-native-simple-stepper'
 
 import ProfilePic from './ProfilePic'
 import BirthDate from './BirthDate'
@@ -20,8 +21,8 @@ export default class Personal extends React.Component {
 
     static navigationOptions = {
         title: 'Personal',
-        headerStyle: { backgroundColor: '#42D260', marginTop: 24 },
-        headerTitleStyle: { color: 'white' },
+        headerStyle: { backgroundColor: 'white', marginTop: 24 },
+        headerTitleStyle: { color: '#42D260' },
       };
 
 
@@ -37,7 +38,8 @@ export default class Personal extends React.Component {
               gender: 'Male',
               city: '',
               country: '',
-              flip: false
+              flip: false,
+              day: 0
           }
       }
 
@@ -139,59 +141,96 @@ export default class Personal extends React.Component {
         return(
 
             
-            <KeyboardAvoidingView behavior="padding">
+            <KeyboardAvoidingView behavior="padding" backgroundColor='#42D260'>
             
              <ScrollView contentContainerStyle={styles.personal}
-                                    showsVerticalScrollIndicator={false}>
+                        showsVerticalScrollIndicator={false}>
+
+            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', marginLeft: 10, marginRight: 10,}}> 
 
                <View style={styles.titleContainer}> 
 
-                  <Text style={styles.title}>Please enter your personal information in order to construct your profile </Text>
+                  <Text style={styles.title}>Please enter your personal information</Text>
 
                 </View>
 
                 
                 <View style={styles.inputCont}> 
-                    <View style={[styles.condCont, {backgroundColor: '#BE2625'} ]}>
-                    <Text style={styles.cond}> R </Text>
-                    </View>
+                    
+                    <View style={{flex: 1}}>
                     <TextInput style={styles.locInput} 
                                placeholder='first name'
+                               placeholderTextColor='white'
+                               underlineColorAndroid = 'transparent'
                                onChangeText={(text) => this._grabFirstName(text)}/>
-                    <View style={[styles.condCont, {backgroundColor: '#BE2625'} ]}>
+                    </View>
+
+                    <View style={styles.condCont}>
                     <Text style={styles.cond}> R </Text>
                     </View>
+
+                </View> 
+
+                <View style={styles.inputCont}>    
+
+
+                    <View style={{flex: 1}}>
                     <TextInput style={styles.locInput} 
                                placeholder='last name'
-                               onChangeText={(text) => this._grabLastName(text)}/>  
+                               placeholderTextColor='white'
+                               underlineColorAndroid = 'transparent'
+                               onChangeText={(text) => this._grabLastName(text)}/> 
+                    </View> 
+                
+                    <View style={styles.condCont}>
+                    <Text style={styles.cond}> R </Text>
+                    </View>
                 </View>
                 <ProfilePic />
+
                 <BirthDate callbackFromParent = {this.callbackBirthDate}/>
                 <Gender callbackFromParent = {this.callbackGender}/>
 
                 <View style={styles.inputCont}> 
-                <View style={[styles.condCont, {backgroundColor: '#BE2625'} ]}>
-                    <Text style={styles.cond}> R </Text>
-                </View>    
-                    <TextInput style={styles.locInput}
-                               placeholder='city'
-                               onChangeText={(text) => this._grabCity(text)} />
-
-                    <View style={[styles.condCont, {backgroundColor: '#BE2625'}]}>           
-                    <Text style={styles.cond}> R </Text>
+                
+                    <View style={{flex: 1}}>  
+                        <TextInput style={styles.locInput}
+                                placeholder='city'
+                                placeholderTextColor= 'white'
+                                underlineColorAndroid = 'transparent'
+                                onChangeText={(text) => this._grabCity(text)} />
                     </View>
-                    <TextInput style={styles.locInput} 
+
+                    <View style={styles.condCont}>
+                        <Text style={styles.cond}> R </Text>
+                    </View>  
+
+                </View>
+
+                <View style={styles.inputCont}> 
+
+                    <View style={{flex: 1}}>
+                        <TextInput style={styles.locInput} 
                                placeholder='country'
+                               placeholderTextColor= 'white'
+                               underlineColorAndroid = 'transparent'
                                onChangeText={(text) => this._grabCountry(text)}/>  
+                    </View>
+
+                    <View style={styles.condCont}>           
+                        <Text style={styles.cond}> R </Text>
+                    </View>
                 </View>
 
                 <TouchableOpacity //disabled={this.state.flip ? false : true}
                                   onPress={()=> navigate('Account', {firstName: this.state.firstName, lastName: this.state.lastName, dateOfBirth: this.state.dateOfBirth, gender: this.state.gender, city: this.state.city,  country: this.state.country })}
-                                  style={[styles.button, {backgroundColor: this.state.flip ? '#42D260' : 'white'}]}>
+                                  style={[styles.button, {backgroundColor: this.state.flip ? 'white' : '#42D260'}]}>
 
-                <Text style={[styles.btnText, {color: this.state.flip ? 'white' : '#42D260'}]}> NEXT </Text>
+                <Text style={[styles.btnText, {color: this.state.flip ? '#42D260' : 'white'}]}> NEXT </Text>
 
                 </TouchableOpacity>
+
+                </View>
 
                 </ScrollView>
 
@@ -206,10 +245,10 @@ export default class Personal extends React.Component {
 
 const styles = StyleSheet.create({
     personal: {
-        backgroundColor: 'white',
+        backgroundColor: '#42D260',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingVertical: 40,
+        paddingVertical: 20,
 
     },
     titleContainer: {
@@ -217,46 +256,47 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginBottom: 15,
-        width: width,
+        marginTop: 15,
+        marginLeft: 20,
+        marginRight: 20
     },
     title: {
-      color: 'grey',
+      color: 'white',
       fontWeight: '900',
-      padding: 5,
-      width: width - 60,
-      fontSize: 17,
+      fontSize: 18,
     },
     inputCont: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        width: width,
         flexDirection: 'row',
-        marginLeft: 15,
-    },
-    locInput: {
-        color: '#42D260',
-        padding: 5,
-        width: width / 2 - 50,
+        marginLeft: 20,
+        padding: 10,
         borderRadius: 5,
         marginTop: 15,
         marginBottom: 15,
         marginRight: 20,
-        borderWidth: 1,
-        borderColor: 'grey'
+        borderWidth: 3,
+        borderColor: 'white'
+    },
+    locInput: {
+        fontSize: 17,
+        color: 'white',
+       
     },
     cond: {
         fontSize: 17,
         textAlign: 'center',
         fontWeight: '600',
-        color: 'white'
+        color: '#42D260'
     },
     condCont: {
+        backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center',
-        width: 25,
-        height: 25,
-        borderRadius: 25/2,
+        width: 22,
+        height: 22,
+        borderRadius: 11,
         marginRight: 5,
     },
     button: {
@@ -265,8 +305,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     width: width - 300,
     alignItems: 'center',
-    borderColor: '#42D260',
-    borderWidth: 1
+    borderColor: 'white',
+    borderWidth: 3
     },
     btnText: {
     padding: 10,

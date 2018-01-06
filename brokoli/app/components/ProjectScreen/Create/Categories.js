@@ -11,7 +11,7 @@ import { StyleSheet,
          Dimensions
          } from 'react-native';
 
-import ProjectCategories from '../../RegisterScreen/Professional/Categories'
+import ProjectCategories from './ProjectCategories'
 import categories from '../../RegisterScreen/categories.js'
 
 const width = Dimensions.get('window').width

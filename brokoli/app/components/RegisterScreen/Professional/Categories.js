@@ -38,8 +38,8 @@ export default class Categories extends React.Component {
             rows.push(
                 <TouchableOpacity key = {i} 
                                   onPress={this._onToggleCategory.bind(this,i)} 
-                                  style={[styles.category, {backgroundColor: this.state.isSelected[i] ? '#42D260' : '#F8F9FB'}]}>
-                  <Text style={[styles.title,{color: this.state.isSelected[i] ? 'white' : 'grey' }]}> {categories[i].name} </Text>
+                                  style={[styles.category, {backgroundColor: this.state.isSelected[i] ? 'white' : '#42D260'}]}>
+                  <Text style={[styles.title,{color: this.state.isSelected[i] ? '#42D260' : 'white' }]}> {categories[i].name} </Text>
                 </TouchableOpacity>
             )
         }
@@ -62,25 +62,12 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         width: width,
-        marginTop: 15,
+        paddingTop: 10,
         marginBottom: 15,
         alignItems: 'center',
+        borderTopWidth: 0.7,
         borderBottomWidth: 0.7,
-        borderColor: 'grey'
-    },
-    headerCont: {
-        borderBottomWidth: 0.7,
-        width: width -60,
-        paddingBottom: 10,
-        marginBottom: 20,
-        borderColor: 'grey',
-        alignItems: 'center'
-    },
-    header:{
-        fontWeight: '300',
-        color: '#42D260',
-        fontStyle: 'normal',
-        fontSize: 16,
+        borderColor: 'white'
     },
     categories: {
         flex: 1,
@@ -91,7 +78,7 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         padding: 10,
         borderRadius: 5,
-        borderColor: '#42D260',
+        borderColor: 'white',
         marginBottom: 15,
         alignItems: 'center',
         justifyContent: 'center'
