@@ -262,6 +262,7 @@ export default class Skills extends React.Component
           );
 
           _addSkill(){
+            var skills = {}
             tempArr.unshift({skill: this.state.newSkill, exp: this.state.newExperience})
             console.log('tempArr: ', tempArr)
             this.state.data = tempArr
@@ -269,6 +270,9 @@ export default class Skills extends React.Component
                 return {data: prevState.data}
             })
             console.log('updatedDataArr: ', this.state.data)
+            skills.id = this.props.id;
+            skills.skills = this.state.data;
+            this.props.callbackUpdateDB(skills, 'update');
             this._toggleModalAdd()
           }
 
@@ -312,6 +316,7 @@ export default class Skills extends React.Component
             
           )
           _deleteItem(){
+            var skills = {}
            //Use temp array(object) instead to state.someArr to apply javascript functionalities on arrays. 
             var tempSkillArr = []
             tempSkillArr = this.state.data
@@ -326,7 +331,9 @@ export default class Skills extends React.Component
                 return { bookmarkData : prevState.data }
             })
             console.log('Update SkillsData: ', this.state.data)
-            
+            skills.id = this.props.id;
+            skills.skills = this.state.data;
+            this.props.callbackUpdateDB(skills, 'update');
             //Close modal
             this._untoggleModalDelete()
           }
