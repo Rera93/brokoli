@@ -102,7 +102,7 @@ export default class Additional extends React.Component {
             return {passSkillsToDb: prevState.passSkillsToDb}
          });
         console.log("Skills: ", this.state.passSkillsToDb)
-        this._verifySkills();
+      //  this._verifySkills();
         this._updateFlip();
     }
 
@@ -115,7 +115,7 @@ export default class Additional extends React.Component {
        console.log('flip: ', this.state.flip)
     }
 
-    _verifySkills(){
+ /*   _verifySkills(){
         let countSkills = 0
         for (let i=0; i < this.state.passSkillsToDb.length; i++)
         {
@@ -143,7 +143,7 @@ export default class Additional extends React.Component {
             }
            
         }
-    }
+    }  */
 
     _sendToDb(){
         let update_final = this.state.finalObj;
