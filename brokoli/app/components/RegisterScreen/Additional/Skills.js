@@ -34,7 +34,10 @@ export default class Skills extends React.Component {
             brokolis: [true,false,false,false,false],
             tempExp: "1",
             index: null,
-            isModalDeleteVisible: false
+            isModalDeleteVisible: false,
+            countSkills: 0, //bound to 5 max
+            flipReg: false,
+            isModalSkillVisible: false
         }
     }
 
@@ -61,20 +64,6 @@ export default class Skills extends React.Component {
         }
       }
 
-    // _grabSkill = (text, i) => {
-
-    //     this.state.skills[i] = text
-
-    //     this.setState(function(prevState, props){
-    //         return {skills: prevState.skills}
-    //      });
-         
-
-    //     //console.log('Child Skills Arr: ',this.state.skills)
-
-    //     this.props.callbackFromParent(this.state.skills);
-
-    // }
     _renderDeleteModalContent = () => (
         
                     <View style={[styles.modalContent, {backgroundColor: '#254D32'}]}>
@@ -128,6 +117,39 @@ export default class Skills extends React.Component {
         
                   }
 
+     _toggleModalSkill(){
+
+        this.state.isModalSkillVisible = !this.state.isModalSkillVisible
+        this.setState(function(prevState, props){
+            return { isModalSkillVisible: prevState.isModalSkillVisible }
+        })
+
+        console.log('isModalSkillVisible: ', this.state.isModalSkillVisible)
+
+     }
+
+     _renderSkillModalContent = () => (
+
+        <View style={[styles.modalContent, {backgroundColor: '#254D32'}]}>
+        
+            <Text style={[styles.title, {color: 'white'}]}>Cannot proceed with registration. At least 5 skills are needed. {5 - this.state.countSkills} more are needed.</Text>
+        
+            <View>
+        
+                                <TouchableOpacity 
+                                                style={[styles.button,{backgroundColor: 'white'}]} 
+                                                onPress={() => this._toggleModalSkill() }>
+                                <Text style={[styles.btnTxt, {color: '#254D32'}]}>Ok</Text>
+                
+                                </TouchableOpacity>
+        
+                            </View>
+        
+                        </View>
+
+     )         
+     
+
                   
     _grabSkill = (text) => {
         this.state.skill = text
@@ -159,6 +181,7 @@ export default class Skills extends React.Component {
               console.log('Flip: ', this.state.flip)
         
             }
+
         
 
     _onAdd(){
@@ -170,6 +193,10 @@ export default class Skills extends React.Component {
         })
         console.log('skillsArrChild: ', this.state.skills)
         this.props.callbackFromParent(this.state.skills);
+
+        //The length of array this.state.skills
+        this._countSkills()
+
         //Release text inputs value
         this.state.skill = ''
         this.setState(function(prevState,props){
@@ -181,6 +208,33 @@ export default class Skills extends React.Component {
         this.setState(function(prevState,props){
             return {experience: prevState.experience}
         })
+  }
+
+  _countSkills(){
+
+    this.state.countSkills = this.state.skills.length
+    this.setState(function(prevState, props){
+        return { countSkills: prevState.countSkills }
+    })
+    console.log('Number of Skills: ', this.state.countSkills)
+
+    if(this.state.countSkills >=5)
+    {
+        this.state.flipReg = true
+        this.setState(function(prevState, props){
+            return { flipReg: prevState.flipReg }
+        })
+        console.log('FlipReg: ', this.state.flipReg )
+    }
+    else
+    {
+        this.state.flipReg = false
+        this.setState(function(prevState, props){
+            return { flipReg: prevState.flipReg }
+        })
+        console.log('FlipReg: ', this.state.flipReg )
+    }
+
   }
 
   _renderBrokolis = ({item}) =>{
@@ -204,6 +258,18 @@ export default class Skills extends React.Component {
             {rows}
             </View>
     )
+  }
+
+  _onSubmit(){
+
+    if(this.state.flipReg){
+         Alert.alert('Registration Completed.')
+     }
+      else {
+
+        this._toggleModalSkill()
+
+     } 
   }
 
   _grabExperience = (experience) => {
@@ -234,6 +300,9 @@ export default class Skills extends React.Component {
      
      console.log('Update SkillsChild: ', this.state.skills)
      this.props.callbackFromParent(this.state.skills);
+
+     //The length of array this.state.skills
+     this._countSkills()
      
      //Close modal
      this._untoggleModalDelete()
@@ -248,9 +317,9 @@ export default class Skills extends React.Component {
         
                 const actions = [{
                     text: 'Done',
-                    icon: require('../../../../img/icons/register.png'),
+                    icon: this.state.flipReg ? require( '../../../../img/icons/move-to-next_yes.png') : require('../../../../img/icons/move-to-next_no.png'),
                     name: 'bt_done',
-                    position: 1
+                    position: 1,
                   }];
     
         return(
@@ -333,10 +402,12 @@ export default class Skills extends React.Component {
           />
 
           
-          <FloatingAction  actions={actions}
+          <FloatingAction  disabled = {true}
+                           actions={actions}
                            visible={actionButtonVisible}
                            overrideWithAction
-                           onPressItem={() => Alert.alert('Registration Completed.')}/>
+                           buttonColor={ this.state.flipReg ? '#42D260' : 'white'}
+                           onPressItem={() => this._onSubmit()}/>
                 
 
           <Modal isVisible = {this.state.isModalDeleteVisible}
@@ -344,6 +415,14 @@ export default class Skills extends React.Component {
                           animationOut={'slideOutRight'}>
 
                          {this._renderDeleteModalContent()}
+
+                    </Modal> 
+
+                    <Modal isVisible = {this.state.isModalSkillVisible}
+                          animationIn={'slideInLeft'}
+                          animationOut={'slideOutRight'}>
+
+                         {this._renderSkillModalContent()}
 
                     </Modal> 
 
@@ -364,17 +443,20 @@ const styles = StyleSheet.create({
 titleCont: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 10,
-    marginBottom: 10
+    paddingTop: 10,
+    paddingBottom: 10,
+    width: width,
+    backgroundColor: 'white'
 },
 title: {
     fontSize: 16,
-    color: '#42D260',
+    color: 'grey',
     textAlign: 'left',
     fontWeight: '600'
     
 },
 posForm: {
+    backgroundColor: 'white',
     flexDirection: 'row',
     padding: 10,
 },

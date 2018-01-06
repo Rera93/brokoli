@@ -169,7 +169,7 @@ export default class Additional extends React.Component {
             return {passSkillsToDb: prevState.passSkillsToDb}
          });
         console.log("Skills: ", this.state.passSkillsToDb)
-        this._verifySkills();
+      //  this._verifySkills();
         this._updateFlip();
     }
 
@@ -182,7 +182,7 @@ export default class Additional extends React.Component {
        console.log('flip: ', this.state.flip)
     }
 
-    _verifySkills(){
+ /*   _verifySkills(){
         let countSkills = 0
         for (let i=0; i < this.state.passSkillsToDb.length; i++)
         {
@@ -210,7 +210,7 @@ export default class Additional extends React.Component {
             }
            
         }
-    }
+    }  */
 
     _sendToDb(){
         let update_final = this.state.finalObj;
@@ -259,20 +259,6 @@ export default class Additional extends React.Component {
                 <Header callbackFromParent = {this.callbackHeader}/>
 
                 <Skills callbackFromParent = {this.callbackSkills} />
-<<<<<<< HEAD
-                
-                <TouchableOpacity onPress={()=>this._sendToDb()} //disabled={this.state.flip ? false : true} 
-                                  style={[styles.button, {backgroundColor: this.state.flip ? '#42D260' : 'white'}]}>
-
-                <Text style={[styles.btnText, {color: this.state.flip ? 'white' :  '#42D260'}]}> PROCEED </Text>
-
-                </TouchableOpacity>
-
-                </ScrollView>
-
-                <View style={{ height: 80 }} />
-=======
->>>>>>> swipe
 
 
                 </View>
@@ -283,7 +269,6 @@ export default class Additional extends React.Component {
 
 const styles = StyleSheet.create({
     additional: {
-        borderWidth: 1,
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center'
