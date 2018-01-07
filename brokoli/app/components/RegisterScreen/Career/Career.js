@@ -32,13 +32,7 @@ export default class Career extends React.Component {
 
           this.state = {
             //Education state
-            schoolName: '',
-            city: '',
-            country: '',
-            startYear: '',
-            endYear: '',
-            degree: '',
-            specialization: '',
+            educations : [],
             //Job states
             companies : Array(nrOfJobs).fill(''),
             jobPositions : Array(nrOfJobs).fill(''),
@@ -58,74 +52,17 @@ export default class Career extends React.Component {
 
       // Callbacks for Education.
 
-      callbackSchoolName = (dataSchoolName) => {
+      callbackEducation = (dataEducations) => {
         
-        this.state.schoolName = dataSchoolName
+        this.state.educations = dataEducations
         this.setState(function(prevState, props){
-            return {schoolName: prevState.schoolName}
+            return {educations: prevState.educations}
          });
-         console.log("SchoolName: ", this.state.schoolName)
+         console.log("Parent Educations: ", this.state.educations)
 
         }
 
-        callbackCity = (dataCity) => {
-
-            this.state.city = dataCity
-            this.setState(function(prevState, props){
-            return {city: prevState.city}
-            });
-            console.log('City: ', this.state.city)
-        }
-
-        callbackCountry = (dataCountry) => {
-
-            this.state.country = dataCountry
-            this.setState(function(prevState, props){
-              return {country: prevState.country}
-             });
-            console.log('Country: ', this.state.country)
-
-        }
-
-        callbackStartYY = (dataStartYear) => {
-
-            this.state.startYear = dataStartYear
-            this.setState(function(prevState, props){
-              return {startYear: prevState.startYear}
-             });
-            console.log('Start Year: ', this.state.startYear)
-
-        }
-
-        callbackEndYY = (dataEndYear) => {
-
-            this.state.endYear = dataEndYear
-            this.setState(function(prevState, props){
-            return {endYear: prevState.endYear}
-            });
-            console.log('End Year: ', this.state.endYear)
-
-        }
-
-        callbackDegree = (dataDegree) => {
- 
-         this.state.degree = dataDegree
-         this.setState(function(prevState, props){
-           return {degree: prevState.degree}
-          });
-         console.log('Degree: ', this.state.degree)
-
-        }
-
-        callbackSpec = (dataSpecialization) => {
-
-         this.state.specialization = dataSpecialization
-         this.setState(function(prevState, props){
-         return {specialization: prevState.specialization}
-         });
-         console.log('Specialization: ', this.state.specialization)
-
-        }
+        
 
         // Call backs for Jobs 
 
@@ -281,13 +218,7 @@ export default class Career extends React.Component {
                      style={styles.bar}> 
 
 
-                        <Education callbackFromParentSchool = {this.callbackSchoolName}
-                                   callbackFromParentCity = {this.callbackCity}
-                                   callbackFromParentCountry = {this.callbackCountry}
-                                   callbackFromParentStartYY = {this.callbackStartYY}
-                                   callbackFromParentEndYY = {this.callbackEndYY}
-                                   callbackFromParentDegree = {this.callbackDegree}
-                                   callbackFromParentSpec = {this.callbackSpec} />
+                        <Education callbackFromParentEducation = {this.callbackEducation} />
 
 
                 </Bar>

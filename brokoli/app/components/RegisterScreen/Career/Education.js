@@ -39,8 +39,7 @@ export default class Education extends React.Component {
                 this.setState(function(prevState, props){
                   return {schoolName: prevState.schoolName}
                  });
-                //console.log('School Name: ', this.state.schoolName)
-               // this.props.callbackFromParentSchool(this.state.schoolName);
+                console.log('School Name: ', this.state.schoolName)
 
                 this._flip()
             
@@ -53,8 +52,8 @@ export default class Education extends React.Component {
                 this.setState(function(prevState, props){
                 return {city: prevState.city}
                 });
-               // console.log('City: ', this.state.city)
-               // this.props.callbackFromParentCity(this.state.city);
+                console.log('City: ', this.state.city)
+              
 
                 this._flip()
                         
@@ -65,8 +64,7 @@ export default class Education extends React.Component {
                 this.setState(function(prevState, props){
                   return {country: prevState.country}
                  });
-                //console.log('Country: ', this.state.country)
-             //   this.props.callbackFromParentCountry(this.state.country);
+                console.log('Country: ', this.state.country)
 
                 this._flip()
                 
@@ -77,8 +75,8 @@ export default class Education extends React.Component {
                 this.setState(function(prevState, props){
                   return {startYear: prevState.startYear}
                  });
-                //console.log('Start Year: ', this.state.startYear)
-            //    this.props.callbackFromParentStartYY(this.state.startYear);
+                 console.log('Start Year: ', this.state.startYear)
+           
                 
     }
 
@@ -88,8 +86,8 @@ export default class Education extends React.Component {
                 this.setState(function(prevState, props){
                   return {startMonth: prevState.startMonth}
                  });
-                //console.log('Start Month: ', this.state.startMonth)
-            //    this.props.callbackFromParentStartYY(this.state.startMonth);
+                console.log('Start Month: ', this.state.startMonth)
+            
                 
     }
 
@@ -100,8 +98,8 @@ export default class Education extends React.Component {
                 this.setState(function(prevState, props){
                   return {endMonth: prevState.endMonth}
                  });
-                //console.log('End Month: ', this.state.endMonth)
-              //  this.props.callbackFromParentStartYY(this.state.endMonth);
+                 console.log('End Month: ', this.state.endMonth)
+             
                 
     }
 
@@ -111,8 +109,7 @@ export default class Education extends React.Component {
                 this.setState(function(prevState, props){
                 return {endYear: prevState.endYear}
                 });
-                //console.log('End Year: ', this.state.endYear)
-             //   this.props.callbackFromParentEndYY(this.state.endYear);
+                console.log('End Year: ', this.state.endYear)
                         
     }
     _grabDegree = (text) => {
@@ -121,8 +118,7 @@ export default class Education extends React.Component {
                 this.setState(function(prevState, props){
                   return {degree: prevState.degree}
                  });
-                //console.log('Degree: ', this.state.degree)
-             //   this.props.callbackFromParentDegree(this.state.degree);
+                 console.log('Degree: ', this.state.degree)
                 
     }
 
@@ -132,8 +128,7 @@ export default class Education extends React.Component {
                 this.setState(function(prevState, props){
                 return {specialization: prevState.specialization}
                 });
-                //console.log('Specialization: ', this.state.specialization)
-             //   this.props.callbackFromParentSpec(this.state.specialization);
+                console.log('Specialization: ', this.state.specialization)
                         
     }
 
@@ -154,7 +149,7 @@ export default class Education extends React.Component {
     
          
          console.log('Update SkillsChild: ', this.state.educations)
-      //   this.props.callbackFromParent(this.state.educations);
+         this.props.callbackFromParentEducation(this.state.educations);
     
          //Close modal
          this._untoggleModalDelete()
@@ -170,7 +165,7 @@ export default class Education extends React.Component {
             return {educations: prevState.educations}
         })
         console.log('educationsArrChild: ', this.state.educations)
-      //  this.props.callbackFromParent(this.state.educations);
+        this.props.callbackFromParentEducation(this.state.educations);
 
         //Release text inputs value
         this.state.schoolName = ''
