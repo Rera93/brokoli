@@ -171,10 +171,27 @@ export default class Education extends React.Component {
 
                 <View style={styles.bottomEdu}>
 
-                <View style={{flex: 2, marginLeft: 10}}>
+                <View style={{flex: 2, marginLeft: 15}}>
+
+                <Text style={styles.title}>Degree</Text>
+
+                    </View>
+
+                    <View style={{flex: 3, marginLeft: 15, marginRight: 10}}>
+
+                    <Text style={styles.title}>Specialization</Text>
+                        </View>
+
+                    </View>
+
+                <View style={styles.bottomEdu}>
+
+
+
+                <View style={[styles.pickerCont, {flex: 2, marginLeft: 10}]}>
 
                 <Picker
-                        selectedValue={this.state.experience}
+                        selectedValue={this.state.degree}
                         onValueChange={(degree) => this._grabDegree(degree)}
                         mode="dropdown"
                         itemStyle = {{fontSize: 12}}
@@ -189,10 +206,10 @@ export default class Education extends React.Component {
 
                 </View>
 
-                <View style={{flex: 3, marginLeft: 10, marginRight: 10}}>
-
+                <View style={[styles.pickerCont, {flex: 3, marginLeft: 10, marginRight: 10}]}>
+                
                 <Picker
-                        selectedValue={this.state.experience}
+                        selectedValue={this.state.specialization}
                         onValueChange={(specialization) => this._grabSpecialization(specialization)}
                         mode="dropdown"
                         itemStyle = {{fontSize: 12}}
@@ -330,6 +347,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginBottom: 10
+    },
+    pickerCont: {
+        borderWidth: 2, 
+        borderColor: 'grey',
+        backgroundColor: '#F8F9FB',
+        borderRadius: 5,
+    },
+    title:{
+        fontSize: 17,
+        fontWeight: '500',
+        color: 'grey'
     }
 
 
