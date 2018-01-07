@@ -32,13 +32,7 @@ export default class Career extends React.Component {
 
           this.state = {
             //Education state
-            schoolName: '',
-            city: '',
-            country: '',
-            startYear: '',
-            endYear: '',
-            degree: '',
-            specialization: '',
+            educations : [],
             //Job states
             jobsObj: [],
             companies : Array(nrOfJobs).fill(''),
@@ -59,74 +53,17 @@ export default class Career extends React.Component {
 
       // Callbacks for Education.
 
-      callbackSchoolName = (dataSchoolName) => {
+      callbackEducation = (dataEducations) => {
         
-        this.state.schoolName = dataSchoolName
+        this.state.educations = dataEducations
         this.setState(function(prevState, props){
-            return {schoolName: prevState.schoolName}
+            return {educations: prevState.educations}
          });
-         console.log("SchoolName: ", this.state.schoolName)
+         console.log("Parent Educations: ", this.state.educations)
 
         }
 
-        callbackCity = (dataCity) => {
-
-            this.state.city = dataCity
-            this.setState(function(prevState, props){
-            return {city: prevState.city}
-            });
-            console.log('City: ', this.state.city)
-        }
-
-        callbackCountry = (dataCountry) => {
-
-            this.state.country = dataCountry
-            this.setState(function(prevState, props){
-              return {country: prevState.country}
-             });
-            console.log('Country: ', this.state.country)
-
-        }
-
-        callbackStartYY = (dataStartYear) => {
-
-            this.state.startYear = dataStartYear
-            this.setState(function(prevState, props){
-              return {startYear: prevState.startYear}
-             });
-            console.log('Start Year: ', this.state.startYear)
-
-        }
-
-        callbackEndYY = (dataEndYear) => {
-
-            this.state.endYear = dataEndYear
-            this.setState(function(prevState, props){
-            return {endYear: prevState.endYear}
-            });
-            console.log('End Year: ', this.state.endYear)
-
-        }
-
-        callbackDegree = (dataDegree) => {
- 
-         this.state.degree = dataDegree
-         this.setState(function(prevState, props){
-           return {degree: prevState.degree}
-          });
-         console.log('Degree: ', this.state.degree)
-
-        }
-
-        callbackSpec = (dataSpecialization) => {
-
-         this.state.specialization = dataSpecialization
-         this.setState(function(prevState, props){
-         return {specialization: prevState.specialization}
-         });
-         console.log('Specialization: ', this.state.specialization)
-
-        }
+        
 
         // Call backs for Jobs 
 
@@ -307,17 +244,9 @@ export default class Career extends React.Component {
                      iconOpened='chevron-down'
                      style={styles.bar}> 
 
-                     <ScrollView showsVerticalScrollIndicator={false}>
 
-                        <Education callbackFromParentSchool = {this.callbackSchoolName}
-                                   callbackFromParentCity = {this.callbackCity}
-                                   callbackFromParentCountry = {this.callbackCountry}
-                                   callbackFromParentStartYY = {this.callbackStartYY}
-                                   callbackFromParentEndYY = {this.callbackEndYY}
-                                   callbackFromParentDegree = {this.callbackDegree}
-                                   callbackFromParentSpec = {this.callbackSpec} />
+                        <Education callbackFromParentEducation = {this.callbackEducation} />
 
-                        </ScrollView>
 
                 </Bar>
 
@@ -331,8 +260,6 @@ export default class Career extends React.Component {
                      iconOpened='chevron-down'
                      style={styles.bar}> 
 
-                     <ScrollView showsVerticalScrollIndicator={false}>
-
                     <JobExp callbackFromJobCompanies = {this.callbackCompanies}
                             callbackFromJobPositions = {this.callbackJobPositions}
                             callbackFromJobCities = {this.callbackJobCities}
@@ -341,8 +268,6 @@ export default class Career extends React.Component {
                             callbackFromJobStartYY = {this.callbackJobStartYY}
                             callbackFromJobEndMM = {this.callbackJobEndMM}
                             callbackFromJobEndYY = {this.callbackJobEndYY}/>
-
-                    </ScrollView>
 
                 </Bar>
 
@@ -356,13 +281,10 @@ export default class Career extends React.Component {
                      iconOpened='chevron-down'
                      style={styles.bar}> 
 
-                     <ScrollView showsVerticalScrollIndicator={false}>
 
                         <ProjectExp callbackFromProjectNames = {this.callbackProjects}
                                     callbackFromProjectPositions = {this.callbackProjectPositions}
                                        callbackFromCourses = {this.callbackCourses} />
-
-                     </ScrollView>
 
                 </Bar>
 
@@ -392,7 +314,6 @@ const styles = StyleSheet.create({
         
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'white',
         borderWidth: 1,
         borderColor: '#42D260',
 
