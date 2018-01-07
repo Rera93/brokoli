@@ -19,6 +19,8 @@ export default class Education extends React.Component {
             country: '',
             startYear: '',
             endYear: '',
+            startMonth: '',
+            endMonth: '',
             degree: '',
             specialization: '',
             educations: [],
@@ -72,6 +74,29 @@ export default class Education extends React.Component {
                 
     }
 
+    _grabStartMM = (text) => {
+        
+                this.state.startMonth = text
+                this.setState(function(prevState, props){
+                  return {startMonth: prevState.startMonth}
+                 });
+                //console.log('Start Month: ', this.state.startMonth)
+                this.props.callbackFromParentStartYY(this.state.startMonth);
+                
+    }
+
+    
+    _grabEndMM = (text) => {
+        
+                this.state.endMonth = text
+                this.setState(function(prevState, props){
+                  return {endMonth: prevState.endMonth}
+                 });
+                //console.log('End Month: ', this.state.endMonth)
+                this.props.callbackFromParentStartYY(this.state.endMonth);
+                
+    }
+
     _grabEndYear = (text) => {
                 
                 this.state.endYear = text
@@ -111,18 +136,14 @@ export default class Education extends React.Component {
 
             <ViewContainer style={styles.educationCont}>
 
-                <View style={styles.eduTitleCont}>
-
-                    <Text style={styles.eduTitle}> Most recent education </Text>
-                    
-                </View>
-
                 <View style={styles.topEdu}>
 
                     <View style={styles.nameCont}>
 
                     <TextInput style={styles.name} 
-                               placeholder="name of school"
+                               placeholder="School name"
+                               placeholderTextColor='#C7C7CD'
+                               underlineColorAndroid='transparent'
                                onChangeText={(text) => this._grabSchoolName(text)}/>
 
                     </View>
@@ -130,11 +151,15 @@ export default class Education extends React.Component {
                     <View style={styles.locationCont}>
 
                     <TextInput style={styles.location}
-                               placeholder="city"
+                               placeholder="City"
+                               placeholderTextColor='#C7C7CD'
+                               underlineColorAndroid='transparent'
                                onChangeText={(text) => this._grabCity(text)} />
 
                     <TextInput style={styles.location}
-                               placeholder="country"
+                               placeholder="Country"
+                               placeholderTextColor='#C7C7CD'
+                               underlineColorAndroid='transparent'
                                onChangeText={(text) => this._grabCountry(text)} />
 
                     </View>
@@ -142,34 +167,179 @@ export default class Education extends React.Component {
 
                 </View>
 
+
+                
+                <View style={[styles.middleEdu, {marginTop: 10, marginBottom: 10}]}>
+
+                <View style={{flex: 1, marginLeft: 15}}>
+
+                <Text style={styles.title}>Start Date</Text>
+
+                    </View>
+
+                    <View style={{flex: 1, marginLeft: 10}}>
+
+                    <Text style={styles.title}>End Date</Text>
+                        </View>
+
+                    </View>
+
                 <View style={styles.middleEdu}>
 
                     <View style={styles.yearCont} >
 
-                        <View style={{flex: 1, justifyContent: 'center'}}> 
+                        <View style={[styles.pickerCont, {flex: 1, justifyContent: 'center', marginRight: 10}]}> 
+
+
+                        <Picker
+                        selectedValue={this.state.startMonth}
+                        onValueChange={(month) => this._grabStartMM(month)}
+                        mode="dropdown"
+                        itemStyle = {{fontSize: 12}}
+                        style={{
+                        color: '#C7C7CD',
+                        height: 35,
+                        }}>
+                        <Picker.Item label="Jan" value="Jan" />
+                        <Picker.Item label="Feb" value="Feb" />
+                        <Picker.Item label="Mar" value="Mar" />
+                        <Picker.Item label="Apr" value="Apr" />
+                        <Picker.Item label="May" value="May" />
+                        <Picker.Item label="Jun" value="Jun" />
+                        <Picker.Item label="Jul" value="Jul" />
+                        <Picker.Item label="Aug" value="Aug" />
+                        <Picker.Item label="Sep" value="Sep" />
+                        <Picker.Item label="Oct" value="Oct" />
+                        <Picker.Item label="Nov" value="Nov" />
+                        <Picker.Item label="Dec" value="Dec" />
+                         </Picker> 
                         
-
-                          
-
                         </View>
 
-                        <View style={{flex: 1, marginTop: 20, alignItems: 'center'}}>
+                        <View style={[styles.pickerCont, {flex: 1, justifyContent: 'center', marginRight: 5}]}> 
 
-                            <Text> until </Text>
 
+                        <Picker
+                        selectedValue={this.state.startYear}
+                        onValueChange={(year) => this._grabStartYear(year)}
+                        mode="dropdown"
+                        itemStyle = {{fontSize: 12}}
+                        style={{
+                        color: '#C7C7CD',
+                        height: 35,
+                        }}>
+                        <Picker.Item label="2018" value="2018" />
+                        <Picker.Item label="2017" value="2017" />
+                        <Picker.Item label="2016" value="2016" />
+                        <Picker.Item label="2015" value="2015" />
+                        <Picker.Item label="2014" value="2014" />
+                        <Picker.Item label="2013" value="2013" />
+                        <Picker.Item label="2012" value="2012" />
+                        <Picker.Item label="2011" value="2011" />
+                        <Picker.Item label="2010" value="2010" />
+                        <Picker.Item label="2009" value="2009" />
+                        <Picker.Item label="2008" value="2008" />
+                        <Picker.Item label="2007" value="2007" />
+                        <Picker.Item label="2006" value="2006" />
+                        <Picker.Item label="2005" value="2005" />
+                        <Picker.Item label="2004" value="2004" />
+                        <Picker.Item label="2003" value="2003" />
+                        <Picker.Item label="2002" value="2002" />
+                        <Picker.Item label="2001" value="2001" />
+                        <Picker.Item label="2000" value="2000" />
+                        <Picker.Item label="1999" value="1999" />
+                        <Picker.Item label="1998" value="1998" />
+                        <Picker.Item label="1997" value="1997" />
+                        <Picker.Item label="1996" value="1996" />
+                        <Picker.Item label="1995" value="1995" />
+                        <Picker.Item label="1994" value="1994" />
+                        <Picker.Item label="1993" value="1993" />
+                        <Picker.Item label="1992" value="1992" />
+                        <Picker.Item label="1991" value="1991" />
+                        <Picker.Item label="1990" value="1990" />
+                         </Picker> 
+                        
                         </View>
 
-                        <View style={{flex: 1}}>
+                        <View style={[styles.pickerCont, {flex: 1, justifyContent: 'center', marginLeft: 5}]}> 
 
-                            
 
+                        <Picker
+                        selectedValue={this.state.endMonth}
+                        onValueChange={(month) => this._grabEndMM(month)}
+                        mode="dropdown"
+                        itemStyle = {{fontSize: 12}}
+                        style={{
+                        color: '#C7C7CD',
+                        height: 35,
+                        }}>
+                        <Picker.Item label="Jan" value="Jan" />
+                        <Picker.Item label="Feb" value="Feb" />
+                        <Picker.Item label="Mar" value="Mar" />
+                        <Picker.Item label="Apr" value="Apr" />
+                        <Picker.Item label="May" value="May" />
+                        <Picker.Item label="Jun" value="Jun" />
+                        <Picker.Item label="Jul" value="Jul" />
+                        <Picker.Item label="Aug" value="Aug" />
+                        <Picker.Item label="Sep" value="Sep" />
+                        <Picker.Item label="Oct" value="Oct" />
+                        <Picker.Item label="Nov" value="Nov" />
+                        <Picker.Item label="Dec" value="Dec" />
+                         </Picker> 
+                        
+                        </View>
+
+                        <View style={[styles.pickerCont, {flex: 1, justifyContent: 'center', marginLeft: 10}]}> 
+
+
+                        <Picker
+                        selectedValue={this.state.endYear}
+                        onValueChange={(year) => this._grabEndYear(year)}
+                        mode="dropdown"
+                        itemStyle = {{fontSize: 12}}
+                        style={{
+                        color: '#C7C7CD',
+                        height: 35,
+                        }}>
+                        <Picker.Item label="2018" value="2018" />
+                        <Picker.Item label="2017" value="2017" />
+                        <Picker.Item label="2016" value="2016" />
+                        <Picker.Item label="2015" value="2015" />
+                        <Picker.Item label="2014" value="2014" />
+                        <Picker.Item label="2013" value="2013" />
+                        <Picker.Item label="2012" value="2012" />
+                        <Picker.Item label="2011" value="2011" />
+                        <Picker.Item label="2010" value="2010" />
+                        <Picker.Item label="2009" value="2009" />
+                        <Picker.Item label="2008" value="2008" />
+                        <Picker.Item label="2007" value="2007" />
+                        <Picker.Item label="2006" value="2006" />
+                        <Picker.Item label="2005" value="2005" />
+                        <Picker.Item label="2004" value="2004" />
+                        <Picker.Item label="2003" value="2003" />
+                        <Picker.Item label="2002" value="2002" />
+                        <Picker.Item label="2001" value="2001" />
+                        <Picker.Item label="2000" value="2000" />
+                        <Picker.Item label="1999" value="1999" />
+                        <Picker.Item label="1998" value="1998" />
+                        <Picker.Item label="1997" value="1997" />
+                        <Picker.Item label="1996" value="1996" />
+                        <Picker.Item label="1995" value="1995" />
+                        <Picker.Item label="1994" value="1994" />
+                        <Picker.Item label="1993" value="1993" />
+                        <Picker.Item label="1992" value="1992" />
+                        <Picker.Item label="1991" value="1991" />
+                        <Picker.Item label="1990" value="1990" />
+
+                         </Picker> 
+                        
                         </View>
 
                     </View>
 
                 </View>
 
-                <View style={styles.bottomEdu}>
+                <View style={[styles.bottomEdu, {marginTop: 10}]}>
 
                 <View style={{flex: 2, marginLeft: 15}}>
 
@@ -197,7 +367,7 @@ export default class Education extends React.Component {
                         itemStyle = {{fontSize: 12}}
                         style={{
                         color: '#C7C7CD',
-                        height: 40,
+                        height: 35,
                         }}>
                         <Picker.Item label="Bachelor" value="Bachelor" />
                         <Picker.Item label="Master" value="Master" />
@@ -215,7 +385,7 @@ export default class Education extends React.Component {
                         itemStyle = {{fontSize: 12}}
                         style={{
                         color: '#C7C7CD',
-                        height: 40,
+                        height: 35,
                         }}>
                         <Picker.Item label="Accountancy" value="Accountancy" />
                         <Picker.Item label="Advanced Study" value="Advanced Study" />
@@ -301,14 +471,22 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     name: {
-        borderWidth: 1,
+
+        backgroundColor: '#F8F9FB',
+        color: '#C7C7CD',
+        borderWidth: 2,
         marginLeft: 10,
         marginRight: 10,
-        padding: 5,
+        paddingTop: 5,
+        paddingBottom: 5,
+        paddingLeft: 10,
+        paddingRight: 10,
         borderRadius: 5,
         alignItems: 'center',
         width: width - 20,
-        borderColor: 'grey'   
+        borderColor: 'grey',
+        fontWeight: '400',
+        fontSize: 16,
     },
     locationCont:{
         flex: 1,
@@ -321,7 +499,8 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginBottom: 5,
 
     },
     yearCont: {
@@ -333,13 +512,21 @@ const styles = StyleSheet.create({
         marginRight: 10
     },
     location: {
-        borderWidth: 1,
+        backgroundColor: '#F8F9FB',
+        borderWidth: 2,
         marginLeft: 10,
         marginRight: 10,
         padding: 5,
         borderRadius: 5, 
         borderColor: 'grey',
-        width: width/2 - 20  
+        width: width/2 - 20, 
+        color: '#C7C7CD',
+        paddingTop: 5,
+        paddingBottom: 5,
+        paddingLeft: 10,
+        paddingRight: 10,
+        fontWeight: '400',
+        fontSize: 16,
     },
     bottomEdu:{
         flex: 1,
