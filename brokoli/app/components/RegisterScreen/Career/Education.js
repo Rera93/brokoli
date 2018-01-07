@@ -3,6 +3,8 @@ import { StyleSheet, Text, TouchableOpacity, Dimensions, View, TextInput } from 
 
 import ViewContainer from '../../ViewContainer'
 import { Dropdown } from 'react-native-material-dropdown';
+import { Picker } from 'react-native-picker-dropdown'
+import Modal from 'react-native-modal'
 
 const width = Dimensions.get('window').width
 
@@ -19,6 +21,11 @@ export default class Education extends React.Component {
             endYear: '',
             degree: '',
             specialization: '',
+            educations: [],
+            flip: false,
+            index: null,
+            isModalDeleteVisible: false
+            
         }
     }
 
@@ -99,81 +106,6 @@ export default class Education extends React.Component {
 
     
     render(){
-
-
-        let degreeData = [{
-            value: 'Phd',
-          }, {
-            value: 'Master',
-          }, {
-            value: 'Bachelor',
-          }];
-
-        let specializationData = [{
-            value: 'Computer Science',
-          }, {
-            value: 'Information Science',
-        }];
-
-        let yyData = [{
-            value: 2017,
-        },{
-            value: 2016,
-        },{
-            value: 2015,
-        }, {
-            value: 2014,
-        },{
-            value: 2013,
-        },{
-            value: 2012,
-        },{
-            value: 2011,
-        },{
-            value: 2010,
-        },{
-            value: 2009,
-        }, {
-            value: 2008,
-        },{
-            value: 2007,
-        },{
-            value: 2006,
-        }, {
-            value: 2005,
-        },{
-            value: 2004,
-        },{
-            value: 2003,
-        }, {
-            value: 2002,
-        },{
-            value: 2001,
-        },{
-            value: 2000,
-        }, {
-            value: 1999,
-        },{
-            value: 1998,
-        }, {
-            value: 1997,
-        },{
-            value: 1996,
-        },{
-            value: 1995,
-        }, {
-            value: 1994,
-        },{
-            value: 1993,
-        },{
-            value: 1992,
-        }, {
-            value: 1991,
-        },{
-            value: 1990,
-        }];
-
-        
     
         return(
 
@@ -215,11 +147,9 @@ export default class Education extends React.Component {
                     <View style={styles.yearCont} >
 
                         <View style={{flex: 1, justifyContent: 'center'}}> 
+                        
 
-                            <Dropdown
-                                label='Starting Year'
-                                onChangeText={(text) => this._grabStartYear(text)}
-                                data={yyData}/> 
+                          
 
                         </View>
 
@@ -231,10 +161,7 @@ export default class Education extends React.Component {
 
                         <View style={{flex: 1}}>
 
-                            <Dropdown
-                                label='Ending Year'
-                                onChangeText={(text) => this._grabEndYear(text)}
-                                data={yyData}/> 
+                            
 
                         </View>
 
@@ -246,20 +173,79 @@ export default class Education extends React.Component {
 
                 <View style={{flex: 2, marginLeft: 10}}>
 
-                <Dropdown
-                    label='Degree'
-                    onChangeText={(text) => this._grabDegree(text)}
-                    data={degreeData}/>    
+                <Picker
+                        selectedValue={this.state.experience}
+                        onValueChange={(degree) => this._grabDegree(degree)}
+                        mode="dropdown"
+                        itemStyle = {{fontSize: 12}}
+                        style={{
+                        color: '#C7C7CD',
+                        height: 40,
+                        }}>
+                        <Picker.Item label="Bachelor" value="Bachelor" />
+                        <Picker.Item label="Master" value="Master" />
+                        <Picker.Item label="Phd" value="Phd" />
+                    </Picker>   
 
                 </View>
 
                 <View style={{flex: 3, marginLeft: 10, marginRight: 10}}>
 
-                <Dropdown
-                    label='Specialization'
-                    onChangeText={(text) => this._grabSpecialization(text)}
-                    data={specializationData}/>   
+                <Picker
+                        selectedValue={this.state.experience}
+                        onValueChange={(specialization) => this._grabSpecialization(specialization)}
+                        mode="dropdown"
+                        itemStyle = {{fontSize: 12}}
+                        style={{
+                        color: '#C7C7CD',
+                        height: 40,
+                        }}>
+                        <Picker.Item label="Accountancy" value="Accountancy" />
+                        <Picker.Item label="Advanced Study" value="Advanced Study" />
+                        <Picker.Item label="Applied Finance" value="Applied Finance" />
+                        <Picker.Item label="Applied Science" value="Applied Science" />
+                        <Picker.Item label="Architecture" value="Architecture" />
+                        <Picker.Item label="Bioinformatics" value="Bioinformatics" />
+                        <Picker.Item label="Business Administration" value="Business Administration" />
+                        <Picker.Item label="Business, Entrepreneurship and Technology" value="Business, Entrepreneurship and Technology" />
+                        <Picker.Item label="Business" value="Business" />
+                        <Picker.Item label="Business Engineering" value="Business Engineering" />
+                        <Picker.Item label="Business Informatics" value="Business Informatics" />
+                        <Picker.Item label="Chemistry" value="Chemistry" />
+                        <Picker.Item label="Criminal Justice" value="Criminal Justice" />
+                        <Picker.Item label="Computer Science" value="Computer Science" />
+                        <Picker.Item label="Cyber Security" value="Cyber Security" />
+                        <Picker.Item label="Data Science" value="Data Science" />
+                        <Picker.Item label="Economics" value="Economics" />
+                        <Picker.Item label="Engineering" value="Engineering" />
+                        <Picker.Item label="Engineering Management" value="Engineering Management" />
+                        <Picker.Item label="European Law" value="European Law" />
+                        <Picker.Item label="Finance" value="Finance" />
+                        <Picker.Item label="Financial Economics" value="Financial Economics" />
+                        <Picker.Item label="Financial Engineering" value="Financial Engineering" />
+                        <Picker.Item label="Fine Arts" value="Fine Arts" />
+                        <Picker.Item label="Humanities" value="Humanities" />
+                        <Picker.Item label="International Affairs" value="International Affairs" />
+                        <Picker.Item label="Information Management" value="Information Management" />
+                        <Picker.Item label="Information System Management" value="Information System Management" />
+                        <Picker.Item label="Laws" value="Laws" />
+                        <Picker.Item label="Landscape Architecture" value="Landscape Architecture" />
+                        <Picker.Item label="Liberal Arts" value="Liberal Arts" />
+                        <Picker.Item label="Management" value="Management" />
+                        <Picker.Item label="Mathematical Finance" value="Mathematical Finance" />
+                        <Picker.Item label="Mathematics" value="Mathematics" />
+                        <Picker.Item label="Medical Science" value="Medical Science" />
+                        <Picker.Item label="Medicine" value="Medicine" />
+                        <Picker.Item label="Philosophy" value="Philosophy" />
+                        <Picker.Item label="Physics" value="Physics" />
+                        <Picker.Item label="Political Science" value="Political Science" />
+                        <Picker.Item label="Psychology" value="Psychology" />
+                        <Picker.Item label="Social Science" value="Social Science" />
+                        <Picker.Item label="Urban Planning" value="Urban Planning" />
+                    </Picker> 
+                
 
+                
                 </View>
 
                 </View>
