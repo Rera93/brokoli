@@ -356,7 +356,6 @@ const styles = StyleSheet.create({
         
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'white',
         borderWidth: 1,
         borderColor: '#42D260',
 

@@ -19,12 +19,12 @@ export default class Education extends React.Component {
             schoolName: '',
             city: '',
             country: '',
-            startYear: '',
-            endYear: '',
-            startMonth: '',
-            endMonth: '',
-            degree: '',
-            specialization: '',
+            startYear: '2018',
+            endYear: '2018',
+            startMonth: 'Jan',
+            endMonth: 'Jan',
+            degree: 'Bachelor',
+            specialization: 'Accountancy',
             educations: [],
             flip: false,
             index: null,
@@ -40,7 +40,7 @@ export default class Education extends React.Component {
                   return {schoolName: prevState.schoolName}
                  });
                 //console.log('School Name: ', this.state.schoolName)
-                this.props.callbackFromParentSchool(this.state.schoolName);
+               // this.props.callbackFromParentSchool(this.state.schoolName);
 
                 this._flip()
             
@@ -54,7 +54,7 @@ export default class Education extends React.Component {
                 return {city: prevState.city}
                 });
                // console.log('City: ', this.state.city)
-                this.props.callbackFromParentCity(this.state.city);
+               // this.props.callbackFromParentCity(this.state.city);
 
                 this._flip()
                         
@@ -66,7 +66,7 @@ export default class Education extends React.Component {
                   return {country: prevState.country}
                  });
                 //console.log('Country: ', this.state.country)
-                this.props.callbackFromParentCountry(this.state.country);
+             //   this.props.callbackFromParentCountry(this.state.country);
 
                 this._flip()
                 
@@ -78,7 +78,7 @@ export default class Education extends React.Component {
                   return {startYear: prevState.startYear}
                  });
                 //console.log('Start Year: ', this.state.startYear)
-                this.props.callbackFromParentStartYY(this.state.startYear);
+            //    this.props.callbackFromParentStartYY(this.state.startYear);
                 
     }
 
@@ -89,7 +89,7 @@ export default class Education extends React.Component {
                   return {startMonth: prevState.startMonth}
                  });
                 //console.log('Start Month: ', this.state.startMonth)
-                this.props.callbackFromParentStartYY(this.state.startMonth);
+            //    this.props.callbackFromParentStartYY(this.state.startMonth);
                 
     }
 
@@ -101,7 +101,7 @@ export default class Education extends React.Component {
                   return {endMonth: prevState.endMonth}
                  });
                 //console.log('End Month: ', this.state.endMonth)
-                this.props.callbackFromParentStartYY(this.state.endMonth);
+              //  this.props.callbackFromParentStartYY(this.state.endMonth);
                 
     }
 
@@ -112,7 +112,7 @@ export default class Education extends React.Component {
                 return {endYear: prevState.endYear}
                 });
                 //console.log('End Year: ', this.state.endYear)
-                this.props.callbackFromParentEndYY(this.state.endYear);
+             //   this.props.callbackFromParentEndYY(this.state.endYear);
                         
     }
     _grabDegree = (text) => {
@@ -122,7 +122,7 @@ export default class Education extends React.Component {
                   return {degree: prevState.degree}
                  });
                 //console.log('Degree: ', this.state.degree)
-                this.props.callbackFromParentDegree(this.state.degree);
+             //   this.props.callbackFromParentDegree(this.state.degree);
                 
     }
 
@@ -133,7 +133,7 @@ export default class Education extends React.Component {
                 return {specialization: prevState.specialization}
                 });
                 //console.log('Specialization: ', this.state.specialization)
-                this.props.callbackFromParentSpec(this.state.specialization);
+             //   this.props.callbackFromParentSpec(this.state.specialization);
                         
     }
 
@@ -154,7 +154,7 @@ export default class Education extends React.Component {
     
          
          console.log('Update SkillsChild: ', this.state.educations)
-         this.props.callbackFromParent(this.state.educations);
+      //   this.props.callbackFromParent(this.state.educations);
     
          //Close modal
          this._untoggleModalDelete()
@@ -288,6 +288,9 @@ export default class Education extends React.Component {
 
             <View style={styles.educationCont}>
 
+
+            <View style={{backgroundColor: 'white'}}>
+
                 <View style={styles.topEdu}>
 
                     <View style={styles.nameCont}>
@@ -296,6 +299,7 @@ export default class Education extends React.Component {
                                placeholder="School name"
                                placeholderTextColor='#C7C7CD'
                                underlineColorAndroid='transparent'
+                               value = {this.state.schoolName}
                                onChangeText={(text) => this._grabSchoolName(text)}/>
 
                     </View>
@@ -306,12 +310,14 @@ export default class Education extends React.Component {
                                placeholder="City"
                                placeholderTextColor='#C7C7CD'
                                underlineColorAndroid='transparent'
+                               value={this.state.city}
                                onChangeText={(text) => this._grabCity(text)} />
 
                     <TextInput style={styles.location}
                                placeholder="Country"
                                placeholderTextColor='#C7C7CD'
                                underlineColorAndroid='transparent'
+                               value={this.state.country}
                                onChangeText={(text) => this._grabCountry(text)} />
 
                     </View>
@@ -336,7 +342,7 @@ export default class Education extends React.Component {
 
                     </View>
 
-                <View style={styles.middleEdu}>
+                <View style={[styles.middleEdu, {marginLeft: 10, marginRight: 10}]}>
 
                         <View style={[styles.pickerCont, {flex: 1, justifyContent: 'center', marginRight: 10}]}> 
 
@@ -592,14 +598,38 @@ export default class Education extends React.Component {
                       <Text style={[styles.btnText,{color: this.state.flip ? 'white' : '#42D260'}]}> ADD </Text>
                     </TouchableOpacity>
 
+                </View>
+
                     <FlatList
                         extraData={this.state}
                         data={this.state.educations}
                         renderItem={({ item, index }) => (
                             <View style={styles.eduContainer}>
-                            <View style={{flex: 5, alignItems: 'flex-start', justifyContent: 'center'}}>
+                            <View style={{paddingTop: 5, paddingBottom: 5, flex: 5, alignItems: 'flex-start', justifyContent: 'center'}}>
                             <View style={styles.edu}>
-                            <Text style={styles.eduText}>Name: {item.school} </Text>
+                            <Image source={require('../../../../img/icons/college-graduation.png')} 
+                                   style={styles.icon}/>
+                            <Text style={styles.eduText}>{item.school} </Text>
+                            </View>
+                            <View style={styles.edu}>
+                            <Image source={require('../../../../img/icons/graduate-certificate.png')} 
+                                   style={styles.icon}/>
+                            <Text style={styles.eduText}>{item.degree}</Text>
+                            </View>
+                            <View style={styles.edu}>
+                            <Image source={require('../../../../img/icons/medal.png')} 
+                                   style={styles.icon}/>
+                            <Text style={styles.eduText}>{item.specialization}</Text>
+                            </View>
+                            <View style={styles.edu}>
+                            <Image source={require('../../../../img/icons/cityCountry.png')} 
+                                   style={styles.icon}/>
+                            <Text style={styles.eduText}>{item.city}, {item.country} </Text>
+                            </View>
+                            <View style={styles.edu}>
+                            <Image source={require('../../../../img/icons/calendar.png')} 
+                                   style={styles.icon}/>
+                            <Text style={styles.eduText}>{item.startMM} {item.startYY} - {item.endMM} {item.endYY} </Text>
                             </View>
                             </View>
                             <TouchableOpacity style={{flex: 1, alignItems: 'flex-end', justifyContent: 'center'}}
@@ -631,7 +661,6 @@ export default class Education extends React.Component {
 const styles = StyleSheet.create({
 
     educationCont: {
-        backgroundColor: 'white',
         marginTop: 10,
     },
     eduTitleCont: {
@@ -645,6 +674,7 @@ const styles = StyleSheet.create({
     topEdu: {
         alignItems: 'center',
         marginTop: 10,
+        backgroundColor: 'white',
 
     },
     nameCont: {
@@ -682,7 +712,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginBottom: 5,
-
+        backgroundColor: 'white',
     },
     yearCont: {
         flex: 1,
@@ -713,7 +743,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom: 10
+        marginBottom: 10,
+        backgroundColor: 'white',
     },
     pickerCont: {
         borderWidth: 2, 
@@ -733,7 +764,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         padding: 5,
-        marginLeft: 5,
+        marginLeft: 10,
+        marginRight: 20,
         width: width - 20,
         marginBottom: 10,
         marginTop: 10,
@@ -748,7 +780,7 @@ const styles = StyleSheet.create({
             width: width - 20,
             backgroundColor: 'white',
             marginBottom: 5,
-            marginLeft: 5,
+            marginLeft: 10,
             marginRight: 5,
             paddingLeft: 10,
             paddingRight: 10,
@@ -761,14 +793,40 @@ const styles = StyleSheet.create({
         marginRight: 5,
         paddingLeft: 10,
         paddingRight: 10,
-        paddingBottom: 20,
-        paddingTop: 20,
+        flexDirection: 'row'
       },
     eduText: {
         color: 'grey',
         fontSize: 17,
+        fontWeight: '400',
+        paddingLeft: 10,
+    },
+    button: {
+        padding: 12,
+        margin: 16,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 4,
+        borderColor: 'rgba(0, 0, 0, 0.1)',
+      },
+      modalContent: {
+        backgroundColor: 'white',
+        padding: 22,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 4,
+        borderColor: 'rgba(0, 0, 0, 0.1)',
+      },
+      btnTxt: {
+        fontSize: 16,
         fontWeight: '400'
     },
+    icon: {
+        width: 22.5,
+        height: 22.5,
+        resizeMode: 'center',
+        tintColor: '#C7C7CD'
+    }
 
 
 })
