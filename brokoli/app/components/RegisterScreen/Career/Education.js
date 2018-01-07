@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, Dimensions, View, TextInput } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, Dimensions, View, TextInput, FlatList } from 'react-native';
 
 import ViewContainer from '../../ViewContainer'
 import { Dropdown } from 'react-native-material-dropdown';
@@ -437,6 +437,12 @@ export default class Education extends React.Component {
 
                 </View>
 
+                    <TouchableOpacity  disabled={!this.state.flip}
+                    style={[styles.btnContainer, {backgroundColor: this.state.flip ? '#42D260' : 'white' }]}
+                    onPress={() => this._onAdd()}>
+                      <Text style={[styles.btnText,{color: this.state.flip ? 'white' : '#42D260'}]}> ADD </Text>
+                    </TouchableOpacity>
+
                 </ViewContainer>
 
         )
@@ -462,7 +468,8 @@ const styles = StyleSheet.create({
     },
     topEdu: {
         flex: 1,
-        alignItems: 'center'
+        alignItems: 'center',
+        marginTop: 10,
 
     },
     nameCont: {
@@ -545,7 +552,24 @@ const styles = StyleSheet.create({
         fontSize: 17,
         fontWeight: '500',
         color: 'grey'
-    }
+    },
+    btnContainer: {
+        flex: 1,
+        borderWidth: 2,
+        borderColor: '#42D260',
+        borderRadius: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 5,
+        marginLeft: 5,
+        width: width - 20,
+        marginBottom: 10,
+        marginTop: 10,
+    },
+    btnText: {
+        fontSize: 17,
+        fontWeight: '600',
+    },
 
 
 })
