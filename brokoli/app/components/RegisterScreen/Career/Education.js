@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, Dimensions, View, TextInput, FlatList } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, Dimensions, View, TextInput, FlatList, Image } from 'react-native';
 
 import ViewContainer from '../../ViewContainer'
 import { Dropdown } from 'react-native-material-dropdown';
@@ -7,6 +7,8 @@ import { Picker } from 'react-native-picker-dropdown'
 import Modal from 'react-native-modal'
 
 const width = Dimensions.get('window').width
+
+var tempArr = []
 
 export default class Education extends React.Component {
 
@@ -39,6 +41,8 @@ export default class Education extends React.Component {
                  });
                 //console.log('School Name: ', this.state.schoolName)
                 this.props.callbackFromParentSchool(this.state.schoolName);
+
+                this._flip()
             
                 
     }
@@ -51,6 +55,8 @@ export default class Education extends React.Component {
                 });
                // console.log('City: ', this.state.city)
                 this.props.callbackFromParentCity(this.state.city);
+
+                this._flip()
                         
     }
     _grabCountry = (text) => {
@@ -61,6 +67,8 @@ export default class Education extends React.Component {
                  });
                 //console.log('Country: ', this.state.country)
                 this.props.callbackFromParentCountry(this.state.country);
+
+                this._flip()
                 
     }
     _grabStartYear = (text) => {
@@ -129,12 +137,156 @@ export default class Education extends React.Component {
                         
     }
 
+    _deleteItem(){
+        //Use temp array(object) instead to state.someArr to apply javascript functionalities on arrays. 
+         var tempEduArr = []
+         tempEduArr = this.state.educations
+         console.log('tempArrChild: ', tempEduArr)
+    
+         //Returns the part of array we want to remove
+         tempEduArr.splice(this.state.index, 1)
+    
+         //Assign the tempArr with the removed element to skills
+         this.state.educations = tempEduArr
+         this.setState(function(prevState, props){
+             return { educations : prevState.educations }
+         })
+    
+         
+         console.log('Update SkillsChild: ', this.state.educations)
+         this.props.callbackFromParent(this.state.educations);
+    
+         //Close modal
+         this._untoggleModalDelete()
+       }
+
+       _onAdd(){
+        tempArr.unshift({school: this.state.schoolName, city: this.state.city, country: this.state.country, 
+                         startMM: this.state.startMonth, startYY: this.state.startYear, endMM: this.state.endMonth,
+                         endYY: this.state.endYear, degree: this.state.degree, specialization: this.state.specialization})
+        console.log('tempArrChild: ', tempArr)
+        this.state.educations = tempArr
+        this.setState(function(prevState,props){
+            return {educations: prevState.educations}
+        })
+        console.log('educationsArrChild: ', this.state.educations)
+      //  this.props.callbackFromParent(this.state.educations);
+
+        //Release text inputs value
+        this.state.schoolName = ''
+        this.setState(function(prevState,props){
+            return {schoolName: prevState.schoolName}
+        })
+        this.state.city = ''
+        this.setState(function(prevState,props){
+            return {city: prevState.city}
+        })
+        this.state.country = ''
+        this.setState(function(prevState,props){
+            return {country: prevState.country}
+        })
+        this.state.startMonth = 'Jan'
+        this.setState(function(prevState,props){
+            return {startMonth: prevState.startMonth}
+        })
+        this.state.startYear = '2018'
+        this.setState(function(prevState,props){
+            return {startYear: prevState.startYear}
+        })
+        this.state.endMonth = 'Jan'
+        this.setState(function(prevState,props){
+            return {endMonth: prevState.endMonth}
+        })
+        this.state.endYear = '2018'
+        this.setState(function(prevState,props){
+            return {endYear: prevState.endYear}
+        })
+        this._flip()
+  }
+
+  _flip(){
+    
+          if(this.state.schoolName != '' && this.state.city != '' && this.state.country != '')
+          {
+              this.state.flip = true
+              this.setState(function(prevState,props){
+                  return {flip: prevState.flip}
+              })
+          }
+          else {
+            this.state.flip = false
+            this.setState(function(prevState,props){
+                return {flip: prevState.flip}
+            })
+    
+          }
+          
+          console.log('Flip: ', this.state.flip)
+    
+        }
+
+        _renderDeleteModalContent = () => (
+            
+                        <View style={[styles.modalContent, {backgroundColor: '#254D32'}]}>
+                        
+                            <Text style={[styles.title, {color: 'white'}]}>Are you sure you want to delete the selected education from your registration?</Text>
+                        
+                            <View style={{flexDirection: 'row'}}>
+                        
+                                                <TouchableOpacity 
+                                                                style={[styles.button,{backgroundColor: 'white'}]} 
+                                                                onPress={() => this._deleteItem() }>
+                                                <Text style={[styles.btnTxt, {color: '#254D32'}]}>Ok</Text>
+                                
+                                                </TouchableOpacity>
+                        
+                                                <TouchableOpacity style={[styles.button, {backgroundColor: '#A7333F'}]} 
+                                                                onPress={() => this._untoggleModalDelete()}>
+                                                <Text style={[styles.btnTxt, {color: 'white'}]}>Cancel</Text>
+                                
+                                                </TouchableOpacity>
+                        
+                                            </View>
+                        
+                                        </View>
+                        
+                      )
+    
+        _toggleModalDelete = ({item, index}) => {
+            
+                        this.state.index = index 
+                        this.setState(function(prevState, props){
+                            return { index: prevState.index }
+                        })
+                
+                        console.log('Selected Index: ', this.state.index)
+                
+                        this.state.isModalDeleteVisible = true
+                        this.setState(function(prevState, props){
+                            return {isModalDeleteVisible: prevState.isModalDeleteVisible}
+                        })
+                        console.log('deleteModal: ', this.state.isModalDeleteVisible)
+                      }
+            
+          _untoggleModalDelete(){
+            
+                        this.state.isModalDeleteVisible = false
+                        this.setState(function(prevState, props){
+                            return { isModalDeleteVisible: prevState.isModalDeleteVisible }
+                        })
+                        console.log('isModalDeleteVisible', this.state.isModalDeleteVisible)
+            
+                      }
+    
+
+    
+
     
     render(){
     
         return(
 
-            <ViewContainer style={styles.educationCont}>
+            <View style={styles.educationCont}>
 
                 <View style={styles.topEdu}>
 
@@ -185,8 +337,6 @@ export default class Education extends React.Component {
                     </View>
 
                 <View style={styles.middleEdu}>
-
-                    <View style={styles.yearCont} >
 
                         <View style={[styles.pickerCont, {flex: 1, justifyContent: 'center', marginRight: 10}]}> 
 
@@ -333,7 +483,6 @@ export default class Education extends React.Component {
 
                          </Picker> 
                         
-                        </View>
 
                     </View>
 
@@ -443,7 +592,37 @@ export default class Education extends React.Component {
                       <Text style={[styles.btnText,{color: this.state.flip ? 'white' : '#42D260'}]}> ADD </Text>
                     </TouchableOpacity>
 
-                </ViewContainer>
+                    <FlatList
+                        extraData={this.state}
+                        data={this.state.educations}
+                        renderItem={({ item, index }) => (
+                            <View style={styles.eduContainer}>
+                            <View style={{flex: 5, alignItems: 'flex-start', justifyContent: 'center'}}>
+                            <View style={styles.edu}>
+                            <Text style={styles.eduText}>Name: {item.school} </Text>
+                            </View>
+                            </View>
+                            <TouchableOpacity style={{flex: 1, alignItems: 'flex-end', justifyContent: 'center'}}
+                                                        onPress = {() => this._toggleModalDelete({item, index})}>
+                                            <Image source={require('../../../../img/icons/delete.png')}
+                                                style = {{resizeMode: 'center', width: 35, height: 35, tintColor: '#A7333F'}} />
+                                        </TouchableOpacity>
+                </View>
+            )}
+            keyExtractor={item => item.school}
+            style={{flex: 1, marginTop: 5}}
+          />
+
+          <Modal isVisible = {this.state.isModalDeleteVisible}
+                          animationIn={'slideInLeft'}
+                          animationOut={'slideOutRight'}>
+
+                         {this._renderDeleteModalContent()}
+
+                    </Modal> 
+
+
+                </View>
 
         )
     }
@@ -452,9 +631,6 @@ export default class Education extends React.Component {
 const styles = StyleSheet.create({
 
     educationCont: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
         backgroundColor: 'white',
         marginTop: 10,
     },
@@ -467,7 +643,6 @@ const styles = StyleSheet.create({
         color: 'grey'
     },
     topEdu: {
-        flex: 1,
         alignItems: 'center',
         marginTop: 10,
 
@@ -503,7 +678,6 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
     middleEdu: {
-        flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
@@ -536,7 +710,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     bottomEdu:{
-        flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
@@ -554,7 +727,6 @@ const styles = StyleSheet.create({
         color: 'grey'
     },
     btnContainer: {
-        flex: 1,
         borderWidth: 2,
         borderColor: '#42D260',
         borderRadius: 5,
@@ -569,6 +741,33 @@ const styles = StyleSheet.create({
     btnText: {
         fontSize: 17,
         fontWeight: '600',
+    },
+    eduContainer:{
+        flex: 1,
+        flexDirection: 'row',
+            width: width - 20,
+            backgroundColor: 'white',
+            marginBottom: 5,
+            marginLeft: 5,
+            marginRight: 5,
+            paddingLeft: 10,
+            paddingRight: 10,
+    },
+    edu:{
+        width: width - 20,
+        backgroundColor: 'white',
+        marginBottom: 5,
+        marginLeft: 5,
+        marginRight: 5,
+        paddingLeft: 10,
+        paddingRight: 10,
+        paddingBottom: 20,
+        paddingTop: 20,
+      },
+    eduText: {
+        color: 'grey',
+        fontSize: 17,
+        fontWeight: '400'
     },
 
 

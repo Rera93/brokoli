@@ -280,7 +280,6 @@ export default class Career extends React.Component {
                      iconOpened='chevron-down'
                      style={styles.bar}> 
 
-                     <ScrollView showsVerticalScrollIndicator={false}>
 
                         <Education callbackFromParentSchool = {this.callbackSchoolName}
                                    callbackFromParentCity = {this.callbackCity}
@@ -290,7 +289,6 @@ export default class Career extends React.Component {
                                    callbackFromParentDegree = {this.callbackDegree}
                                    callbackFromParentSpec = {this.callbackSpec} />
 
-                        </ScrollView>
 
                 </Bar>
 
@@ -304,8 +302,6 @@ export default class Career extends React.Component {
                      iconOpened='chevron-down'
                      style={styles.bar}> 
 
-                     <ScrollView showsVerticalScrollIndicator={false}>
-
                     <JobExp callbackFromJobCompanies = {this.callbackCompanies}
                             callbackFromJobPositions = {this.callbackJobPositions}
                             callbackFromJobCities = {this.callbackJobCities}
@@ -314,8 +310,6 @@ export default class Career extends React.Component {
                             callbackFromJobStartYY = {this.callbackJobStartYY}
                             callbackFromJobEndMM = {this.callbackJobEndMM}
                             callbackFromJobEndYY = {this.callbackJobEndYY}/>
-
-                    </ScrollView>
 
                 </Bar>
 
@@ -329,13 +323,10 @@ export default class Career extends React.Component {
                      iconOpened='chevron-down'
                      style={styles.bar}> 
 
-                     <ScrollView showsVerticalScrollIndicator={false}>
 
                         <ProjectExp callbackFromProjectNames = {this.callbackProjects}
                                     callbackFromProjectPositions = {this.callbackProjectPositions}
                                        callbackFromCourses = {this.callbackCourses} />
-
-                     </ScrollView>
 
                 </Bar>
 
