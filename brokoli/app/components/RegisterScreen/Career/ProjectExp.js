@@ -37,8 +37,6 @@ export default class ProjectExp extends React.Component {
                 console.log('Project Name: ', this.state.projectName)
 
                 this._flip()
-
-              //  this.props.callbackFromProjectNames(this.state.projectName);
                 
     }
 
@@ -52,7 +50,6 @@ export default class ProjectExp extends React.Component {
 
                 this._flip()
 
-              //  this.props.callbackFromProjectPositions(this.state.position);
                         
     }
     _grabCourse = (text) => {
@@ -64,8 +61,6 @@ export default class ProjectExp extends React.Component {
                 console.log('Course: ', this.state.course)
 
                 this._flip()
-
-                //this.props.callbackFromCourses(this.state.course);
                 
     }
 
@@ -86,7 +81,7 @@ export default class ProjectExp extends React.Component {
     
          
          console.log('Update ProjectsChild: ', this.state.projects)
-         this.props.callbackFromParentEducation(this.state.projects);
+         this.props.callbackFromParentProjects(this.state.projects);
     
          //Close modal
          this._untoggleModalDelete()
@@ -100,7 +95,7 @@ export default class ProjectExp extends React.Component {
             return {projects: prevState.projects}
         })
         console.log('projectsArrChild: ', this.state.projects)
-        this.props.callbackFromParentEducation(this.state.projects);
+        this.props.callbackFromParentProjects(this.state.projects);
 
         //Release text inputs value
         this.state.projectName = ''

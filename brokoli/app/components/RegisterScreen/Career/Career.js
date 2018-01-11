@@ -42,10 +42,8 @@ export default class Career extends React.Component {
             jobStartYears: Array(nrOfJobs).fill(''),
             jobEndMonths: Array(nrOfJobs).fill(''),
             jobEndYears: Array(nrOfJobs).fill(''),
-            //Project states
-            projectNames : Array(nrOfProjects).fill(''),
-            projectPositions : Array(nrOfProjects).fill(''),
-            courses: Array(nrOfProjects).fill(''),
+            //Project state
+            projects : []
 
           }
       }
@@ -148,33 +146,14 @@ export default class Career extends React.Component {
 
         //Callbacks for Projects
 
-        callbackProjects = (dataProjectNames) => {
+        callbackProjects = (dataProjects) => {
             
-                        this.state.projectNames = dataProjectNames
+                        this.state.projects = dataProjects
                         this.setState(function(prevState, props){
-                        return {projectNames: prevState.projectNames}
+                        return {projects: prevState.projects}
                         });
-                        console.log('Project Names: ', this.state.projectNames)
+                        console.log('Projects: ', this.state.projects)
             
-        }
-
-        callbackProjectPositions = (dataPositions) => {
-            
-                        this.state.projectPositions = dataPositions
-                        this.setState(function(prevState, props){
-                        return {projectPositions: prevState.projectPositions}
-                        });
-                        console.log('Project Positions: ', this.state.projectPositions)
-            
-        }
-
-        callbackCourses = (dataCourses) => {
-            
-                        this.state.courses = dataCourses
-                        this.setState(function(prevState, props){
-                        return {courses: prevState.courses}
-                        });
-                        console.log('Courses: ', this.state.courses)
         }
 
         componentDidMount() {
@@ -255,9 +234,7 @@ export default class Career extends React.Component {
                      style={styles.bar}> 
 
 
-                        <ProjectExp callbackFromProjectNames = {this.callbackProjects}
-                                    callbackFromProjectPositions = {this.callbackProjectPositions}
-                                       callbackFromCourses = {this.callbackCourses} />
+                        <ProjectExp callbackFromParentProjects = {this.callbackProjects} />
 
                 </Bar>
 
