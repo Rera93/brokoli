@@ -293,8 +293,7 @@ export default class ProjectExp extends React.Component {
     const styles = StyleSheet.create({
         
             projectContainer: {
-                alignItems: 'center',
-                justifyContent: 'center',
+               marginTop: 10
             },
             inputCont: {
                 flex: 1,

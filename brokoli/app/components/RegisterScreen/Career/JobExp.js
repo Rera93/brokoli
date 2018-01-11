@@ -1,5 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, Dimensions, TextInput } from 'react-native';
+import { StyleSheet, 
+         Text, 
+         TouchableOpacity, 
+         View, 
+         Dimensions, 
+         TextInput,
+         FlatList,
+         Image } from 'react-native';
 import { Picker } from 'react-native-picker-dropdown'
 import Modal from 'react-native-modal'
 
@@ -21,6 +28,10 @@ export default class JobExp extends React.Component {
             startYear: '2018',
             endMonth: 'Mon',
             endYear: '2018',
+            jobs: [],
+            flip: false,
+            index: null,
+            isModalDeleteVisible: false
         }
     }
 
@@ -31,6 +42,8 @@ export default class JobExp extends React.Component {
                   return {company: prevState.company}
                  });
                 console.log('Company: ', this.state.company)
+
+                this._flip()
                 
     }
 
@@ -41,6 +54,8 @@ export default class JobExp extends React.Component {
                 return {position: prevState.position}
                 });
                 console.log('Position: ', this.state.position)
+
+                this._flip()
                         
     }
     _grabCity = (text) => {
@@ -50,6 +65,8 @@ export default class JobExp extends React.Component {
                   return {city: prevState.city}
                  });
                 console.log('City: ', this.state.city)
+
+                this._flip()
                 
     }
 
@@ -60,6 +77,8 @@ export default class JobExp extends React.Component {
                 return {country: prevState.country}
                 });
                 console.log('Country: ', this.state.country)
+
+                this._flip()
                         
     }
     
@@ -103,16 +122,162 @@ export default class JobExp extends React.Component {
         
     }  
 
+    _deleteItem(){
+        //Use temp array(object) instead to state.someArr to apply javascript functionalities on arrays. 
+         var tempJobArr = []
+         tempJobArr = this.state.jobs
+         console.log('tempArrChild: ', tempJobArr)
+    
+         //Returns the part of array we want to remove
+         tempJobArr.splice(this.state.index, 1)
+    
+         //Assign the tempArr with the removed element to jobs
+         this.statejobs = tempJobArr
+         this.setState(function(prevState, props){
+             return { jobs : prevState.jobs }
+         })
+    
+         
+         console.log('Update JobsChild: ', this.state.jobs)
+        // this.props.callbackFromParentJobs(this.state.jobs);
+    
+         //Close modal
+         this._untoggleModalDelete()
+       }
+
+       _onAdd(){
+        tempArr.unshift({comp: this.state.company, pos: this.state.position, city: this.state.city,
+                         country: this.state.country, startMM: this.state.startMonth, startYY: this.state.startYear,
+                         endMM: this.state.endMonth, endYY: this.state.endYear})
+        console.log('tempArrChild: ', tempArr)
+        this.state.jobs = tempArr
+        this.setState(function(prevState,props){
+            return {jobs: prevState.jobs}
+        })
+        console.log('jobsArrChild: ', this.state.jobs)
+      //  this.props.callbackFromParentJobs(this.state.jobs);
+
+        //Release text inputs value
+        this.state.company = ''
+        this.setState(function(prevState,props){
+            return {company: prevState.company}
+        })
+        this.state.position = ''
+        this.setState(function(prevState,props){
+            return {position: prevState.position}
+        })
+        this.state.city = ''
+        this.setState(function(prevState,props){
+            return {city: prevState.city}
+        })
+        this.state.country = ''
+        this.setState(function(prevState,props){
+            return {country: prevState.country}
+        })
+        this.state.startMonth = 'Mon'
+        this.setState(function(prevState,props){
+            return {startMonth: prevState.startMonth}
+        })
+        this.state.startYear = '2018'
+        this.setState(function(prevState,props){
+            return {startYear: prevState.startYear}
+        })
+        this.state.endMonth = 'Jan'
+        this.setState(function(prevState,props){
+            return {endMonth: prevState.endMonth}
+        })
+        this.state.endYear = '2018'
+        this.setState(function(prevState,props){
+            return {endYear: prevState.endYear}
+        })
+
+        this._flip()
+  }
+
+  _flip(){
+    
+          if(this.state.company != '' && this.state.position != '' && this.state.city != '' && this.state.country != '')
+          {
+              this.state.flip = true
+              this.setState(function(prevState,props){
+                  return {flip: prevState.flip}
+              })
+          }
+          else {
+            this.state.flip = false
+            this.setState(function(prevState,props){
+                return {flip: prevState.flip}
+            })
+    
+          }
+          
+          console.log('Flip: ', this.state.flip)
+    
+        }
+
+        _renderDeleteModalContent = () => (
+            
+                        <View style={[styles.modalContent, {backgroundColor: '#254D32'}]}>
+                        
+                            <Text style={[styles.title, {color: 'white'}]}>Are you sure you want to delete the selected job from your registration?</Text>
+                        
+                            <View style={{flexDirection: 'row'}}>
+                        
+                                                <TouchableOpacity 
+                                                                style={[styles.button,{backgroundColor: 'white'}]} 
+                                                                onPress={() => this._deleteItem() }>
+                                                <Text style={[styles.btnTxt, {color: '#254D32'}]}>Ok</Text>
+                                
+                                                </TouchableOpacity>
+                        
+                                                <TouchableOpacity style={[styles.button, {backgroundColor: '#A7333F'}]} 
+                                                                onPress={() => this._untoggleModalDelete()}>
+                                                <Text style={[styles.btnTxt, {color: 'white'}]}>Cancel</Text>
+                                
+                                                </TouchableOpacity>
+                        
+                                            </View>
+                        
+                                        </View>
+                        
+                      )
+    
+        _toggleModalDelete = ({item, index}) => {
+            
+                        this.state.index = index 
+                        this.setState(function(prevState, props){
+                            return { index: prevState.index }
+                        })
+                
+                        console.log('Selected Index: ', this.state.index)
+                
+                        this.state.isModalDeleteVisible = true
+                        this.setState(function(prevState, props){
+                            return {isModalDeleteVisible: prevState.isModalDeleteVisible}
+                        })
+                        console.log('deleteModal: ', this.state.isModalDeleteVisible)
+                      }
+            
+          _untoggleModalDelete(){
+            
+                        this.state.isModalDeleteVisible = false
+                        this.setState(function(prevState, props){
+                            return { isModalDeleteVisible: prevState.isModalDeleteVisible }
+                        })
+                        console.log('isModalDeleteVisible', this.state.isModalDeleteVisible)
+            
+                      }
+
+
     render(){
 
         return(
 
             <View style={styles.jobContainer}>
 
-            <View style={{flexDirection: 'row', padding: 10, backgroundColor: 'white'}}>
+<View style={{flexDirection: 'row', padding: 10, backgroundColor: 'white'}}>
 
-
-                <View style={{flex: 1}}>
+                <View style={{flex : 1, backgroundColor: 'white'}}>
 
                     <View style={styles.inputCont}>  
 
@@ -326,15 +491,61 @@ export default class JobExp extends React.Component {
 
                     </View>
 
-                </View>  
 
+                </View> 
 
-
+                <TouchableOpacity  disabled={!this.state.flip}
+                    style={[styles.btnContainer, {backgroundColor: this.state.flip ? '#42D260' : 'white' }]}
+                    onPress={() => this._onAdd()}>
+                      <Text style={[styles.btnText,{color: this.state.flip ? 'white' : '#42D260'}]}> ADD </Text>
+                    </TouchableOpacity>
 
 
                 </View>
 
                 </View>
+                
+
+                <FlatList
+                        extraData={this.state}
+                        data={this.state.jobs}
+                        renderItem={({ item, index }) => (
+                            <View style={styles.jobContainerList}>
+                            <View style={{paddingTop: 10, paddingBottom: 5, flex: 5, alignItems: 'flex-start', justifyContent: 'center'}}>
+                            <View style={styles.job}>
+                            <Image source={require('../../../../img/icons/projection-screen.png')} 
+                                   style={styles.icon}/>
+                            <Text style={styles.jobText}>{item.comp} </Text>
+                            </View>
+                            <View style={styles.job}>
+                            <Image source={require('../../../../img/icons/workpos.png')} 
+                                   style={styles.icon}/>
+                            <Text style={styles.jobText}>{item.pos}</Text>
+                            </View>
+                            <View style={styles.job}>
+                            <Image source={require('../../../../img/icons/books.png')} 
+                                   style={styles.icon}/>
+                            <Text style={styles.jobText}>{item.city}, {item.country}</Text>
+                            </View>
+                            </View>
+                            <TouchableOpacity style={{flex: 1, alignItems: 'flex-end', justifyContent: 'center'}}
+                                                        onPress = {() => this._toggleModalDelete({item, index})}>
+                                            <Image source={require('../../../../img/icons/delete.png')}
+                                                style = {{resizeMode: 'center', width: 35, height: 35, tintColor: '#A7333F'}} />
+                                        </TouchableOpacity>
+                </View>
+            )}
+            keyExtractor={item => item.comp}
+            style={{flex: 1, marginTop: 10}}
+          />
+
+          <Modal isVisible = {this.state.isModalDeleteVisible}
+                          animationIn={'slideInLeft'}
+                          animationOut={'slideOutRight'}>
+
+                         {this._renderDeleteModalContent()}
+
+                    </Modal> 
 
 
 
@@ -379,5 +590,73 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         color: 'grey'
     },
+btnContainer: {
+    flex: 1,
+    borderWidth: 2,
+    borderColor: '#42D260',
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 5,
+    marginTop: 20,
+},
+btnText: {
+    fontSize: 17,
+    fontWeight: '600',
+},
+jobContainerList:{
+    flex: 1,
+    flexDirection: 'row',
+        width: width - 20,
+        backgroundColor: 'white',
+        marginBottom: 5,
+        marginLeft: 10,
+        marginRight: 5,
+        paddingLeft: 10,
+        paddingRight: 10,
+},
+job:{
+    width: width - 20,
+    backgroundColor: 'white',
+    marginBottom: 5,
+    marginLeft: 5,
+    marginRight: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
+    flexDirection: 'row'
+  },
+jobText: {
+    color: 'grey',
+    fontSize: 17,
+    fontWeight: '400',
+    paddingLeft: 10,
+},
+button: {
+    padding: 12,
+    margin: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 4,
+    borderColor: 'rgba(0, 0, 0, 0.1)',
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    padding: 22,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 4,
+    borderColor: 'rgba(0, 0, 0, 0.1)',
+  },
+  btnTxt: {
+    fontSize: 16,
+    fontWeight: '400'
+},
+icon: {
+    width: 22.5,
+    height: 22.5,
+    resizeMode: 'center',
+    tintColor: '#C7C7CD'
+}
+
 })
 
