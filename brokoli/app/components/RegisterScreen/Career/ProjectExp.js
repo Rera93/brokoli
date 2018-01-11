@@ -14,90 +14,51 @@ export default class ProjectExp extends React.Component {
         super(props)
 
         this.state = {
-            projectNames : Array(nrOfProjects).fill(''),
-            positions : Array(nrOfProjects).fill(''),
-            courses: Array(nrOfProjects).fill(''),
+            projectName : '',
+            position : '',
+            course: '',
+            projects: [],
+            flip: false,
+            index: null,
+            isModalDeleteVisible: false
         }
     }
 
-    _grabProjectName = (text, i) => {
+    _grabProjectName = (text) => {
         
-                this.state.projectNames[i] = text
+                this.state.projectName = text
                 this.setState(function(prevState, props){
-                  return {projectNames: prevState.projectNames}
+                  return {projectName: prevState.projectName}
                  });
-                //console.log('Project Names: ', this.state.projectNames)
+                console.log('Project Name: ', this.state.projectName)
 
-                this.props.callbackFromProjectNames(this.state.projectNames);
+              //  this.props.callbackFromProjectNames(this.state.projectName);
                 
     }
 
-    _grabPosition = (text, i) => {
+    _grabPosition = (text) => {
                 
-                this.state.positions[i] = text
+                this.state.position= text
                 this.setState(function(prevState, props){
-                return {positions: prevState.positions}
+                return {position: prevState.position}
                 });
-                //console.log('Positions: ', this.state.positions)
+                console.log('Position: ', this.state.position)
 
-                this.props.callbackFromProjectPositions(this.state.positions);
+              //  this.props.callbackFromProjectPositions(this.state.position);
                         
     }
-    _grabCourse = (text, i) => {
+    _grabCourse = (text) => {
         
-                this.state.courses[i] = text
+                this.state.course = text
                 this.setState(function(prevState, props){
-                  return {courses: prevState.courses}
+                  return {course: prevState.course}
                  });
-                //console.log('Courses: ', this.state.courses)
+                console.log('Course: ', this.state.course)
 
-                this.props.callbackFromCourses(this.state.courses);
+                //this.props.callbackFromCourses(this.state.course);
                 
     }
 
-
-    _renderProjectForms(){
-        var rows = []
-        for(let i=0; i < nrOfProjects; i++)
-        {
-            rows.push(
-
-                <View key = {i}
-                      style={styles.projectCont}>
-
-                    <View style={styles.inputCont}>  
-
-                    <TextInput style={styles.singleInput} 
-                               placeholder={'project name ' + (i+1)}
-                               onChangeText={(text) => this._grabProjectName(text, i)}/>
-
-                    </View>
-
-                    <View style={styles.inputCont}>
-
-                    <TextInput style={styles.singleInput} 
-                               placeholder={'position ' + (i+1)}
-                               onChangeText={(text) => this._grabPosition(text, i)}/>
-
-                    </View>
-
-                    <View style={styles.inputCont}>
-
-                    <TextInput style={styles.singleInput} 
-                               placeholder={'course ' + (i+1)}
-                               onChangeText={(text) => this._grabCourse(text, i)}/>
-
-                    </View>
-                    </View>
-            )
-        }
-        return(
-                <View style={{flex: 1, marginBottom: 10}}>
-                {rows}
-
-                </View>
-        )
-    }
 
     render(){
 
@@ -105,15 +66,47 @@ export default class ProjectExp extends React.Component {
 
             <View style={styles.projectContainer}>
 
-                <View style={styles.titleCont}> 
+                <View style={{flexDirection: 'row', padding: 10}}>
 
-                <Text style={styles.title}> Add at most 3 projects to improve you profile</Text>
+                <View style={{flex: 6}}> 
 
-                    </View>
+                <View style={styles.inputCont}>  
 
-                   {this._renderProjectForms()} 
+                <TextInput style={styles.singleInput} 
+                            placeholder='Project Name '
+                            onChangeText={(text) => this._grabProjectName(text)}/>
 
                 </View>
+
+                <View style={styles.inputCont}>
+
+                <TextInput style={styles.singleInput} 
+                            placeholder='Position'
+                            onChangeText={(text) => this._grabPosition(text)}/>
+
+                </View>
+
+                <View style={styles.inputCont}>
+
+                <TextInput style={styles.singleInput} 
+                            placeholder={'Course'}
+                            onChangeText={(text) => this._grabCourse(text)}/>
+
+                </View>
+
+                </View>
+
+                <TouchableOpacity  disabled={!this.state.flip}
+                    style={[styles.btnContainer, {backgroundColor: this.state.flip ? '#42D260' : 'white' }]}
+                    onPress={() => this._onAdd()}>
+                      <Text style={[styles.btnText,{color: this.state.flip ? 'white' : '#42D260'}]}> ADD </Text>
+                    </TouchableOpacity>
+
+                </View>
+
+
+                
+          </View>
 
         )
     }
@@ -121,46 +114,39 @@ export default class ProjectExp extends React.Component {
     const styles = StyleSheet.create({
         
             projectContainer: {
-                flex: 1,
                 alignItems: 'center',
                 justifyContent: 'center',
-                backgroundColor: 'white'
-            },
-            titleCont:{
-                flex: 1,
-                alignItems: "center",
-                justifyContent: 'center',
-                marginTop: 20,
-            },
-            title: {
-                fontWeight: '600',
-                fontSize: 16, 
-                color: 'grey'
+                backgroundColor: 'white',
             },
             inputCont: {
                 flex: 1,
-                alignItems: 'center',
-                justifyContent: 'center',
                 marginTop: 10,
                 marginBottom: 10,
-            },
-            projectCont: {
-                flex: 1,
-                paddingTop: 10,
-                marginTop: 15,
-                borderTopWidth: 0.7,
-                borderColor: '#42D260'
-            },
-            singleInput: {
-                borderWidth: 1,
-                marginLeft: 10,
+                borderWidth: 2,
                 marginRight: 10,
                 padding: 5,
                 borderRadius: 5,
-                alignItems: 'center',
-                width: width - 20,
                 borderColor: 'grey', 
-                color: '#42D260'  
+            },
+            singleInput: {
+                color: '#C7C7CD',
+                fontSize: 17,
+                fontWeight: '400',
+                paddingLeft: 5, 
+            },
+            btnContainer: {
+                flex: 1,
+                borderWidth: 2,
+                borderColor: '#42D260',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: 5,
+                marginTop: 10,
+                marginBottom: 10,
+            },
+            btnText: {
+                fontSize: 17,
+                fontWeight: '600',
             },
 
         })
