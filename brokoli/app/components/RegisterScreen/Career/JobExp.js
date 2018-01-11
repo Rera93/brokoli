@@ -1,10 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, Dimensions, TextInput } from 'react-native';
-import { Dropdown } from 'react-native-material-dropdown';
-import ViewContainer from '../../ViewContainer'
+import { Picker } from 'react-native-picker-dropdown'
+import Modal from 'react-native-modal'
 
 const width = Dimensions.get("window").width
-const nrOfJobs = 3
+
+var tempArr = []
 
 export default class JobExp extends React.Component {
 
@@ -12,302 +13,95 @@ export default class JobExp extends React.Component {
         super(props)
 
         this.state = {
-            companies : Array(nrOfJobs).fill(''),
-            positions : Array(nrOfJobs).fill(''),
-            cities: Array(nrOfJobs).fill(''),
-            countries: Array(nrOfJobs).fill(''),
-            startMonths: Array(nrOfJobs).fill(''),
-            startYears: Array(nrOfJobs).fill(''),
-            endMonths: Array(nrOfJobs).fill(''),
-            endYears: Array(nrOfJobs).fill(''),
+            company: '',
+            position : '',
+            city: '',
+            country: '',
+            startMonth: 'Mon',
+            startYear: '2018',
+            endMonth: 'Mon',
+            endYear: '2018',
         }
     }
 
-    _grabCompany = (text, i) => {
+    _grabCompany = (text) => {
         
-                this.state.companies[i] = text
+                this.state.company = text
                 this.setState(function(prevState, props){
-                  return {companies: prevState.companies}
+                  return {company: prevState.company}
                  });
-             //   console.log('Companies: ', this.state.companies)
-
-                this.props.callbackFromJobCompanies(this.state.companies);
+                console.log('Company: ', this.state.company)
                 
     }
 
-    _grabPosition = (text, i) => {
+    _grabPosition = (text) => {
                 
-                this.state.positions[i] = text
+                this.state.position = text
                 this.setState(function(prevState, props){
-                return {positions: prevState.positions}
+                return {position: prevState.position}
                 });
-             //   console.log('Positions: ', this.state.positions)
-
-                this.props.callbackFromJobPositions(this.state.positions);
+                console.log('Position: ', this.state.position)
                         
     }
-    _grabCity = (text, i) => {
+    _grabCity = (text) => {
         
-                this.state.cities[i] = text
+                this.state.city= text
                 this.setState(function(prevState, props){
-                  return {cities: prevState.cities}
+                  return {city: prevState.city}
                  });
-            //    console.log('Cities: ', this.state.cities)
-
-                this.props.callbackFromJobCities(this.state.cities);
+                console.log('City: ', this.state.city)
                 
     }
 
-    _grabCountry = (text, i) => {
+    _grabCountry = (text) => {
                 
-                this.state.countries[i] = text
+                this.state.country = text
                 this.setState(function(prevState, props){
-                return {countries: prevState.countries}
+                return {country: prevState.country}
                 });
-             //   console.log('Countries: ', this.state.countries)
-
-                this.props.callbackFromJobCountries(this.state.countries);
+                console.log('Country: ', this.state.country)
                         
     }
     
-    _grabStartMonth = (text, i) => {
+    _grabStartMonth = (text) => {
         
-        this.state.startMonths[i] = text
+        this.state.startMonth = text
         this.setState(function(prevState, props){
-        return {startMonths: prevState.startMonths}
+        return {startMonth: prevState.startMonth}
         });
-       //console.log('Start Months: ', this.state.startMonths) 
+       console.log('Start Month: ', this.state.startMonth) 
 
-        this.props.callbackFromJobStartMM(this.state.startMonths);
     }    
 
-    _grabEndMonth = (text, i) => {
+    _grabEndMonth = (text) => {
         
-        this.state.endMonths[i] = text
+        this.state.endMonth = text
         this.setState(function(prevState, props){
-        return {endMonths: prevState.endMonths}
+        return {endMonth: prevState.endMonth}
         });
-       // console.log('End Months: ', this.state.endMonths) 
-        
-       this.props.callbackFromJobEndMM(this.state.endMonths);
+        console.log('End Month: ', this.state.endMonth) 
         
     }
     
-    _grabStartYear = (text, i) => {
+    _grabStartYear = (text) => {
         
-        this.state.startYears[i] = text
+        this.state.startYear = text
         this.setState(function(prevState, props){
-        return {startYears: prevState.startYears}
+        return {startYear: prevState.startYear}
         });
-       // console.log('Start Years: ', this.state.startYears)   
+        console.log('Start Year: ', this.state.startYear)   
 
-        
-        this.props.callbackFromJobStartYY(this.state.startYears);
     }    
 
-    _grabEndYear = (text, i) => {
+    _grabEndYear = (text) => {
         
-        this.state.endYears[i] = text
+        this.state.endYears = text
         this.setState(function(prevState, props){
-        return {endYears: prevState.endYears}
+        return {endYear: prevState.endYear}
         });
-       // console.log('End Years: ', this.state.endYears)  
+        console.log('End Year: ', this.state.endYear)  
         
-        this.props.callbackFromJobEndYY(this.state.endYears);
     }  
-
-    
-
-    _renderJobForms(){
-
-
-        let monthData = [{
-            value: 'Jan',
-        },{
-            value: 'Feb',
-        },{
-            value: 'Mar',
-        },{
-            value: 'Apr',
-        },{
-            value: 'May',
-        },{
-            value: 'Jun',
-        },{
-            value: 'Jul',
-        },{
-            value: 'Aug',
-        },{
-            value: 'Sep',
-        }, {
-            value: 'Oct',
-        },{
-            value: 'Nov',
-        }, {
-            value: 'Dec'
-        }]
-
-        let yyData = [{
-            value: 2017,
-        },{
-            value: 2016,
-        },{
-            value: 2015,
-        }, {
-            value: 2014,
-        },{
-            value: 2013,
-        },{
-            value: 2012,
-        },{
-            value: 2011,
-        },{
-            value: 2010,
-        },{
-            value: 2009,
-        }, {
-            value: 2008,
-        },{
-            value: 2007,
-        },{
-            value: 2006,
-        }, {
-            value: 2005,
-        },{
-            value: 2004,
-        },{
-            value: 2003,
-        }, {
-            value: 2002,
-        },{
-            value: 2001,
-        },{
-            value: 2000,
-        }, {
-            value: 1999,
-        },{
-            value: 1998,
-        }, {
-            value: 1997,
-        },{
-            value: 1996,
-        },{
-            value: 1995,
-        }, {
-            value: 1994,
-        },{
-            value: 1993,
-        },{
-            value: 1992,
-        }, {
-            value: 1991,
-        },{
-            value: 1990,
-        }];
-
-
-        var rows = []
-        for(let i=0; i < nrOfJobs; i++)
-        {
-            rows.push(
-
-                <View key = {i}
-                      style={styles.jobCont}>
-
-                    <View style={styles.inputCont}>  
-
-                    <TextInput style={styles.singleInput} 
-                               placeholder={'company name ' + (i+1)}
-                               onChangeText={(text) => this._grabCompany(text, i)}/>
-
-                    </View>
-
-                    <View style={styles.inputCont}>
-
-                    <TextInput style={styles.singleInput} 
-                               placeholder={'position ' + (i+1)}
-                               onChangeText={(text) => this._grabPosition(text, i)}/>
-
-                    </View>
-
-                    <View style={[styles.inputCont, {flexDirection: 'row', marginBottom: 0}]}>           
-
-                    <TextInput style={styles.location} 
-                               placeholder={'city ' + (i+1)}
-                               onChangeText={(text) => this._grabCity(text, i)}/>
-                    
-                    <TextInput style={styles.location} 
-                               placeholder={'contry ' + (i+1)}
-                               onChangeText={(text) => this._grabCountry(text, i)}/>
-
-                    </View>   
-
-                    <View style={[styles.inputCont, {flexDirection: 'row', marginTop: 0}]}>
-
-                    <View style={[styles.inputCont, {flexDirection: 'row'}]}>
-
-                    <View style={[styles.dropdown, {marginRight: 5}]}>
-
-                        <Dropdown
-                        label={'month ' + (i+1)} 
-                        onChangeText={(text) => this._grabStartMonth(text,i)}
-                        data={monthData}/>  
-
-                    </View>   
-                    
-                    <View style={[styles.dropdown, {marginLeft: 5}]}>
-                        <Dropdown
-                        label={'year ' + (i+1)} 
-                        onChangeText={(text) => this._grabStartYear(text,i)}
-                        data={yyData}/>  
-                    </View>    
-
-                    </View>  
-
-                    <View style={[styles.inputCont, {flexDirection: 'row'}]}>
-
-                    <View tyle={{flex: 1, paddingTop: 20, justifyContent: 'center', alignItems: 'center'}}> 
-
-                        <Text> / </Text>
-
-                     </View>   
-
-                    <View style={[styles.dropdown, {marginRight: 5}]}>
-
-                        <Dropdown
-                        label={'month ' + (i+1)} 
-                        onChangeText={(text) => this._grabEndMonth(text,i)}
-                        data={monthData}/>  
-
-                    </View>    
-                    
-                    <View style={[styles.dropdown, {marginLeft: 5}]}>
-
-                        <Dropdown
-                        label={'year ' + (i+1)} 
-                        onChangeText={(text) => this._grabEndYear(text,i)}
-                        data={yyData}/>
-
-                    </View>      
-
-                    </View>           
-
-                    </View>
-
-
-
-
-                </View>
-            )
-        }
-        return(
-                <View style={{flex: 1}}>
-                {rows}
-
-                </View>
-        )
-    }
-
 
     render(){
 
@@ -315,13 +109,62 @@ export default class JobExp extends React.Component {
 
             <View style={styles.jobContainer}>
 
-                <View style={styles.titleCont}> 
+            <View style={{flexDirection: 'row', padding: 10, backgroundColor: 'white'}}>
 
-                <Text style={styles.title}> Add at most 3 jobs related to your profile </Text>
+
+                <View style={{flex: 1}}>
+
+                    <View style={styles.inputCont}>  
+
+                    <TextInput style={styles.singleInput} 
+                               placeholder='Company'
+                               placeholderTextColor='#C7C7CD'
+                               underlineColorAndroid='transparent'
+                               value={this.state.company}
+                               onChangeText={(text) => this._grabCompany(text)}/>
 
                     </View>
 
-                   {this._renderJobForms()} 
+                    <View style={styles.inputCont}>
+
+                    <TextInput style={styles.singleInput} 
+                               placeholder='Position'
+                               placeholderTextColor='#C7C7CD'
+                               underlineColorAndroid='transparent'
+                               value={this.state.position}
+                               onChangeText={(text) => this._grabPosition(text)}/>
+
+                    </View>
+
+                    <View style={[styles.inputCont, {flexDirection: 'row', marginBottom: 0}]}>           
+
+                    <TextInput style={styles.location} 
+                               placeholder='City'
+                               placeholderTextColor='#C7C7CD'
+                               underlineColorAndroid='transparent'
+                               value={this.state.city}
+                               onChangeText={(text) => this._grabCity(text)}/>
+                    
+                    <TextInput style={styles.location} 
+                               placeholder='Country'
+                               placeholderTextColor='#C7C7CD'
+                               underlineColorAndroid='transparent'
+                               value={this.state.country}
+                               onChangeText={(text) => this._grabCountry(text)}/>
+
+                    </View>   
+
+
+
+
+
+                </View>
+
+                </View>
+
+
+
+
 
                 </View>
 
@@ -333,46 +176,23 @@ export default class JobExp extends React.Component {
 const styles = StyleSheet.create({
 
     jobContainer: {
-        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: 'white'
-    },
-    titleCont:{
-        flex: 1,
-        alignItems: "center",
-        justifyContent: 'center',
-        marginTop: 20,
-    },
-    title: {
-        fontWeight: '600',
-        fontSize: 16, 
-        color: 'grey'
     },
     inputCont: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
         marginTop: 10,
         marginBottom: 10,
-    },
-    jobCont: {
-        flex: 1,
-        marginTop: 15,
-        paddingTop: 10,
-        borderTopWidth: 0.7,
-        borderColor: '#42D260'
-    },
-    singleInput: {
-        borderWidth: 1,
-        marginLeft: 10,
-        marginRight: 10,
+        borderWidth: 2,
         padding: 5,
         borderRadius: 5,
-        alignItems: 'center',
-        width: width - 20,
-        borderColor: 'grey',
-        color: '#42D260'   
+        borderColor: 'grey', 
+    },
+    singleInput: {
+        color: '#C7C7CD',
+        fontSize: 17,
+        fontWeight: '400',
+        paddingLeft: 5, 
     },
     location: {
         borderWidth: 1,
