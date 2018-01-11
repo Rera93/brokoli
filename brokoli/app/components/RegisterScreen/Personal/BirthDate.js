@@ -72,24 +72,24 @@ const styles = StyleSheet.create({
         marginTop: 15,
         marginBottom: 15,
         marginRight: 20,
-        borderWidth: 3,
-        borderColor: 'white'
+        borderWidth: 2,
+        borderColor: 'grey'
     },
     dateBirthCont: {
         flex: 1,
     },
     dateBirth:{
-        color: 'white',
+        color: '#C7C7CD',
         fontSize: 17
     },
     cond: {
         fontSize: 17,
         textAlign: 'center',
         fontWeight: '600',
-        color: '#42D260'
+        color: 'white'
     },
     condCont: {
-        backgroundColor: 'white',
+        backgroundColor: '#42D260',
         alignItems: 'center',
         justifyContent: 'center',
         width: 22,
