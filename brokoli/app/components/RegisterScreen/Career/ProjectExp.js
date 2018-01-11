@@ -247,19 +247,19 @@ export default class ProjectExp extends React.Component {
                         data={this.state.projects}
                         renderItem={({ item, index }) => (
                             <View style={styles.projContainer}>
-                            <View style={{paddingTop: 5, paddingBottom: 5, flex: 5, alignItems: 'flex-start', justifyContent: 'center'}}>
+                            <View style={{paddingTop: 10, paddingBottom: 5, flex: 5, alignItems: 'flex-start', justifyContent: 'center'}}>
                             <View style={styles.project}>
-                            <Image source={require('../../../../img/icons/college-graduation.png')} 
+                            <Image source={require('../../../../img/icons/projection-screen.png')} 
                                    style={styles.icon}/>
                             <Text style={styles.projText}>{item.proj} </Text>
                             </View>
                             <View style={styles.project}>
-                            <Image source={require('../../../../img/icons/graduate-certificate.png')} 
+                            <Image source={require('../../../../img/icons/workpos.png')} 
                                    style={styles.icon}/>
                             <Text style={styles.projText}>{item.pos}</Text>
                             </View>
                             <View style={styles.project}>
-                            <Image source={require('../../../../img/icons/medal.png')} 
+                            <Image source={require('../../../../img/icons/books.png')} 
                                    style={styles.icon}/>
                             <Text style={styles.projText}>{item.course}</Text>
                             </View>
