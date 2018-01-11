@@ -161,6 +161,21 @@ export default class JobExp extends React.Component {
                         </View>
                     </View> 
 
+                    <View style={{flex: 1, flexDirection: 'row', marginTop: 5, marginBottom: 5}}>
+
+                     <View style={{flex: 1}}>
+
+                            <Text style={styles.title}>Start Date</Text>
+
+                     </View>
+
+                    <View style={{flex: 1, marginLeft: 10}}>
+
+                         <Text style={styles.title}>End Date</Text>
+                        </View>
+
+                    </View>
+
                     <View style={{flex: 1, flexDirection: 'row'}}>
 
                         <View style={[styles.pickerCont, {flex: 1, justifyContent: 'center', marginRight: 10}]}> 
@@ -358,6 +373,11 @@ const styles = StyleSheet.create({
         borderColor: 'grey',
         backgroundColor: '#F8F9FB',
         borderRadius: 5,
-    }
+    },
+    title:{
+        fontSize: 17,
+        fontWeight: '500',
+        color: 'grey'
+    },
 })
 
