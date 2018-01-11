@@ -38,8 +38,8 @@ export default class Categories extends React.Component {
             rows.push(
                 <TouchableOpacity key = {i} 
                                   onPress={this._onToggleCategory.bind(this,i)} 
-                                  style={[styles.category, {backgroundColor: this.state.isSelected[i] ? 'white' : '#42D260'}]}>
-                  <Text style={[styles.title,{color: this.state.isSelected[i] ? '#42D260' : 'white' }]}> {categories[i].name} </Text>
+                                  style={[styles.category, {backgroundColor: this.state.isSelected[i] ? '#42D260' : 'white'}]}>
+                  <Text style={[styles.title,{color: this.state.isSelected[i] ? 'white' : 'grey' }]}> {categories[i].name} </Text>
                 </TouchableOpacity>
             )
         }
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderTopWidth: 0.7,
         borderBottomWidth: 0.7,
-        borderColor: 'white'
+        borderColor: '#C7C7CD'
     },
     categories: {
         flex: 1,
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         padding: 10,
         borderRadius: 5,
-        borderColor: 'white',
+        borderColor: '#42D260',
         marginBottom: 15,
         alignItems: 'center',
         justifyContent: 'center'

@@ -79,8 +79,8 @@ export default class Professional extends React.Component {
 
     static navigationOptions = {
         title: 'Categories',
-        headerStyle: { backgroundColor: 'white', marginTop: 24 },
-        headerTitleStyle: { color: '#42D260' },
+        headerStyle: { backgroundColor: '#42D260', marginTop: 24 },
+        headerTitleStyle: { color: 'white' },
       };
 
       componentDidMount() {
@@ -112,10 +112,10 @@ export default class Professional extends React.Component {
              <Categories callbackFromParent = {this.myCallback} />
 
              <TouchableOpacity disabled={this.state.flip ? false : true} 
-                               style={[styles.button, {backgroundColor: this.state.flip ? 'white' : '#42D260'}]} 
+                               style={[styles.button, {backgroundColor: this.state.flip ? '#42D260' : 'white'}]} 
                                onPress={this._onSubmit.bind(this)}>
 
-                <Text style={[styles.btnText, {color: this.state.flip ? '#42D260' : 'white'}]}> NEXT </Text>
+                <Text style={[styles.btnText, {color: this.state.flip ? 'white' : '#42D260'}]}> NEXT </Text>
 
                 </TouchableOpacity>
 
@@ -127,15 +127,15 @@ export default class Professional extends React.Component {
 
 const styles = StyleSheet.create({
     professional: {
-        backgroundColor: '#42D260'
+        backgroundColor: 'white'
     },
     button: {
     marginBottom: 20,
     borderRadius: 10,
     width: width -300,
     alignItems: 'center',
-    borderWidth: 1,
-    borderColor: 'white'
+    borderWidth: 2,
+    borderColor: '#42D260'
     },
     btnText: {
     padding: 10,
@@ -146,12 +146,11 @@ headerCont: {
     marginBottom: 20,
     marginLeft: 15, 
     marginRight: 15,
-    borderColor: 'white',
     alignItems: 'center'
 },
 header:{
     fontWeight: '500',
-    color: 'white',
+    color: 'grey',
     fontSize: 17,
 },
 

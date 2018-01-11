@@ -189,7 +189,7 @@ export default class Account extends React.Component {
                           </View>
                         </View>
 
-                    <TouchableHighlight //disabled={this.state.flip ? false : true} 
+                    <TouchableHighlight disabled={this.state.flip ? false : true} 
                                         onPress={()=> navigate('Professional', {firstName: this.state.firstName, lastName: this.state.lastName, dateOfBirth: this.state.dateOfBirth, gender: this.state.gender, city: this.state.city,  country: this.state.country, username: this.state.username, email: this.state.email, password: this.state.password})}
                                         style={[styles.button, {backgroundColor: this.state.flip ? '#42D260' : 'white'}]}>
 
