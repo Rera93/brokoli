@@ -139,7 +139,7 @@ export default class JobExp extends React.Component {
     
          
          console.log('Update JobsChild: ', this.state.jobs)
-        // this.props.callbackFromParentJobs(this.state.jobs);
+         this.props.callbackFromParentJobs(this.state.jobs);
     
          //Close modal
          this._untoggleModalDelete()
@@ -155,7 +155,7 @@ export default class JobExp extends React.Component {
             return {jobs: prevState.jobs}
         })
         console.log('jobsArrChild: ', this.state.jobs)
-      //  this.props.callbackFromParentJobs(this.state.jobs);
+        this.props.callbackFromParentJobs(this.state.jobs);
 
         //Release text inputs value
         this.state.company = ''
