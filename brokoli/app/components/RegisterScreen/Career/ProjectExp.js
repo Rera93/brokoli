@@ -308,7 +308,7 @@ export default class ProjectExp extends React.Component {
             },
             singleInput: {
                 color: '#C7C7CD',
-                fontSize: 17,
+                fontSize: 16,
                 fontWeight: '400',
                 paddingLeft: 5, 
             },
