@@ -21,8 +21,8 @@ export default class Personal extends React.Component {
 
     static navigationOptions = {
         title: 'Personal',
-        headerStyle: { backgroundColor: 'white', marginTop: 24 },
-        headerTitleStyle: { color: '#42D260' },
+        headerStyle: { backgroundColor: '#42D260', marginTop: 24 },
+        headerTitleStyle: { color: 'white' },
       };
 
 
@@ -141,7 +141,7 @@ export default class Personal extends React.Component {
         return(
 
             
-            <KeyboardAvoidingView behavior="padding" backgroundColor='#42D260'>
+            <KeyboardAvoidingView behavior="padding" backgroundColor='white'>
             
              <ScrollView contentContainerStyle={styles.personal}
                         showsVerticalScrollIndicator={false}>
@@ -160,7 +160,7 @@ export default class Personal extends React.Component {
                     <View style={{flex: 1}}>
                     <TextInput style={styles.locInput} 
                                placeholder='first name'
-                               placeholderTextColor='white'
+                               placeholderTextColor='#C7C7CD'
                                underlineColorAndroid = 'transparent'
                                onChangeText={(text) => this._grabFirstName(text)}/>
                     </View>
@@ -177,7 +177,7 @@ export default class Personal extends React.Component {
                     <View style={{flex: 1}}>
                     <TextInput style={styles.locInput} 
                                placeholder='last name'
-                               placeholderTextColor='white'
+                               placeholderTextColor='#C7C7CD'
                                underlineColorAndroid = 'transparent'
                                onChangeText={(text) => this._grabLastName(text)}/> 
                     </View> 
@@ -196,7 +196,7 @@ export default class Personal extends React.Component {
                     <View style={{flex: 1}}>  
                         <TextInput style={styles.locInput}
                                 placeholder='city'
-                                placeholderTextColor= 'white'
+                                placeholderTextColor= '#C7C7CD'
                                 underlineColorAndroid = 'transparent'
                                 onChangeText={(text) => this._grabCity(text)} />
                     </View>
@@ -212,7 +212,7 @@ export default class Personal extends React.Component {
                     <View style={{flex: 1}}>
                         <TextInput style={styles.locInput} 
                                placeholder='country'
-                               placeholderTextColor= 'white'
+                               placeholderTextColor= '#C7C7CD'
                                underlineColorAndroid = 'transparent'
                                onChangeText={(text) => this._grabCountry(text)}/>  
                     </View>
@@ -222,11 +222,11 @@ export default class Personal extends React.Component {
                     </View>
                 </View>
 
-                <TouchableOpacity //disabled={this.state.flip ? false : true}
+                <TouchableOpacity disabled={this.state.flip ? false : true}
                                   onPress={()=> navigate('Account', {firstName: this.state.firstName, lastName: this.state.lastName, dateOfBirth: this.state.dateOfBirth, gender: this.state.gender, city: this.state.city,  country: this.state.country })}
-                                  style={[styles.button, {backgroundColor: this.state.flip ? 'white' : '#42D260'}]}>
+                                  style={[styles.button, {backgroundColor: this.state.flip ? '#42D260' : 'white'}]}>
 
-                <Text style={[styles.btnText, {color: this.state.flip ? '#42D260' : 'white'}]}> NEXT </Text>
+                <Text style={[styles.btnText, {color: this.state.flip ? 'white' : '#42D260'}]}> NEXT </Text>
 
                 </TouchableOpacity>
 
@@ -245,7 +245,7 @@ export default class Personal extends React.Component {
 
 const styles = StyleSheet.create({
     personal: {
-        backgroundColor: '#42D260',
+        backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center',
         paddingVertical: 20,
@@ -261,7 +261,7 @@ const styles = StyleSheet.create({
         marginRight: 20
     },
     title: {
-      color: 'white',
+      color: 'grey',
       fontWeight: '900',
       fontSize: 18,
     },
@@ -276,22 +276,22 @@ const styles = StyleSheet.create({
         marginTop: 15,
         marginBottom: 15,
         marginRight: 20,
-        borderWidth: 3,
-        borderColor: 'white'
+        borderWidth: 2,
+        borderColor: 'grey'
     },
     locInput: {
         fontSize: 17,
-        color: 'white',
+        color: '#C7C7CD',
        
     },
     cond: {
         fontSize: 17,
         textAlign: 'center',
         fontWeight: '600',
-        color: '#42D260'
+        color: 'white'
     },
     condCont: {
-        backgroundColor: 'white',
+        backgroundColor: '#42D260',
         alignItems: 'center',
         justifyContent: 'center',
         width: 22,
@@ -305,8 +305,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     width: width - 300,
     alignItems: 'center',
-    borderColor: 'white',
-    borderWidth: 3
+    borderColor: '#42D260',
+    borderWidth: 2
     },
     btnText: {
     padding: 10,

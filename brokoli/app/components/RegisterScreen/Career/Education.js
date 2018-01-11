@@ -1,8 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, Dimensions, View, TextInput, FlatList, Image } from 'react-native';
 
-import ViewContainer from '../../ViewContainer'
-import { Dropdown } from 'react-native-material-dropdown';
 import { Picker } from 'react-native-picker-dropdown'
 import Modal from 'react-native-modal'
 

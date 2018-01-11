@@ -50,8 +50,8 @@ export default class Gender extends React.Component {
                           isSelected={this.state.selectedValueIndex === i}
                           onPress={onPress}
                           borderWidth={3}
-                          buttonInnerColor={'white'}
-                          buttonOuterColor={this.state.selectedValueIndex === i ? 'white' : 'white'}
+                          buttonInnerColor={'#42D260'}
+                          buttonOuterColor={this.state.selectedValueIndex === i ? '#42D260' : '#42D260'}
                           buttonSize={10}
                           buttonOuterSize={22}
                           buttonStyle={{}}
@@ -62,7 +62,7 @@ export default class Gender extends React.Component {
                           index={i}
                           labelHorizontal={true}
                           onPress={onPress}
-                          labelStyle={{fontSize: 17, color: 'white'}}
+                          labelStyle={{fontSize: 17, color: '#C7C7CD'}}
                           labelWrapStyle={{marginTop: 5}}
                         />
                         </RadioButton>
@@ -98,10 +98,10 @@ const styles = StyleSheet.create({
     fontSize: 17,
     textAlign: 'center',
     fontWeight: '600',
-    color: '#42D260'
+    color: 'white'
 },
 condCont: {
-    backgroundColor: 'white',
+    backgroundColor: '#42D260',
     alignItems: 'center',
     justifyContent: 'center',
     width: 22,
