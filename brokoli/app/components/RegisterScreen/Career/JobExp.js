@@ -136,21 +136,29 @@ export default class JobExp extends React.Component {
 
                     </View>
 
-                    <View style={[styles.inputCont, {flexDirection: 'row', marginBottom: 0}]}>           
+                    <View style={{flex: 1, flexDirection: 'row'}}>
 
-                    <TextInput style={styles.location} 
+                     <View style={[styles.inputCont, {marginRight: 5}]}>           
+
+                    <TextInput style={styles.singleInput} 
                                placeholder='City'
                                placeholderTextColor='#C7C7CD'
                                underlineColorAndroid='transparent'
                                value={this.state.city}
                                onChangeText={(text) => this._grabCity(text)}/>
+
+                    </View>
+
+                    <View style={[styles.inputCont, {marginLeft: 5}]}> 
                     
-                    <TextInput style={styles.location} 
+                    <TextInput style={styles.singleInput} 
                                placeholder='Country'
                                placeholderTextColor='#C7C7CD'
                                underlineColorAndroid='transparent'
                                value={this.state.country}
                                onChangeText={(text) => this._grabCountry(text)}/>
+
+                    </View>
 
                     </View>   
 
@@ -194,19 +202,5 @@ const styles = StyleSheet.create({
         fontWeight: '400',
         paddingLeft: 5, 
     },
-    location: {
-        borderWidth: 1,
-        marginLeft: 10,
-        marginRight: 10,
-        padding: 5,
-        borderRadius: 5, 
-        borderColor: 'grey',
-        width: width/2 - 20 
-    },
-    dropdown: {
-        flex: 1,
-        marginLeft: 10,
-        marginRight: 10
-    }
 })
 
