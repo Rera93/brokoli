@@ -24,9 +24,9 @@ export default class JobExp extends React.Component {
             position : '',
             city: '',
             country: '',
-            startMonth: 'Mon',
+            startMonth: 'Jan',
             startYear: '2018',
-            endMonth: 'Mon',
+            endMonth: 'Jan',
             endYear: '2018',
             jobs: [],
             flip: false,
@@ -513,7 +513,7 @@ export default class JobExp extends React.Component {
                             <View style={styles.jobContainerList}>
                             <View style={{paddingTop: 10, paddingBottom: 5, flex: 5, alignItems: 'flex-start', justifyContent: 'center'}}>
                             <View style={styles.job}>
-                            <Image source={require('../../../../img/icons/projection-screen.png')} 
+                            <Image source={require('../../../../img/icons/company.png')} 
                                    style={styles.icon}/>
                             <Text style={styles.jobText}>{item.comp} </Text>
                             </View>
@@ -523,9 +523,14 @@ export default class JobExp extends React.Component {
                             <Text style={styles.jobText}>{item.pos}</Text>
                             </View>
                             <View style={styles.job}>
-                            <Image source={require('../../../../img/icons/books.png')} 
+                            <Image source={require('../../../../img/icons/cityCountry.png')} 
                                    style={styles.icon}/>
                             <Text style={styles.jobText}>{item.city}, {item.country}</Text>
+                            </View>
+                            <View style={styles.job}>
+                            <Image source={require('../../../../img/icons/calendar.png')} 
+                                   style={styles.icon}/>
+                            <Text style={styles.jobText}>{item.startMM} {item.startYY} - {item.endMM} {item.endYY}</Text>
                             </View>
                             </View>
                             <TouchableOpacity style={{flex: 1, alignItems: 'flex-end', justifyContent: 'center'}}
