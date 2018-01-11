@@ -195,7 +195,7 @@ export default class ProjectExp extends React.Component {
 
             <View style={styles.projectContainer}>
 
-                <View style={{flexDirection: 'row', padding: 10}}>
+                <View style={{flexDirection: 'row', padding: 10, backgroundColor: 'white'}}>
 
                 <View style={{flex: 6}}> 
 
@@ -203,7 +203,10 @@ export default class ProjectExp extends React.Component {
 
                 <TextInput style={styles.singleInput} 
                             placeholder='Project Name '
-                            onChangeText={(text) => this._grabProjectName(text)}/>
+                            onChangeText={(text) => this._grabProjectName(text)}
+                            placeholderTextColor='#C7C7CD'
+                            underlineColorAndroid='transparent'
+                            value={this.state.projectName}/>
 
                 </View>
 
@@ -211,7 +214,10 @@ export default class ProjectExp extends React.Component {
 
                 <TextInput style={styles.singleInput} 
                             placeholder='Position'
-                            onChangeText={(text) => this._grabPosition(text)}/>
+                            placeholderTextColor='#C7C7CD'
+                            underlineColorAndroid='transparent'
+                            onChangeText={(text) => this._grabPosition(text)}
+                            value={this.state.position}/>
 
                 </View>
 
@@ -219,7 +225,10 @@ export default class ProjectExp extends React.Component {
 
                 <TextInput style={styles.singleInput} 
                             placeholder={'Course'}
-                            onChangeText={(text) => this._grabCourse(text)}/>
+                            placeholderTextColor='#C7C7CD'
+                            underlineColorAndroid='transparent'
+                            onChangeText={(text) => this._grabCourse(text)}
+                            value={this.state.course}/>
 
                 </View>
 
