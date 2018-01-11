@@ -600,7 +600,7 @@ export default class Education extends React.Component {
                         data={this.state.educations}
                         renderItem={({ item, index }) => (
                             <View style={styles.eduContainer}>
-                            <View style={{paddingTop: 5, paddingBottom: 5, flex: 5, alignItems: 'flex-start', justifyContent: 'center'}}>
+                            <View style={{paddingTop: 10, paddingBottom: 5, flex: 5, alignItems: 'flex-start', justifyContent: 'center'}}>
                             <View style={styles.edu}>
                             <Image source={require('../../../../img/icons/college-graduation.png')} 
                                    style={styles.icon}/>
