@@ -272,7 +272,7 @@ export default class ProjectExp extends React.Component {
                 </View>
             )}
             keyExtractor={item => item.proj}
-            style={{flex: 1, marginTop: 5}}
+            style={{flex: 1, marginTop: 10}}
           />
 
           <Modal isVisible = {this.state.isModalDeleteVisible}
@@ -295,7 +295,6 @@ export default class ProjectExp extends React.Component {
             projectContainer: {
                 alignItems: 'center',
                 justifyContent: 'center',
-                backgroundColor: 'white',
             },
             inputCont: {
                 flex: 1,
