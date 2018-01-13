@@ -252,144 +252,160 @@ export default class Education extends React.Component
 
               </View>
 
-              <View style={styles.expInput}>
+              <View style={{flexDirection: 'row', marginTop: 10}}>
 
-                    <Picker
-                        selectedValue={this.state.newStartMonth}
-                        onValueChange={(month) => this._grabNewStartMonth(month)}
-                        mode="dropdown"
-                        itemStyle = {{fontSize: 12}}
-                        style={{
-                        color: '#C7C7CD',
-                        height: 40,
-                        }}>
-                        <Picker.Item label="Jan" value="Jan" />
-                        <Picker.Item label="Feb" value="Feb" />
-                        <Picker.Item label="Mar" value="Mar" />
-                        <Picker.Item label="Apr" value="Apr" />
-                        <Picker.Item label="May" value="May" />
-                        <Picker.Item label="Jun" value="Jun" />
-                        <Picker.Item label="Jul" value="Jul" />
-                        <Picker.Item label="Aug" value="Aug" />
-                        <Picker.Item label="Sep" value="Sep" />
-                        <Picker.Item label="Oct" value="Oct" />
-                        <Picker.Item label="Nov" value="Nov" />
-                        <Picker.Item label="Dec" value="Dec" />
-                    </Picker>
-                 
+              <View style={{justifyContent: 'center', marginRight: -20, flex: 1}}> 
+                                <Text style={{fontSize: 16, color: '#254D32', fontWeight: '400'}}>Start Date</Text>
+                        </View>
+
+                <View style={[styles.expInput, {flex: 1}]}>
+
+                        <Picker
+                            selectedValue={this.state.newStartMonth}
+                            onValueChange={(month) => this._grabNewStartMonth(month)}
+                            mode="dropdown"
+                            itemStyle = {{fontSize: 12}}
+                            style={{
+                            color: '#C7C7CD',
+                            height: 35,
+                            }}>
+                            <Picker.Item label="Jan" value="Jan" />
+                            <Picker.Item label="Feb" value="Feb" />
+                            <Picker.Item label="Mar" value="Mar" />
+                            <Picker.Item label="Apr" value="Apr" />
+                            <Picker.Item label="May" value="May" />
+                            <Picker.Item label="Jun" value="Jun" />
+                            <Picker.Item label="Jul" value="Jul" />
+                            <Picker.Item label="Aug" value="Aug" />
+                            <Picker.Item label="Sep" value="Sep" />
+                            <Picker.Item label="Oct" value="Oct" />
+                            <Picker.Item label="Nov" value="Nov" />
+                            <Picker.Item label="Dec" value="Dec" />
+                        </Picker>
+                    
+                    </View>
+                    <View style={[styles.expInput, {flex: 1}]}>
+
+                        <Picker
+                            selectedValue={this.state.newStartYear}
+                            onValueChange={(year) => this._grabNewStartYear(year)}
+                            mode="dropdown"
+                            itemStyle = {{fontSize: 12}}
+                            style={{
+                            color: '#C7C7CD',
+                            height: 35,
+                            }}>
+                            <Picker.Item label="2018" value="2018" />
+                            <Picker.Item label="2017" value="2017" />
+                            <Picker.Item label="2016" value="2016" />
+                            <Picker.Item label="2015" value="2015" />
+                            <Picker.Item label="2014" value="2014" />
+                            <Picker.Item label="2013" value="2013" />
+                            <Picker.Item label="2012" value="2012" />
+                            <Picker.Item label="2011" value="2011" />
+                            <Picker.Item label="2010" value="2010" />
+                            <Picker.Item label="2009" value="2009" />
+                            <Picker.Item label="2008" value="2008" />
+                            <Picker.Item label="2007" value="2007" />
+                            <Picker.Item label="2006" value="2006" />
+                            <Picker.Item label="2005" value="2005" />
+                            <Picker.Item label="2004" value="2004" />
+                            <Picker.Item label="2003" value="2003" />
+                            <Picker.Item label="2002" value="2002" />
+                            <Picker.Item label="2001" value="2001" />
+                            <Picker.Item label="2000" value="2000" />
+                            <Picker.Item label="1999" value="1999" />
+                            <Picker.Item label="1998" value="1998" />
+                            <Picker.Item label="1997" value="1997" />
+                            <Picker.Item label="1996" value="1996" />
+                            <Picker.Item label="1995" value="1995" />
+                            <Picker.Item label="1994" value="1994" />
+                            <Picker.Item label="1993" value="1993" />
+                            <Picker.Item label="1992" value="1992" />
+                            <Picker.Item label="1991" value="1991" />
+                            <Picker.Item label="1990" value="1990" />
+                        </Picker>
+                    
+                    </View>
+
                 </View>
-                <View style={styles.expInput}>
 
-                    <Picker
-                        selectedValue={this.state.newStartYear}
-                        onValueChange={(year) => this._grabNewStartYear(year)}
-                        mode="dropdown"
-                        itemStyle = {{fontSize: 12}}
-                        style={{
-                        color: '#C7C7CD',
-                        height: 40,
-                        }}>
-                        <Picker.Item label="2018" value="2018" />
-                        <Picker.Item label="2017" value="2017" />
-                        <Picker.Item label="2016" value="2016" />
-                        <Picker.Item label="2015" value="2015" />
-                        <Picker.Item label="2014" value="2014" />
-                        <Picker.Item label="2013" value="2013" />
-                        <Picker.Item label="2012" value="2012" />
-                        <Picker.Item label="2011" value="2011" />
-                        <Picker.Item label="2010" value="2010" />
-                        <Picker.Item label="2009" value="2009" />
-                        <Picker.Item label="2008" value="2008" />
-                        <Picker.Item label="2007" value="2007" />
-                        <Picker.Item label="2006" value="2006" />
-                        <Picker.Item label="2005" value="2005" />
-                        <Picker.Item label="2004" value="2004" />
-                        <Picker.Item label="2003" value="2003" />
-                        <Picker.Item label="2002" value="2002" />
-                        <Picker.Item label="2001" value="2001" />
-                        <Picker.Item label="2000" value="2000" />
-                        <Picker.Item label="1999" value="1999" />
-                        <Picker.Item label="1998" value="1998" />
-                        <Picker.Item label="1997" value="1997" />
-                        <Picker.Item label="1996" value="1996" />
-                        <Picker.Item label="1995" value="1995" />
-                        <Picker.Item label="1994" value="1994" />
-                        <Picker.Item label="1993" value="1993" />
-                        <Picker.Item label="1992" value="1992" />
-                        <Picker.Item label="1991" value="1991" />
-                        <Picker.Item label="1990" value="1990" />
-                    </Picker>
-                 
-                </View>
+                <View style={{flexDirection: 'row', marginTop: 10}}>
 
-                <View style={styles.expInput}>
+                    <View style={{justifyContent: 'center', marginRight: -20, flex: 1}}> 
+                                <Text style={{fontSize: 16, color: '#254D32', fontWeight: '400'}}>End Date</Text>
+                        </View>
 
-                    <Picker
-                        selectedValue={this.state.newEndMonth}
-                        onValueChange={(month) => this._grabNewEndMonth(month)}
-                        mode="dropdown"
-                        itemStyle = {{fontSize: 12}}
-                        style={{
-                        color: '#C7C7CD',
-                        height: 40,
-                        }}>
-                        <Picker.Item label="Jan" value="Jan" />
-                        <Picker.Item label="Feb" value="Feb" />
-                        <Picker.Item label="Mar" value="Mar" />
-                        <Picker.Item label="Apr" value="Apr" />
-                        <Picker.Item label="May" value="May" />
-                        <Picker.Item label="Jun" value="Jun" />
-                        <Picker.Item label="Jul" value="Jul" />
-                        <Picker.Item label="Aug" value="Aug" />
-                        <Picker.Item label="Sep" value="Sep" />
-                        <Picker.Item label="Oct" value="Oct" />
-                        <Picker.Item label="Nov" value="Nov" />
-                        <Picker.Item label="Dec" value="Dec" />
-                    </Picker>
-                 
-                </View>
-                <View style={styles.expInput}>
+                    <View style={[styles.expInput, {flex: 1}]}>
 
-                    <Picker
-                        selectedValue={this.state.newEndYear}
-                        onValueChange={(year) => this._grabNewEndYear(year)}
-                        mode="dropdown"
-                        itemStyle = {{fontSize: 12}}
-                        style={{
-                        color: '#C7C7CD',
-                        height: 40,
-                        }}>
-                        <Picker.Item label="2018" value="2018" />
-                        <Picker.Item label="2017" value="2017" />
-                        <Picker.Item label="2016" value="2016" />
-                        <Picker.Item label="2015" value="2015" />
-                        <Picker.Item label="2014" value="2014" />
-                        <Picker.Item label="2013" value="2013" />
-                        <Picker.Item label="2012" value="2012" />
-                        <Picker.Item label="2011" value="2011" />
-                        <Picker.Item label="2010" value="2010" />
-                        <Picker.Item label="2009" value="2009" />
-                        <Picker.Item label="2008" value="2008" />
-                        <Picker.Item label="2007" value="2007" />
-                        <Picker.Item label="2006" value="2006" />
-                        <Picker.Item label="2005" value="2005" />
-                        <Picker.Item label="2004" value="2004" />
-                        <Picker.Item label="2003" value="2003" />
-                        <Picker.Item label="2002" value="2002" />
-                        <Picker.Item label="2001" value="2001" />
-                        <Picker.Item label="2000" value="2000" />
-                        <Picker.Item label="1999" value="1999" />
-                        <Picker.Item label="1998" value="1998" />
-                        <Picker.Item label="1997" value="1997" />
-                        <Picker.Item label="1996" value="1996" />
-                        <Picker.Item label="1995" value="1995" />
-                        <Picker.Item label="1994" value="1994" />
-                        <Picker.Item label="1993" value="1993" />
-                        <Picker.Item label="1992" value="1992" />
-                        <Picker.Item label="1991" value="1991" />
-                        <Picker.Item label="1990" value="1990" />
-                    </Picker>
-                 
+                        <Picker
+                            selectedValue={this.state.newEndMonth}
+                            onValueChange={(month) => this._grabNewEndMonth(month)}
+                            mode="dropdown"
+                            itemStyle = {{fontSize: 12}}
+                            style={{
+                            color: '#C7C7CD',
+                            height: 35,
+                            }}>
+                            <Picker.Item label="Jan" value="Jan" />
+                            <Picker.Item label="Feb" value="Feb" />
+                            <Picker.Item label="Mar" value="Mar" />
+                            <Picker.Item label="Apr" value="Apr" />
+                            <Picker.Item label="May" value="May" />
+                            <Picker.Item label="Jun" value="Jun" />
+                            <Picker.Item label="Jul" value="Jul" />
+                            <Picker.Item label="Aug" value="Aug" />
+                            <Picker.Item label="Sep" value="Sep" />
+                            <Picker.Item label="Oct" value="Oct" />
+                            <Picker.Item label="Nov" value="Nov" />
+                            <Picker.Item label="Dec" value="Dec" />
+                        </Picker>
+                    
+                    </View>
+                    <View style={[styles.expInput, {flex: 1}]}>
+
+                        <Picker
+                            selectedValue={this.state.newEndYear}
+                            onValueChange={(year) => this._grabNewEndYear(year)}
+                            mode="dropdown"
+                            itemStyle = {{fontSize: 12}}
+                            style={{
+                            color: '#C7C7CD',
+                            height: 35,
+                            }}>
+                            <Picker.Item label="2018" value="2018" />
+                            <Picker.Item label="2017" value="2017" />
+                            <Picker.Item label="2016" value="2016" />
+                            <Picker.Item label="2015" value="2015" />
+                            <Picker.Item label="2014" value="2014" />
+                            <Picker.Item label="2013" value="2013" />
+                            <Picker.Item label="2012" value="2012" />
+                            <Picker.Item label="2011" value="2011" />
+                            <Picker.Item label="2010" value="2010" />
+                            <Picker.Item label="2009" value="2009" />
+                            <Picker.Item label="2008" value="2008" />
+                            <Picker.Item label="2007" value="2007" />
+                            <Picker.Item label="2006" value="2006" />
+                            <Picker.Item label="2005" value="2005" />
+                            <Picker.Item label="2004" value="2004" />
+                            <Picker.Item label="2003" value="2003" />
+                            <Picker.Item label="2002" value="2002" />
+                            <Picker.Item label="2001" value="2001" />
+                            <Picker.Item label="2000" value="2000" />
+                            <Picker.Item label="1999" value="1999" />
+                            <Picker.Item label="1998" value="1998" />
+                            <Picker.Item label="1997" value="1997" />
+                            <Picker.Item label="1996" value="1996" />
+                            <Picker.Item label="1995" value="1995" />
+                            <Picker.Item label="1994" value="1994" />
+                            <Picker.Item label="1993" value="1993" />
+                            <Picker.Item label="1992" value="1992" />
+                            <Picker.Item label="1991" value="1991" />
+                            <Picker.Item label="1990" value="1990" />
+                        </Picker>
+                    
+                    </View>
+
                 </View>
 
                 <View style={styles.expInput}>
@@ -401,7 +417,7 @@ export default class Education extends React.Component
                         itemStyle = {{fontSize: 12}}
                         style={{
                         color: '#C7C7CD',
-                        height: 40,
+                        height: 35,
                         }}>
                         <Picker.Item label="Bachelor" value="Bachelor" />
                         <Picker.Item label="Master" value="Master" />
@@ -419,7 +435,7 @@ export default class Education extends React.Component
                         itemStyle = {{fontSize: 12}}
                         style={{
                         color: '#C7C7CD',
-                        height: 40,
+                        height: 35,
                         }}>
                        <Picker.Item label="Accountancy" value="Accountancy" />
                        <Picker.Item label="Advanced Study" value="Advanced Study" />
