@@ -316,7 +316,8 @@ export default class Profile extends React.Component {
                 
                             <View style={styles.modalContent}>
                             
-                                    <View style={styles.form}> 
+                                    <ScrollView contentContainerStyle={styles.form}
+                                                showsVerticalScrollIndicator={false}> 
                             
                                     <Text style={styles.title}>Update personal settings</Text> 
                             
@@ -365,7 +366,7 @@ export default class Profile extends React.Component {
                             
                                      </View>
                             
-                                          </View>
+                                          </ScrollView>
                             
                                           <View style={{flexDirection: 'row', marginTop: 20}}>
                             
