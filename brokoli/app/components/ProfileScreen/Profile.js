@@ -9,7 +9,7 @@ import { StyleSheet, Text, View, Image, Dimensions, ScrollView, Alert, Touchable
 import Skills from './Skills'
 import Projects from './Projects'
 import Jobs from './Jobs'
-import Overview from './Overview'
+import Education from './Education'
 import Tabs from './Tabs'
 
 
@@ -566,7 +566,7 @@ export default class Profile extends React.Component {
 
                 <Tabs>
 
-                    <Overview title='OVERVIEW'/>
+                    <Education title='EDUCATION'/>
                     <Skills title='SKILLS' />
                     <Jobs title='JOBS' />
                     <Projects title='PROJECTS' />
