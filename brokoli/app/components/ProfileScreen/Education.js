@@ -37,8 +37,8 @@ export default class Education extends React.Component
             startYear: '2018',
             endMonth: 'Jan',
             endYear: '2018',
-            newDegree: '',
-            newSpecialisation: '',
+            newDegree: 'Bachelor',
+            newSpecialisation: 'Accountancy',
             flip: false,
             index: null,
             itemToDelete: [],
@@ -502,23 +502,67 @@ export default class Education extends React.Component
           }
 
           _releaseNewData(){
-            //Release text inputs value
-            this.state.newSkill = ''
+            //Release text input values
+            this.state.newSchool = ''
             this.setState(function(prevState,props){
-                return {newSkill: prevState.newSkill}
+                return {newSchool: prevState.newSchool}
             })
+
+            this.state.newCity = ''
+            this.setState(function(prevState,props){
+                return {newCity: prevState.newCity}
+            })
+
+            this.state.newCountry = ''
+            this.setState(function(prevState,props){
+                return {newCountry: prevState.newCountry}
+            })
+          
+            this.state.newStartMonth = "Jan"
+            this.setState(function(prevState,props){
+                return {newStartMonth: prevState.newStartMonth}
+            })
+
+            this.state.newStartYear = "2018"
+            this.setState(function(prevState,props){
+                return {newStartYear: prevState.newStartYear}
+            })
+            this.state.newStartMonth = "Jan"
+            this.setState(function(prevState,props){
+                return {newStartMonth: prevState.newStartMonth}
+            })
+
+            this.state.newStartYear = "2018"
+            this.setState(function(prevState,props){
+                return {newStartYear: prevState.newStartYear}
+            })
+            this.state.newEndMonth = "Jan"
+            this.setState(function(prevState,props){
+                return {newEndMonth: prevState.newEndMonth}
+            })
+
+            this.state.newEndYear = "2018"
+            this.setState(function(prevState,props){
+                return {newEndYear: prevState.newEndYear}
+            })
+            this.state.newDegree = "Bachelor"
+            this.setState(function(prevState,props){
+                return {newDegree: prevState.newDegree}
+            })
+
+            this.state.newSpecialisation = "Accountancy"
+            this.setState(function(prevState,props){
+                return {newSpecialisation: prevState.newSpecialisation}
+            })
+
             this._flip()
-            //Release experience value
-            this.state.newExperience = "1"
-            this.setState(function(prevState,props){
-                return {newExperience: prevState.newExperience}
-            })
+            
           }
           _renderDeleteModalContent = () => (
 
             <View style={[styles.modalContent, {backgroundColor: '#254D32'}]}>
             
-                <Text style={[styles.title, {color: 'white'}]}>Are you sure you want to delete the selected skill from your profile?</Text>
+                <Text style={[styles.title, {color: 'white'}]}>Are you sure you want to delete the selected education from your profile?</Text>
             
                 <View style={{flexDirection: 'row'}}>
             
@@ -542,19 +586,19 @@ export default class Education extends React.Component
           )
           _deleteItem(){
            //Use temp array(object) instead to state.someArr to apply javascript functionalities on arrays. 
-            var tempSkillArr = []
-            tempSkillArr = this.state.data
-            console.log('tempArr: ', tempSkillArr)
+            var tempEdyArr = []
+            tempEduArr = this.state.data
+            console.log('tempArr: ', tempEduArr)
 
             //Returns the part of array we want to remove
-            tempSkillArr.splice(this.state.index, 1)
+            tempEduArr.splice(this.state.index, 1)
 
-            //Assign the tempArr with the removed element to bookmarkData
-            this.state.data = tempSkillArr
+            //Assign the tempArr with the removed element to education data
+            this.state.data = tempEduArr
             this.setState(function(prevState, props){
                 return { bookmarkData : prevState.data }
             })
-            console.log('Update SkillsData: ', this.state.data)
+            console.log('Update EducationsData: ', this.state.data)
             
             //Close modal
             this._untoggleModalDelete()
