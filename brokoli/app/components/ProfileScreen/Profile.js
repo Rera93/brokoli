@@ -9,7 +9,7 @@ import { StyleSheet, Text, View, Image, Dimensions, ScrollView, Alert, Touchable
 import Skills from './Skills'
 import Projects from './Projects'
 import Jobs from './Jobs'
-import Overview from './Overview'
+import Education from './Education'
 import Tabs from './Tabs'
 
 
@@ -789,10 +789,11 @@ export default class Profile extends React.Component {
 
                 <Tabs>
 
-                    <Overview title='OVERVIEW'/>
+                    <Education title='EDUCATION'/>
                     <Skills title='SKILLS' skills={this.state.userData.skills} id={this.props.screenProps} callbackUpdateDB={this.callbackUpdateDB}/>
                     <Jobs title='JOBS' jobs={this.state.userData.jobsObj} id={this.props.screenProps} callbackUpdateDB={this.callbackUpdateDB}/>
                     <Projects title='PROJECTS' projects={this.state.userData.projectArrObj} id={this.props.screenProps} callbackUpdateDB={this.callbackUpdateDB}/>
+
 
                 </Tabs>
 

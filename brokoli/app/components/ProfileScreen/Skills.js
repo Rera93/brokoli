@@ -12,7 +12,6 @@ import { StyleSheet,
 import FloatingAction from '../FloatingComponents/FloatingAction'
 import Modal from 'react-native-modal'
 import { Picker } from 'react-native-picker-dropdown'
-import Swipeout from 'react-native-swipeout'
 
 const width = Dimensions.get('window').width
 const height = Dimensions.get('window').height
@@ -171,16 +170,6 @@ export default class Skills extends React.Component
             console.log("Experience: ", this.state.newExperience)
                 
         }
-
-        refreshFlatList = (deletedKey) => {
-            this.state.deleteRowKey = deletedKey
-            this.setState(function(prevState, props){
-                return {
-                    deleteRowKey: prevState.deleteRowKey
-                }
-        })
-      }
-
         _flip(){
             
                   if(this.state.newSkill != '')
@@ -374,7 +363,7 @@ export default class Skills extends React.Component
                      keyExtractor={item => item.skill}
                      ItemSeparatorComponent={this._renderSeparator}
                      ListHeaderComponent={() => (!this.state.data.length ? 
-                    <Text style={{marginTop: height / 4, textAlign: 'center', fontSize: 20, fontWeight: '500', color: '#42D260'}}>Add Skill</Text> : null)}
+                    <Text style={{marginTop: height / 4, textAlign: 'center', fontSize: 20, fontWeight: '500', color: '#42D260'}}>Add skill</Text> : null)}
                  />
 
                  <FloatingAction 
