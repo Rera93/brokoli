@@ -11,6 +11,7 @@ import { StyleSheet,
 
 import FloatingAction from '../FloatingComponents/FloatingAction'
 import Modal from 'react-native-modal'
+import { Picker } from 'react-native-picker-dropdown'
 
 const width = Dimensions.get('window').width
 const height = Dimensions.get('window').height

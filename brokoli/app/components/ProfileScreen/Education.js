@@ -195,6 +195,369 @@ export default class Education extends React.Component
             console.log('New Specialisation: ', this.state.newSpecialisation)
         }
 
+        _flip(){
+            
+                  if(this.state.newSchool != '' && this.state.newCity != '' && this.state.newCountry != '')
+                  {
+                      this.state.flip = true
+                      this.setState(function(prevState,props){
+                          return {flip: prevState.flip}
+                      })
+                  }
+                  else {
+                    this.state.flip = false
+                    this.setState(function(prevState,props){
+                        return {flip: prevState.flip}
+                    })
+            
+                  }
+                  
+                  console.log('Flip: ', this.state.flip)
+            
+                }
+        
+          _renderModalContent = () => (
+            <View style={styles.modalContent}>
+
+              <View style={styles.form}> 
+
+              <Text style={styles.title}>Add new education</Text> 
+
+              <View style={{marginTop: 10}}>
+              
+              <TextInput placeholder='school'
+                         style={styles.input}
+                         underlineColorAndroid='transparent'
+                         onChangeText={(text) => this._grabNewSchool(text)}
+                         value={this.state.newSchool}/>
+
+              </View>
+              <View style={{marginTop: 10}}>
+              
+              <TextInput placeholder='city'
+                         style={styles.input}
+                         underlineColorAndroid='transparent'
+                         onChangeText={(text) => this._grabNewCity(text)}
+                         value={this.state.newCity}/>
+
+              </View>
+              <View style={{marginTop: 10}}>
+              
+              <TextInput placeholder='country'
+                         style={styles.input}
+                         underlineColorAndroid='transparent'
+                         onChangeText={(text) => this._grabNewCountry(text)}
+                         value={this.state.newCountry}/>
+
+              </View>
+
+              <View style={styles.expInput}>
+
+                    <Picker
+                        selectedValue={this.state.newStartMonth}
+                        onValueChange={(month) => this._grabNewStartMonth(month)}
+                        mode="dropdown"
+                        itemStyle = {{fontSize: 12}}
+                        style={{
+                        color: '#C7C7CD',
+                        height: 40,
+                        }}>
+                        <Picker.Item label="Jan" value="Jan" />
+                        <Picker.Item label="Feb" value="Feb" />
+                        <Picker.Item label="Mar" value="Mar" />
+                        <Picker.Item label="Apr" value="Apr" />
+                        <Picker.Item label="May" value="May" />
+                        <Picker.Item label="Jun" value="Jun" />
+                        <Picker.Item label="Jul" value="Jul" />
+                        <Picker.Item label="Aug" value="Aug" />
+                        <Picker.Item label="Sep" value="Sep" />
+                        <Picker.Item label="Oct" value="Oct" />
+                        <Picker.Item label="Nov" value="Nov" />
+                        <Picker.Item label="Dec" value="Dec" />
+                    </Picker>
+                 
+                </View>
+                <View style={styles.expInput}>
+
+                    <Picker
+                        selectedValue={this.state.newStartYear}
+                        onValueChange={(year) => this._grabNewStartYear(year)}
+                        mode="dropdown"
+                        itemStyle = {{fontSize: 12}}
+                        style={{
+                        color: '#C7C7CD',
+                        height: 40,
+                        }}>
+                        <Picker.Item label="2018" value="2018" />
+                        <Picker.Item label="2017" value="2017" />
+                        <Picker.Item label="2016" value="2016" />
+                        <Picker.Item label="2015" value="2015" />
+                        <Picker.Item label="2014" value="2014" />
+                        <Picker.Item label="2013" value="2013" />
+                        <Picker.Item label="2012" value="2012" />
+                        <Picker.Item label="2011" value="2011" />
+                        <Picker.Item label="2010" value="2010" />
+                        <Picker.Item label="2009" value="2009" />
+                        <Picker.Item label="2008" value="2008" />
+                        <Picker.Item label="2007" value="2007" />
+                        <Picker.Item label="2006" value="2006" />
+                        <Picker.Item label="2005" value="2005" />
+                        <Picker.Item label="2004" value="2004" />
+                        <Picker.Item label="2003" value="2003" />
+                        <Picker.Item label="2002" value="2002" />
+                        <Picker.Item label="2001" value="2001" />
+                        <Picker.Item label="2000" value="2000" />
+                        <Picker.Item label="1999" value="1999" />
+                        <Picker.Item label="1998" value="1998" />
+                        <Picker.Item label="1997" value="1997" />
+                        <Picker.Item label="1996" value="1996" />
+                        <Picker.Item label="1995" value="1995" />
+                        <Picker.Item label="1994" value="1994" />
+                        <Picker.Item label="1993" value="1993" />
+                        <Picker.Item label="1992" value="1992" />
+                        <Picker.Item label="1991" value="1991" />
+                        <Picker.Item label="1990" value="1990" />
+                    </Picker>
+                 
+                </View>
+
+                <View style={styles.expInput}>
+
+                    <Picker
+                        selectedValue={this.state.newEndMonth}
+                        onValueChange={(month) => this._grabNewEndMonth(month)}
+                        mode="dropdown"
+                        itemStyle = {{fontSize: 12}}
+                        style={{
+                        color: '#C7C7CD',
+                        height: 40,
+                        }}>
+                        <Picker.Item label="Jan" value="Jan" />
+                        <Picker.Item label="Feb" value="Feb" />
+                        <Picker.Item label="Mar" value="Mar" />
+                        <Picker.Item label="Apr" value="Apr" />
+                        <Picker.Item label="May" value="May" />
+                        <Picker.Item label="Jun" value="Jun" />
+                        <Picker.Item label="Jul" value="Jul" />
+                        <Picker.Item label="Aug" value="Aug" />
+                        <Picker.Item label="Sep" value="Sep" />
+                        <Picker.Item label="Oct" value="Oct" />
+                        <Picker.Item label="Nov" value="Nov" />
+                        <Picker.Item label="Dec" value="Dec" />
+                    </Picker>
+                 
+                </View>
+                <View style={styles.expInput}>
+
+                    <Picker
+                        selectedValue={this.state.newEndYear}
+                        onValueChange={(year) => this._grabNewEndYear(year)}
+                        mode="dropdown"
+                        itemStyle = {{fontSize: 12}}
+                        style={{
+                        color: '#C7C7CD',
+                        height: 40,
+                        }}>
+                        <Picker.Item label="2018" value="2018" />
+                        <Picker.Item label="2017" value="2017" />
+                        <Picker.Item label="2016" value="2016" />
+                        <Picker.Item label="2015" value="2015" />
+                        <Picker.Item label="2014" value="2014" />
+                        <Picker.Item label="2013" value="2013" />
+                        <Picker.Item label="2012" value="2012" />
+                        <Picker.Item label="2011" value="2011" />
+                        <Picker.Item label="2010" value="2010" />
+                        <Picker.Item label="2009" value="2009" />
+                        <Picker.Item label="2008" value="2008" />
+                        <Picker.Item label="2007" value="2007" />
+                        <Picker.Item label="2006" value="2006" />
+                        <Picker.Item label="2005" value="2005" />
+                        <Picker.Item label="2004" value="2004" />
+                        <Picker.Item label="2003" value="2003" />
+                        <Picker.Item label="2002" value="2002" />
+                        <Picker.Item label="2001" value="2001" />
+                        <Picker.Item label="2000" value="2000" />
+                        <Picker.Item label="1999" value="1999" />
+                        <Picker.Item label="1998" value="1998" />
+                        <Picker.Item label="1997" value="1997" />
+                        <Picker.Item label="1996" value="1996" />
+                        <Picker.Item label="1995" value="1995" />
+                        <Picker.Item label="1994" value="1994" />
+                        <Picker.Item label="1993" value="1993" />
+                        <Picker.Item label="1992" value="1992" />
+                        <Picker.Item label="1991" value="1991" />
+                        <Picker.Item label="1990" value="1990" />
+                    </Picker>
+                 
+                </View>
+
+                <View style={styles.expInput}>
+
+                <Picker
+                        selectedValue={this.state.newDegree}
+                        onValueChange={(degree) => this._grabNewDegree(degree)}
+                        mode="dropdown"
+                        itemStyle = {{fontSize: 12}}
+                        style={{
+                        color: '#C7C7CD',
+                        height: 40,
+                        }}>
+                        <Picker.Item label="Bachelor" value="Bachelor" />
+                        <Picker.Item label="Master" value="Master" />
+                        <Picker.Item label="Phd" value="Phd" />
+                    </Picker>   
+
+                </View>
+
+                <View style={styles.expInput}>
+
+                <Picker
+                        selectedValue={this.state.newSpecialisation}
+                        onValueChange={(specialisation) => this._grabNewSpecialisation(specialisation)}
+                        mode="dropdown"
+                        itemStyle = {{fontSize: 12}}
+                        style={{
+                        color: '#C7C7CD',
+                        height: 40,
+                        }}>
+                       <Picker.Item label="Accountancy" value="Accountancy" />
+                       <Picker.Item label="Advanced Study" value="Advanced Study" />
+                       <Picker.Item label="Applied Finance" value="Applied Finance" />
+                       <Picker.Item label="Applied Science" value="Applied Science" />
+                       <Picker.Item label="Architecture" value="Architecture" />
+                       <Picker.Item label="Bioinformatics" value="Bioinformatics" />
+                       <Picker.Item label="Business Administration" value="Business Administration" />
+                       <Picker.Item label="Business, Entrepreneurship and Technology" value="Business, Entrepreneurship and Technology" />
+                       <Picker.Item label="Business" value="Business" />
+                       <Picker.Item label="Business Engineering" value="Business Engineering" />
+                       <Picker.Item label="Business Informatics" value="Business Informatics" />
+                       <Picker.Item label="Chemistry" value="Chemistry" />
+                       <Picker.Item label="Criminal Justice" value="Criminal Justice" />
+                       <Picker.Item label="Computer Science" value="Computer Science" />
+                       <Picker.Item label="Cyber Security" value="Cyber Security" />
+                       <Picker.Item label="Data Science" value="Data Science" />
+                       <Picker.Item label="Economics" value="Economics" />
+                       <Picker.Item label="Engineering" value="Engineering" />
+                       <Picker.Item label="Engineering Management" value="Engineering Management" />
+                       <Picker.Item label="European Law" value="European Law" />
+                       <Picker.Item label="Finance" value="Finance" />
+                       <Picker.Item label="Financial Economics" value="Financial Economics" />
+                       <Picker.Item label="Financial Engineering" value="Financial Engineering" />
+                       <Picker.Item label="Fine Arts" value="Fine Arts" />
+                       <Picker.Item label="Humanities" value="Humanities" />
+                       <Picker.Item label="International Affairs" value="International Affairs" />
+                       <Picker.Item label="Information Management" value="Information Management" />
+                       <Picker.Item label="Information System Management" value="Information System Management" />
+                       <Picker.Item label="Laws" value="Laws" />
+                       <Picker.Item label="Landscape Architecture" value="Landscape Architecture" />
+                       <Picker.Item label="Liberal Arts" value="Liberal Arts" />
+                       <Picker.Item label="Management" value="Management" />
+                       <Picker.Item label="Mathematical Finance" value="Mathematical Finance" />
+                       <Picker.Item label="Mathematics" value="Mathematics" />
+                       <Picker.Item label="Medical Science" value="Medical Science" />
+                       <Picker.Item label="Medicine" value="Medicine" />
+                       <Picker.Item label="Philosophy" value="Philosophy" />
+                       <Picker.Item label="Physics" value="Physics" />
+                       <Picker.Item label="Political Science" value="Political Science" />
+                       <Picker.Item label="Psychology" value="Psychology" />
+                       <Picker.Item label="Social Science" value="Social Science" />
+                       <Picker.Item label="Urban Planning" value="Urban Planning" />
+                    </Picker>   
+
+                </View>
+
+              </View>
+
+              <View style={{flexDirection: 'row'}}>
+
+              <TouchableOpacity  disabled={!this.state.flip}
+                                style={[styles.button,{borderWidth: 2, borderColor: '#254D32', backgroundColor: this.state.flip ? '#254D32' : 'white'} ]} 
+                                onPress={() => this._addEdu()}>
+                <Text style={[styles.btnTxt, {color: this.state.flip ? 'white' : '#254D32'}]}>Add</Text>
+ 
+              </TouchableOpacity>
+
+              <TouchableOpacity style={[styles.button, {backgroundColor: '#A7333F'}]} 
+                                onPress={() => this._toggleModalAdd()}>
+                <Text style={[styles.btnTxt, {color: 'white'}]}>Close</Text>
+ 
+              </TouchableOpacity>
+
+              </View>
+            
+            </View>
+          );
+
+          _addEdu(){
+            tempArr.unshift({skill: this.state.newSkill, experience: this.state.newExperience})
+            console.log('tempArr: ', tempArr)
+            this.state.data = tempArr
+            this.setState(function(prevState,props){
+                return {data: prevState.data}
+            })
+            console.log('updatedDataArr: ', this.state.data)
+            this._toggleModalAdd()
+          }
+
+          _releaseNewData(){
+            //Release text inputs value
+            this.state.newSkill = ''
+            this.setState(function(prevState,props){
+                return {newSkill: prevState.newSkill}
+            })
+            this._flip()
+            //Release experience value
+            this.state.newExperience = "1"
+            this.setState(function(prevState,props){
+                return {newExperience: prevState.newExperience}
+            })
+          }
+          _renderDeleteModalContent = () => (
+
+            <View style={[styles.modalContent, {backgroundColor: '#254D32'}]}>
+            
+                <Text style={[styles.title, {color: 'white'}]}>Are you sure you want to delete the selected skill from your profile?</Text>
+            
+                <View style={{flexDirection: 'row'}}>
+            
+                                    <TouchableOpacity 
+                                                    style={[styles.button,{backgroundColor: 'white'}]} 
+                                                    onPress={() => this._deleteItem() }>
+                                    <Text style={[styles.btnTxt, {color: '#254D32'}]}>Ok</Text>
+                    
+                                    </TouchableOpacity>
+            
+                                    <TouchableOpacity style={[styles.button, {backgroundColor: '#A7333F'}]} 
+                                                    onPress={() => this._untoggleModalDelete()}>
+                                    <Text style={[styles.btnTxt, {color: 'white'}]}>Cancel</Text>
+                    
+                                    </TouchableOpacity>
+            
+                                </View>
+            
+                            </View>
+            
+          )
+          _deleteItem(){
+           //Use temp array(object) instead to state.someArr to apply javascript functionalities on arrays. 
+            var tempSkillArr = []
+            tempSkillArr = this.state.data
+            console.log('tempArr: ', tempSkillArr)
+
+            //Returns the part of array we want to remove
+            tempSkillArr.splice(this.state.index, 1)
+
+            //Assign the tempArr with the removed element to bookmarkData
+            this.state.data = tempSkillArr
+            this.setState(function(prevState, props){
+                return { bookmarkData : prevState.data }
+            })
+            console.log('Update SkillsData: ', this.state.data)
+            
+            //Close modal
+            this._untoggleModalDelete()
+          }
+
 
     render(){
         return(
