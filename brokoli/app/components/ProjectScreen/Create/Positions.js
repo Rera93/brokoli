@@ -45,7 +45,8 @@ export default class Positions extends React.Component {
             nrOfPos: '1',
             index: null,
             projectObj: {},
-            isModalDeleteVisible: false
+            isModalDeleteVisible: false,
+            isModalCreateVisible: false
         }
 
     }
@@ -286,15 +287,56 @@ export default class Positions extends React.Component {
       }
 
 
-    sendToDb(){
-      
-      var str2 = JSON.stringify(this.state.projectObj, null, 4);
-      console.log('to be inserted  <<<<<' +str2);
+       sendToDb()
+       {   
+            var str2 = JSON.stringify(this.state.projectObj, null, 4);
+            console.log('to be inserted  <<<<<' +str2);
+    
+            this._updateDB(this.state.projectObj, 'insertProjects');
+            const { navigate } = this.props.navigation 
+            setTimeout(() => navigate('Projects'), 500);
+           
+           
+        }
 
-      this._updateDB(this.state.projectObj, 'insertProjects');
-      Alert.alert('Your project has been successfully created.');
+        
 
-    }
+        _toggleModalCreate(){
+            this.state.isModalCreateVisible = true
+            this.setState(function(prevState, props){
+                return { isModalCreateVisible: prevState.isModalCreateVisible }
+            })
+            console.log("isModalCreateVisible: ", this.state.isModalCreateVisible)
+        }
+        _untoggleModalCreate(){
+            this.state.isModalCreateVisible = false
+            this.setState(function(prevState, props){
+                return { isModalCreateVisible: prevState.isModalCreateVisible }
+            })
+            console.log("isModalCreateVisible: ", this.state.isModalCreateVisible)
+            this.sendToDb()
+        }
+
+        _renderCreateModalContent = () => (
+
+            <View style={[styles.modalContent, {backgroundColor: '#254D32'}]}>
+            
+                <Text style={[styles.title, {color: 'white'}]}>Your project was successfully created.</Text>
+            
+                <View style={{flexDirection: 'row'}}>
+            
+                                    <TouchableOpacity style={[styles.button, {backgroundColor: '#A7333F'}]} 
+                                                    onPress={() => this._untoggleModalCreate()}>
+                                    <Text style={[styles.btnTxt, {color: 'white'}]}>Ok</Text>
+                    
+                                    </TouchableOpacity>
+            
+                                </View>
+            
+                            </View>
+
+        )
+
 
     render(){
         const { navigate } = this.props.navigation
@@ -412,12 +454,20 @@ export default class Positions extends React.Component {
                          {this._renderDeleteModalContent()}
 
                     </Modal> 
+
+           <Modal isVisible = {this.state.isModalCreateVisible}
+                  animationIn={'slideInLeft'}
+                  animationOut={'slideOutRight'}>
+
+                         {this._renderCreateModalContent()}
+
+                    </Modal> 
                
 
                 <FloatingAction  actions={actions}
                            visible={actionButtonVisible}
                            overrideWithAction
-                           onPressItem={() => this.sendToDb()}/>
+                           onPressItem={() => this._toggleModalCreate()}/>
             </View>
         )
     }
