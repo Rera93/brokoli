@@ -489,7 +489,9 @@ export default class Education extends React.Component
           );
 
           _addEdu(){
-            tempArr.unshift({skill: this.state.newSkill, experience: this.state.newExperience})
+            tempArr.unshift({school: this.state.newSchool, city: this.state.newCity, country: this.state.newCountry,
+                             startMM: this.state.newStartMonth, startYY: this.state.newStartYear, endMM: this.state.newEndMonth,
+                             endYY: this.state.newEndYear, degree: this.state.newDegree, specialisation: this.state.newSpecialisation})
             console.log('tempArr: ', tempArr)
             this.state.data = tempArr
             this.setState(function(prevState,props){
