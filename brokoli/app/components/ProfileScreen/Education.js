@@ -408,7 +408,14 @@ export default class Education extends React.Component
 
                 </View>
 
-                <View style={styles.expInput}>
+                
+              <View style={{flexDirection: 'row', marginTop: 10}}>
+
+              <View style={{justifyContent: 'center', marginRight: -60, flex: 1}}> 
+                                <Text style={{fontSize: 16, color: '#254D32', fontWeight: '400'}}>Degree</Text>
+                        </View>
+
+                <View style={[styles.expInput, {flex: 1}]}>
 
                 <Picker
                         selectedValue={this.state.newDegree}
@@ -426,7 +433,16 @@ export default class Education extends React.Component
 
                 </View>
 
-                <View style={styles.expInput}>
+                </View>
+
+                
+              <View style={{flexDirection: 'row', marginTop: 10, marginBottom: 10}}>
+
+              <View style={{justifyContent: 'center', marginRight: -60, flex: 1}}> 
+                                <Text style={{fontSize: 16, color: '#254D32', fontWeight: '400'}}>Specialisation</Text>
+                        </View>
+
+                <View style={[styles.expInput, {flex: 1}]}>
 
                 <Picker
                         selectedValue={this.state.newSpecialisation}
@@ -483,6 +499,8 @@ export default class Education extends React.Component
 
                 </View>
 
+                </View>
+
               </View>
 
               <View style={{flexDirection: 'row'}}>
@@ -507,8 +525,8 @@ export default class Education extends React.Component
 
           _addEdu(){
             tempArr.unshift({school: this.state.newSchool, city: this.state.newCity, country: this.state.newCountry,
-                             startMM: this.state.newStartMonth, startYY: this.state.newStartYear, endMM: this.state.newEndMonth,
-                             endYY: this.state.newEndYear, degree: this.state.newDegree, specialisation: this.state.newSpecialisation})
+                             startMonth: this.state.newStartMonth, startYear: this.state.newStartYear, endMonth: this.state.newEndMonth,
+                             endYear: this.state.newEndYear, degree: this.state.newDegree, specialization: this.state.newSpecialisation})
             console.log('tempArr: ', tempArr)
             this.state.data = tempArr
             this.setState(function(prevState,props){
