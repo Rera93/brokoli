@@ -5,7 +5,7 @@
 */
 
 import React from 'react';
-import { StyleSheet, Text, View, Image, Dimensions, ScrollView, Alert, TouchableOpacity, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Image, Dimensions, ScrollView, Alert, TouchableOpacity, TextInput} from 'react-native';
 import Skills from './Skills'
 import Projects from './Projects'
 import Jobs from './Jobs'
@@ -121,7 +121,8 @@ export default class Profile extends React.Component {
 
             <View style={styles.modalContent}>
             
-                    <View style={styles.form}> 
+                    <ScrollView contentContainerStyle={styles.form}  
+                                showsVerticalScrollIndicator = {false}> 
             
                     <Text style={styles.title}>Update account settings</Text> 
             
@@ -176,7 +177,7 @@ export default class Profile extends React.Component {
                      </View>
             
             
-                          </View>
+                          </ScrollView>
             
                           <View style={{flexDirection: 'row', marginTop: 20}}>
             
