@@ -8,7 +8,8 @@ import { StyleSheet,
          Alert,
          TextInput,
          TouchableOpacity,
-         KeyboardAvoidingView } from 'react-native';
+         KeyboardAvoidingView,
+         ScrollView } from 'react-native';
 
 import FloatingAction from '../FloatingComponents/FloatingAction'
 import Modal from 'react-native-modal'
@@ -188,7 +189,8 @@ export default class Projects extends React.Component
 
             <View style={styles.modalContent}>
 
-              <View style={styles.form}> 
+              <ScrollView contentContainerStyle={styles.form}
+                          showsVerticalScrollIndicator = {false}> 
 
               <Text style={styles.title}>Add new project</Text> 
 
@@ -222,7 +224,7 @@ export default class Projects extends React.Component
 
               </View>
 
-              </View>
+              </ScrollView>
 
               <View style={{flexDirection: 'row', paddingTop: 20}}>
 

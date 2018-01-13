@@ -7,7 +7,9 @@ import { StyleSheet,
             FlatList,
             Alert,
             TextInput,
-            TouchableOpacity } from 'react-native';
+            TouchableOpacity,
+            KeyboardAvoidingView,
+            ScrollView } from 'react-native';
 
 import FloatingAction from '../FloatingComponents/FloatingAction'
 import Modal from 'react-native-modal'
@@ -220,7 +222,8 @@ export default class Education extends React.Component
           _renderModalContent = () => (
             <View style={styles.modalContent}>
 
-              <View style={styles.form}> 
+              <ScrollView contentContainerStyle={styles.form}
+                          showsVerticalScrollIndicator = {false}> 
 
               <Text style={styles.title}>Add new education</Text> 
 
@@ -501,7 +504,7 @@ export default class Education extends React.Component
 
                 </View>
 
-              </View>
+              </ScrollView>
 
               <View style={{flexDirection: 'row'}}>
 
