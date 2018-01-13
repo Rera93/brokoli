@@ -360,7 +360,7 @@ export default class Skills extends React.Component
                           </View>   
                     
                      )}
-                     keyExtractor={item => item.skill}
+                     keyExtractor={item => item.skill+item.exp}
                      ItemSeparatorComponent={this._renderSeparator}
                      ListHeaderComponent={() => (!this.state.data.length ? 
                     <Text style={{marginTop: height / 4, textAlign: 'center', fontSize: 20, fontWeight: '500', color: '#42D260'}}>Add skill</Text> : null)}

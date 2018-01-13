@@ -414,7 +414,7 @@ export default class Projects extends React.Component
                           </View>   
                     
                      )}
-                     keyExtractor={item => item.position}
+                     keyExtractor={item => item.position+item.project}
                      ItemSeparatorComponent={this._renderSeparator}
                      ListHeaderComponent={() => (!this.state.data.length ? 
                     <Text style={{marginTop: height / 4, textAlign: 'center', fontSize: 20, fontWeight: '400', color: '#42D260'}}>Add Project</Text> : null)}

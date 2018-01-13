@@ -95,32 +95,32 @@ export default class Career extends React.Component {
                     passToDb: this.props.navigation.state.params.categories})
     }
 
-    _organizeJobsObject(){
-        //organizing job attributes into elements 
-           //TODO move this to register.
-           var element = {};
-           var str = '';
-            var arrayLength = this.state.companies.length;
-            for (var i = 0; i < arrayLength; i++) {
-                element.startMonth = this.state.jobStartMonths[i];
-                element.startYear = this.state.jobStartYears[i];
-                element.endMonth = this.state.jobEndMonths[i];
-                element.endYear = this.state.jobEndYears[i];
-                element.position = this.state.jobPositions[i];
-                element.company = this.state.companies[i];
-                element.city = this.state.jobCities[i];
-                element.country = this.state.jobCountries[i];
-                console.log('element ' + this.state.companies.length+ this.state.jobPositions[i]);
-                str = JSON.stringify(element, null, 4);
-                console.log('obj '+ str);
-                this.setState({ jobsObj: [...this.state.jobsObj, element] })
+    // _organizeJobsObject(){
+    //     //organizing job attributes into elements 
+    //        //TODO move this to register.
+    //        var element = {};
+    //        var str = '';
+    //         var arrayLength = this.state.companies.length;
+    //         for (var i = 0; i < arrayLength; i++) {
+    //             element.startMonth = this.state.jobStartMonths[i];
+    //             element.startYear = this.state.jobStartYears[i];
+    //             element.endMonth = this.state.jobEndMonths[i];
+    //             element.endYear = this.state.jobEndYears[i];
+    //             element.position = this.state.jobPositions[i];
+    //             element.company = this.state.companies[i];
+    //             element.city = this.state.jobCities[i];
+    //             element.country = this.state.jobCountries[i];
+    //             console.log('element ' + this.state.companies.length+ this.state.jobPositions[i]);
+    //             str = JSON.stringify(element, null, 4);
+    //             console.log('obj '+ str);
+    //             this.setState({ jobsObj: [...this.state.jobsObj, element] })
                   
                 
-            }
+    //         }
 
-            console.log('jobsObj: '+ this.state.jobsObj[0]);
-            this.props.navigation.navigate('Additional', {finalObj: this.state })
-    }
+    //         console.log('jobsObj: '+ this.state.jobsObj[0]);
+            
+    //}
 
 
 
@@ -180,7 +180,7 @@ export default class Career extends React.Component {
 
                 </Bar>
 
-                <TouchableOpacity style={styles.button} onPress={()=> this._organizeJobsObject()}>
+                <TouchableOpacity style={styles.button} onPress={()=> navigate('Additional', {finalObj: this.state })}>
 
                 <Text style={styles.btnText}> NEXT </Text>
 

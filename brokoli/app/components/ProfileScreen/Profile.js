@@ -793,8 +793,8 @@ export default class Profile extends React.Component {
 
                     <Education title='EDUCATION'/>
                     <Skills title='SKILLS' skills={this.state.userData.skills} id={this.props.screenProps} callbackUpdateDB={this.callbackUpdateDB}/>
-                    <Jobs title='JOBS' jobs={this.state.userData.jobsObj} id={this.props.screenProps} callbackUpdateDB={this.callbackUpdateDB}/>
-                    <Projects title='PROJECTS' projects={this.state.userData.projectArrObj} id={this.props.screenProps} callbackUpdateDB={this.callbackUpdateDB}/>
+                    <Jobs title='JOBS' jobs={this.state.userData.jobs} id={this.props.screenProps} callbackUpdateDB={this.callbackUpdateDB}/>
+                    <Projects title='PROJECTS' projects={this.state.userData.projects} id={this.props.screenProps} callbackUpdateDB={this.callbackUpdateDB}/>
 
 
                 </Tabs>

@@ -44,113 +44,113 @@ export default class Additional extends React.Component {
     componentDidMount() {
         //Alert.alert("Props", this.props.navigation.state.params.date + this.props.navigation.state.params.gender) ;
        this.setState({finalObj : this.props.navigation.state.params.finalObj})
-       this._organizeJobsObject();
-       this._organizeProjectsObject();
+       //this._organizeJobsObject();
+       //this._organizeProjectsObject();
     }
 
-    _organizeJobsObject(){
-        //organizing job attributes into elements 
-           //TODO move this to register.
-           const {finalObj} = this.props.navigation.state.params;
-           var element = {};
-           var arrObj=[];
-           var str = '';
-            var arrayLength = finalObj.companies.length;
-            for (var i = 0; i < arrayLength; i++) {
+    // _organizeJobsObject(){
+    //     //organizing job attributes into elements 
+    //        //TODO move this to register.
+    //        const {finalObj} = this.props.navigation.state.params;
+    //        var element = {};
+    //        var arrObj=[];
+    //        var str = '';
+    //         var arrayLength = finalObj.companies.length;
+    //         for (var i = 0; i < arrayLength; i++) {
                 
-                console.log('element ' + finalObj.companies.length+ finalObj.jobPositions[i]);
+    //             console.log('element ' + finalObj.companies.length+ finalObj.jobPositions[i]);
                 
-                //this.setState(prevState => ({
-                    element = {startMonth : finalObj.jobStartMonths[i],
-                                                    startYear : finalObj.jobStartYears[i],
-                                                    endMonth : finalObj.jobEndMonths[i],
-                                                    endYear : finalObj.jobEndYears[i],
-                                                    position : finalObj.jobPositions[i],
-                                                    company : finalObj.companies[i],
-                                                    city : finalObj.jobCities[i],
-                                                    country : finalObj.jobCountries[i]};
-                str = JSON.stringify(element, null, 4);
-                console.log('objelem '+ str);
-                if(finalObj.jobPositions[i].length > 0)
-                    arrObj.push(element);
-                str = JSON.stringify(arrObj, null, 4);
-                console.log('Arrayofobj '+ str);
+    //             //this.setState(prevState => ({
+    //                 element = {startMonth : finalObj.jobStartMonths[i],
+    //                                                 startYear : finalObj.jobStartYears[i],
+    //                                                 endMonth : finalObj.jobEndMonths[i],
+    //                                                 endYear : finalObj.jobEndYears[i],
+    //                                                 position : finalObj.jobPositions[i],
+    //                                                 company : finalObj.companies[i],
+    //                                                 city : finalObj.jobCities[i],
+    //                                                 country : finalObj.jobCountries[i]};
+    //             str = JSON.stringify(element, null, 4);
+    //             console.log('objelem '+ str);
+    //             if(finalObj.jobPositions[i].length > 0)
+    //                 arrObj.push(element);
+    //             str = JSON.stringify(arrObj, null, 4);
+    //             console.log('Arrayofobj '+ str);
                   
                 
-            }
-            //this.setState({jobsObj: arrObj});
+    //         }
+    //         //this.setState({jobsObj: arrObj});
             
-            let update = finalObj;
-            update.jobsObj = arrObj;
+    //         let update = finalObj;
+    //         update.jobsObj = arrObj;
 
-            this._deleteJobRepetition();
+    //         this._deleteJobRepetition();
             
 
 
-            //console.log('jobsObj: '+ this.state.jobsObj[0]);
+    //         //console.log('jobsObj: '+ this.state.jobsObj[0]);
             
-    }
+    // }
 
-    _deleteJobRepetition(){
-        const {finalObj} = this.props.navigation.state.params;
-        let update = finalObj;
-        delete update.jobStartMonths;
-        delete update.jobStartYears;
-        delete update.jobEndMonths;
-        delete update.jobEndYears;
-        delete update.jobPositions;
-        delete update.companies;
-        delete update.jobCities;
-        delete update.jobCountries;   
+    // _deleteJobRepetition(){
+    //     const {finalObj} = this.props.navigation.state.params;
+    //     let update = finalObj;
+    //     delete update.jobStartMonths;
+    //     delete update.jobStartYears;
+    //     delete update.jobEndMonths;
+    //     delete update.jobEndYears;
+    //     delete update.jobPositions;
+    //     delete update.companies;
+    //     delete update.jobCities;
+    //     delete update.jobCountries;   
 
-    }
+    // }
 
-    _organizeProjectsObject(){
-        //organizing job attributes into elements 
-           //TODO move this to register.
-           const {finalObj} = this.props.navigation.state.params;
-           var element = {};
-           var arrObj=[];
-           var str = '';
-            var arrayLength = finalObj.projectNames.length;
-            for (var i = 0; i < arrayLength; i++) {
+    // _organizeProjectsObject(){
+    //     //organizing job attributes into elements 
+    //        //TODO move this to register.
+    //        const {finalObj} = this.props.navigation.state.params;
+    //        var element = {};
+    //        var arrObj=[];
+    //        var str = '';
+    //         var arrayLength = finalObj.projectNames.length;
+    //         for (var i = 0; i < arrayLength; i++) {
                 
-                console.log('element ' + finalObj.projectNames.length+ finalObj.projectNames[i]);
+    //             console.log('element ' + finalObj.projectNames.length+ finalObj.projectNames[i]);
                 
-                //this.setState(prevState => ({
-                    element = {project : finalObj.projectNames[i],
-                                                    position : finalObj.projectPositions[i],
-                                                    course : finalObj.courses[i]};
-                str = JSON.stringify(element, null, 4);
-                console.log('objelem '+ str);
-                if(finalObj.projectNames[i].length > 0)
-                    arrObj.push(element);
-                str = JSON.stringify(arrObj, null, 4);
-                console.log('Arrayofobj '+ str);
+    //             //this.setState(prevState => ({
+    //                 element = {project : finalObj.projectNames[i],
+    //                                                 position : finalObj.projectPositions[i],
+    //                                                 course : finalObj.courses[i]};
+    //             str = JSON.stringify(element, null, 4);
+    //             console.log('objelem '+ str);
+    //             if(finalObj.projectNames[i].length > 0)
+    //                 arrObj.push(element);
+    //             str = JSON.stringify(arrObj, null, 4);
+    //             console.log('Arrayofobj '+ str);
                   
                 
-            }
-            //this.setState({jobsObj: arrObj});
+    //         }
+    //         //this.setState({jobsObj: arrObj});
             
-            let update = finalObj;
-            update.projectArrObj = arrObj;
+    //         let update = finalObj;
+    //         update.projectArrObj = arrObj;
 
-            this._deleteProjectRepetition();
+    //         this._deleteProjectRepetition();
             
 
 
-            //console.log('jobsObj: '+ this.state.jobsObj[0]);
+    //         //console.log('jobsObj: '+ this.state.jobsObj[0]);
             
-    }
+    // }
 
-    _deleteProjectRepetition(){
-        const {finalObj} = this.props.navigation.state.params;
-        let update = finalObj;
-        delete update.projectNames;
-        delete update.projectPositions;
-        delete update.courses; 
+    // _deleteProjectRepetition(){
+    //     const {finalObj} = this.props.navigation.state.params;
+    //     let update = finalObj;
+    //     delete update.projectNames;
+    //     delete update.projectPositions;
+    //     delete update.courses; 
 
-    }
+    // }
 
     callbackHeader = (dataFromChild) => {
         this.state.passHeadertoDb = dataFromChild
@@ -214,6 +214,7 @@ export default class Additional extends React.Component {
 
     callbackToDB = () => {
         this._sendToDb();
+        this.props.navigation.navigate('Login');
     }
 
     _sendToDb(){
