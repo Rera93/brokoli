@@ -356,7 +356,7 @@ export default class Skills extends React.Component
                      keyExtractor={item => item.skill}
                      ItemSeparatorComponent={this._renderSeparator}
                      ListHeaderComponent={() => (!this.state.data.length ? 
-                    <Text style={{marginTop: height / 4, textAlign: 'center', fontSize: 20, fontWeight: '500', color: '#42D260'}}>Out of skills</Text> : null)}
+                    <Text style={{marginTop: height / 4, textAlign: 'center', fontSize: 20, fontWeight: '500', color: '#42D260'}}>Add skill</Text> : null)}
                  />
 
                  <FloatingAction 

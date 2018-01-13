@@ -627,11 +627,32 @@ export default class Education extends React.Component
                      renderItem={({ item, index }) => (
                          <View style={styles.skillContainer}>
                             <View style={{flex: 5, alignItems: 'flex-start', justifyContent: 'center'}}>
-                            <Text style={styles.item}>{item.school}</Text>
-                            <Text style={styles.item}>{item.degree}</Text>
-                            <Text style={styles.item}>{item.specialization}</Text>
-                            <Text style={styles.item}>{item.startMonth} {item.startYear} - {item.endMonth} {item.endYear}</Text>
-                            <Text style={styles.item}>{item.city}, {item.country}</Text>
+
+                                <View style={{flexDirection: 'row', marginTop: 5}}>
+                                    <Image source={require('../../../img/icons/college-graduation.png')} style={styles.itemIcon} />
+                                    <Text style={styles.item}>{item.school}</Text>
+                                </View>
+
+                                <View style={{flexDirection: 'row', marginTop: 5}}>
+                                    <Image source={require('../../../img/icons/graduate-certificate.png')} style={styles.itemIcon} />
+                                    <Text style={styles.item}>{item.degree}</Text>
+                                </View>
+
+                                <View style={{flexDirection: 'row', marginTop: 5}}>
+                                    <Image source={require('../../../img/icons/medal.png')} style={styles.itemIcon} />
+                                    <Text style={styles.item}>{item.specialization}</Text>
+                                </View>
+
+                                <View style={{flexDirection: 'row', marginTop: 5}}>
+                                    <Image source={require('../../../img/icons/calendar.png')} style={styles.itemIcon} />
+                                    <Text style={styles.item}>{item.startMonth} {item.startYear} - {item.endMonth} {item.endYear}</Text>
+                                </View>
+
+                                <View style={{flexDirection: 'row', marginTop: 5}}>
+                                    <Image source={require('../../../img/icons/cityCountry.png')} style={styles.itemIcon} />
+                                    <Text style={styles.item}>{item.city}, {item.country}</Text>
+                                </View>
+
                             </View>
                             <TouchableOpacity style={{flex: 1, alignItems: 'flex-end', justifyContent: 'center'}}
                                               onPress = {() => this._toggleModalDelete({item, index})}>
@@ -644,7 +665,7 @@ export default class Education extends React.Component
                      keyExtractor={item => item.school}
                      ItemSeparatorComponent={this._renderSeparator}
                      ListHeaderComponent={() => (!this.state.data.length ? 
-                    <Text style={{marginTop: height / 4, textAlign: 'center', fontSize: 20, fontWeight: '500', color: '#42D260'}}>Out of education</Text> : null)}
+                    <Text style={{marginTop: height / 4, textAlign: 'center', fontSize: 20, fontWeight: '500', color: '#42D260'}}>Add education</Text> : null)}
                  />
 
                  <FloatingAction 
@@ -763,5 +784,12 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: '400'
     },
+    itemIcon: {
+        resizeMode: 'center',
+        width: 20,
+        height: 20,
+        tintColor: '#C7C7CD',
+        marginRight: 10,
+    }
     
 })
