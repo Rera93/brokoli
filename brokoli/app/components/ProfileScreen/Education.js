@@ -606,6 +606,14 @@ export default class Education extends React.Component
 
 
     render(){
+        const { actionButtonVisible } = this.state;
+        
+        const actions = [{
+                text: 'Add',
+                icon: require('../../../img/icons/add.png'),
+                name: 'bt_add',
+                position: 1
+        }];
         return(
 
             <View style={styles.container}> 
@@ -624,5 +632,87 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: 'white'
-    }
+    },
+    skillContainer:{
+        flex: 1,
+        flexDirection: 'row',
+            width: width - 20,
+            backgroundColor: 'white',
+            marginBottom: 5,
+            marginLeft: 5,
+            marginRight: 5,
+            paddingLeft: 10,
+            paddingRight: 10,
+            paddingBottom: 20,
+            paddingTop: 20,
+    },
+    icon: {
+        width: 20,
+        height: 20,
+        resizeMode: 'contain'
+    },
+    expContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: 5,
+        marginBottom: 5
+    },
+    item: {
+        fontSize: 17,
+        color: 'grey',
+        fontWeight: '400'
+    },
+    button: {
+        padding: 12,
+        margin: 16,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 4,
+        borderColor: 'rgba(0, 0, 0, 0.1)',
+      },
+      modalContent: {
+        backgroundColor: 'white',
+        padding: 22,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 4,
+        borderColor: 'rgba(0, 0, 0, 0.1)',
+      },
+      bottomModal: {
+        justifyContent: 'flex-end',
+        margin: 0,
+      },
+      btnTxt: {
+          fontSize: 16,
+          fontWeight: '400'
+      },
+      input: {
+        borderWidth: 2,
+        borderColor: 'grey',
+        backgroundColor: '#F8F9FB',
+        borderRadius: 5,
+        paddingTop: 5,
+        paddingBottom: 5,
+        paddingLeft: 15,
+        paddingRight: 15,
+        marginRight: 5,
+        marginBottom: 5,
+        color: '#C7C7CD',
+    },
+    form:{
+        width: width - 100
+    },
+    expInput:{
+        borderWidth: 2,
+        borderColor: 'grey',
+        backgroundColor: '#F8F9FB',
+        borderRadius: 5,
+        marginRight: 5,
+    },
+    title: {
+        color: '#254D32',
+        fontSize: 20,
+        fontWeight: '400'
+    },
+    
 })
