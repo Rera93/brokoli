@@ -11,6 +11,7 @@ import { StyleSheet,
 
 import FloatingAction from '../FloatingComponents/FloatingAction'
 import Modal from 'react-native-modal'
+import { Picker } from 'react-native-picker-dropdown'
 
 var tempArr = []
 
@@ -616,9 +617,57 @@ export default class Education extends React.Component
         }];
         return(
 
+           
             <View style={styles.container}> 
 
-                 <Text> Education </Text>
+                 <FlatList
+                     onScroll={this.handleScroll}  
+                     extraData={this.state}
+                     data={this.state.data}
+                     renderItem={({ item, index }) => (
+                         <View style={styles.skillContainer}>
+                            <View style={{flex: 5, alignItems: 'flex-start', justifyContent: 'center'}}>
+                            <Text style={styles.item}>{item.school}</Text>
+                            <Text style={styles.item}>{item.degree}</Text>
+                            <Text style={styles.item}>{item.specialization}</Text>
+                            <Text style={styles.item}>{item.startMonth} {item.startYear} - {item.endMonth} {item.endYear}</Text>
+                            <Text style={styles.item}>{item.city}, {item.country}</Text>
+                            </View>
+                            <TouchableOpacity style={{flex: 1, alignItems: 'flex-end', justifyContent: 'center'}}
+                                              onPress = {() => this._toggleModalDelete({item, index})}>
+                                <Image source={require('../../../img/icons/delete.png')}
+                                       style = {{resizeMode: 'center', width: 35, height: 35, tintColor: '#A7333F'}} />
+                            </TouchableOpacity>
+                          </View>   
+                    
+                     )}
+                     keyExtractor={item => item.school}
+                     ItemSeparatorComponent={this._renderSeparator}
+                     ListHeaderComponent={() => (!this.state.data.length ? 
+                    <Text style={{marginTop: height / 4, textAlign: 'center', fontSize: 20, fontWeight: '500', color: '#42D260'}}>Out of education</Text> : null)}
+                 />
+
+                 <FloatingAction 
+                           actions={actions}
+                           visible={actionButtonVisible}
+                           overrideWithAction
+                           onPressItem={() => this._toggleModalAdd()}/>
+
+                  <Modal isVisible = {this.state.isModalAddVisible}
+                         animationIn={'slideInLeft'}
+                         animationOut={'slideOutRight'}>
+
+                         {this._renderModalContent()}
+                  </Modal>   
+
+                   <Modal isVisible = {this.state.isModalDeleteVisible}
+                          animationIn={'slideInLeft'}
+                          animationOut={'slideOutRight'}>
+
+                         {this._renderDeleteModalContent()}
+
+                    </Modal>      
+                   
 
                  </View>
 
