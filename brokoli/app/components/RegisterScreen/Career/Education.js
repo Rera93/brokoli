@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, Dimensions, View, TextInput, FlatList, Image } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, Dimensions, View, TextInput, FlatList, Image, KeyboardAvoidingView } from 'react-native';
 
 import { Picker } from 'react-native-picker-dropdown'
 import Modal from 'react-native-modal'
@@ -643,6 +643,8 @@ export default class Education extends React.Component {
                          {this._renderDeleteModalContent()}
 
                     </Modal> 
+
+
 
 
                 </View>
