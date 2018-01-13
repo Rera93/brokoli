@@ -220,7 +220,8 @@ export default class Jobs extends React.Component
 
             <View style={styles.modalContent}>
 
-              <ScrollView contentContainerStyle={styles.form}> 
+              <ScrollView contentContainerStyle={styles.form}
+                          showsVerticalScrollIndicator = {false}> 
 
               <Text style={styles.title}>Add new job</Text> 
 

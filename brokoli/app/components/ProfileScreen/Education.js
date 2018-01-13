@@ -222,7 +222,8 @@ export default class Education extends React.Component
           _renderModalContent = () => (
             <View style={styles.modalContent}>
 
-              <ScrollView contentContainerStyle={styles.form}> 
+              <ScrollView contentContainerStyle={styles.form}
+                          showsVerticalScrollIndicator = {false}> 
 
               <Text style={styles.title}>Add new education</Text> 
 
