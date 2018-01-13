@@ -9,6 +9,7 @@ import Account from '../components/RegisterScreen/Account/Account'
 import Professional from '../components/RegisterScreen/Professional/Professional'
 import Career from '../components/RegisterScreen/Career/Career'
 import Additional from '../components/RegisterScreen/Additional/Additional'
+import Login from '../containers/LoginScreen'
 
 
 const StackNav = StackNavigator({
@@ -17,7 +18,8 @@ const StackNav = StackNavigator({
     Account: {screen: Account},
     Professional: {screen: Professional},
     Career: {screen: Career},
-    Additional: {screen: Additional}
+    Additional: {screen: Additional},
+    Login: {screen: Login},
 }, {
     transitionConfig: getSlideFromRightTransition
 });

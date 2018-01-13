@@ -264,7 +264,9 @@ export default class Skills extends React.Component {
 
     if(this.state.flipReg){
         this.props.callbackToDB();
-         Alert.alert('Registration Completed.')
+        // Alert.alert('Registration Completed.')
+        const {navigate} = this.props.navigation
+        navigate('Login')
      }
       else {
 
