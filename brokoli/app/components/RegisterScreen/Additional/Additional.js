@@ -221,6 +221,8 @@ export default class Additional extends React.Component {
         let update_final = this.state.finalObj;
         update_final.skills = this.state.passSkillsToDb;
         update_final.header = this.state.passHeadertoDb; 
+        update_final.bookmarkedProjects = [];
+        
         
 
       //Alert.alert("Gonna send", this.state.firstName + " "+ this.state.lastName + " "+ this.state.gender +" "+ this.state.dateOfBirth);

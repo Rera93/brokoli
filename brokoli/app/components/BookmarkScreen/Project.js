@@ -36,7 +36,7 @@ export default class Project extends React.Component{
                             title: 'Brokoli1',
                             abstract: 'someAbstract',
                             header: 'Tinder for Project. Bringing people and projects together in a virtual environment.',
-                            posData: [
+                            positions: [
                             {pos: 'Java Developer', exp: 4, posNr: 2, open: true, apply: false, posDescription: 'Dicant gloriatur sea te, ad veniam essent sadipscing eum. In has appareat sadipscing, sit impedit necessitatibus id. Sea no erat debet antiopam, quo ex ridens dolorem erroribus, ne sit alia harum nusquam. Nibh soleat perfecto an eam, prima nonumy accusam ea vel. Nec tempor oportere et, doctus alienum detracto ad his.'},
                             {pos: 'React Native Architect', exp: 2,  open: true, apply: false, posNr: 2, posDescription: 'Te erat facer eum, te nisl referrentur ius. Eos tollit doming conceptam te, quis oporteat et eos. Vis ei tritani aperiri platonem, mei option alterum ea. Inimicus prodesset mediocritatem mei at, eam ullum essent detraxit no. Ius cu mucius efficiendi suscipiantur, tamquam suscipit dissentiet ne vel, ad illud mucius contentiones sed. Qui at essent dolores.'},
                             {pos: 'Financial Analyst', exp: 3, posNr: 1,  open: true, apply: false, posDescription: 'Est tibique commune in, et mei erant paulo ullamcorper. Adhuc ubique oportere eum ex, mei no tibique adversarium. Mazim persius ut eum, ei putent oblique mel, ludus equidem ea usu. Quo viderer hendrerit ei, ea nam lorem ullum albucius.'},
@@ -390,12 +390,12 @@ export default class Project extends React.Component{
   
     _onApply(){
   
-        this.state.projectData.posData[this.state.tempPosIndex].apply = true
+        this.state.projectData.positions[this.state.tempPosIndex].apply = true
       this.setState(function(prevState, props){
         return { projectData: prevState.projectData }
       })
   
-      console.log('Apply', this.state.projectData.posData[this.state.tempPosIndex].apply)
+      console.log('Apply', this.state.projectData.positions[this.state.tempPosIndex].apply)
   
       this._untoggleApplyModal()
     }
@@ -447,7 +447,7 @@ export default class Project extends React.Component{
 
                   <FlatList
                     extraData={this.state}
-                    data={this.state.projectData.posData}
+                    data={this.state.projectData.positions}
                     renderItem={({ item, index }) => (
 
                 <View style={{paddingTop: 5, paddingBottom: 5}}>

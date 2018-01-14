@@ -31,10 +31,10 @@ export default class Projects extends React.Component {
        this.state = {
         loading: false,
         data: [],
-        page: 1,
-        seed: 1,
-        error: null,
-        refreshing: false,
+        // page: 1,
+        // seed: 1,
+         error: null,
+         refreshing: false,
         actionButtonVisible: true
       };
      }
@@ -61,9 +61,70 @@ export default class Projects extends React.Component {
       }
     }
 
-     componentDidMount() {
-        this.makeRemoteRequest();
+    componentDidMount() {
+        var arrayProjects = [];
+        var obj ={id:this.props.screenProps}
+        this.getData(obj, 'fetchmyprojects').then((responseData) => {
+        for (var i = 0; i < responseData.length; i++) {
+            var positions = [];
+             var object = responseData[i];
+             object.project.brokoliCounter = 0;
+             var position;
+             for( var j = 0 ; j < object.project.positions.length; j++){
+                position = object.project.positions[j];
+                position.open = true;
+                position.apply = false;
+                position.posDescription = 'Dicant gloriatur sea te, ad veniam essent sadipscing eum. In has appareat sadipscing, sit impedit necessitatibus id. Sea no erat debet antiopam, quo ex ridens dolorem erroribus, ne sit alia harum nusquam. Nibh soleat perfecto an eam, prima nonumy accusam ea vel. Nec tempor oportere et, doctus alienum detracto ad his.'
+                positions.push(position);
+
+
+            }
+
+            object.project.positions = positions;
+
+            arrayProjects.push(object.project);
+        }
+        
+        this.state.data = arrayProjects;
+        this.setState(function(prevState, props){
+            return {data: prevState.data,
+                  error:  null,
+                  loading: false,
+                  refreshing: false}
+        })
+        var str = JSON.stringify(this.state.data, null, 4);
+          console.log('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'+str);
+
+      });
+
+        //this.makeRemoteRequest();
       }
+
+      //This is just an example where a bunch of data is being fetched from the API below. 
+      //Need to fetch data from db and display them in the flat list.
+      getData(body, urlParam){
+      
+
+      return fetch('https://brokoli.eu-gb.mybluemix.net/api/'+urlParam, {  
+                 method: 'POST',
+                 headers: {
+                   'Accept': 'application/json',
+                   'Content-Type': 'application/json',
+                 }
+               ,
+                  body: JSON.stringify(body),
+
+                
+                })
+        .then((response) => response.json());
+
+        
+
+    }
+
+     // componentDidMount() {
+     //    this.makeRemoteRequest();
+     //  }
 
       //This is just an example where a bunch of data is being fetched from the API below. 
       //Need to fetch data from db and display them in the flat list.
@@ -110,18 +171,18 @@ export default class Projects extends React.Component {
                <View style={{flex: 5, alignItems: 'flex-start', justifyContent: 'center'}}>
                 <View style={styles.nameCont}>
                 {/*Name of project*/}
-                <Text style={styles.name}> {item.email} </Text>
+                <Text style={styles.name}> {item.title} </Text>
                 </View>
                 <View style={styles.reactionsCont}>
                 <View style={styles.reactions}>
                 {/*Number of applicants until now*/}
                 <Image style={styles.icon} source={require('../../../img/icons/applicants.png')} />
-                <Text style={{fontSize: 17, fontWeight: '400', color: '#C7C7CD'}}> {item.name.first}  </Text>
+                <Text style={{fontSize: 17, fontWeight: '400', color: '#C7C7CD'}}> {item.applicants}  </Text>
                 </View>
                 <View  style={styles.reactions}>
                  {/*Number of brokoli's until now*/}
                  <Image style={styles.icon} source={require('../../../img/icons/brokolis.png')} />
-                 <Text style={{fontSize: 17, fontWeight: '400', color: '#C7C7CD'}}> {item.name.last}  </Text>
+                 <Text style={{fontSize: 17, fontWeight: '400', color: '#C7C7CD'}}> {item.totalBrokolis}  </Text>
                  </View>
                 </View>
                 </View>
@@ -132,7 +193,7 @@ export default class Projects extends React.Component {
 
               </TouchableOpacity>
             )}
-            keyExtractor={item => item.email}
+            keyExtractor={item => item.title}
           />
 
           <FloatingAction

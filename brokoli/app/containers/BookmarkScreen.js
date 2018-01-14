@@ -35,7 +35,7 @@ class BookmarkScreen extends React.Component {
     render(){
         return(
             
-          <BookmarkStackNav />
+          <BookmarkStackNav screenProps={this.props.screenProps}/>
 
         )
     }

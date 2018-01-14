@@ -30,10 +30,10 @@ export default class Bookmarks extends React.Component{
         this.state = {
 
             bookmarkData: [
-                {project: 'Brokoli1', applicants: 17, brokolis: 15, id: 100},
+                /*{project: 'Brokoli1', applicants: 17, brokolis: 15, id: 100},
                 {project: 'Brokoli2', applicants: 145, brokolis: 65, id: 101},
                 {project: 'Brokoli3', applicants: 137, brokolis: 32, id: 102},
-                {project: 'Brokoli4', applicants: 4, brokolis: 23, id: 103},
+                {project: 'Brokoli4', applicants: 4, brokolis: 23, id: 103},*/
         ],
         activeRowKey: null,
         isModalDeleteVisible: false,
@@ -43,29 +43,62 @@ export default class Bookmarks extends React.Component{
     }
 
     componentDidMount(){
-        this._makeRemoteRequest()
+        var arrayProjects = [];
+        var obj ={id:this.props.screenProps}
+        this._makeRemoteRequest(obj, 'fetchbookmarkedprojects').then((responseData) => {
+        for (var i = 0; i < responseData.length; i++) {
+            var positions = [];
+             var object = responseData[i];
+             object.project.brokoliCounter = 0;
+             var position;
+             for( var j = 0 ; j < object.project.positions.length; j++){
+                position = object.project.positions[j];
+                position.open = true;
+                position.apply = false;
+                position.posDescription = 'Dicant gloriatur sea te, ad veniam essent sadipscing eum. In has appareat sadipscing, sit impedit necessitatibus id. Sea no erat debet antiopam, quo ex ridens dolorem erroribus, ne sit alia harum nusquam. Nibh soleat perfecto an eam, prima nonumy accusam ea vel. Nec tempor oportere et, doctus alienum detracto ad his.'
+                positions.push(position);
+
+
+            }
+
+            object.project.positions = positions;
+
+            arrayProjects.push(object.project);
+        }
+        var str = JSON.stringify(arrayProjects, null, 4);
+          console.log(str);
+        this.state.bookmarkData = arrayProjects;
+        this.setState(function(prevState, props){
+            return {bookmarkData: prevState.bookmarkData}
+        })
+
+      });
+    }
+
+
+
+
+    _makeRemoteRequest(body, urlParam){
+      
+
+      return fetch('https://brokoli.eu-gb.mybluemix.net/api/'+urlParam, {  
+                 method: 'POST',
+                 headers: {
+                   'Accept': 'application/json',
+                   'Content-Type': 'application/json',
+                 }
+               ,
+                  body: JSON.stringify(body),
+
+                
+                })
+        .then((response) => response.json());
+
+        
+
     }
         
-      //Need to fetch data from db and display them in the flat list.
-      _makeRemoteRequest = () => {
-
-        /*
-            DB request happens here. 
-            Need to be called everytime a bookmark is set on the brokoli tab,  
-
-            tempBookmarkArr = dataFetchedFromDb
-
-            Update state of bookmarkData like the following
-
-            this.state.bookmarkData = tempBookmarkArr
-            this.setState(function(prevState, props){
-                return { boormarkData: prevState.bookmarkData}
-            })
-
-        */
-        
-       
-    }
+      
 
     _toggleDeleteModal({item, index}){
 
@@ -183,7 +216,7 @@ export default class Bookmarks extends React.Component{
                 <View style={{flex: 5, alignItems: 'flex-start', justifyContent: 'center'}}>
                 <View style={styles.nameCont}>
                 {/*Name of project*/}
-                <Text style={styles.name}> {item.project} </Text>
+                <Text style={styles.name}> {item.title} </Text>
                 </View>
                 <View style={styles.reactionsCont}>
                 <View style={styles.reactions}>
@@ -194,7 +227,7 @@ export default class Bookmarks extends React.Component{
                 <View style={styles.reactions}>
                  {/*Number of brokoli's until now*/}
                  <Image style={styles.icon} source={require('../../../img/icons/brokolis.png')} />
-                 <Text style={{fontSize: 17, fontWeight: '400', color: '#C7C7CD'}}> {item.brokolis}  </Text>
+                 <Text style={{fontSize: 17, fontWeight: '400', color: '#C7C7CD'}}> {item.totalBrokolis}  </Text>
                  </View>
                 </View>
                 </View>

@@ -28,7 +28,7 @@ class BrokoliScreen extends React.Component {
     render(){
         return(
             <ViewContainer>
-            <Swipe />
+            <Swipe screenProps ={this.props.screenProps}/>
               </ViewContainer>
 
         )

@@ -525,7 +525,7 @@ export default class Jobs extends React.Component
             })
             console.log('updatedDataArr: ', this.state.data)
             jobs.id = this.props.id;
-            jobs.jobsObj = this.state.data;
+            jobs.jobs = this.state.data;
             this.props.callbackUpdateDB(jobs, 'update');
             this._toggleModalAdd()
           }
@@ -611,7 +611,7 @@ export default class Jobs extends React.Component
             })
             console.log('Update SkillsData: ', this.state.data)
             jobs.id = this.props.id;
-            jobs.jobsObj = this.state.data;
+            jobs.jobs = this.state.data;
             this.props.callbackUpdateDB(jobs, 'update');
             //Close modal
             this._untoggleModalDelete()

@@ -44,6 +44,7 @@ var tempArr = []
     constructor(props) {
       super(props);
       this.state = {
+        bookmarkedProjects :[],
         projects: [],
         isInfoVisible: false,
         applicants: 17,
@@ -77,7 +78,7 @@ var tempArr = []
           */
 
         cards: [
-          {projectOwner: 'Alan Andrade', bookmark: false, brokoliCounter: 2, totalBrokolis: 17, applicants: 34, title: 'Brokoli1',
+          /*{projectOwner: 'Alan Andrade', bookmark: false, brokoliCounter: 2, totalBrokolis: 17, applicants: 34, title: 'Brokoli1',
            abstract: 'someAbstract', header: 'Tinder for Project. Bringing people and projects together in a virtual environment.',
            posData: [
             {pos: 'Java Developer', exp: 4, posNr: 2, open: true, apply: false, posDescription: 'Dicant gloriatur sea te, ad veniam essent sadipscing eum. In has appareat sadipscing, sit impedit necessitatibus id. Sea no erat debet antiopam, quo ex ridens dolorem erroribus, ne sit alia harum nusquam. Nibh soleat perfecto an eam, prima nonumy accusam ea vel. Nec tempor oportere et, doctus alienum detracto ad his.'},
@@ -110,37 +111,87 @@ var tempArr = []
             {pos: 'React Native Architect', exp: 2, posNr: 2, open: true, apply: false, posDescription: 'Est tibique commune in, et mei erant paulo ullamcorper. Adhuc ubique oportere eum ex, mei no tibique adversarium. Mazim persius ut eum, ei putent oblique mel, ludus equidem ea usu. Quo viderer hendrerit ei, ea nam lorem ullum albucius.'},
             {pos: 'Financial Analyst', exp: 3, posNr: 1, open: true, apply: false, posDescription: 'Quo te tale complectitur. At duo hinc vocent ullamcorper, pri dolorem persequeris in, te quot albucius luptatum sed. Et sea aliquid commune. Cum omnes dolore vocent ei. Sea mollis aeterno at'},
             {pos: 'Managerial Accountant', exp: 5, posNr: 1, open: true, apply: false, posDescription: 'Te erat facer eum, te nisl referrentur ius. Eos tollit doming conceptam te, quis oporteat et eos. Vis ei tritani aperiri platonem, mei option alterum ea. Inimicus prodesset mediocritatem mei at, eam ullum essent detraxit no. Ius cu mucius efficiendi suscipiantur, tamquam suscipit dissentiet ne vel, ad illud mucius contentiones sed. Qui at essent dolores.'}]},
-        ],
+        */],
         cardIndex: 0,
       }
     }
 
     componentDidMount(){
-      this.getData();
-    }
-
-    getData(){
       var arrayProjects = [];
-      return fetch('https://brokoli.eu-gb.mybluemix.net/api/visitors', {  
-        method: 'GET',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }
-      })
-        .then((response) => response.json())
-        .then((responseData) => {
-          for (var i = 0; i < responseData.length; i++) {
-            var object = responseData[i];
-            arrayProjects.push(object);
-          }
-          this.setState({projects: arrayProjects})
+      var obj = {id: this.props.screenProps}
+      this.getData(obj,'fetchprojects').then((responseData) => {
+           for (var i = 0; i < responseData.length; i++) {
+              var positions = [];
+             var object = responseData[i];
+             object.project.brokoliCounter = 0;
+             var position;
+             for( var j = 0 ; j < object.project.positions.length; j++){
+                position = object.project.positions[j];
+                position.open = true;
+                position.apply = false;
+                position.posDescription = 'Dicant gloriatur sea te, ad veniam essent sadipscing eum. In has appareat sadipscing, sit impedit necessitatibus id. Sea no erat debet antiopam, quo ex ridens dolorem erroribus, ne sit alia harum nusquam. Nibh soleat perfecto an eam, prima nonumy accusam ea vel. Nec tempor oportere et, doctus alienum detracto ad his.'
+                positions.push(position);
+             }
+             object.project.positions = positions;
+
+             arrayProjects.push(object.project);
+           }
+
+           
+
+          var str = JSON.stringify(arrayProjects, null, 4);
+          console.log(str);
+
+          
+          this.state.cards = arrayProjects
+          this.setState(function(prevState, props){
+            return { cards: prevState.cards }
+          })
+
          
         });
 
-        console.log('Projects: ', this.state.projects)
+
+
+
+
+
+
+      console.log('>>>>>>>>>>>>>>>>'+this.props.screenProps);
+      
+      var idObj = {id:this.props.screenProps}
+            
+      this.getData(idObj, 'bookmarkedprojects')
+      .then((responseData) => {
+        
+        this.state.bookmarkedProjects = responseData.data;
+        this.setState(function(prevState, props){
+            return {bookmarkedProjects: prevState.bookmarkedProjects}
+        })
+
+      });
+  }
+
+    getData(body, urlParam){
+      
+
+      return fetch('https://brokoli.eu-gb.mybluemix.net/api/'+urlParam, {  
+                 method: 'POST',
+                 headers: {
+                   'Accept': 'application/json',
+                   'Content-Type': 'application/json',
+                 }
+               ,
+                  body: JSON.stringify(body),
+
+                
+                })
+        .then((response) => response.json());
+
+        
 
     }
+
 
     _incrementCardIndex(cardIndex){
       this.state.cardIndex = cardIndex + 1
@@ -156,6 +207,20 @@ var tempArr = []
         return {cards: prevState.cards}
       })
       console.log('Toogled Bookmark: ', this.state.cards[this.state.cardIndex].bookmark)
+
+      console.log('>>>>>>>>>>>>>>>'+(this.state.bookmarkedProjects.indexOf(this.state.cards[this.state.cardIndex].id)==-1));
+      if((this.state.bookmarkedProjects.indexOf(this.state.cards[this.state.cardIndex].id) == -1)){
+        
+        let bookmarks = this.state.bookmarkedProjects;
+        bookmarks.push(this.state.cards[this.state.cardIndex].id);
+        this.setState({bookmarks});
+
+        var obj = {id:this.props.screenProps, bookmarkedProjects:this.state.bookmarkedProjects}
+        this.getData(obj, 'update');
+        
+      }
+
+
     }
 
     _untoogleBookmark()
@@ -165,6 +230,19 @@ var tempArr = []
         return {bookmark: prevState.bookmark}
       })
       console.log('Untoogled Bookmark: ', this.state.cards[this.state.cardIndex].bookmark)
+
+
+      
+      let bookmarks = this.state.bookmarkedProjects;
+      var index = bookmarks.indexOf(this.state.cards[this.state.cardIndex].id);    // <-- Not supported in <IE9
+      if (index !== -1) {
+          bookmarks.splice(index, 1);
+      }
+      this.setState({ bookmarks });
+
+      var obj = {id:this.props.screenProps, bookmarkedProjects:this.state.bookmarkedProjects}
+      this.getData(obj, 'update');
+
     }
     
     _toggleInfoModal()
@@ -236,6 +314,8 @@ var tempArr = []
       })
 
       console.log('Brokolis: ', this.state.cards[this.state.cardIndex].totalBrokolis)
+      var obj = {id:this.state.cards[this.state.cardIndex].id, totalBrokolis:this.state.cards[this.state.cardIndex].totalBrokolis}
+      this.getData(obj, 'updateProject')
       }
       else{
         
@@ -255,6 +335,9 @@ var tempArr = []
       this.setState(function(prevState, props){
         return { cards: this.state.cards}
       })
+
+      var obj = {id:this.state.cards[this.state.cardIndex].id, totalBrokolis:this.state.cards[this.state.cardIndex].totalBrokolis}
+      this.getData(obj, 'updateProject')
 
       console.log('Brokolis: ', this.state.cards[this.state.cardIndex].brokoliCounter)
       }
@@ -463,12 +546,12 @@ var tempArr = []
 
   _onApply(){
 
-    this.state.cards[this.state.cardIndex].posData[this.state.tempPosIndex].apply = true
+    this.state.cards[this.state.cardIndex].positions[this.state.tempPosIndex].apply = true
     this.setState(function(prevState, props){
       return { cards: prevState.cards }
     })
 
-    console.log('Apply', this.state.cards[this.state.cardIndex].posData[this.state.tempPosIndex].apply)
+    console.log('Apply', this.state.cards[this.state.cardIndex].positions[this.state.tempPosIndex].apply)
 
     this._untoggleApplyModal()
   }
@@ -526,10 +609,10 @@ var tempArr = []
 
           
            
-          </View>
+            </View>
 
 
-          <View style={styles.body}>
+            <View style={styles.body}>
 
             <View style={styles.headerCont}>
               <Text style={styles.headerTitle}>{card.header}</Text>
@@ -542,7 +625,7 @@ var tempArr = []
 
                   <FlatList
                     extraData={this.state}
-                    data={card.posData}
+                    data={card.positions}
                     renderItem={({ item, index }) => (
 
                

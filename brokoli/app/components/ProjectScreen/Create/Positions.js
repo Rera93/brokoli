@@ -40,6 +40,7 @@ export default class Positions extends React.Component {
             position : '',
             actionButtonVisible: true,
             experience: "1",
+            description : "Default position description",
             brokolis: [true,false,false,false,false],
             tempExp: "1",
             nrOfPos: '1',
@@ -57,6 +58,19 @@ export default class Positions extends React.Component {
         this.setState(function(prevState, props){
             return {projectObj: prevState.projectObj}
          });
+
+        let projectObj = this.state.projectObj;
+         projectObj.totalBrokolis = 0;
+         this.setState(function(prevState, props){
+            return {projectObj: prevState.projectObj}
+         });
+
+         let copy = this.state.projectObj;
+           copy.applicants = 0;
+           this.setState(function(prevState, props){
+              return {projectObj: prevState.projectObj}
+           });
+
        
     }
 
@@ -267,6 +281,7 @@ export default class Positions extends React.Component {
          let projectObj = this.state.projectObj;
          projectObj.positions = this.state.positions;                        //updating value
          this.setState({projectObj});
+         
          
          //Close modal
          this._untoggleModalDelete()

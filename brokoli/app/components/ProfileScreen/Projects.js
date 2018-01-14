@@ -258,7 +258,7 @@ export default class Projects extends React.Component
             })
             console.log('updatedDataArr: ', this.state.data)
             projects.id = this.props.id,
-            projects.projectArrObj= this.state.data,
+            projects.projects= this.state.data,
             this._toggleModalAdd()
             this.props.callbackUpdateDB(projects, 'update');
 
@@ -324,7 +324,7 @@ export default class Projects extends React.Component
              })
              console.log('Update ProjectsData: ', this.state.data)
              projects.id = this.props.id,
-              projects.projectArrObj = this.state.data,
+              projects.projects = this.state.data,
               this.props.callbackUpdateDB(projects, 'update');
              //Close modal
              this._untoggleModalDelete()
