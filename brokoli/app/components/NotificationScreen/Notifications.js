@@ -31,9 +31,9 @@ export default class Bookmarks extends React.Component{
 
             applicationsData: [
                 {project: 'Brokoli1', position: 'Jave Developer', response: 'Pending'},
-                {project: 'Brokoli2', position: 'C# Engineer', response: 'Pending'},
+                {project: 'Brokoli2', position: 'C# Engineer', response: 'Declined'},
                 {project: 'Brokoli3', position: 'React Native Front-End', response: 'Pending'},
-                {project: 'Brokoli4', position: 'IOS Software Architect', response: 'Pending'},
+                {project: 'Brokoli4', position: 'IOS Software Architect', response: 'Accepted'},
         ],
         isModalDeleteVisible: false,
         index: 0,
@@ -179,8 +179,8 @@ export default class Bookmarks extends React.Component{
                 <Image style={styles.icon} source={require('../../../img/icons/workpos.png')} />
                 <Text style={{fontSize: 17, fontWeight: '400', color: '#C7C7CD'}}> {item.position}  </Text>
                 </View>
-                <View style={styles.reactions}>
-                    <Text style={{fontSize: 17, color: 'black', fontWeight: '500'}}> {item.response} </Text>
+                <View style={[styles.reactions, {borderRadius: 5, backgroundColor: item.response == 'Pending' ? '#D5B942' : item.response == 'Declined' ? '#A7333F' : '#42D260' } ]}>
+                    <Text style={{fontSize: 17, color: 'white', fontWeight: '500'}}> {item.response} </Text>
                     </View>
                 </View>
                 <TouchableOpacity onPress={()=>this._toggleDeleteModal({item, index})}
