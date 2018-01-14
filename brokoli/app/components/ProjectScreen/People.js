@@ -192,15 +192,27 @@ export default class People extends React.Component{
                   <View style={styles.card} card={card}>
 
                   {/*Header*/}
-                  <View style = {{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                  <View style = {{flex: 2, justifyContent: 'center', alignItems: 'center', borderBottomWidth: 0.7, borderColor: '#E8E8E8',}}>
 
                   
-                  <View style={{flex: 1}}>
+                  <View style={{borderWidth: 2, borderColor: '#42D260', borderRadius: 100, justifyContent: 'center', alignItems: 'center'}}>
 
                       <Image source={card.picture}
-                             style={{width: 70, height: 70, resizeMode: 'center'}} />
+                             style={{width: 100, height: 100, borderRadius: 55, padding: 30, resizeMode: 'center'}} />
 
                       </View>
+
+                  <View style={{alignItems: 'center', justifyContent: 'center', marginTop: 10, marginBottom: 10}}> 
+
+                      <Text style={{fontSize: 20, color: '#C7C7CD', fontWeight: '300'}}> {card.name}  </Text>
+
+                      </View>
+
+                  <View style={{alignItems: 'center', justifyContent: 'center'}}> 
+
+                      <Text style={{fontSize: 18.5, color: '#C7C7CD', fontWeight: '300'}}> {card.header}  </Text>
+
+                      </View>   
 
           
            
@@ -332,7 +344,7 @@ export default class People extends React.Component{
             backgroundColor={'white'}
             onSwipedAll = { () => this._setIndexToZero() }
             onSwiped={(cardIndex) => this._incrementCardIndex(cardIndex)}
-            cardVerticalMargin={40}
+            cardVerticalMargin={20}
             animateOverlayLabelsOpacity
             animateCardOpacity>
 
@@ -361,9 +373,9 @@ const styles = StyleSheet.create({
         flex: 1,
         borderRadius: 4,
         borderWidth: 2,
-        borderColor: '#E8E8E8',
+        borderColor: '#42D260',
         justifyContent: 'center',
         backgroundColor: 'white',
-        marginBottom: 40,
+        marginBottom: 150,
       },
 }) 
