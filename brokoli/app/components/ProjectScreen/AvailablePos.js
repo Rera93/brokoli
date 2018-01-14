@@ -30,10 +30,10 @@ export default class Bookmarks extends React.Component{
         this.state = {
             projectId : null,
             posData: [
-                {position: 'IOS Developer', applicants: 17},
-                {position: 'IOS Developer1', applicants: 7},
-                {position: 'IOS Developer2', applicants: 27},
-                {position: 'IOS Developer3', applicants: 37},
+                {position: 'IOS Developer', applicants: 17, nrPos: 3},
+                {position: 'IOS Developer1', applicants: 7, nrPos: 2},
+                {position: 'IOS Developer2', applicants: 27, nrPos: 1},
+                {position: 'IOS Developer3', applicants: 37, nrPos: 1},
         ],
         isModalDeleteVisible: false,
         index: 0,
@@ -171,9 +171,16 @@ export default class Bookmarks extends React.Component{
                 <Text style={styles.name}> {item.position} </Text>
                 </View>
                 <View style={styles.reactions}>
+                <View style={styles.reactions}>
                 {/*Number of applicants until now*/}
                 <Image style={styles.icon} source={require('../../../img/icons/applicants.png')} />
                 <Text style={{fontSize: 17, fontWeight: '400', color: '#C7C7CD'}}> {item.applicants}  </Text>
+                </View>
+                <View style={styles.reactions}>
+                {/*Number of available positions*/}
+                <Image style={[styles.icon, {tintColor: '#A7333F' }]} source={require('../../../img/icons/posNr.png')} />
+                <Text style={{fontSize: 17, fontWeight: '400', color: '#C7C7CD'}}> {item.nrPos}  </Text>
+                </View>
                 </View>
                 </View>
                 <View style={[styles.reactions,{flex: 1}]}>
