@@ -109,7 +109,7 @@ export default class Bookmarks extends React.Component{
 
         <View style={[styles.modalContent, {backgroundColor: '#254D32'}]}>
         
-            <Text style={[styles.title, {color: 'white'}]}>Are you sure you want to unbookmark the selected project?</Text>
+            <Text style={[styles.title, {color: 'white'}]}>Are you sure you want to discard application for the selected position?</Text>
         
             <View style={{flexDirection: 'row'}}>
         
@@ -167,8 +167,7 @@ export default class Bookmarks extends React.Component{
             <FlatList
             data={this.state.applicationsData}
             renderItem={({ item, index }) => (
-              <View style={styles.item} item={item} index={index}
-                                onLongPress = {() => this._toggleDeleteModal({item, index})}>
+              <View style={styles.item}>
                 <View style={{flex: 5, alignItems: 'flex-start', justifyContent: 'center'}}>
                 <View style={styles.reactions}>
                 {/*Name of project*/}
@@ -184,7 +183,8 @@ export default class Bookmarks extends React.Component{
                     <Text style={{fontSize: 17, color: 'black', fontWeight: '500'}}> {item.response} </Text>
                     </View>
                 </View>
-                <TouchableOpacity style={{flex: 1, alignItems: 'flex-end', justifyContent: 'center', paddingRight: 10}}>
+                <TouchableOpacity onPress={()=>this._toggleDeleteModal({item, index})}
+                                  style={{flex: 1, alignItems: 'flex-end', justifyContent: 'center', paddingRight: 10}}>
                         <Image source={require('../../../img/icons/trash.png')}
                         style={{width: 25, height: 25, resizeMode: 'center', tintColor: '#A7333F'}} />
                 </TouchableOpacity>
