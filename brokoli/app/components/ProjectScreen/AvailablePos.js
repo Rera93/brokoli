@@ -17,11 +17,11 @@ const height = Dimensions.get('window').height
 
 export default class Bookmarks extends React.Component{
 
-    static navigationOptions = {
-        title: 'Available Positions',
+    static navigationOptions = ({ navigation}) => ({
+        title: `${navigation.state.params.selectedItem.project}`,
         headerStyle: { backgroundColor: '#42D260', marginTop: 24 },
         headerTitleStyle: { color: 'white' },
-      };
+      });
 
 
     constructor(props){
