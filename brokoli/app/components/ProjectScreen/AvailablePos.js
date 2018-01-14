@@ -28,7 +28,7 @@ export default class Bookmarks extends React.Component{
         super(props)
 
         this.state = {
-
+            projectId : null,
             posData: [
                 {position: 'IOS Developer', applicants: 17},
                 {position: 'IOS Developer1', applicants: 7},
@@ -42,29 +42,25 @@ export default class Bookmarks extends React.Component{
     }
 
     componentDidMount(){
-        this._makeRemoteRequest()
+
+        this.state.projectId = this.props.navigation.state.params.selectedItem.id
+        this.setState(function(prevState, props){
+             return { projectId: prevState.projectId }
+        })
+        console.log('Passed projectId: ', this.state.projectId)
+        // Use projectId to sent request to db and fetch the correct project. 
+        this._fetchCorrenspondingProject()
     }
+
+    _fetchCorrenspondingProject(){
         
-      //Need to fetch data from db and display them in the flat list.
-      _makeRemoteRequest = () => {
-
-        /*
-            DB request happens here. 
-            Need to be called everytime a bookmark is set on the brokoli tab,  
-
-            tempArr = dataFetchedFromDb
-
-            Update state of bookmarkData like the following
-
-            this.state.bookmarkData = tempArr
-            this.setState(function(prevState, props){
-                return { boormarkData: prevState.bookmarkData}
-            })
-
-        */
+                /*
+                    Store the array as the state of projectData define above.
+                    The code will generate the right data in the right position 
+                    if you keep the format of key-value pairs the same.
+                */
+              }
         
-       
-    }
 
     _toggleDeleteModal({item, index}){
 
@@ -165,15 +161,14 @@ export default class Bookmarks extends React.Component{
 
 
             <FlatList
-            data={this.state.bookmarkData}
+            data={this.state.posData}
             renderItem={({ item, index }) => (
-              <TouchableOpacity style={styles.item} item={item} index={index}
-                                onPress = {() => this._openPosition({item, index}) }
-                                onLongPress = {() => this._toggleDeleteModal({item, index})}>
+              <View style={styles.item}>
                 <View style={{flex: 5, alignItems: 'flex-start', justifyContent: 'center'}}>
-                <View style={styles.nameCont}>
+                <View style={styles.reactions}>
                 {/*Name of project*/}
-                <Text style={styles.name}> {item.project} </Text>
+                <Image style={styles.icon} source={require('../../../img/icons/workpos.png')} />
+                <Text style={styles.name}> {item.position} </Text>
                 </View>
                 <View style={styles.reactions}>
                 {/*Number of applicants until now*/}
@@ -181,14 +176,22 @@ export default class Bookmarks extends React.Component{
                 <Text style={{fontSize: 17, fontWeight: '400', color: '#C7C7CD'}}> {item.applicants}  </Text>
                 </View>
                 </View>
-                <View style={{flex: 1, alignItems: 'flex-end', justifyContent: 'center'}}>
+                <View style={[styles.reactions,{flex: 1}]}>
+                <TouchableOpacity onPress = {() => this._toggleDeleteModal({item, index})}
+                                  style={{flex: 1, alignItems: 'flex-end', justifyContent: 'center', paddingRight: 15}}>
+                    <Image source={require('../../../img/icons/trash.png')}
+                           style={{width: 25, height: 25, resizeMode: 'center', tintColor: '#A7333F'}} />
+                    </TouchableOpacity>
+                <TouchableOpacity onPress = {() => this._openPosition({item, index}) }
+                                  style={{flex: 1, alignItems: 'flex-end', justifyContent: 'center'}}>
                     <Image source={require('../../../img/icons/right-arrow.png')}
                            style={{width: 25, height: 25, resizeMode: 'center', tintColor: '#42D260'}} />
-                    </View>
-              </TouchableOpacity>
+                    </TouchableOpacity>
+                </View>
+              </View>
             )}
             keyExtractor={item => item.position}
-            ListHeaderComponent={() => (!this.state.bookmarkData.length ? 
+            ListHeaderComponent={() => (!this.state.posData.length ? 
             <Text style={{marginTop: height / 3, textAlign: 'center', fontSize: 20, fontWeight: '500', color: '#42D260'}}>No positions available for project</Text> : null)}
           />
 
