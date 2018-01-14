@@ -15,6 +15,14 @@ const window = Dimensions.get('window');
 const width = window.width
 var tempArr = []
 
+var tempExampleArr = [{name: 'Alan Andrade', picture: require('../../../img/icons/ppl2.png'), header: 'Time you enjoy wasting was not wasted',
+skillData: [
+ {skill: 'Java Developer', exp: 4}, 
+ {pos: 'React Native Architect', exp: 2},
+ {pos: 'Financial Analyst', exp: 3},
+ {pos: 'Managerial Accountant', exp: 5},
+ {pos: 'C# Software Engineer', exp: 4}]}]
+
 export default class People extends React.Component{
 
     static navigationOptions = ({ navigation}) => ({
@@ -32,8 +40,9 @@ export default class People extends React.Component{
               isEducationModalVisible: false,
               isJobExpModalVisible: false,
               isProjectExpModalVisible: false,
+              isSkillsModalVisible: false,
               cards: [
-                {name: 'Alan Andrade', picture: '', header: 'Time you enjoy wasting was not wasted',
+                {name: 'Alan Andrade', picture: require('../../../img/icons/ppl1.png'), header: 'Time you enjoy wasting was not wasted',
                  skillData: [
                   {skill: 'Java Developer', exp: 4}, 
                   {pos: 'React Native Architect', exp: 2},
@@ -41,7 +50,7 @@ export default class People extends React.Component{
                   {pos: 'Managerial Accountant', exp: 5},
                   {pos: 'C# Software Engineer', exp: 4}]},
       
-                {name: 'Alan Andrade', picture: '', header: 'Time you enjoy wasting was not wasted',
+                {name: 'Alan Andrade', picture: require('../../../img/icons/ppl3.png'), header: 'Time you enjoy wasting was not wasted',
                  skillData: [
                         {skill: 'Java Developer1', exp: 4}, 
                         {pos: 'React Native Architect', exp: 2},
@@ -119,13 +128,242 @@ export default class People extends React.Component{
                 })
                 console.log('isProjectExpModalVisible: ', this.state.isProjectExpModalVisible)
             }
+
+            _fetchCards(){
+                
+                    this.state.cards = tempExampleArr
+                    this.setState(function(prevState, props){
+                      return { cards: prevState.cards}
+                    })
+                
+                    console.log('New cards: ', this.state.cards)
+                
+                  }
+                
+                  _setIndexToZero(){
+                
+                    this.state.cardIndex = 0
+                    this.setState(function(prevState, props){
+                      return { cardIndex: prevState.cardIndex}
+                    })
+                  }
+                   _incrementCardIndex(cardIndex){
+      this.state.cardIndex = cardIndex + 1
+      this.setState(function(prevState, props){
+        return { cardIndex: prevState.cardIndex }
+      })
+      console.log('Card Index: ', this.state.cardIndex)
+    }
+
+    _renderModalEducation = () => (
+        <View>
+
+            </View>
+    ) 
+
+    _renderModalJobExp = () => (
+        <View>
+
+            </View>
+    ) 
+
+    _renderModalProjectExp = () => (
+        <View>
+
+            </View>
+    ) 
+
+    _renderModalSkills = () => (
+        <View>
+
+            </View>
+    ) 
                 
 
     render(){
 
         return(
-            <View>
-                </View>
+            <Swiper
+            cards={this.state.cards}
+            renderCard={(card) => {
+                if(this.state.cardIndex < this.state.cards.length )
+                {
+                return (
+                  <View style={styles.card} card={card}>
+
+                  {/*Header*/}
+                  <View style = {{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+
+                  
+                  <View style={{flex: 1}}>
+
+                      <Image source={card.picture}
+                             style={{width: 70, height: 70, resizeMode: 'center'}} />
+
+                      </View>
+
+          
+           
+          </View>
+
+
+          <View style={{flex:2}}>
+
+
+          </View>
+
+          <View style={{flex: 1}}> 
+
+             
+
+
+
+            </View>
+
+          <Modal isVisible = {this.state.isEducationModalVisible}
+                         animationIn={'slideInLeft'}
+                         animationOut={'slideOutRight'}
+                         onBackdropPress={() => this.setState({ isEducationModalVisible: false })}>
+
+                         {this._renderModalEducation()}
+
+                  </Modal>  
+
+            <Modal isVisible = {this.state.isJobExpModalVisible}
+                   animationIn={'slideInLeft'}
+                   animationOut={'slideOutRight'}
+                   onBackdropPress={() => this.setState({ isJobExpModalVisible: false })}>
+
+                         {this._renderModalJobExp()}
+
+                  </Modal> 
+
+                  <Modal isVisible = {this.state.isProjectExpModalVisible}
+                   animationIn={'slideInLeft'}
+                   animationOut={'slideOutRight'}
+                   onBackdropPress={() => this.setState({ isProjectExpModalVisible: false })}>
+
+                         {this._renderModalProjectExp()}
+
+                  </Modal> 
+
+                  <Modal isVisible = {this.state.isSkillsModalVisible}
+                   animationIn={'slideInLeft'}
+                   animationOut={'slideOutRight'}
+                   onBackdropPress={() => this.setState({ isSkillsModalVisible: false })}>
+
+                         {this._renderModalSkills()}
+
+                  </Modal> 
+
+                  </View>
+                )
+          }
+            }}
+             overlayLabels={{
+            bottom: {
+              title: 'Bleah',
+              style: {
+                label: {
+                  backgroundColor: 'white',
+                  borderColor: '#A7333F',
+                  color: '#A7333F',
+                  borderWidth: 2
+                },
+                wrapper: {
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }
+              }
+            },
+            left: {
+              title: 'Discard',
+              style: {
+                label: {
+                  backgroundColor: 'white',
+                  borderColor: '#A7333F',
+                  color: '#A7333F',
+                  borderWidth: 2
+                },
+                wrapper: {
+                  flexDirection: 'column',
+                  alignItems: 'flex-end',
+                  justifyContent: 'center',
+                  marginRight: 10
+                }
+              }
+            },
+            right: {
+              title: 'Discard',
+              style: {
+                label: {
+                  backgroundColor: 'white',
+                  borderColor: '#A7333F',
+                  color: '#A7333F',
+                  borderWidth: 2
+                },
+                wrapper: {
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
+                  justifyContent: 'center',
+                  marginLeft: 10,
+                }
+              }
+            },
+            top: {
+              title: 'Nice Idea',
+              style: {
+                label: {
+                  backgroundColor: 'white',
+                  borderColor: '#42D260',
+                  color: '#42D260',
+                  borderWidth: 2
+                },
+                wrapper: {
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }
+              }
+            }
+          }}
+            cardIndex={this.state.cardIndex}
+            backgroundColor={'white'}
+            onSwipedAll = { () => this._setIndexToZero() }
+            onSwiped={(cardIndex) => this._incrementCardIndex(cardIndex)}
+            cardVerticalMargin={40}
+            animateOverlayLabelsOpacity
+            animateCardOpacity>
+
+            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+
+                    <TouchableOpacity onPress = { () => this._fetchCards()}>  
+
+                      <Image source={require('../../../img/icons/brokoli.png')}
+                             style={{resizeMode: 'center', width: 200, height: 200, tintColor: 'white'}}/>
+
+                      </TouchableOpacity> 
+
+                      <Text style={{color: 'white', fontWeight: '600', fontSize: 22}}> Tap Brokoli to fetch more people </Text>
+
+
+
+                      </View>
+
+            </Swiper>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    card: {
+        flex: 1,
+        borderRadius: 4,
+        borderWidth: 2,
+        borderColor: '#E8E8E8',
+        justifyContent: 'center',
+        backgroundColor: 'white',
+        marginBottom: 40,
+      },
+}) 
