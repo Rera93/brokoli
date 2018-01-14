@@ -10,7 +10,7 @@ import { StyleSheet,
 import Modal from 'react-native-modal'
 
 
-var tempBookmarkArr = []
+var tempArr = []
 
 const width = Dimensions.get('window').width
 const height = Dimensions.get('window').height
@@ -18,7 +18,7 @@ const height = Dimensions.get('window').height
 export default class Bookmarks extends React.Component{
 
     static navigationOptions = {
-        title: 'Your Bookmarks',
+        title: 'Your Applications',
         headerStyle: { backgroundColor: '#42D260', marginTop: 24 },
         headerTitleStyle: { color: 'white' },
       };
@@ -29,11 +29,11 @@ export default class Bookmarks extends React.Component{
 
         this.state = {
 
-            bookmarkData: [
-                /*{project: 'Brokoli1', applicants: 17, brokolis: 15, id: 100},
-                {project: 'Brokoli2', applicants: 145, brokolis: 65, id: 101},
-                {project: 'Brokoli3', applicants: 137, brokolis: 32, id: 102},
-                {project: 'Brokoli4', applicants: 4, brokolis: 23, id: 103},*/
+            applicationsData: [
+                {project: 'Brokoli1', position: 'Jave Developer', response: 'Pending'},
+                {project: 'Brokoli2', position: 'C# Engineer', response: 'Declined'},
+                {project: 'Brokoli3', position: 'React Native Front-End', response: 'Pending'},
+                {project: 'Brokoli4', position: 'IOS Software Architect', response: 'Accepted'},
         ],
         isModalDeleteVisible: false,
         index: 0,
@@ -42,62 +42,29 @@ export default class Bookmarks extends React.Component{
     }
 
     componentDidMount(){
-        var arrayProjects = [];
-        var obj ={id:this.props.screenProps}
-        this._makeRemoteRequest(obj, 'fetchbookmarkedprojects').then((responseData) => {
-        for (var i = 0; i < responseData.length; i++) {
-            var positions = [];
-             var object = responseData[i];
-             object.project.brokoliCounter = 0;
-             var position;
-             for( var j = 0 ; j < object.project.positions.length; j++){
-                position = object.project.positions[j];
-                position.open = true;
-                position.apply = false;
-                position.posDescription = 'Dicant gloriatur sea te, ad veniam essent sadipscing eum. In has appareat sadipscing, sit impedit necessitatibus id. Sea no erat debet antiopam, quo ex ridens dolorem erroribus, ne sit alia harum nusquam. Nibh soleat perfecto an eam, prima nonumy accusam ea vel. Nec tempor oportere et, doctus alienum detracto ad his.'
-                positions.push(position);
-
-
-            }
-
-            object.project.positions = positions;
-
-            arrayProjects.push(object.project);
-        }
-        var str = JSON.stringify(arrayProjects, null, 4);
-          console.log(str);
-        this.state.bookmarkData = arrayProjects;
-        this.setState(function(prevState, props){
-            return {bookmarkData: prevState.bookmarkData}
-        })
-
-      });
-    }
-
-
-
-
-    _makeRemoteRequest(body, urlParam){
-      
-
-      return fetch('https://brokoli.eu-gb.mybluemix.net/api/'+urlParam, {  
-                 method: 'POST',
-                 headers: {
-                   'Accept': 'application/json',
-                   'Content-Type': 'application/json',
-                 }
-               ,
-                  body: JSON.stringify(body),
-
-                
-                })
-        .then((response) => response.json());
-
-        
-
+        this._makeRemoteRequest()
     }
         
-      
+      //Need to fetch data from db and display them in the flat list.
+      _makeRemoteRequest = () => {
+
+        /*
+            DB request happens here. 
+            Need to be called everytime a bookmark is set on the brokoli tab,  
+
+            tempArr = dataFetchedFromDb
+
+            Update state of bookmarkData like the following
+
+            this.state.bookmarkData = tempArr
+            this.setState(function(prevState, props){
+                return { boormarkData: prevState.bookmarkData}
+            })
+
+        */
+        
+       
+    }
 
     _toggleDeleteModal({item, index}){
 
@@ -142,13 +109,13 @@ export default class Bookmarks extends React.Component{
 
         <View style={[styles.modalContent, {backgroundColor: '#254D32'}]}>
         
-            <Text style={[styles.title, {color: 'white'}]}>Are you sure you want to unbookmark the selected project?</Text>
+            <Text style={[styles.title, {color: 'white'}]}>Are you sure you want to discard application for the selected position?</Text>
         
             <View style={{flexDirection: 'row'}}>
         
                                 <TouchableOpacity 
                                                 style={[styles.button,{backgroundColor: 'white'}]} 
-                                                onPress={() => this._unBookmark() }>
+                                                onPress={() => this._unApply() }>
                                 <Text style={[styles.btnTxt, {color: '#254D32'}]}>Ok</Text>
                 
                                 </TouchableOpacity>
@@ -164,22 +131,22 @@ export default class Bookmarks extends React.Component{
                         </View>
     )
 
-    _unBookmark() {
+    _unApply() {
 
         //Use temp array(object) instead to state.someArr to apply javascript functionalities on arrays. 
         var tempArr = []
-        tempArr = this.state.bookmarkData
+        tempArr = this.state.applicationsData
         console.log('tempArr: ', tempArr)
 
         //Returns the part of array we want to remove
         tempArr.splice(this.state.index, 1)
 
         //Assign the tempArr with the removed element to bookmarkData
-        this.state.bookmarkData = tempArr
+        this.state.applicationsData = tempArr
         this.setState(function(prevState, props){
-            return { bookmarkData : prevState.bookmarkData }
+            return { applicationsData : prevState.applicationsData }
         })
-        console.log('Update BookmarkData: ', this.state.bookmarkData)
+        console.log('Update BookmarkData: ', this.state.applicationsData)
         
         //Close modal
         this._untoggleDeleteModal()
@@ -198,38 +165,34 @@ export default class Bookmarks extends React.Component{
 
 
             <FlatList
-            data={this.state.bookmarkData}
+            data={this.state.applicationsData}
             renderItem={({ item, index }) => (
-              <TouchableOpacity style={styles.item} item={item} index={index}
-                                onPress = {() => this._openBookmark({item, index}) }
-                                onLongPress = {() => this._toggleDeleteModal({item, index})}>
+              <View style={styles.item}>
                 <View style={{flex: 5, alignItems: 'flex-start', justifyContent: 'center'}}>
-                <View style={styles.nameCont}>
+                <View style={styles.reactions}>
                 {/*Name of project*/}
-                <Text style={styles.name}> {item.title} </Text>
+                <Image style={styles.icon} source={require('../../../img/icons/project.png')} />
+                <Text style={styles.name}> {item.project} </Text>
                 </View>
-                <View style={styles.reactionsCont}>
                 <View style={styles.reactions}>
                 {/*Number of applicants until now*/}
-                <Image style={styles.icon} source={require('../../../img/icons/applicants.png')} />
-                <Text style={{fontSize: 17, fontWeight: '400', color: '#C7C7CD'}}> {item.applicants}  </Text>
+                <Image style={styles.icon} source={require('../../../img/icons/workpos.png')} />
+                <Text style={{fontSize: 17, fontWeight: '400', color: '#C7C7CD'}}> {item.position}  </Text>
                 </View>
-                <View style={styles.reactions}>
-                 {/*Number of brokoli's until now*/}
-                 <Image style={styles.icon} source={require('../../../img/icons/brokolis.png')} />
-                 <Text style={{fontSize: 17, fontWeight: '400', color: '#C7C7CD'}}> {item.totalBrokolis}  </Text>
-                 </View>
-                </View>
-                </View>
-                <View style={{flex: 1, alignItems: 'flex-end', justifyContent: 'center'}}>
-                    <Image source={require('../../../img/icons/right-arrow.png')}
-                           style={{width: 25, height: 25, resizeMode: 'center', tintColor: '#42D260'}} />
+                <View style={[styles.reactions, {borderRadius: 5, backgroundColor: item.response == 'Pending' ? '#D5B942' : item.response == 'Declined' ? '#A7333F' : '#42D260' } ]}>
+                    <Text style={{fontSize: 17, color: 'white', fontWeight: '500'}}> {item.response} </Text>
                     </View>
-              </TouchableOpacity>
+                </View>
+                <TouchableOpacity onPress={()=>this._toggleDeleteModal({item, index})}
+                                  style={{flex: 1, alignItems: 'flex-end', justifyContent: 'center', paddingRight: 10}}>
+                        <Image source={require('../../../img/icons/trash.png')}
+                        style={{width: 25, height: 25, resizeMode: 'center', tintColor: '#A7333F'}} />
+                </TouchableOpacity>
+              </View>
             )}
             keyExtractor={item => item.project}
-            ListHeaderComponent={() => (!this.state.bookmarkData.length ? 
-            <Text style={{marginTop: height / 3, textAlign: 'center', fontSize: 20, fontWeight: '500', color: '#42D260'}}>Out of bookmarks</Text> : null)}
+            ListHeaderComponent={() => (!this.state.applicationsData.length ? 
+            <Text style={{marginTop: height / 3, textAlign: 'center', fontSize: 20, fontWeight: '500', color: '#42D260'}}>No recent applications</Text> : null)}
           />
 
           <Modal isVisible = {this.state.isModalDeleteVisible}
@@ -274,6 +237,8 @@ const styles = StyleSheet.create({
         paddingTop: 5,
       },
       reactions: {
+        paddingTop: 5,
+        paddingBottom: 5,
         flexDirection: 'row'
       },
       icon: {

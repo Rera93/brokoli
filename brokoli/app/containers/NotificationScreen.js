@@ -8,8 +8,17 @@
 'use strict'
 import React from 'react';
 import { StyleSheet, Text, Image } from 'react-native';
+import Notifications from '../components/NotificationScreen/Notifications'
+import {StackNavigator} from 'react-navigation'
+import getSlideFromRightTransition from 'react-navigation-slide-from-right-transition';
 
-import ViewContainer from '../components/ViewContainer'
+
+const NotificationsStackNav = StackNavigator({
+  Notifications: { screen: Notifications},
+},{
+    transitionConfig: getSlideFromRightTransition
+});
+
 
 class NotificationScreen extends React.Component {
 
@@ -17,7 +26,7 @@ class NotificationScreen extends React.Component {
         tabBarLabel: 'Mail',
         tabBarIcon: ({ tintColor }) => (
           <Image
-            source={require('../../img/icons/mail.png')}
+            source={require('../../img/icons/summary.png')}
             style={[styles.icon, {tintColor: tintColor}]}
           />
         ),
@@ -25,9 +34,9 @@ class NotificationScreen extends React.Component {
 
     render(){
         return(
-            <ViewContainer>
-                <Text> Hello Notification Screen </Text>
-                </ViewContainer>
+
+              <NotificationsStackNav />           
+
 
         )
     }
@@ -35,8 +44,8 @@ class NotificationScreen extends React.Component {
 
 const styles = StyleSheet.create({
     icon: {
-      width: 26,
-      height: 26,
+      width: 24,
+      height: 24,
     },
   });
 

@@ -25,7 +25,7 @@ class BookmarkScreen extends React.Component {
         tabBarLabel: 'Bookmark',
         tabBarIcon: ({ tintColor }) => (
           <Image
-            source={require('../../img/icons/bookmark.png')}
+            source={require('../../img/icons/bookmark-out.png')}
             style={[styles.icon, {tintColor: tintColor}]}
           />
         ),
