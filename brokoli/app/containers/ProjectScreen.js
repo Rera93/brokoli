@@ -15,12 +15,17 @@ import Projects from '../components/ProjectScreen/Projects';
 import Detail from '../components/ProjectScreen/Create/Detail';
 import Categories from '../components/ProjectScreen/Create/Categories';
 import Positions from '../components/ProjectScreen/Create/Positions';
+import People from '../components/ProjectScreen/People';
+import AvailablePos from '../components/ProjectScreen/AvailablePos';
 
 const ProjectStackNav = StackNavigator({
   Projects: { screen: Projects},
   Detail: {screen: Detail },
   Categories: {screen: Categories },
-  Positions: {screen: Positions }
+  Positions: {screen: Positions },
+  AvailablePos: {screen: AvailablePos},
+  People: {screen: People},
+
 },{
     transitionConfig: getSlideFromRightTransition
 });
