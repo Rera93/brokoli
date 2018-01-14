@@ -261,6 +261,9 @@ export default class Projects extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   item:{
     backgroundColor: 'white',
     flexDirection: 'row',
