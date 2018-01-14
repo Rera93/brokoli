@@ -5,6 +5,7 @@ import { StyleSheet,
          View,
          FlatList,
          TouchableOpacity,
+         TouchableWithoutFeedback,
          Dimensions } from 'react-native';
 
 import Modal from 'react-native-modal'
@@ -45,18 +46,32 @@ export default class People extends React.Component{
                 {name: 'Alan Andrade', picture: require('../../../img/icons/ppl1.png'), header: 'Time you enjoy wasting was not wasted',
                  skillData: [
                   {skill: 'Java Developer', exp: 4}, 
-                  {pos: 'React Native Architect', exp: 2},
-                  {pos: 'Financial Analyst', exp: 3},
-                  {pos: 'Managerial Accountant', exp: 5},
-                  {pos: 'C# Software Engineer', exp: 4}]},
+                  {skill: 'React Native Architect', exp: 2},
+                  {skill: 'Financial Analyst', exp: 3},
+                  {skill: 'Managerial Accountant', exp: 5},
+                  {skill: 'C# Software Engineer', exp: 4}],
+                 educationData: [
+                     {school: 'Radboud University', degree: 'Master', spec: 'Computing Science', startMM: 'Jan', startYY: '2016', endMM: 'Jan', endYY: '2017', city: 'Nijmegen', country: 'The Netherlands'},
+                     {school: 'Radboud University1', degree: 'Master', spec: 'Computing Science', startMM: 'Jan', startYY: '2016', endMM: 'Jan', endYY: '2017', city: 'Nijmegen', country: 'The Netherlands'},
+                 ],
+                 projectData: [
+                    {project: 'Brokoli1', position: 'React Native Developer', course: 'Software Development'},
+                    {project: 'Brokoli2', position: 'React Native Developer', course: 'Software Development'},
+                 ],
+                 jobData: [
+                     {company: 'Google', position: 'Javascript Developer', startMM: 'Jan', startYY: '2016', endMM: 'Jan', endYY: '2017', city: 'Nijmegen', country: 'The Netherlands'},
+                     {company: 'Google1', position: 'Javascript Developer', startMM: 'Jan', startYY: '2016', endMM: 'Jan', endYY: '2017', city: 'Nijmegen', country: 'The Netherlands'},
+
+                 ],
+                },
       
                 {name: 'Alan Andrade', picture: require('../../../img/icons/ppl3.png'), header: 'Time you enjoy wasting was not wasted',
                  skillData: [
                         {skill: 'Java Developer1', exp: 4}, 
-                        {pos: 'React Native Architect', exp: 2},
-                        {pos: 'Financial Analyst', exp: 3},
-                        {pos: 'Managerial Accountant', exp: 5},
-                        {pos: 'C# Software Engineer', exp: 4}],
+                        {skill: 'React Native Architect', exp: 2},
+                        {skill: 'Financial Analyst', exp: 3},
+                        {skill: 'Managerial Accountant', exp: 5},
+                        {skill: 'C# Software Engineer', exp: 4}],
               }],
               cardIndex: 0,
             }
@@ -121,12 +136,20 @@ export default class People extends React.Component{
                 console.log('isJobExpModalVisible: ', this.state.isJobExpModalVisible)
             }
 
-            _toggleEducationModel(){
+            _toggleProjectModel(){
                 this.state.isProjectExpModalVisible = !this.state.isProjectExpModalVisible
                 this.setState(function(prevState, props){
                     return { isProjectExpModalVisible: prevState.isProjectExpModalVisible }
                 })
                 console.log('isProjectExpModalVisible: ', this.state.isProjectExpModalVisible)
+            }
+
+            _toggleSkillsModel(){
+                this.state.isSkillsModalVisible = !this.state.isSkillsModalVisible
+                this.setState(function(prevState, props){
+                    return { isSkillsModalVisible: prevState.isSkillsModalVisible }
+                })
+                console.log('isSkillsModalVisible: ', this.state.isSkillsModalVisible)
             }
 
             _fetchCards(){
@@ -229,37 +252,38 @@ export default class People extends React.Component{
           <View style={{height: 50, backgroundColor: '#42D260', flexDirection: 'row'}}> 
 
 
-          <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+          <TouchableOpacity style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
 
              <Image style={{resizeMode: 'center', width: 25, height: 25, tintColor: 'white'}}
                     source={require('../../../img/icons/tools.png')} />
 
-              </View>
+              </TouchableOpacity>
 
 
-          <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+          <TouchableOpacity style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
 
              <Image style={{resizeMode: 'center', width: 25, height: 25, tintColor: 'white'}}
                     source={require('../../../img/icons/college-graduation.png')} />
-              </View>
+              </TouchableOpacity>
 
 
-          <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+          <TouchableOpacity style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
 
           <Image style={{resizeMode: 'center', width: 25, height: 25, tintColor: 'white'}}
                     source={require('../../../img/icons/work.png')} />
 
 
-              </View>
+              </TouchableOpacity>
 
 
-           <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+           <TouchableOpacity onPress={()=> this._toggleProjectModel()}
+                             style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
 
            <Image style={{resizeMode: 'center', width: 25, height: 25, tintColor: 'white'}}
                     source={require('../../../img/icons/projectexp.png')} />
 
 
-               </View>
+               </TouchableOpacity>
 
 
 
