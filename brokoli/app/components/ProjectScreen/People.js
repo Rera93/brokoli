@@ -224,7 +224,44 @@ export default class People extends React.Component{
 
           </View>
 
-          <View style={{flex: 1}}> 
+          {/*Footer*/}
+
+          <View style={{height: 50, backgroundColor: '#42D260', flexDirection: 'row'}}> 
+
+
+          <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+
+             <Image style={{resizeMode: 'center', width: 25, height: 25, tintColor: 'white'}}
+                    source={require('../../../img/icons/tools.png')} />
+
+              </View>
+
+
+          <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+
+             <Image style={{resizeMode: 'center', width: 25, height: 25, tintColor: 'white'}}
+                    source={require('../../../img/icons/college-graduation.png')} />
+              </View>
+
+
+          <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+
+          <Image style={{resizeMode: 'center', width: 25, height: 25, tintColor: 'white'}}
+                    source={require('../../../img/icons/work.png')} />
+
+
+              </View>
+
+
+           <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+
+           <Image style={{resizeMode: 'center', width: 25, height: 25, tintColor: 'white'}}
+                    source={require('../../../img/icons/projectexp.png')} />
+
+
+               </View>
+
+
 
              
 
