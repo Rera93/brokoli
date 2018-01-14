@@ -19,7 +19,7 @@ import ProjectScreen from './app/containers/ProjectScreen'
 import BookmarkScreen from './app/containers/BookmarkScreen'
 import BrokoliScreen from './app/containers/BrokoliScreen'
 import ProfileScreen from './app/containers/ProfileScreen'
-import NotificationScreen from './app/containers/RegisterScreen'
+import NotificationScreen from './app/containers/NotificationScreen'
 
 //middleware that logs actions
 const loggerMiddleware = createLogger({ predicate : (getState, action) => __DEV__});
