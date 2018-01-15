@@ -178,6 +178,18 @@ export default class People extends React.Component{
       console.log('Card Index: ', this.state.cardIndex)
     }
 
+    _renderSeparator = () => {
+        return (
+          <View
+            style={{
+              height: 1,
+              width: width,
+              backgroundColor: "#C7C7CD",
+            }}
+          />
+        )
+    }
+
     _renderModalEducation = () => (
         <View>
 
@@ -185,12 +197,6 @@ export default class People extends React.Component{
     ) 
 
     _renderModalJobExp = () => (
-        <View>
-
-            </View>
-    ) 
-
-    _renderModalProjectExp = () => (
         <View>
 
             </View>
@@ -311,14 +317,50 @@ export default class People extends React.Component{
 
                   </Modal> 
 
+                  <View>
+
                   <Modal isVisible = {this.state.isProjectExpModalVisible}
                    animationIn={'slideInLeft'}
                    animationOut={'slideOutRight'}
                    onBackdropPress={() => this.setState({ isProjectExpModalVisible: false })}>
 
-                         {this._renderModalProjectExp()}
+                   <View style={[styles.modalContent, {justifyContent: 'flex-start'}]}>
+
+                    <FlatList
+                     data={card.projectData}
+                     renderItem={({ item, index }) => (
+                         <View style={styles.itemProject}>
+
+                            <View style={styles.reactions}>
+                            {/*Name of project*/}
+                            <Image style={styles.icon} source={require('../../../img/icons/project.png')} />
+                            <Text style={styles.name}> {item.project} </Text>
+                            </View>
+                            <View style={styles.reactions}>
+                            {/*Number of applicants until now*/}
+                            <Image style={styles.icon} source={require('../../../img/icons/workpos.png')} />
+                            <Text style={{fontSize: 17, fontWeight: '400', color: '#C7C7CD'}}> {item.position}  </Text>
+                            </View>
+                            <View style={styles.reactions}>
+                                <Image style={styles.icon} source={require('../../../img/icons/books.png')} />
+                                <Text style={{fontSize: 17, fontWeight: '400', color: '#C7C7CD'}}> {item.course} </Text>
+                                </View>
+
+                            
+                          </View>   
+                    
+                     )}
+                     keyExtractor={item => item.project}
+                     ItemSeparatorComponent={this._renderSeparator}
+                 />
+                
+
+            </View>
+
 
                   </Modal> 
+
+                  </View>
 
                   <Modal isVisible = {this.state.isSkillsModalVisible}
                    animationIn={'slideInLeft'}
@@ -439,4 +481,60 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         marginBottom: 150,
       },
+    item:{
+        backgroundColor: 'white',
+        marginBottom: 5,
+        marginLeft: 5,
+        marginRight: 5,
+        paddingLeft: 10,
+        paddingRight: 10,
+        paddingBottom: 20,
+        paddingTop: 20
+      },
+
+      reactions: {
+        paddingTop: 5,
+        paddingBottom: 5,
+        flexDirection: 'row'
+      },
+      icon: {
+        resizeMode: 'contain',
+        width: 25,
+        height: 25,
+        tintColor: '#42D260'
+      },
+      button: {
+        padding: 12,
+        margin: 16,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 4,
+        borderColor: 'rgba(0, 0, 0, 0.1)',
+      },
+      modalContent: {
+        padding: 10,
+        borderRadius: 4,
+        borderColor: 'rgba(0, 0, 0, 0.1)',
+      },
+      btnTxt: {
+        fontSize: 16,
+        fontWeight: '400'
+    },
+    title: {
+        color: '#254D32',
+        fontSize: 20,
+        fontWeight: '400'
+    },
+    itemProject: {
+        flex: 1,
+            width: width - 20,
+            backgroundColor: 'white',
+            marginBottom: 5,
+            marginLeft: 5,
+            marginRight: 5,
+            paddingLeft: 10,
+            paddingRight: 10,
+            paddingBottom: 20,
+            paddingTop: 20,
+    }
 }) 
