@@ -300,12 +300,12 @@ export default class People extends React.Component{
             }}
              overlayLabels={{
             bottom: {
-              title: 'Bleah',
+              title: 'Pending',
               style: {
                 label: {
                   backgroundColor: 'white',
-                  borderColor: '#A7333F',
-                  color: '#A7333F',
+                  borderColor: '#D5B942',
+                  color: '#D5B942',
                   borderWidth: 2
                 },
                 wrapper: {
@@ -316,7 +316,7 @@ export default class People extends React.Component{
               }
             },
             left: {
-              title: 'Discard',
+              title: 'Decline',
               style: {
                 label: {
                   backgroundColor: 'white',
@@ -333,12 +333,12 @@ export default class People extends React.Component{
               }
             },
             right: {
-              title: 'Discard',
+              title: 'Accept',
               style: {
                 label: {
                   backgroundColor: 'white',
-                  borderColor: '#A7333F',
-                  color: '#A7333F',
+                  borderColor: '#42D260',
+                  color: '#42D260',
                   borderWidth: 2
                 },
                 wrapper: {
@@ -350,12 +350,12 @@ export default class People extends React.Component{
               }
             },
             top: {
-              title: 'Nice Idea',
+              title: 'Pending',
               style: {
                 label: {
                   backgroundColor: 'white',
-                  borderColor: '#42D260',
-                  color: '#42D260',
+                  borderColor: '#D5B942',
+                  color: '#D5B942',
                   borderWidth: 2
                 },
                 wrapper: {
