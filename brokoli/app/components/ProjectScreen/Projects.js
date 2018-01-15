@@ -34,10 +34,6 @@ export default class Projects extends React.Component {
         loading: false,
         data: [],
         // page: 1,
-        // seed: 1,
-         error: null,
-         refreshing: false,
-        actionButtonVisible: true,
         error: null,
         refreshing: false,
         actionButtonVisible: true,
@@ -72,28 +68,29 @@ export default class Projects extends React.Component {
     componentDidMount() {
         var arrayProjects = [];
         var obj ={id:this.props.screenProps}
+        console.log('@@@@@@@@@@@@@@@@@@@@gonna fetchmyprojects '+ obj.id);
         this.getData(obj, 'fetchmyprojects').then((responseData) => {
-        for (var i = 0; i < responseData.length; i++) {
-            var positions = [];
-             var object = responseData[i];
-             object.project.brokoliCounter = 0;
-             var position;
-             for( var j = 0 ; j < object.project.positions.length; j++){
-                position = object.project.positions[j];
-                position.open = true;
-                position.apply = false;
-                position.posDescription = 'Dicant gloriatur sea te, ad veniam essent sadipscing eum. In has appareat sadipscing, sit impedit necessitatibus id. Sea no erat debet antiopam, quo ex ridens dolorem erroribus, ne sit alia harum nusquam. Nibh soleat perfecto an eam, prima nonumy accusam ea vel. Nec tempor oportere et, doctus alienum detracto ad his.'
-                positions.push(position);
+        // for (var i = 0; i < responseData.length; i++) {
+        //     var positions = [];
+        //      var object = responseData[i];
+        //      object.project.brokoliCounter = 0;
+        //      var position;
+        //      for( var j = 0 ; j < object.project.positions.length; j++){
+        //         position = object.project.positions[j];
+        //         position.open = true;
+        //         position.apply = false;
+        //         position.posDescription = 'Dicant gloriatur sea te, ad veniam essent sadipscing eum. In has appareat sadipscing, sit impedit necessitatibus id. Sea no erat debet antiopam, quo ex ridens dolorem erroribus, ne sit alia harum nusquam. Nibh soleat perfecto an eam, prima nonumy accusam ea vel. Nec tempor oportere et, doctus alienum detracto ad his.'
+        //         positions.push(position);
 
 
-            }
+        //     }
 
-            object.project.positions = positions;
+        //     object.project.positions = positions;
 
-            arrayProjects.push(object.project);
-        }
+        //     arrayProjects.push(object.project);
+        // }
         
-        this.state.data = arrayProjects;
+        this.state.data = responseData;
         this.setState(function(prevState, props){
             return {data: prevState.data,
                   error:  null,
@@ -101,7 +98,7 @@ export default class Projects extends React.Component {
                   refreshing: false}
         })
         var str = JSON.stringify(this.state.data, null, 4);
-          console.log('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'+str);
+          console.log('<=<=<=<=<==<=<=<=<=<=<==<=<<<<<<<<'+str);
 
       });
 
