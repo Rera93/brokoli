@@ -43,17 +43,6 @@ export default class ProjectExp extends React.Component{
         this._fetchCorrenspondingProject()
     }
 
-    componentWillReceiveProps(nextProps){
-        
-                this.state.projectData = nextProps.navigation.state.params.selectedProjectExp
-                this.setState(function(prevState, props){
-                     return { projectData: prevState.projectData }
-                })
-                console.log('Passed projectData: ', this.state.projectData)
-                // Use projectData to sent request to db and fetch the correct project. 
-                this._fetchCorrenspondingProject()
-            }
-
     _fetchCorrenspondingProject(){
         
                 /*
@@ -108,7 +97,7 @@ const styles = StyleSheet.create({
         paddingTop: 5,
     },
     name: {
-        fontSize: 20,
+        fontSize: 17,
         fontWeight: '400',
         color: '#C7C7CD'
     },

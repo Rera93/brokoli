@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
         paddingTop: 5,
     },
     name: {
-        fontSize: 20,
+        fontSize: 17,
         fontWeight: '400',
         color: '#C7C7CD'
     },

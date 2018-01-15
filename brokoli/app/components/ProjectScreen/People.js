@@ -16,13 +16,13 @@ const window = Dimensions.get('window');
 const width = window.width
 var tempArr = []
 
-var tempExampleArr = [{name: 'Alan Andrade', picture: require('../../../img/icons/ppl2.png'), header: 'Time you enjoy wasting was not wasted',
+var tempExampleArr = [{name: 'Alan Andrade1', picture: require('../../../img/icons/ppl2.png'), header: 'Time you enjoy wasting was not wasted1',
 skillData: [
- {skill: 'Java Developer', exp: 4}, 
- {pos: 'React Native Architect', exp: 2},
- {pos: 'Financial Analyst', exp: 3},
- {pos: 'Managerial Accountant', exp: 5},
- {pos: 'C# Software Engineer', exp: 4}]}]
+ {skill: 'Java Developer1', exp: 4}, 
+ {pos: 'React Native Architect1', exp: 2},
+ {pos: 'Financial Analyst1', exp: 3},
+ {pos: 'Managerial Accountant1', exp: 5},
+ {pos: 'C# Software Engineer1', exp: 4}]}]
 
 export default class People extends React.Component{
 
