@@ -16,7 +16,7 @@ const window = Dimensions.get('window');
 const width = window.width
 var tempArr = []
 
-var tempExampleArr = [{name: 'Alan Andrade1', picture: require('../../../img/icons/ppl2.png'), header: 'Time you enjoy wasting was not wasted1',
+var tempExampleArr = [{name: 'Alan Andrade1', picture: require('../../../img/icons/ppl2.png'), chart: require('../../../img/icons/chart3.png'), header: 'Time you enjoy wasting was not wasted1',
 skillData: [
  {skill: 'Java Developer1', exp: 4}, 
  {pos: 'React Native Architect1', exp: 2},
@@ -43,7 +43,7 @@ export default class People extends React.Component{
               isProjectExpModalVisible: false,
               isSkillsModalVisible: false,
               cards: [
-                {name: 'Alan Andrade', picture: require('../../../img/icons/ppl1.png'), header: 'Time you enjoy wasting was not wasted',
+                {name: 'Alan Andrade', picture: require('../../../img/icons/ppl1.png'), chart: require('../../../img/icons/chart1.png'), header: 'Time you enjoy wasting was not wasted',
                  skillData: [
                   {skill: 'Java Developer', exp: 4}, 
                   {skill: 'React Native Architect', exp: 2},
@@ -65,7 +65,7 @@ export default class People extends React.Component{
                  ],
                 },
       
-                {name: 'Alan Andrade', picture: require('../../../img/icons/ppl3.png'), header: 'Time you enjoy wasting was not wasted',
+                {name: 'Alan Andrade', picture: require('../../../img/icons/ppl3.png'), chart: require('../../../img/icons/chart2.png'), header: 'Time you enjoy wasting was not wasted',
                  skillData: [
                         {skill: 'Java Developer1', exp: 4}, 
                         {skill: 'React Native Architect', exp: 2},
@@ -243,8 +243,10 @@ export default class People extends React.Component{
            
           </View>
 
+          {/*Body*/}
+          <View style={{flex:2, justifyContent: 'center', alignItems: 'center'}}>
 
-          <View style={{flex:2}}>
+          <Image source = {card.chart} style={{width: 300, height: 300, resizeMode: 'center'}} />
 
 
           </View>
