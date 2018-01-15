@@ -186,9 +186,9 @@ export default class Personal extends React.Component {
                     <Text style={styles.cond}> R </Text>
                     </View>
                 </View>
-                <ProfilePic />
+                {/*<ProfilePic />*/}
 
-                <BirthDate callbackFromParent = {this.callbackBirthDate}/>
+               <BirthDate callbackFromParent = {this.callbackBirthDate}/>
                 <Gender callbackFromParent = {this.callbackGender}/>
 
                 <View style={styles.inputCont}> 
