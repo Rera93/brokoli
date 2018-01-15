@@ -5,6 +5,7 @@ import { StyleSheet,
          View,
          FlatList,
          TouchableOpacity,
+         TouchableWithoutFeedback,
          Dimensions } from 'react-native';
 
 import Modal from 'react-native-modal'
@@ -15,13 +16,13 @@ const window = Dimensions.get('window');
 const width = window.width
 var tempArr = []
 
-var tempExampleArr = [{name: 'Alan Andrade', picture: require('../../../img/icons/ppl2.png'), header: 'Time you enjoy wasting was not wasted',
+var tempExampleArr = [{name: 'Alan Andrade1', picture: require('../../../img/icons/ppl2.png'), header: 'Time you enjoy wasting was not wasted1',
 skillData: [
- {skill: 'Java Developer', exp: 4}, 
- {pos: 'React Native Architect', exp: 2},
- {pos: 'Financial Analyst', exp: 3},
- {pos: 'Managerial Accountant', exp: 5},
- {pos: 'C# Software Engineer', exp: 4}]}]
+ {skill: 'Java Developer1', exp: 4}, 
+ {pos: 'React Native Architect1', exp: 2},
+ {pos: 'Financial Analyst1', exp: 3},
+ {pos: 'Managerial Accountant1', exp: 5},
+ {pos: 'C# Software Engineer1', exp: 4}]}]
 
 export default class People extends React.Component{
 
@@ -45,19 +46,45 @@ export default class People extends React.Component{
                 {name: 'Alan Andrade', picture: require('../../../img/icons/ppl1.png'), header: 'Time you enjoy wasting was not wasted',
                  skillData: [
                   {skill: 'Java Developer', exp: 4}, 
-                  {pos: 'React Native Architect', exp: 2},
-                  {pos: 'Financial Analyst', exp: 3},
-                  {pos: 'Managerial Accountant', exp: 5},
-                  {pos: 'C# Software Engineer', exp: 4}]},
+                  {skill: 'React Native Architect', exp: 2},
+                  {skill: 'Financial Analyst', exp: 3},
+                  {skill: 'Managerial Accountant', exp: 5},
+                  {skill: 'C# Software Engineer', exp: 4}],
+                 educationData: [
+                     {school: 'Radboud University', degree: 'Master', spec: 'Computing Science', startMM: 'Jan', startYY: '2016', endMM: 'Jan', endYY: '2017', city: 'Nijmegen', country: 'The Netherlands'},
+                     {school: 'Radboud University1', degree: 'Master', spec: 'Computing Science', startMM: 'Jan', startYY: '2016', endMM: 'Jan', endYY: '2017', city: 'Nijmegen', country: 'The Netherlands'},
+                 ],
+                 projectData: [
+                    {project: 'Brokoli1', position: 'React Native Developer', course: 'Software Development'},
+                    {project: 'Brokoli2', position: 'React Native Developer', course: 'Software Development'},
+                 ],
+                 jobData: [
+                     {company: 'Google', position: 'Javascript Developer', startMM: 'Jan', startYY: '2016', endMM: 'Jan', endYY: '2017', city: 'Nijmegen', country: 'The Netherlands'},
+                     {company: 'Google1', position: 'Javascript Developer', startMM: 'Jan', startYY: '2016', endMM: 'Jan', endYY: '2017', city: 'Nijmegen', country: 'The Netherlands'},
+
+                 ],
+                },
       
                 {name: 'Alan Andrade', picture: require('../../../img/icons/ppl3.png'), header: 'Time you enjoy wasting was not wasted',
                  skillData: [
                         {skill: 'Java Developer1', exp: 4}, 
-                        {pos: 'React Native Architect', exp: 2},
-                        {pos: 'Financial Analyst', exp: 3},
-                        {pos: 'Managerial Accountant', exp: 5},
-                        {pos: 'C# Software Engineer', exp: 4}],
-              }],
+                        {skill: 'React Native Architect', exp: 2},
+                        {skill: 'Financial Analyst', exp: 3},
+                        {skill: 'Managerial Accountant', exp: 5},
+                        {skill: 'C# Software Engineer', exp: 4}],
+              educationData: [
+                {school: 'Radboud Universit2', degree: 'Master', spec: 'Computing Science', startMM: 'Jan', startYY: '2016', endMM: 'Jan', endYY: '2017', city: 'Nijmegen', country: 'The Netherlands'},
+                {school: 'Radboud University3', degree: 'Master', spec: 'Computing Science', startMM: 'Jan', startYY: '2016', endMM: 'Jan', endYY: '2017', city: 'Nijmegen', country: 'The Netherlands'},
+            ],
+            projectData: [
+               {project: 'Brokoli4', position: 'React Native Developer', course: 'Software Development'},
+               {project: 'Brokoli5', position: 'React Native Developer', course: 'Software Development'},
+            ],
+            jobData: [
+                {company: 'Google5', position: 'Javascript Developer', startMM: 'Jan', startYY: '2016', endMM: 'Jan', endYY: '2017', city: 'Nijmegen', country: 'The Netherlands'},
+                {company: 'Google6', position: 'Javascript Developer', startMM: 'Jan', startYY: '2016', endMM: 'Jan', endYY: '2017', city: 'Nijmegen', country: 'The Netherlands'},
+
+            ]}],
               cardIndex: 0,
             }
           }
@@ -121,12 +148,20 @@ export default class People extends React.Component{
                 console.log('isJobExpModalVisible: ', this.state.isJobExpModalVisible)
             }
 
-            _toggleEducationModel(){
+            _toggleProjectModel(){
                 this.state.isProjectExpModalVisible = !this.state.isProjectExpModalVisible
                 this.setState(function(prevState, props){
                     return { isProjectExpModalVisible: prevState.isProjectExpModalVisible }
                 })
                 console.log('isProjectExpModalVisible: ', this.state.isProjectExpModalVisible)
+            }
+
+            _toggleSkillsModel(){
+                this.state.isSkillsModalVisible = !this.state.isSkillsModalVisible
+                this.setState(function(prevState, props){
+                    return { isSkillsModalVisible: prevState.isSkillsModalVisible }
+                })
+                console.log('isSkillsModalVisible: ', this.state.isSkillsModalVisible)
             }
 
             _fetchCards(){
@@ -155,32 +190,22 @@ export default class People extends React.Component{
       console.log('Card Index: ', this.state.cardIndex)
     }
 
-    _renderModalEducation = () => (
-        <View>
-
-            </View>
-    ) 
-
-    _renderModalJobExp = () => (
-        <View>
-
-            </View>
-    ) 
-
-    _renderModalProjectExp = () => (
-        <View>
-
-            </View>
-    ) 
-
-    _renderModalSkills = () => (
-        <View>
-
-            </View>
-    ) 
+    _renderSeparator = () => {
+        return (
+          <View
+            style={{
+              height: 1,
+              width: width,
+              backgroundColor: "#C7C7CD",
+            }}
+          />
+        )
+    }
                 
 
     render(){
+
+      const {navigate} = this.props.navigation
 
         return(
             <Swiper
@@ -229,81 +254,45 @@ export default class People extends React.Component{
           <View style={{height: 50, backgroundColor: '#42D260', flexDirection: 'row'}}> 
 
 
-          <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+          <TouchableOpacity onPress={()=> navigate('Skills', {selectedSkillsExp: card.skillData})}
+                            style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
 
              <Image style={{resizeMode: 'center', width: 25, height: 25, tintColor: 'white'}}
                     source={require('../../../img/icons/tools.png')} />
 
-              </View>
+              </TouchableOpacity>
 
 
-          <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+          <TouchableOpacity onPress={()=> navigate('Edu', {selectedEduExp: card.educationData})}
+                            style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
 
              <Image style={{resizeMode: 'center', width: 25, height: 25, tintColor: 'white'}}
                     source={require('../../../img/icons/college-graduation.png')} />
-              </View>
+              </TouchableOpacity>
 
 
-          <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+          <TouchableOpacity onPress={()=> navigate('JobExp', {selectedJobExp: card.jobData})}
+                            style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
 
           <Image style={{resizeMode: 'center', width: 25, height: 25, tintColor: 'white'}}
                     source={require('../../../img/icons/work.png')} />
 
 
-              </View>
+              </TouchableOpacity>
 
 
-           <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+           <TouchableOpacity onPress={()=> navigate('ProjectExp', {selectedProjectExp: card.projectData})}
+                             style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
 
            <Image style={{resizeMode: 'center', width: 25, height: 25, tintColor: 'white'}}
                     source={require('../../../img/icons/projectexp.png')} />
 
 
-               </View>
-
-
-
-             
-
+               </TouchableOpacity>
 
 
             </View>
 
-          <Modal isVisible = {this.state.isEducationModalVisible}
-                         animationIn={'slideInLeft'}
-                         animationOut={'slideOutRight'}
-                         onBackdropPress={() => this.setState({ isEducationModalVisible: false })}>
-
-                         {this._renderModalEducation()}
-
-                  </Modal>  
-
-            <Modal isVisible = {this.state.isJobExpModalVisible}
-                   animationIn={'slideInLeft'}
-                   animationOut={'slideOutRight'}
-                   onBackdropPress={() => this.setState({ isJobExpModalVisible: false })}>
-
-                         {this._renderModalJobExp()}
-
-                  </Modal> 
-
-                  <Modal isVisible = {this.state.isProjectExpModalVisible}
-                   animationIn={'slideInLeft'}
-                   animationOut={'slideOutRight'}
-                   onBackdropPress={() => this.setState({ isProjectExpModalVisible: false })}>
-
-                         {this._renderModalProjectExp()}
-
-                  </Modal> 
-
-                  <Modal isVisible = {this.state.isSkillsModalVisible}
-                   animationIn={'slideInLeft'}
-                   animationOut={'slideOutRight'}
-                   onBackdropPress={() => this.setState({ isSkillsModalVisible: false })}>
-
-                         {this._renderModalSkills()}
-
-                  </Modal> 
 
                   </View>
                 )
@@ -390,11 +379,11 @@ export default class People extends React.Component{
                     <TouchableOpacity onPress = { () => this._fetchCards()}>  
 
                       <Image source={require('../../../img/icons/brokoli.png')}
-                             style={{resizeMode: 'center', width: 200, height: 200, tintColor: 'white'}}/>
+                             style={{resizeMode: 'center', width: 200, height: 200, tintColor: '#42D260'}}/>
 
                       </TouchableOpacity> 
 
-                      <Text style={{color: 'white', fontWeight: '600', fontSize: 22}}> Tap Brokoli to fetch more people </Text>
+                      <Text style={{color: '#42D260', fontWeight: '600', fontSize: 22}}> Tap Brokoli to fetch more people </Text>
 
 
 
@@ -415,4 +404,61 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         marginBottom: 150,
       },
+    item:{
+        backgroundColor: 'white',
+        marginBottom: 5,
+        marginLeft: 5,
+        marginRight: 5,
+        paddingLeft: 10,
+        paddingRight: 10,
+        paddingBottom: 20,
+        paddingTop: 20
+      },
+
+      reactions: {
+        paddingTop: 5,
+        paddingBottom: 5,
+        flexDirection: 'row'
+      },
+      icon: {
+        resizeMode: 'contain',
+        width: 25,
+        height: 25,
+        tintColor: '#42D260'
+      },
+      button: {
+        padding: 12,
+        margin: 16,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 4,
+        borderColor: 'rgba(0, 0, 0, 0.1)',
+      },
+      modalContent: {
+        // flex: 1, 
+        // backgroundColor: 'white',
+        padding: 10,
+        borderRadius: 4,
+        borderColor: 'rgba(0, 0, 0, 0.1)',
+      },
+      btnTxt: {
+        fontSize: 16,
+        fontWeight: '400'
+    },
+    title: {
+        color: '#254D32',
+        fontSize: 20,
+        fontWeight: '400'
+    },
+    itemProject: {
+        // flex: 1,
+        //     backgroundColor: 'white',
+            marginBottom: 5,
+            marginLeft: 5,
+            marginRight: 5,
+            paddingLeft: 10,
+            paddingRight: 10,
+            paddingBottom: 20,
+            paddingTop: 20,
+    }
 }) 
