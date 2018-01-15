@@ -189,27 +189,11 @@ export default class People extends React.Component{
           />
         )
     }
-
-    _renderModalEducation = () => (
-        <View>
-
-            </View>
-    ) 
-
-    _renderModalJobExp = () => (
-        <View>
-
-            </View>
-    ) 
-
-    _renderModalSkills = () => (
-        <View>
-
-            </View>
-    ) 
                 
 
     render(){
+
+      const {navigate} = this.props.navigation
 
         return(
             <Swiper
@@ -282,7 +266,7 @@ export default class People extends React.Component{
               </TouchableOpacity>
 
 
-           <TouchableOpacity onPress={()=> this._toggleProjectModel()}
+           <TouchableOpacity onPress={()=> navigate('ProjectExp', {selectedProjectExp: card.projectData})}
                              style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
 
            <Image style={{resizeMode: 'center', width: 25, height: 25, tintColor: 'white'}}
@@ -292,84 +276,8 @@ export default class People extends React.Component{
                </TouchableOpacity>
 
 
-
-             
-
-
-
             </View>
 
-          <Modal isVisible = {this.state.isEducationModalVisible}
-                         animationIn={'slideInLeft'}
-                         animationOut={'slideOutRight'}
-                         onBackdropPress={() => this.setState({ isEducationModalVisible: false })}>
-
-                         {this._renderModalEducation()}
-
-                  </Modal>  
-
-            <Modal isVisible = {this.state.isJobExpModalVisible}
-                   animationIn={'slideInLeft'}
-                   animationOut={'slideOutRight'}
-                   onBackdropPress={() => this.setState({ isJobExpModalVisible: false })}>
-
-                         {this._renderModalJobExp()}
-
-                  </Modal> 
-
-                  <View>
-
-                  <Modal isVisible = {this.state.isProjectExpModalVisible}
-                   animationIn={'slideInLeft'}
-                   animationOut={'slideOutRight'}
-                   onBackdropPress={() => this.setState({ isProjectExpModalVisible: false })}>
-
-                   <View style={[styles.modalContent, {justifyContent: 'flex-start'}]}>
-
-                    <FlatList
-                     data={card.projectData}
-                     renderItem={({ item, index }) => (
-                         <View style={styles.itemProject}>
-
-                            <View style={styles.reactions}>
-                            {/*Name of project*/}
-                            <Image style={styles.icon} source={require('../../../img/icons/project.png')} />
-                            <Text style={styles.name}> {item.project} </Text>
-                            </View>
-                            <View style={styles.reactions}>
-                            {/*Number of applicants until now*/}
-                            <Image style={styles.icon} source={require('../../../img/icons/workpos.png')} />
-                            <Text style={{fontSize: 17, fontWeight: '400', color: '#C7C7CD'}}> {item.position}  </Text>
-                            </View>
-                            <View style={styles.reactions}>
-                                <Image style={styles.icon} source={require('../../../img/icons/books.png')} />
-                                <Text style={{fontSize: 17, fontWeight: '400', color: '#C7C7CD'}}> {item.course} </Text>
-                                </View>
-
-                            
-                          </View>   
-                    
-                     )}
-                     keyExtractor={item => item.project}
-                     ItemSeparatorComponent={this._renderSeparator}
-                 />
-                
-
-            </View>
-
-
-                  </Modal> 
-
-                  </View>
-
-                  <Modal isVisible = {this.state.isSkillsModalVisible}
-                   animationIn={'slideInLeft'}
-                   animationOut={'slideOutRight'}
-                   onBackdropPress={() => this.setState({ isSkillsModalVisible: false })}>
-
-                         {this._renderModalSkills()}
-
-                  </Modal> 
 
                   </View>
                 )
@@ -456,11 +364,11 @@ export default class People extends React.Component{
                     <TouchableOpacity onPress = { () => this._fetchCards()}>  
 
                       <Image source={require('../../../img/icons/brokoli.png')}
-                             style={{resizeMode: 'center', width: 200, height: 200, tintColor: 'white'}}/>
+                             style={{resizeMode: 'center', width: 200, height: 200, tintColor: '#42D260'}}/>
 
                       </TouchableOpacity> 
 
-                      <Text style={{color: 'white', fontWeight: '600', fontSize: 22}}> Tap Brokoli to fetch more people </Text>
+                      <Text style={{color: '#42D260', fontWeight: '600', fontSize: 22}}> Tap Brokoli to fetch more people </Text>
 
 
 
@@ -512,6 +420,8 @@ const styles = StyleSheet.create({
         borderColor: 'rgba(0, 0, 0, 0.1)',
       },
       modalContent: {
+        // flex: 1, 
+        // backgroundColor: 'white',
         padding: 10,
         borderRadius: 4,
         borderColor: 'rgba(0, 0, 0, 0.1)',
@@ -526,9 +436,8 @@ const styles = StyleSheet.create({
         fontWeight: '400'
     },
     itemProject: {
-        flex: 1,
-            width: width - 20,
-            backgroundColor: 'white',
+        // flex: 1,
+        //     backgroundColor: 'white',
             marginBottom: 5,
             marginLeft: 5,
             marginRight: 5,
