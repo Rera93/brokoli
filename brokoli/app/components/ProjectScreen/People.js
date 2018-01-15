@@ -72,7 +72,19 @@ export default class People extends React.Component{
                         {skill: 'Financial Analyst', exp: 3},
                         {skill: 'Managerial Accountant', exp: 5},
                         {skill: 'C# Software Engineer', exp: 4}],
-              }],
+              educationData: [
+                {school: 'Radboud Universit2', degree: 'Master', spec: 'Computing Science', startMM: 'Jan', startYY: '2016', endMM: 'Jan', endYY: '2017', city: 'Nijmegen', country: 'The Netherlands'},
+                {school: 'Radboud University3', degree: 'Master', spec: 'Computing Science', startMM: 'Jan', startYY: '2016', endMM: 'Jan', endYY: '2017', city: 'Nijmegen', country: 'The Netherlands'},
+            ],
+            projectData: [
+               {project: 'Brokoli4', position: 'React Native Developer', course: 'Software Development'},
+               {project: 'Brokoli5', position: 'React Native Developer', course: 'Software Development'},
+            ],
+            jobData: [
+                {company: 'Google5', position: 'Javascript Developer', startMM: 'Jan', startYY: '2016', endMM: 'Jan', endYY: '2017', city: 'Nijmegen', country: 'The Netherlands'},
+                {company: 'Google6', position: 'Javascript Developer', startMM: 'Jan', startYY: '2016', endMM: 'Jan', endYY: '2017', city: 'Nijmegen', country: 'The Netherlands'},
+
+            ]}],
               cardIndex: 0,
             }
           }
@@ -242,7 +254,8 @@ export default class People extends React.Component{
           <View style={{height: 50, backgroundColor: '#42D260', flexDirection: 'row'}}> 
 
 
-          <TouchableOpacity style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+          <TouchableOpacity onPress={()=> navigate('Skills', {selectedSkillsExp: card.skillData})}
+                            style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
 
              <Image style={{resizeMode: 'center', width: 25, height: 25, tintColor: 'white'}}
                     source={require('../../../img/icons/tools.png')} />
@@ -250,14 +263,16 @@ export default class People extends React.Component{
               </TouchableOpacity>
 
 
-          <TouchableOpacity style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+          <TouchableOpacity onPress={()=> navigate('Edu', {selectedEduExp: card.educationData})}
+                            style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
 
              <Image style={{resizeMode: 'center', width: 25, height: 25, tintColor: 'white'}}
                     source={require('../../../img/icons/college-graduation.png')} />
               </TouchableOpacity>
 
 
-          <TouchableOpacity style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+          <TouchableOpacity onPress={()=> navigate('JobExp', {selectedJobExp: card.jobData})}
+                            style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
 
           <Image style={{resizeMode: 'center', width: 25, height: 25, tintColor: 'white'}}
                     source={require('../../../img/icons/work.png')} />

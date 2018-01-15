@@ -17,7 +17,10 @@ import Categories from '../components/ProjectScreen/Create/Categories';
 import Positions from '../components/ProjectScreen/Create/Positions';
 import People from '../components/ProjectScreen/People';
 import AvailablePos from '../components/ProjectScreen/AvailablePos';
-import ProjectExp from '../components/ProjectScreen/ProjectExp'
+import ProjectExp from '../components/ProjectScreen/ProjectExp';
+import JobExp from '../components/ProjectScreen/JobExp';
+import Edu from '../components/ProjectScreen/Edu';
+import Skills from '../components/ProjectScreen/Skills'
 
 const ProjectStackNav = StackNavigator({
   Projects: { screen: Projects},
@@ -26,7 +29,10 @@ const ProjectStackNav = StackNavigator({
   Positions: {screen: Positions },
   AvailablePos: {screen: AvailablePos},
   People: {screen: People},
-  ProjectExp: {screen: ProjectExp}
+  ProjectExp: {screen: ProjectExp},
+  JobExp: {screen: JobExp},
+  Edu: {screen: Edu},
+  Skills: {screen: Skills}
 
 },{
     transitionConfig: getSlideFromRightTransition
